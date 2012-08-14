@@ -56,14 +56,14 @@ namespace MapGenerator
             this.surface.Size = new System.Drawing.Size(686, 561);
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
-            this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(surface_MouseMove);
+            this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.surface_MouseMove);
             // 
             // randomSeedBox
             // 
             this.randomSeedBox.Location = new System.Drawing.Point(12, 79);
             this.randomSeedBox.Name = "randomSeedBox";
             this.randomSeedBox.Size = new System.Drawing.Size(100, 20);
-            this.randomSeedBox.TabIndex = 1;
+            this.randomSeedBox.TabIndex = 3;
             this.randomSeedBox.Text = "123456";
             // 
             // randomSeedLabel
@@ -72,7 +72,7 @@ namespace MapGenerator
             this.randomSeedLabel.Location = new System.Drawing.Point(9, 62);
             this.randomSeedLabel.Name = "randomSeedLabel";
             this.randomSeedLabel.Size = new System.Drawing.Size(75, 13);
-            this.randomSeedLabel.TabIndex = 2;
+            this.randomSeedLabel.TabIndex = 0;
             this.randomSeedLabel.Text = "Random Seed";
             // 
             // generateButton
@@ -81,7 +81,7 @@ namespace MapGenerator
             this.generateButton.Location = new System.Drawing.Point(12, 526);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(75, 23);
-            this.generateButton.TabIndex = 3;
+            this.generateButton.TabIndex = 10;
             this.generateButton.Text = "Generate";
             this.generateButton.UseVisualStyleBackColor = true;
             this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
@@ -92,7 +92,7 @@ namespace MapGenerator
             this.widthLabel.Location = new System.Drawing.Point(12, 13);
             this.widthLabel.Name = "widthLabel";
             this.widthLabel.Size = new System.Drawing.Size(35, 13);
-            this.widthLabel.TabIndex = 4;
+            this.widthLabel.TabIndex = 0;
             this.widthLabel.Text = "Width";
             // 
             // heightLabel
@@ -101,7 +101,7 @@ namespace MapGenerator
             this.heightLabel.Location = new System.Drawing.Point(121, 13);
             this.heightLabel.Name = "heightLabel";
             this.heightLabel.Size = new System.Drawing.Size(38, 13);
-            this.heightLabel.TabIndex = 5;
+            this.heightLabel.TabIndex = 0;
             this.heightLabel.Text = "Height";
             // 
             // widthBox
@@ -109,7 +109,7 @@ namespace MapGenerator
             this.widthBox.Location = new System.Drawing.Point(12, 30);
             this.widthBox.Name = "widthBox";
             this.widthBox.Size = new System.Drawing.Size(100, 20);
-            this.widthBox.TabIndex = 6;
+            this.widthBox.TabIndex = 1;
             this.widthBox.Text = "1680";
             // 
             // heightBox
@@ -117,7 +117,7 @@ namespace MapGenerator
             this.heightBox.Location = new System.Drawing.Point(124, 30);
             this.heightBox.Name = "heightBox";
             this.heightBox.Size = new System.Drawing.Size(100, 20);
-            this.heightBox.TabIndex = 7;
+            this.heightBox.TabIndex = 2;
             this.heightBox.Text = "1050";
             // 
             // randomTextureDimensionsLabel
@@ -126,7 +126,7 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel.Location = new System.Drawing.Point(9, 117);
             this.randomTextureDimensionsLabel.Name = "randomTextureDimensionsLabel";
             this.randomTextureDimensionsLabel.Size = new System.Drawing.Size(143, 13);
-            this.randomTextureDimensionsLabel.TabIndex = 8;
+            this.randomTextureDimensionsLabel.TabIndex = 0;
             this.randomTextureDimensionsLabel.Text = "Random Texture Dimensions";
             // 
             // randomTextureWidthBox
@@ -134,7 +134,7 @@ namespace MapGenerator
             this.randomTextureWidthBox.Location = new System.Drawing.Point(12, 134);
             this.randomTextureWidthBox.Name = "randomTextureWidthBox";
             this.randomTextureWidthBox.Size = new System.Drawing.Size(100, 20);
-            this.randomTextureWidthBox.TabIndex = 9;
+            this.randomTextureWidthBox.TabIndex = 4;
             this.randomTextureWidthBox.Text = "64";
             // 
             // randomTextureHeightBox
@@ -142,7 +142,7 @@ namespace MapGenerator
             this.randomTextureHeightBox.Location = new System.Drawing.Point(124, 133);
             this.randomTextureHeightBox.Name = "randomTextureHeightBox";
             this.randomTextureHeightBox.Size = new System.Drawing.Size(100, 20);
-            this.randomTextureHeightBox.TabIndex = 10;
+            this.randomTextureHeightBox.TabIndex = 5;
             this.randomTextureHeightBox.Text = "64";
             // 
             // MapGeneratorForm
