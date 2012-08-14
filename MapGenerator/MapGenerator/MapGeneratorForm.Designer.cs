@@ -51,6 +51,7 @@ namespace MapGenerator
             this.noiseTab = new System.Windows.Forms.TabPage();
             this.randomTextureScaleBox = new System.Windows.Forms.TextBox();
             this.randomTextureScaleLabel = new System.Windows.Forms.Label();
+            this.waterTab = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
@@ -157,6 +158,7 @@ namespace MapGenerator
             // 
             this.mainOptionsControl.Controls.Add(this.outputTab);
             this.mainOptionsControl.Controls.Add(this.noiseTab);
+            this.mainOptionsControl.Controls.Add(this.waterTab);
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
@@ -210,6 +212,15 @@ namespace MapGenerator
             this.randomTextureScaleLabel.Size = new System.Drawing.Size(73, 13);
             this.randomTextureScaleLabel.TabIndex = 7;
             this.randomTextureScaleLabel.Text = "Texture Scale";
+            // 
+            // waterTab
+            // 
+            this.waterTab.Location = new System.Drawing.Point(4, 22);
+            this.waterTab.Name = "waterTab";
+            this.waterTab.Size = new System.Drawing.Size(232, 491);
+            this.waterTab.TabIndex = 2;
+            this.waterTab.Text = "Water";
+            this.waterTab.UseVisualStyleBackColor = true;
             // 
             // MapGeneratorForm
             // 
@@ -272,5 +283,6 @@ namespace MapGenerator
         private TabPage noiseTab;
         private Label randomTextureScaleLabel;
         private TextBox randomTextureScaleBox;
+        private TabPage waterTab;
     }
 }
