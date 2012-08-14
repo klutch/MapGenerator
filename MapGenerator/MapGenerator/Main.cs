@@ -19,6 +19,7 @@ namespace MapGenerator
         private System.Windows.Forms.PictureBox surface;
         public RenderTarget2D renderTarget;
         private Texture2D randomTexture;
+        private Texture2D gradientTexture;
         private Random random;
         public Vector2 view;
         public float scale = 1;
@@ -106,6 +107,9 @@ namespace MapGenerator
             }
             randomTexture = new Texture2D(GraphicsDevice, options.randomTextureWidth, options.randomTextureHeight);
             randomTexture.SetData<Color>(data);
+
+            // Initialize random gradient
+
 
             // Initialize render target
             renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
