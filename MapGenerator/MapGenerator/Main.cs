@@ -114,6 +114,7 @@ namespace MapGenerator
             // Draw effects to render target
             baseEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
             baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.randomTextureWidth, options.randomTextureHeight));
+            baseEffect.Parameters["randomTextureScale"].SetValue(options.randomTextureScale);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();

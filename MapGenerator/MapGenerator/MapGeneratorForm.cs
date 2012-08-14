@@ -16,6 +16,7 @@ namespace MapGenerator
         public int seed;
         public int randomTextureWidth;
         public int randomTextureHeight;
+        public float randomTextureScale;
     };
 
     public partial class MapGeneratorForm : Form
@@ -61,6 +62,7 @@ namespace MapGenerator
             options.seed = int.Parse(randomSeedBox.Text);
             options.randomTextureWidth = int.Parse(randomTextureWidthBox.Text);
             options.randomTextureHeight = int.Parse(randomTextureHeightBox.Text);
+            options.randomTextureScale = float.Parse(randomTextureScaleBox.Text);
 
             return options;
         }

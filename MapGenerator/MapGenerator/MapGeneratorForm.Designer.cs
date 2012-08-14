@@ -49,12 +49,13 @@ namespace MapGenerator
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
             this.randomTab = new System.Windows.Forms.TabPage();
+            this.randomTextureScaleBox = new System.Windows.Forms.TextBox();
+            this.randomTextureScaleLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
             this.randomTab.SuspendLayout();
             this.SuspendLayout();
-            this.MouseWheel += new MouseEventHandler(MapGeneratorForm_MouseWheel);
             // 
             // surface
             // 
@@ -63,7 +64,7 @@ namespace MapGenerator
             this.surface.Size = new System.Drawing.Size(686, 561);
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
-            this.surface.MouseMove += new MouseEventHandler(this.surface_MouseMove);
+            this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.surface_MouseMove);
             // 
             // randomSeedBox
             // 
@@ -130,7 +131,7 @@ namespace MapGenerator
             // randomTextureDimensionsLabel
             // 
             this.randomTextureDimensionsLabel.AutoSize = true;
-            this.randomTextureDimensionsLabel.Location = new System.Drawing.Point(6, 67);
+            this.randomTextureDimensionsLabel.Location = new System.Drawing.Point(6, 61);
             this.randomTextureDimensionsLabel.Name = "randomTextureDimensionsLabel";
             this.randomTextureDimensionsLabel.Size = new System.Drawing.Size(143, 13);
             this.randomTextureDimensionsLabel.TabIndex = 0;
@@ -138,7 +139,7 @@ namespace MapGenerator
             // 
             // randomTextureWidthBox
             // 
-            this.randomTextureWidthBox.Location = new System.Drawing.Point(9, 84);
+            this.randomTextureWidthBox.Location = new System.Drawing.Point(9, 78);
             this.randomTextureWidthBox.Name = "randomTextureWidthBox";
             this.randomTextureWidthBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureWidthBox.TabIndex = 4;
@@ -146,7 +147,7 @@ namespace MapGenerator
             // 
             // randomTextureHeightBox
             // 
-            this.randomTextureHeightBox.Location = new System.Drawing.Point(121, 83);
+            this.randomTextureHeightBox.Location = new System.Drawing.Point(121, 77);
             this.randomTextureHeightBox.Name = "randomTextureHeightBox";
             this.randomTextureHeightBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureHeightBox.TabIndex = 5;
@@ -178,6 +179,8 @@ namespace MapGenerator
             // 
             // randomTab
             // 
+            this.randomTab.Controls.Add(this.randomTextureScaleBox);
+            this.randomTab.Controls.Add(this.randomTextureScaleLabel);
             this.randomTab.Controls.Add(this.randomTextureHeightBox);
             this.randomTab.Controls.Add(this.randomSeedLabel);
             this.randomTab.Controls.Add(this.randomTextureDimensionsLabel);
@@ -186,10 +189,27 @@ namespace MapGenerator
             this.randomTab.Location = new System.Drawing.Point(4, 22);
             this.randomTab.Name = "randomTab";
             this.randomTab.Padding = new System.Windows.Forms.Padding(3);
-            this.randomTab.Size = new System.Drawing.Size(232, 259);
+            this.randomTab.Size = new System.Drawing.Size(232, 491);
             this.randomTab.TabIndex = 1;
             this.randomTab.Text = "Random";
             this.randomTab.UseVisualStyleBackColor = true;
+            // 
+            // randomTextureScaleBox
+            // 
+            this.randomTextureScaleBox.Location = new System.Drawing.Point(9, 127);
+            this.randomTextureScaleBox.Name = "randomTextureScaleBox";
+            this.randomTextureScaleBox.Size = new System.Drawing.Size(100, 20);
+            this.randomTextureScaleBox.TabIndex = 8;
+            this.randomTextureScaleBox.Text = "32.00";
+            // 
+            // randomTextureScaleLabel
+            // 
+            this.randomTextureScaleLabel.AutoSize = true;
+            this.randomTextureScaleLabel.Location = new System.Drawing.Point(6, 110);
+            this.randomTextureScaleLabel.Name = "randomTextureScaleLabel";
+            this.randomTextureScaleLabel.Size = new System.Drawing.Size(73, 13);
+            this.randomTextureScaleLabel.TabIndex = 7;
+            this.randomTextureScaleLabel.Text = "Texture Scale";
             // 
             // MapGeneratorForm
             // 
@@ -201,6 +221,7 @@ namespace MapGenerator
             this.Controls.Add(this.surface);
             this.Name = "MapGeneratorForm";
             this.Text = "Map Generator";
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MapGeneratorForm_MouseWheel);
             ((System.ComponentModel.ISupportInitialize)(this.surface)).EndInit();
             this.mainOptionsControl.ResumeLayout(false);
             this.outputTab.ResumeLayout(false);
@@ -216,7 +237,7 @@ namespace MapGenerator
             if (e.X >= surface.Left && e.X <= surface.Left + surface.Width &&
                 e.Y >= 0 && e.Y <= surface.Height)
             {
-                float scaleModified = 0.001f;
+                float scaleModified = 0.0005f;
                 main.scale += scaleModified * e.Delta;
             }
         }
@@ -249,5 +270,7 @@ namespace MapGenerator
         private TabControl mainOptionsControl;
         private TabPage outputTab;
         private TabPage randomTab;
+        private Label randomTextureScaleLabel;
+        private TextBox randomTextureScaleBox;
     }
 }
