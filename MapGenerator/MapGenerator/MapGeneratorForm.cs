@@ -64,7 +64,7 @@ namespace MapGenerator
             main.generateMap(getOptions());
         }
 
-        private MapGeneratorOptions getOptions()
+        public MapGeneratorOptions getOptions()
         {
             MapGeneratorOptions options = new MapGeneratorOptions();
             options.width = int.Parse(widthBox.Text);

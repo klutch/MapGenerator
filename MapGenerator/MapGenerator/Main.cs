@@ -145,6 +145,9 @@ namespace MapGenerator
             if (newKeyState.IsKeyDown(Keys.Home) && oldKeyState.IsKeyUp(Keys.Home))
                 resetView();
 
+            if (newKeyState.IsKeyDown(Keys.Enter) && oldKeyState.IsKeyUp(Keys.Enter))
+                generateMap(mapGeneratorForm.getOptions());
+
             oldKeyState = newKeyState;
 
             base.Update(gameTime);
