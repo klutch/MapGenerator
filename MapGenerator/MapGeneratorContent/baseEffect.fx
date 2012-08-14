@@ -8,30 +8,37 @@ float2 randomTextureSize;
 float2 renderTargetSize;
 float randomTextureScale;
 
-float4 perlin(float2 texCoords)
+float noise(float2 position)
 {
-	float2 pixel = float2(8, 8) / renderTargetSize;
-	float4 noise = float4(0, 0, 0, 1);
-	noise += tex2D(baseSampler, texCoords + float2(-pixel.x, -pixel.y));
-	noise += tex2D(baseSampler, texCoords + float2(pixel.x, -pixel.y));
-	noise += tex2D(baseSampler, texCoords + float2(pixel.x, pixel.y));
-	noise += tex2D(baseSampler, texCoords + float2(-pixel.x, pixel.y));
-	noise.rgb /= 16;
+	float total = 0;
+	float2 frequency = 0.23;
+	float gain = 0.6;
+	float amplitude = gain;
+	float lacunarity = 2;
 
-	noise += tex2D(baseSampler, texCoords + float2(-pixel.x, 0));
-	noise += tex2D(baseSampler, texCoords + float2(pixel.x, 0));
-	noise += tex2D(baseSampler, texCoords + float2(0, -pixel.x));
-	noise += tex2D(baseSampler, texCoords + float2(0, pixel.x));
-	noise.rgb /= 8;
+	for (int i = 0; i < 5; i++)
+	{
+		total += tex2D(baseSampler, (position / 1.8) * frequency) * amplitude;
+		frequency *= lacunarity;
+		amplitude *= gain;
+	}
 
-	noise.rgb += tex2D(baseSampler, texCoords).rgb / 4;
-
-	return noise;
+	return total;
 }
 
 float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
-	return perlin(texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale);
+	/*
+	float2 p = (texCoords);
+	float2 q = float2(noise(p * 2.3), noise(p * 2.3));
+	float2 r = noise(p / 4 + 0.2);
+	float total = noise(p + 4.0 * r);
+	*/
+
+	float total = noise(texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale);
+	float4 color = float4(total, total, total, 1);
+
+	return color;
 }
 
 technique Main

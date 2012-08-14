@@ -50,7 +50,7 @@ namespace MapGenerator
 
         private void generateButton_Click(object sender, EventArgs e)
         {
-            main.resetView();
+            //main.resetView();
             main.generateMap(getOptions());
         }
 
