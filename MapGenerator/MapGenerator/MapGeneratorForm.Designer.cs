@@ -58,10 +58,13 @@ namespace MapGenerator
             this.randomTextureScaleBox = new System.Windows.Forms.TextBox();
             this.randomTextureScaleLabel = new System.Windows.Forms.Label();
             this.waterTab = new System.Windows.Forms.TabPage();
+            this.waterLevelBox = new System.Windows.Forms.TextBox();
+            this.waterLevelLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
             this.noiseTab.SuspendLayout();
+            this.waterTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // surface
@@ -278,12 +281,31 @@ namespace MapGenerator
             // 
             // waterTab
             // 
+            this.waterTab.Controls.Add(this.waterLevelBox);
+            this.waterTab.Controls.Add(this.waterLevelLabel);
             this.waterTab.Location = new System.Drawing.Point(4, 22);
             this.waterTab.Name = "waterTab";
             this.waterTab.Size = new System.Drawing.Size(232, 491);
             this.waterTab.TabIndex = 2;
             this.waterTab.Text = "Water";
             this.waterTab.UseVisualStyleBackColor = true;
+            // 
+            // waterLevelBox
+            // 
+            this.waterLevelBox.Location = new System.Drawing.Point(12, 30);
+            this.waterLevelBox.Name = "waterLevelBox";
+            this.waterLevelBox.Size = new System.Drawing.Size(100, 20);
+            this.waterLevelBox.TabIndex = 1;
+            this.waterLevelBox.Text = "0.10";
+            // 
+            // waterLevelLabel
+            // 
+            this.waterLevelLabel.AutoSize = true;
+            this.waterLevelLabel.Location = new System.Drawing.Point(9, 13);
+            this.waterLevelLabel.Name = "waterLevelLabel";
+            this.waterLevelLabel.Size = new System.Drawing.Size(65, 13);
+            this.waterLevelLabel.TabIndex = 0;
+            this.waterLevelLabel.Text = "Water Level";
             // 
             // MapGeneratorForm
             // 
@@ -302,6 +324,8 @@ namespace MapGenerator
             this.outputTab.PerformLayout();
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
+            this.waterTab.ResumeLayout(false);
+            this.waterTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -353,5 +377,7 @@ namespace MapGenerator
         private Label lacunarityLabel;
         private TextBox noiseGainBox;
         private Label gainLabel;
+        private TextBox waterLevelBox;
+        private Label waterLevelLabel;
     }
 }

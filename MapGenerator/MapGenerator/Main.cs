@@ -18,6 +18,8 @@ namespace MapGenerator
         private MapGeneratorForm mapGeneratorForm;
         private System.Windows.Forms.PictureBox surface;
         public RenderTarget2D renderTarget;
+        public Texture2D baseNoise;
+        public Texture2D baseWater;
         private Texture2D randomTexture;
         private Random random;
         public Vector2 view;
@@ -26,6 +28,7 @@ namespace MapGenerator
         private KeyboardState oldKeyState;
 
         private Effect baseEffect;
+        private Effect waterEffect;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -74,6 +77,7 @@ namespace MapGenerator
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteFont = Content.Load<SpriteFont>("spriteFont");
             baseEffect = Content.Load<Effect>("baseEffect");
+            waterEffect = Content.Load<Effect>("waterEffect");
         }
 
         // UnloadContent
@@ -107,14 +111,12 @@ namespace MapGenerator
             randomTexture = new Texture2D(GraphicsDevice, options.randomTextureWidth, options.randomTextureHeight);
             randomTexture.SetData<Color>(data);
 
-            // Initialize random gradient
-
-
             // Initialize render target
             renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
-            GraphicsDevice.SetRenderTarget(renderTarget);
 
-            // Draw effects to render target
+            // Draw noise effect to render target
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Black);
             baseEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
             baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.randomTextureWidth, options.randomTextureHeight));
             baseEffect.Parameters["randomTextureScale"].SetValue(options.randomTextureScale);
@@ -125,7 +127,40 @@ namespace MapGenerator
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();
 
-            // Reset render target to back buffer
+            // Reset render target
+            GraphicsDevice.SetRenderTarget(null);
+
+            // Store base noise texture
+            data = new Color[options.width * options.height];
+            renderTarget.GetData<Color>(data);
+            baseNoise = new Texture2D(GraphicsDevice, options.width, options.height);
+            baseNoise.SetData<Color>(data);
+
+            // Draw water effect to render target
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Transparent);
+            waterEffect.Parameters["waterLevel"].SetValue(options.waterLevel);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, waterEffect);
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Reset render target
+            GraphicsDevice.SetRenderTarget(null);
+
+            // Store base water texture
+            renderTarget.GetData<Color>(data);
+            baseWater = new Texture2D(GraphicsDevice, options.width, options.height);
+            baseWater.SetData<Color>(data);
+
+            // Draw textures
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Reset render target
             GraphicsDevice.SetRenderTarget(null);
         }
 
