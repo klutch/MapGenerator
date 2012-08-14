@@ -49,6 +49,12 @@ namespace MapGenerator
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.noiseLacunarityBox = new System.Windows.Forms.TextBox();
+            this.lacunarityLabel = new System.Windows.Forms.Label();
+            this.noiseGainBox = new System.Windows.Forms.TextBox();
+            this.gainLabel = new System.Windows.Forms.Label();
+            this.noiseFrequencyBox = new System.Windows.Forms.TextBox();
+            this.frequencyLabel = new System.Windows.Forms.Label();
             this.randomTextureScaleBox = new System.Windows.Forms.TextBox();
             this.randomTextureScaleLabel = new System.Windows.Forms.Label();
             this.waterTab = new System.Windows.Forms.TabPage();
@@ -80,9 +86,9 @@ namespace MapGenerator
             this.randomSeedLabel.AutoSize = true;
             this.randomSeedLabel.Location = new System.Drawing.Point(6, 12);
             this.randomSeedLabel.Name = "randomSeedLabel";
-            this.randomSeedLabel.Size = new System.Drawing.Size(75, 13);
+            this.randomSeedLabel.Size = new System.Drawing.Size(32, 13);
             this.randomSeedLabel.TabIndex = 0;
-            this.randomSeedLabel.Text = "Random Seed";
+            this.randomSeedLabel.Text = "Seed";
             // 
             // generateButton
             // 
@@ -134,9 +140,9 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel.AutoSize = true;
             this.randomTextureDimensionsLabel.Location = new System.Drawing.Point(6, 61);
             this.randomTextureDimensionsLabel.Name = "randomTextureDimensionsLabel";
-            this.randomTextureDimensionsLabel.Size = new System.Drawing.Size(143, 13);
+            this.randomTextureDimensionsLabel.Size = new System.Drawing.Size(130, 13);
             this.randomTextureDimensionsLabel.TabIndex = 0;
-            this.randomTextureDimensionsLabel.Text = "Random Texture Dimensions";
+            this.randomTextureDimensionsLabel.Text = "Noise Texture Dimensions";
             // 
             // randomTextureWidthBox
             // 
@@ -181,6 +187,12 @@ namespace MapGenerator
             // 
             // noiseTab
             // 
+            this.noiseTab.Controls.Add(this.noiseLacunarityBox);
+            this.noiseTab.Controls.Add(this.lacunarityLabel);
+            this.noiseTab.Controls.Add(this.noiseGainBox);
+            this.noiseTab.Controls.Add(this.gainLabel);
+            this.noiseTab.Controls.Add(this.noiseFrequencyBox);
+            this.noiseTab.Controls.Add(this.frequencyLabel);
             this.noiseTab.Controls.Add(this.randomTextureScaleBox);
             this.noiseTab.Controls.Add(this.randomTextureScaleLabel);
             this.noiseTab.Controls.Add(this.randomTextureHeightBox);
@@ -196,9 +208,60 @@ namespace MapGenerator
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
             // 
+            // noiseLacunarityBox
+            // 
+            this.noiseLacunarityBox.Location = new System.Drawing.Point(9, 176);
+            this.noiseLacunarityBox.Name = "noiseLacunarityBox";
+            this.noiseLacunarityBox.Size = new System.Drawing.Size(100, 20);
+            this.noiseLacunarityBox.TabIndex = 16;
+            this.noiseLacunarityBox.Text = "2";
+            // 
+            // lacunarityLabel
+            // 
+            this.lacunarityLabel.AutoSize = true;
+            this.lacunarityLabel.Location = new System.Drawing.Point(6, 159);
+            this.lacunarityLabel.Name = "lacunarityLabel";
+            this.lacunarityLabel.Size = new System.Drawing.Size(56, 13);
+            this.lacunarityLabel.TabIndex = 15;
+            this.lacunarityLabel.Text = "Lacunarity";
+            // 
+            // noiseGainBox
+            // 
+            this.noiseGainBox.Location = new System.Drawing.Point(121, 127);
+            this.noiseGainBox.Name = "noiseGainBox";
+            this.noiseGainBox.Size = new System.Drawing.Size(100, 20);
+            this.noiseGainBox.TabIndex = 12;
+            this.noiseGainBox.Text = "0.6";
+            // 
+            // gainLabel
+            // 
+            this.gainLabel.AutoSize = true;
+            this.gainLabel.Location = new System.Drawing.Point(118, 110);
+            this.gainLabel.Name = "gainLabel";
+            this.gainLabel.Size = new System.Drawing.Size(29, 13);
+            this.gainLabel.TabIndex = 11;
+            this.gainLabel.Text = "Gain";
+            // 
+            // noiseFrequencyBox
+            // 
+            this.noiseFrequencyBox.Location = new System.Drawing.Point(8, 127);
+            this.noiseFrequencyBox.Name = "noiseFrequencyBox";
+            this.noiseFrequencyBox.Size = new System.Drawing.Size(100, 20);
+            this.noiseFrequencyBox.TabIndex = 10;
+            this.noiseFrequencyBox.Text = "0.23";
+            // 
+            // frequencyLabel
+            // 
+            this.frequencyLabel.AutoSize = true;
+            this.frequencyLabel.Location = new System.Drawing.Point(5, 110);
+            this.frequencyLabel.Name = "frequencyLabel";
+            this.frequencyLabel.Size = new System.Drawing.Size(57, 13);
+            this.frequencyLabel.TabIndex = 9;
+            this.frequencyLabel.Text = "Frequency";
+            // 
             // randomTextureScaleBox
             // 
-            this.randomTextureScaleBox.Location = new System.Drawing.Point(9, 127);
+            this.randomTextureScaleBox.Location = new System.Drawing.Point(121, 29);
             this.randomTextureScaleBox.Name = "randomTextureScaleBox";
             this.randomTextureScaleBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureScaleBox.TabIndex = 8;
@@ -207,7 +270,7 @@ namespace MapGenerator
             // randomTextureScaleLabel
             // 
             this.randomTextureScaleLabel.AutoSize = true;
-            this.randomTextureScaleLabel.Location = new System.Drawing.Point(6, 110);
+            this.randomTextureScaleLabel.Location = new System.Drawing.Point(118, 12);
             this.randomTextureScaleLabel.Name = "randomTextureScaleLabel";
             this.randomTextureScaleLabel.Size = new System.Drawing.Size(73, 13);
             this.randomTextureScaleLabel.TabIndex = 7;
@@ -284,5 +347,11 @@ namespace MapGenerator
         private Label randomTextureScaleLabel;
         private TextBox randomTextureScaleBox;
         private TabPage waterTab;
+        private Label frequencyLabel;
+        private TextBox noiseFrequencyBox;
+        private TextBox noiseLacunarityBox;
+        private Label lacunarityLabel;
+        private TextBox noiseGainBox;
+        private Label gainLabel;
     }
 }

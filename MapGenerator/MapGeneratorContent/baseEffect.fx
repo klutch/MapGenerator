@@ -8,19 +8,22 @@ float2 randomTextureSize;
 float2 renderTargetSize;
 float randomTextureScale;
 
+float noiseFrequency;
+float noiseGain;
+float noiseLacunarity;
+int noiseOctaves;
+
 float noise(float2 position)
 {
 	float total = 0;
-	float2 frequency = 0.23;
-	float gain = 0.6;
-	float amplitude = gain;
-	float lacunarity = 2;
+	float frequency = noiseFrequency;
+	float amplitude = noiseGain;
 
 	for (int i = 0; i < 5; i++)
 	{
 		total += tex2D(baseSampler, (position / 1.8) * frequency) * amplitude;
-		frequency *= lacunarity;
-		amplitude *= gain;
+		frequency *= noiseLacunarity;
+		amplitude *= noiseGain;
 	}
 
 	return total;
