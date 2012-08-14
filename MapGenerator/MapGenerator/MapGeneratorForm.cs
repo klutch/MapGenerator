@@ -36,12 +36,19 @@ namespace MapGenerator
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
         {
+            // Resize surface
             surface.Width = Width - surface.Location.X;
             surface.Height = Height;
 
+            // Resize main options control
+            mainOptionsControl.Height = Height - 83;
+
+            // Resize graphics device
             Main.graphics.PreferredBackBufferWidth = surface.Width;
             Main.graphics.PreferredBackBufferHeight = surface.Height;
             Main.graphics.ApplyChanges();
+
+            // Redraw map
             if (main.renderTarget != null)
                 main.generateMap(getOptions());
         }
