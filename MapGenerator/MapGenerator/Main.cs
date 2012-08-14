@@ -15,14 +15,19 @@ namespace MapGenerator
     {
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
+        private SpriteFont spriteFont;
         private MapGeneratorForm mapGeneratorForm;
+        private PictureBox surface;
+        private RenderTarget2D renderTarget;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
         {
+            this.mapGeneratorForm = mapGeneratorForm;
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            this.mapGeneratorForm = mapGeneratorForm;
+            surface = mapGeneratorForm.getSurface();
 
             // Events
             graphics.PreparingDeviceSettings +=
@@ -34,13 +39,16 @@ namespace MapGenerator
         // Initialize
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferWidth = surface.Width;
+            graphics.PreferredBackBufferHeight = surface.Height;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
         // preparingGraphicsDeviceSettings event handler
         private void preparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
         {
-            e.GraphicsDeviceInformation.PresentationParameters.DeviceWindowHandle = mapGeneratorForm.getSurface().Handle;
+            e.GraphicsDeviceInformation.PresentationParameters.DeviceWindowHandle = surface.Handle;
         }
 
         // visibleChanged event handler
@@ -54,11 +62,18 @@ namespace MapGenerator
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteFont = Content.Load<SpriteFont>("spriteFont");
         }
 
         // UnloadContent
         protected override void UnloadContent()
         {
+        }
+
+        // generateMap
+        public static void generateMap(MapGeneratorOptions options)
+        {
+            Console.WriteLine("Generate map");
         }
 
         // Update
@@ -71,6 +86,13 @@ namespace MapGenerator
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin();
+
+            if (renderTarget != null)
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

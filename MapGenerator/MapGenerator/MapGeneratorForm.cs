@@ -9,6 +9,12 @@ using System.Windows.Forms;
 
 namespace MapGenerator
 {
+    public struct MapGeneratorOptions
+    {
+        public int width;
+        public int height;
+    };
+
     public partial class MapGeneratorForm : Form
     {
         public MapGeneratorForm()
@@ -31,6 +37,12 @@ namespace MapGenerator
         void MapGeneratorForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void generateButton_Click(object sender, EventArgs e)
+        {
+            MapGeneratorOptions options = new MapGeneratorOptions();
+            Main.generateMap(options);
         }
     }
 }
