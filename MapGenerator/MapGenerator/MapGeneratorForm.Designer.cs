@@ -36,6 +36,7 @@
             this.surface = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.randomSeedLabel = new System.Windows.Forms.Label();
+            this.generateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,16 +65,27 @@
             this.randomSeedLabel.TabIndex = 2;
             this.randomSeedLabel.Text = "Random Seed";
             // 
+            // generateButton
+            // 
+            this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.generateButton.Location = new System.Drawing.Point(12, 526);
+            this.generateButton.Name = "generateButton";
+            this.generateButton.Size = new System.Drawing.Size(75, 23);
+            this.generateButton.TabIndex = 3;
+            this.generateButton.Text = "Generate";
+            this.generateButton.UseVisualStyleBackColor = true;
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 561);
+            this.Controls.Add(this.generateButton);
             this.Controls.Add(this.randomSeedLabel);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.surface);
             this.Name = "MapGeneratorForm";
-            this.Text = "MapGeneratorForm";
+            this.Text = "Map Generator";
             ((System.ComponentModel.ISupportInitialize)(this.surface)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -85,5 +97,6 @@
         private System.Windows.Forms.PictureBox surface;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label randomSeedLabel;
+        private System.Windows.Forms.Button generateButton;
     }
 }

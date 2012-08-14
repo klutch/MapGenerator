@@ -15,10 +15,10 @@ namespace MapGenerator
         {
             InitializeComponent();
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
-            ResizeEnd += new EventHandler(MapGeneratorForm_ResizeEnd);
+            Resize += new EventHandler(MapGeneratorForm_Resize);
         }
 
-        void MapGeneratorForm_ResizeEnd(object sender, EventArgs e)
+        void MapGeneratorForm_Resize(object sender, EventArgs e)
         {
             surface.Width = Width - surface.Location.X;
             surface.Height = Height;
