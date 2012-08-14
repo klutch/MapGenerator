@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -17,11 +16,14 @@ namespace MapGenerator
         public static SpriteBatch spriteBatch;
         private SpriteFont spriteFont;
         private MapGeneratorForm mapGeneratorForm;
-        private PictureBox surface;
+        private System.Windows.Forms.PictureBox surface;
         public RenderTarget2D renderTarget;
         private Texture2D randomTexture;
         private Random random;
         public Vector2 view;
+        public float scale = 1;
+        private KeyboardState newKeyState;
+        private KeyboardState oldKeyState;
 
         private Effect baseEffect;
 
@@ -37,7 +39,7 @@ namespace MapGenerator
             // Events
             graphics.PreparingDeviceSettings +=
                 new EventHandler<PreparingDeviceSettingsEventArgs>(preparingDeviceSettings);
-            Control.FromHandle(this.Window.Handle).VisibleChanged +=
+            System.Windows.Forms.Control.FromHandle(this.Window.Handle).VisibleChanged +=
                 new EventHandler(visibleChanged);
         }
 
@@ -47,6 +49,9 @@ namespace MapGenerator
             graphics.PreferredBackBufferWidth = surface.Width;
             graphics.PreferredBackBufferHeight = surface.Height;
             graphics.ApplyChanges();
+
+            view = new Vector2(surface.Width, surface.Height) / 2;
+
             base.Initialize();
         }
 
@@ -59,8 +64,8 @@ namespace MapGenerator
         // visibleChanged event handler
         private void visibleChanged(object sender, EventArgs e)
         {
-            if (Control.FromHandle(this.Window.Handle).Visible)
-                Control.FromHandle(this.Window.Handle).Visible = false;
+            if (System.Windows.Forms.Control.FromHandle(this.Window.Handle).Visible)
+                System.Windows.Forms.Control.FromHandle(this.Window.Handle).Visible = false;
         }
 
         // LoadContent
@@ -117,9 +122,24 @@ namespace MapGenerator
             GraphicsDevice.SetRenderTarget(null);
         }
 
+        // resetView
+        public void resetView()
+        {
+            scale = 1;
+            view = new Vector2(surface.Width, surface.Height) / 2;
+        }
+
         // Update
         protected override void Update(GameTime gameTime)
         {
+            newKeyState = Keyboard.GetState();
+
+            // Input
+            if (newKeyState.IsKeyDown(Keys.Home) && oldKeyState.IsKeyUp(Keys.Home))
+                resetView();
+
+            oldKeyState = newKeyState;
+
             base.Update(gameTime);
         }
 
@@ -131,7 +151,7 @@ namespace MapGenerator
             spriteBatch.Begin();
 
             if (renderTarget != null)
-                spriteBatch.Draw(renderTarget, view, renderTarget.Bounds, Color.White);
+                spriteBatch.Draw(renderTarget, view, renderTarget.Bounds, Color.White, 0, new Vector2(renderTarget.Width, renderTarget.Height) / 2, scale, SpriteEffects.None, 0);
 
             spriteBatch.End();
 
