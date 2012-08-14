@@ -19,7 +19,7 @@ float noise(float2 position)
 	float frequency = noiseFrequency;
 	float amplitude = noiseGain;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		total += tex2D(baseSampler, (position / 1.8) * frequency) * amplitude;
 		frequency *= noiseLacunarity;
