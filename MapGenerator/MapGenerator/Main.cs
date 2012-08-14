@@ -19,7 +19,6 @@ namespace MapGenerator
         private System.Windows.Forms.PictureBox surface;
         public RenderTarget2D renderTarget;
         private Texture2D randomTexture;
-        private Texture2D gradientTexture;
         private Random random;
         public Vector2 view;
         public float scale = 1;
