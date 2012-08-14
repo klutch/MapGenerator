@@ -10,6 +10,15 @@
       <Output>E:\_C#\MapGenerator\MapGenerator\MapGenerator\bin\x86\Debug\Content\spriteFont.xnb</Output>
       <Time>2012-08-13T19:24:45.5628741-05:00</Time>
     </Item>
+    <Item>
+      <Source>baseEffect.fx</Source>
+      <Name>baseEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\_C#\MapGenerator\MapGenerator\MapGenerator\bin\x86\Debug\Content\baseEffect.xnb</Output>
+      <Time>2012-08-13T20:24:43.6276716-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

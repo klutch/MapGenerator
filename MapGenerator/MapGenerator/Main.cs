@@ -18,7 +18,11 @@ namespace MapGenerator
         private SpriteFont spriteFont;
         private MapGeneratorForm mapGeneratorForm;
         private PictureBox surface;
-        private RenderTarget2D renderTarget;
+        public RenderTarget2D renderTarget;
+        private Texture2D randomTexture;
+        private Random random;
+
+        private Effect baseEffect;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -63,6 +67,7 @@ namespace MapGenerator
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteFont = Content.Load<SpriteFont>("spriteFont");
+            baseEffect = Content.Load<Effect>("baseEffect");
         }
 
         // UnloadContent
@@ -71,9 +76,42 @@ namespace MapGenerator
         }
 
         // generateMap
-        public static void generateMap(MapGeneratorOptions options)
+        public void generateMap(MapGeneratorOptions options)
         {
-            Console.WriteLine("Generate map");
+            // Destroy existing render target
+            if (renderTarget != null)
+            {
+                renderTarget.Dispose();
+                renderTarget = null;
+            }
+
+            // Initialize random number generator
+            random = new Random(options.seed);
+
+            // Initialize random texture
+            Color[] data = new Color[options.randomTextureWidth * options.randomTextureHeight];
+            for (int i = 0; i < options.randomTextureWidth; i++)
+            {
+                for (int j = 0; j < options.randomTextureHeight; j++)
+                {
+                    float randomNumber = (float)random.NextDouble();
+                    data[i + j * options.randomTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
+                }
+            }
+            randomTexture = new Texture2D(GraphicsDevice, options.randomTextureWidth, options.randomTextureHeight);
+            randomTexture.SetData<Color>(data);
+
+            // Initialize render target
+            renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            GraphicsDevice.SetRenderTarget(renderTarget);
+
+            // Draw effects to render target
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
+            spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Reset render target to back buffer
+            GraphicsDevice.SetRenderTarget(null);
         }
 
         // Update

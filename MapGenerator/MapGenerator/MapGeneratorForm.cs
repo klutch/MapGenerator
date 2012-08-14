@@ -13,10 +13,15 @@ namespace MapGenerator
     {
         public int width;
         public int height;
+        public int seed;
+        public int randomTextureWidth;
+        public int randomTextureHeight;
     };
 
     public partial class MapGeneratorForm : Form
     {
+        public Main main;
+
         public MapGeneratorForm()
         {
             InitializeComponent();
@@ -32,6 +37,8 @@ namespace MapGenerator
             Main.graphics.PreferredBackBufferWidth = surface.Width;
             Main.graphics.PreferredBackBufferHeight = surface.Height;
             Main.graphics.ApplyChanges();
+            if (main.renderTarget != null)
+                main.generateMap(getOptions());
         }
 
         void MapGeneratorForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -41,8 +48,19 @@ namespace MapGenerator
 
         private void generateButton_Click(object sender, EventArgs e)
         {
+            main.generateMap(getOptions());
+        }
+
+        private MapGeneratorOptions getOptions()
+        {
             MapGeneratorOptions options = new MapGeneratorOptions();
-            Main.generateMap(options);
+            options.width = int.Parse(widthBox.Text);
+            options.height = int.Parse(heightBox.Text);
+            options.seed = int.Parse(randomSeedBox.Text);
+            options.randomTextureWidth = int.Parse(randomTextureWidthBox.Text);
+            options.randomTextureHeight = int.Parse(randomTextureHeightBox.Text);
+
+            return options;
         }
     }
 }

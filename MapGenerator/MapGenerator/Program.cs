@@ -14,6 +14,7 @@ namespace MapGenerator
             form.Show();
             using (Main game = new Main(form))
             {
+                form.main = game;
                 game.Run();
             }
         }
