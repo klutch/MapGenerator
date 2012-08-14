@@ -1,0 +1,9 @@
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\MapGenerator.MapGeneratorForm.resources
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\bin\x86\Debug\MapGenerator.exe
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\bin\x86\Debug\MapGenerator.pdb
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\MapGenerator.exe
+E:\_C#\MapGenerator\MapGenerator\MapGenerator\obj\x86\Debug\MapGenerator.pdb
