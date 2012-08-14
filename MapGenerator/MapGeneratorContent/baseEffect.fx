@@ -31,14 +31,11 @@ float noise(float2 position)
 
 float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
-	/*
-	float2 p = (texCoords);
+	float2 p = texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
 	float2 q = float2(noise(p * 2.3), noise(p * 2.3));
-	float2 r = noise(p / 4 + 0.2);
+	float2 r = noise(q / 4 + 0.2);
 	float total = noise(p + 4.0 * r);
-	*/
 
-	float total = noise(texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale);
 	float4 color = float4(total, total, total, 1);
 
 	return color;
