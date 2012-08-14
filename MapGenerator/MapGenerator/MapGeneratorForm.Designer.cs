@@ -1,4 +1,6 @@
-﻿namespace MapGenerator
+﻿using System.Windows.Forms;
+
+namespace MapGenerator
 {
     partial class MapGeneratorForm
     {
@@ -54,6 +56,7 @@
             this.surface.Size = new System.Drawing.Size(686, 561);
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
+            this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(surface_MouseMove);
             // 
             // randomSeedBox
             // 
@@ -164,6 +167,18 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        void surface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                main.view.X += e.X - lastDragPosition.X;
+                main.view.Y += e.Y - lastDragPosition.Y;
+            }
+
+            lastDragPosition.X = e.X;
+            lastDragPosition.Y = e.Y;
         }
 
         #endregion

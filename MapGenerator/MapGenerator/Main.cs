@@ -21,6 +21,7 @@ namespace MapGenerator
         public RenderTarget2D renderTarget;
         private Texture2D randomTexture;
         private Random random;
+        public Vector2 view;
 
         private Effect baseEffect;
 
@@ -128,7 +129,7 @@ namespace MapGenerator
             spriteBatch.Begin();
 
             if (renderTarget != null)
-                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.Draw(renderTarget, view, renderTarget.Bounds, Color.White);
 
             spriteBatch.End();
 

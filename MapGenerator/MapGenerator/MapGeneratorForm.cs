@@ -21,6 +21,7 @@ namespace MapGenerator
     public partial class MapGeneratorForm : Form
     {
         public Main main;
+        private Point lastDragPosition;
 
         public MapGeneratorForm()
         {
