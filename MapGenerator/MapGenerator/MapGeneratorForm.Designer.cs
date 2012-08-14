@@ -48,13 +48,13 @@ namespace MapGenerator
             this.randomTextureHeightBox = new System.Windows.Forms.TextBox();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
-            this.randomTab = new System.Windows.Forms.TabPage();
+            this.noiseTab = new System.Windows.Forms.TabPage();
             this.randomTextureScaleBox = new System.Windows.Forms.TextBox();
             this.randomTextureScaleLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
-            this.randomTab.SuspendLayout();
+            this.noiseTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // surface
@@ -156,7 +156,7 @@ namespace MapGenerator
             // mainOptionsControl
             // 
             this.mainOptionsControl.Controls.Add(this.outputTab);
-            this.mainOptionsControl.Controls.Add(this.randomTab);
+            this.mainOptionsControl.Controls.Add(this.noiseTab);
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
@@ -177,22 +177,22 @@ namespace MapGenerator
             this.outputTab.Text = "Output";
             this.outputTab.UseVisualStyleBackColor = true;
             // 
-            // randomTab
+            // noiseTab
             // 
-            this.randomTab.Controls.Add(this.randomTextureScaleBox);
-            this.randomTab.Controls.Add(this.randomTextureScaleLabel);
-            this.randomTab.Controls.Add(this.randomTextureHeightBox);
-            this.randomTab.Controls.Add(this.randomSeedLabel);
-            this.randomTab.Controls.Add(this.randomTextureDimensionsLabel);
-            this.randomTab.Controls.Add(this.randomSeedBox);
-            this.randomTab.Controls.Add(this.randomTextureWidthBox);
-            this.randomTab.Location = new System.Drawing.Point(4, 22);
-            this.randomTab.Name = "randomTab";
-            this.randomTab.Padding = new System.Windows.Forms.Padding(3);
-            this.randomTab.Size = new System.Drawing.Size(232, 491);
-            this.randomTab.TabIndex = 1;
-            this.randomTab.Text = "Random";
-            this.randomTab.UseVisualStyleBackColor = true;
+            this.noiseTab.Controls.Add(this.randomTextureScaleBox);
+            this.noiseTab.Controls.Add(this.randomTextureScaleLabel);
+            this.noiseTab.Controls.Add(this.randomTextureHeightBox);
+            this.noiseTab.Controls.Add(this.randomSeedLabel);
+            this.noiseTab.Controls.Add(this.randomTextureDimensionsLabel);
+            this.noiseTab.Controls.Add(this.randomSeedBox);
+            this.noiseTab.Controls.Add(this.randomTextureWidthBox);
+            this.noiseTab.Location = new System.Drawing.Point(4, 22);
+            this.noiseTab.Name = "noiseTab";
+            this.noiseTab.Padding = new System.Windows.Forms.Padding(3);
+            this.noiseTab.Size = new System.Drawing.Size(232, 491);
+            this.noiseTab.TabIndex = 1;
+            this.noiseTab.Text = "Noise";
+            this.noiseTab.UseVisualStyleBackColor = true;
             // 
             // randomTextureScaleBox
             // 
@@ -226,8 +226,8 @@ namespace MapGenerator
             this.mainOptionsControl.ResumeLayout(false);
             this.outputTab.ResumeLayout(false);
             this.outputTab.PerformLayout();
-            this.randomTab.ResumeLayout(false);
-            this.randomTab.PerformLayout();
+            this.noiseTab.ResumeLayout(false);
+            this.noiseTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -269,7 +269,7 @@ namespace MapGenerator
         private System.Windows.Forms.TextBox randomTextureHeightBox;
         private TabControl mainOptionsControl;
         private TabPage outputTab;
-        private TabPage randomTab;
+        private TabPage noiseTab;
         private Label randomTextureScaleLabel;
         private TextBox randomTextureScaleBox;
     }
