@@ -49,6 +49,15 @@ namespace MapGenerator
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.fbm3DivisorLabel = new System.Windows.Forms.Label();
+            this.fbm3DivisorBox = new System.Windows.Forms.TextBox();
+            this.fbm3Checkbox = new System.Windows.Forms.CheckBox();
+            this.fbm2DivisorLabel = new System.Windows.Forms.Label();
+            this.fbm2DivisorBox = new System.Windows.Forms.TextBox();
+            this.fbm2Checkbox = new System.Windows.Forms.CheckBox();
+            this.fbmDivisorLabel = new System.Windows.Forms.Label();
+            this.fbm1DivisorBox = new System.Windows.Forms.TextBox();
+            this.fbm1Checkbox = new System.Windows.Forms.CheckBox();
             this.brightnessMultiplierBox = new System.Windows.Forms.TextBox();
             this.brightnessLabel = new System.Windows.Forms.Label();
             this.noiseLacunarityBox = new System.Windows.Forms.TextBox();
@@ -62,15 +71,6 @@ namespace MapGenerator
             this.waterTab = new System.Windows.Forms.TabPage();
             this.waterLevelBox = new System.Windows.Forms.TextBox();
             this.waterLevelLabel = new System.Windows.Forms.Label();
-            this.fbm1Checkbox = new System.Windows.Forms.CheckBox();
-            this.fbm1DivisorBox = new System.Windows.Forms.TextBox();
-            this.fbmDivisorLabel = new System.Windows.Forms.Label();
-            this.fbm2DivisorLabel = new System.Windows.Forms.Label();
-            this.fbm2DivisorBox = new System.Windows.Forms.TextBox();
-            this.fbm2Checkbox = new System.Windows.Forms.CheckBox();
-            this.fbm3DivisorLabel = new System.Windows.Forms.Label();
-            this.fbm3DivisorBox = new System.Windows.Forms.TextBox();
-            this.fbm3Checkbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
@@ -233,6 +233,96 @@ namespace MapGenerator
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
             // 
+            // fbm3DivisorLabel
+            // 
+            this.fbm3DivisorLabel.AutoSize = true;
+            this.fbm3DivisorLabel.Location = new System.Drawing.Point(70, 354);
+            this.fbm3DivisorLabel.Name = "fbm3DivisorLabel";
+            this.fbm3DivisorLabel.Size = new System.Drawing.Size(39, 13);
+            this.fbm3DivisorLabel.TabIndex = 27;
+            this.fbm3DivisorLabel.Text = "Divisor";
+            // 
+            // fbm3DivisorBox
+            // 
+            this.fbm3DivisorBox.Location = new System.Drawing.Point(121, 351);
+            this.fbm3DivisorBox.Name = "fbm3DivisorBox";
+            this.fbm3DivisorBox.Size = new System.Drawing.Size(100, 20);
+            this.fbm3DivisorBox.TabIndex = 26;
+            this.fbm3DivisorBox.Text = "8.00";
+            // 
+            // fbm3Checkbox
+            // 
+            this.fbm3Checkbox.AutoSize = true;
+            this.fbm3Checkbox.Checked = true;
+            this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 328);
+            this.fbm3Checkbox.Name = "fbm3Checkbox";
+            this.fbm3Checkbox.Size = new System.Drawing.Size(146, 17);
+            this.fbm3Checkbox.TabIndex = 25;
+            this.fbm3Checkbox.Text = "Enable Fractional Layer 3";
+            this.fbm3Checkbox.UseVisualStyleBackColor = true;
+            this.fbm3Checkbox.CheckedChanged += new System.EventHandler(this.fbm3Checkbox_CheckedChanged);
+            // 
+            // fbm2DivisorLabel
+            // 
+            this.fbm2DivisorLabel.AutoSize = true;
+            this.fbm2DivisorLabel.Location = new System.Drawing.Point(70, 296);
+            this.fbm2DivisorLabel.Name = "fbm2DivisorLabel";
+            this.fbm2DivisorLabel.Size = new System.Drawing.Size(39, 13);
+            this.fbm2DivisorLabel.TabIndex = 24;
+            this.fbm2DivisorLabel.Text = "Divisor";
+            // 
+            // fbm2DivisorBox
+            // 
+            this.fbm2DivisorBox.Location = new System.Drawing.Point(121, 293);
+            this.fbm2DivisorBox.Name = "fbm2DivisorBox";
+            this.fbm2DivisorBox.Size = new System.Drawing.Size(100, 20);
+            this.fbm2DivisorBox.TabIndex = 23;
+            this.fbm2DivisorBox.Text = "4.00";
+            // 
+            // fbm2Checkbox
+            // 
+            this.fbm2Checkbox.AutoSize = true;
+            this.fbm2Checkbox.Checked = true;
+            this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 270);
+            this.fbm2Checkbox.Name = "fbm2Checkbox";
+            this.fbm2Checkbox.Size = new System.Drawing.Size(146, 17);
+            this.fbm2Checkbox.TabIndex = 22;
+            this.fbm2Checkbox.Text = "Enable Fractional Layer 2";
+            this.fbm2Checkbox.UseVisualStyleBackColor = true;
+            this.fbm2Checkbox.CheckedChanged += new System.EventHandler(this.fbm2Checkbox_CheckedChanged);
+            // 
+            // fbmDivisorLabel
+            // 
+            this.fbmDivisorLabel.AutoSize = true;
+            this.fbmDivisorLabel.Location = new System.Drawing.Point(70, 238);
+            this.fbmDivisorLabel.Name = "fbmDivisorLabel";
+            this.fbmDivisorLabel.Size = new System.Drawing.Size(39, 13);
+            this.fbmDivisorLabel.TabIndex = 21;
+            this.fbmDivisorLabel.Text = "Divisor";
+            // 
+            // fbm1DivisorBox
+            // 
+            this.fbm1DivisorBox.Location = new System.Drawing.Point(121, 235);
+            this.fbm1DivisorBox.Name = "fbm1DivisorBox";
+            this.fbm1DivisorBox.Size = new System.Drawing.Size(100, 20);
+            this.fbm1DivisorBox.TabIndex = 20;
+            this.fbm1DivisorBox.Text = "2.00";
+            // 
+            // fbm1Checkbox
+            // 
+            this.fbm1Checkbox.AutoSize = true;
+            this.fbm1Checkbox.Checked = true;
+            this.fbm1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 212);
+            this.fbm1Checkbox.Name = "fbm1Checkbox";
+            this.fbm1Checkbox.Size = new System.Drawing.Size(146, 17);
+            this.fbm1Checkbox.TabIndex = 19;
+            this.fbm1Checkbox.Text = "Enable Fractional Layer 1";
+            this.fbm1Checkbox.UseVisualStyleBackColor = true;
+            this.fbm1Checkbox.CheckedChanged += new System.EventHandler(this.fbm1Checkbox_CheckedChanged);
+            // 
             // brightnessMultiplierBox
             // 
             this.brightnessMultiplierBox.Location = new System.Drawing.Point(121, 176);
@@ -345,93 +435,6 @@ namespace MapGenerator
             this.waterLevelLabel.Size = new System.Drawing.Size(65, 13);
             this.waterLevelLabel.TabIndex = 0;
             this.waterLevelLabel.Text = "Water Level";
-            // 
-            // fbm1Checkbox
-            // 
-            this.fbm1Checkbox.AutoSize = true;
-            this.fbm1Checkbox.Checked = true;
-            this.fbm1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 212);
-            this.fbm1Checkbox.Name = "fbm1Checkbox";
-            this.fbm1Checkbox.Size = new System.Drawing.Size(146, 17);
-            this.fbm1Checkbox.TabIndex = 19;
-            this.fbm1Checkbox.Text = "Enable Fractional Layer 1";
-            this.fbm1Checkbox.UseVisualStyleBackColor = true;
-            // 
-            // fbm1DivisorBox
-            // 
-            this.fbm1DivisorBox.Location = new System.Drawing.Point(121, 235);
-            this.fbm1DivisorBox.Name = "fbm1DivisorBox";
-            this.fbm1DivisorBox.Size = new System.Drawing.Size(100, 20);
-            this.fbm1DivisorBox.TabIndex = 20;
-            this.fbm1DivisorBox.Text = "2.00";
-            // 
-            // fbmDivisorLabel
-            // 
-            this.fbmDivisorLabel.AutoSize = true;
-            this.fbmDivisorLabel.Location = new System.Drawing.Point(70, 238);
-            this.fbmDivisorLabel.Name = "fbmDivisorLabel";
-            this.fbmDivisorLabel.Size = new System.Drawing.Size(39, 13);
-            this.fbmDivisorLabel.TabIndex = 21;
-            this.fbmDivisorLabel.Text = "Divisor";
-            // 
-            // fbm2DivisorLabel
-            // 
-            this.fbm2DivisorLabel.AutoSize = true;
-            this.fbm2DivisorLabel.Location = new System.Drawing.Point(70, 296);
-            this.fbm2DivisorLabel.Name = "fbm2DivisorLabel";
-            this.fbm2DivisorLabel.Size = new System.Drawing.Size(39, 13);
-            this.fbm2DivisorLabel.TabIndex = 24;
-            this.fbm2DivisorLabel.Text = "Divisor";
-            // 
-            // fbm2DivisorBox
-            // 
-            this.fbm2DivisorBox.Location = new System.Drawing.Point(121, 293);
-            this.fbm2DivisorBox.Name = "fbm2DivisorBox";
-            this.fbm2DivisorBox.Size = new System.Drawing.Size(100, 20);
-            this.fbm2DivisorBox.TabIndex = 23;
-            this.fbm2DivisorBox.Text = "4.00";
-            // 
-            // fbm2Checkbox
-            // 
-            this.fbm2Checkbox.AutoSize = true;
-            this.fbm2Checkbox.Checked = true;
-            this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 270);
-            this.fbm2Checkbox.Name = "fbm2Checkbox";
-            this.fbm2Checkbox.Size = new System.Drawing.Size(146, 17);
-            this.fbm2Checkbox.TabIndex = 22;
-            this.fbm2Checkbox.Text = "Enable Fractional Layer 2";
-            this.fbm2Checkbox.UseVisualStyleBackColor = true;
-            // 
-            // fbm3DivisorLabel
-            // 
-            this.fbm3DivisorLabel.AutoSize = true;
-            this.fbm3DivisorLabel.Location = new System.Drawing.Point(70, 354);
-            this.fbm3DivisorLabel.Name = "fbm3DivisorLabel";
-            this.fbm3DivisorLabel.Size = new System.Drawing.Size(39, 13);
-            this.fbm3DivisorLabel.TabIndex = 27;
-            this.fbm3DivisorLabel.Text = "Divisor";
-            // 
-            // fbm3DivisorBox
-            // 
-            this.fbm3DivisorBox.Location = new System.Drawing.Point(121, 351);
-            this.fbm3DivisorBox.Name = "fbm3DivisorBox";
-            this.fbm3DivisorBox.Size = new System.Drawing.Size(100, 20);
-            this.fbm3DivisorBox.TabIndex = 26;
-            this.fbm3DivisorBox.Text = "8.00";
-            // 
-            // fbm3Checkbox
-            // 
-            this.fbm3Checkbox.AutoSize = true;
-            this.fbm3Checkbox.Checked = true;
-            this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 328);
-            this.fbm3Checkbox.Name = "fbm3Checkbox";
-            this.fbm3Checkbox.Size = new System.Drawing.Size(146, 17);
-            this.fbm3Checkbox.TabIndex = 25;
-            this.fbm3Checkbox.Text = "Enable Fractional Layer 3";
-            this.fbm3Checkbox.UseVisualStyleBackColor = true;
             // 
             // MapGeneratorForm
             // 

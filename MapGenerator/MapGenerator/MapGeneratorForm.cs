@@ -104,5 +104,20 @@ namespace MapGenerator
 
             return options;
         }
+
+        private void fbm3Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm2Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm1Checkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
     }
 }
