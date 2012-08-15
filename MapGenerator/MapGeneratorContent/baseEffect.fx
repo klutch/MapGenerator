@@ -8,6 +8,7 @@ float2 randomTextureSize;
 float2 renderTargetSize;
 float randomTextureScale;
 
+float2 offset;
 float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
@@ -55,12 +56,16 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 // Pixel shader
 float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
-	float2 p = texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
+	// Set position
+	float2 p = 
+		(offset / renderTargetSize) - 
+		texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
+
+	// Calculate noise
 	float n = noise(p);
 	n *= noise(p + n / 2);
 	n *= noise(p + n / 4);
 	n *= noise(p + n / 8);
-	
 	n *= brightness;
 
 	return float4(n, n, n, 1);

@@ -18,17 +18,21 @@ namespace MapGenerator
         private MapGeneratorForm mapGeneratorForm;
         private System.Windows.Forms.PictureBox surface;
         public RenderTarget2D renderTarget;
-        public Texture2D baseNoise;
-        public Texture2D baseWater;
-        private Texture2D randomTexture;
         private Random random;
         public Vector2 view;
         public float scale = 1;
         private KeyboardState newKeyState;
         private KeyboardState oldKeyState;
+        private MouseState newMouseState;
+        private MouseState oldMouseState;
+        private Vector2 lastMousePosition;
 
         private Effect baseEffect;
         private Effect waterEffect;
+        public Texture2D baseNoise;
+        public Texture2D baseWater;
+        private Texture2D randomTexture;
+        private Vector2 effectOffset;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -112,7 +116,7 @@ namespace MapGenerator
             randomTexture.SetData<Color>(data);
 
             // Initialize vertex shader properties
-            Matrix projection = Matrix.CreateOrthographicOffCenter(0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0, 1);
+            Matrix projection = Matrix.CreateOrthographicOffCenter(0, options.width, options.height, 0, 0, 1);
             Matrix halfPixelOffset = Matrix.CreateTranslation(-0.5f, -0.5f, 0);
             baseEffect.Parameters["matrixTransform"].SetValue(halfPixelOffset * projection);
 
@@ -129,6 +133,7 @@ namespace MapGenerator
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
             baseEffect.Parameters["brightness"].SetValue(options.brightness);
+            baseEffect.Parameters["offset"].SetValue(effectOffset);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();
@@ -181,6 +186,7 @@ namespace MapGenerator
         protected override void Update(GameTime gameTime)
         {
             newKeyState = Keyboard.GetState();
+            newMouseState = Mouse.GetState();
 
             // Input
             if (newKeyState.IsKeyDown(Keys.Home) && oldKeyState.IsKeyUp(Keys.Home))
@@ -189,7 +195,16 @@ namespace MapGenerator
             if (newKeyState.IsKeyDown(Keys.Enter) && oldKeyState.IsKeyUp(Keys.Enter))
                 generateMap(mapGeneratorForm.getOptions());
 
+            if (newMouseState.RightButton == ButtonState.Pressed)
+            {
+                effectOffset += new Vector2(newMouseState.X - lastMousePosition.X, newMouseState.Y - lastMousePosition.Y);
+                generateMap(mapGeneratorForm.getOptions());
+            }
+
             oldKeyState = newKeyState;
+            oldMouseState = newMouseState;
+            lastMousePosition.X = newMouseState.X;
+            lastMousePosition.Y = newMouseState.Y;
 
             base.Update(gameTime);
         }
