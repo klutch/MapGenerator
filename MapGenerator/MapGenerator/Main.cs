@@ -128,6 +128,7 @@ namespace MapGenerator
             baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
+            baseEffect.Parameters["brightness"].SetValue(options.brightness);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();

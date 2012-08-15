@@ -21,6 +21,7 @@ namespace MapGenerator
         public float noiseGain;
         public float noiseLacunarity;
         public float waterLevel;
+        public float brightness;
     };
 
     public partial class MapGeneratorForm : Form
@@ -78,6 +79,7 @@ namespace MapGenerator
             options.noiseGain = float.Parse(noiseGainBox.Text);
             options.noiseLacunarity = float.Parse(noiseLacunarityBox.Text);
             options.waterLevel = float.Parse(waterLevelBox.Text);
+            options.brightness = float.Parse(brightnessMultiplierBox.Text);
 
             return options;
         }

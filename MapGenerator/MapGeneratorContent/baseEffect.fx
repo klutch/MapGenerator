@@ -11,6 +11,8 @@ float randomTextureScale;
 float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
+float brightness;
+
 float4x4 matrixTransform;
 
 float2 frequencyModifier[] = 
@@ -58,6 +60,8 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 	n *= noise(p + n / 2);
 	n *= noise(p + n / 4);
 	n *= noise(p + n / 8);
+	
+	n *= brightness;
 
 	return float4(n, n, n, 1);
 }

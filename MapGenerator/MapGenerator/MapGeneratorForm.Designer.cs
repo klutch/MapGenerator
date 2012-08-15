@@ -60,6 +60,8 @@ namespace MapGenerator
             this.waterTab = new System.Windows.Forms.TabPage();
             this.waterLevelBox = new System.Windows.Forms.TextBox();
             this.waterLevelLabel = new System.Windows.Forms.Label();
+            this.brightnessLabel = new System.Windows.Forms.Label();
+            this.brightnessMultiplierBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
@@ -190,6 +192,8 @@ namespace MapGenerator
             // 
             // noiseTab
             // 
+            this.noiseTab.Controls.Add(this.brightnessMultiplierBox);
+            this.noiseTab.Controls.Add(this.brightnessLabel);
             this.noiseTab.Controls.Add(this.noiseLacunarityBox);
             this.noiseTab.Controls.Add(this.lacunarityLabel);
             this.noiseTab.Controls.Add(this.noiseGainBox);
@@ -247,7 +251,7 @@ namespace MapGenerator
             // 
             // noiseFrequencyBox
             // 
-            this.noiseFrequencyBox.Location = new System.Drawing.Point(8, 127);
+            this.noiseFrequencyBox.Location = new System.Drawing.Point(9, 127);
             this.noiseFrequencyBox.Name = "noiseFrequencyBox";
             this.noiseFrequencyBox.Size = new System.Drawing.Size(100, 20);
             this.noiseFrequencyBox.TabIndex = 10;
@@ -256,7 +260,7 @@ namespace MapGenerator
             // frequencyLabel
             // 
             this.frequencyLabel.AutoSize = true;
-            this.frequencyLabel.Location = new System.Drawing.Point(5, 110);
+            this.frequencyLabel.Location = new System.Drawing.Point(6, 110);
             this.frequencyLabel.Name = "frequencyLabel";
             this.frequencyLabel.Size = new System.Drawing.Size(57, 13);
             this.frequencyLabel.TabIndex = 9;
@@ -306,6 +310,23 @@ namespace MapGenerator
             this.waterLevelLabel.Size = new System.Drawing.Size(65, 13);
             this.waterLevelLabel.TabIndex = 0;
             this.waterLevelLabel.Text = "Water Level";
+            // 
+            // brightnessLabel
+            // 
+            this.brightnessLabel.AutoSize = true;
+            this.brightnessLabel.Location = new System.Drawing.Point(118, 159);
+            this.brightnessLabel.Name = "brightnessLabel";
+            this.brightnessLabel.Size = new System.Drawing.Size(56, 13);
+            this.brightnessLabel.TabIndex = 17;
+            this.brightnessLabel.Text = "Brightness";
+            // 
+            // brightnessMultiplierBox
+            // 
+            this.brightnessMultiplierBox.Location = new System.Drawing.Point(121, 176);
+            this.brightnessMultiplierBox.Name = "brightnessMultiplierBox";
+            this.brightnessMultiplierBox.Size = new System.Drawing.Size(100, 20);
+            this.brightnessMultiplierBox.TabIndex = 18;
+            this.brightnessMultiplierBox.Text = "1.00";
             // 
             // MapGeneratorForm
             // 
@@ -379,5 +400,7 @@ namespace MapGenerator
         private Label gainLabel;
         private TextBox waterLevelBox;
         private Label waterLevelLabel;
+        private TextBox brightnessMultiplierBox;
+        private Label brightnessLabel;
     }
 }
