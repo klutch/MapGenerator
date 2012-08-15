@@ -28,8 +28,10 @@ namespace MapGenerator
 
         private Effect baseEffect;
         private Effect waterEffect;
+        private Effect floraEffect;
         public RenderTarget2D baseNoise;
         public RenderTarget2D baseWater;
+        public RenderTarget2D baseFlora;
         private Texture2D randomTexture;
 
         // Constructor
@@ -80,6 +82,7 @@ namespace MapGenerator
             spriteFont = Content.Load<SpriteFont>("spriteFont");
             baseEffect = Content.Load<Effect>("baseEffect");
             waterEffect = Content.Load<Effect>("waterEffect");
+            floraEffect = Content.Load<Effect>("floraEffect");
         }
 
         // UnloadContent
@@ -116,12 +119,15 @@ namespace MapGenerator
             // Initialize vertex shader properties
             Matrix projection = Matrix.CreateOrthographicOffCenter(0, options.width, options.height, 0, 0, 1);
             Matrix halfPixelOffset = Matrix.CreateTranslation(-0.5f, -0.5f, 0);
-            baseEffect.Parameters["matrixTransform"].SetValue(halfPixelOffset * projection);
+            Matrix matrixTransform = halfPixelOffset * projection;
+            baseEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
 
             // Initialize render target
             renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
-
+            
+            //////////////////////////////////////
             // Draw noise effect to render target
+            ///////////////////////////////////////
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
             baseEffect.Parameters["position"].SetValue(options.position);
@@ -150,7 +156,9 @@ namespace MapGenerator
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
 
+            //////////////////////////////////////////
             // Draw water effect to render target
+            //////////////////////////////////////////
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Transparent);
             waterEffect.Parameters["waterLevel"].SetValue(options.waterLevel);
@@ -161,16 +169,37 @@ namespace MapGenerator
             // Store base water texture
             baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseWater);
-            spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.Transparent);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
 
-            // Draw textures
+            ////////////////////////////////
+            // Draw flora effect
+            ////////////////////////////////
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Transparent);
+            floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Store base flora texture
+            baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            GraphicsDevice.SetRenderTarget(baseFlora);
+            GraphicsDevice.Clear(Color.Transparent);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Draw all textures
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin();
+
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
+            spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
             spriteBatch.End();
 
             // Reset render target

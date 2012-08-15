@@ -74,6 +74,7 @@ namespace MapGenerator
             this.waterTab = new System.Windows.Forms.TabPage();
             this.waterLevelBox = new System.Windows.Forms.TextBox();
             this.waterLevelLabel = new System.Windows.Forms.Label();
+            this.floraTab = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
@@ -182,6 +183,7 @@ namespace MapGenerator
             this.mainOptionsControl.Controls.Add(this.outputTab);
             this.mainOptionsControl.Controls.Add(this.noiseTab);
             this.mainOptionsControl.Controls.Add(this.waterTab);
+            this.mainOptionsControl.Controls.Add(this.floraTab);
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
@@ -467,6 +469,15 @@ namespace MapGenerator
             this.waterLevelLabel.TabIndex = 0;
             this.waterLevelLabel.Text = "Water Level";
             // 
+            // floraTab
+            // 
+            this.floraTab.Location = new System.Drawing.Point(4, 22);
+            this.floraTab.Name = "floraTab";
+            this.floraTab.Size = new System.Drawing.Size(232, 491);
+            this.floraTab.TabIndex = 3;
+            this.floraTab.Text = "Flora";
+            this.floraTab.UseVisualStyleBackColor = true;
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -588,5 +599,6 @@ namespace MapGenerator
         private TextBox positionYBox;
         private TextBox positionXBox;
         private Label positionLabel;
+        private TabPage floraTab;
     }
 }
