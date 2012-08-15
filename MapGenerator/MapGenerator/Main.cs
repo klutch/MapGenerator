@@ -111,6 +111,11 @@ namespace MapGenerator
             randomTexture = new Texture2D(GraphicsDevice, options.randomTextureWidth, options.randomTextureHeight);
             randomTexture.SetData<Color>(data);
 
+            // Initialize vertex shader properties
+            Matrix projection = Matrix.CreateOrthographicOffCenter(0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0, 1);
+            Matrix halfPixelOffset = Matrix.CreateTranslation(-0.5f, -0.5f, 0);
+            baseEffect.Parameters["matrixTransform"].SetValue(halfPixelOffset * projection);
+
             // Initialize render target
             renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
 

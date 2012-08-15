@@ -11,8 +11,24 @@ float randomTextureScale;
 float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
-int noiseOctaves;
+float4x4 matrixTransform;
 
+// Vertex shader
+void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
+{ 
+	position = mul(position, matrixTransform); 
+}
+
+// Pixel shader
+float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
+{
+	float2 p = texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
+	float n = noise(p);
+
+	return float4(n, n, n, 1);
+}
+
+// Noise
 float noise(float2 position)
 {
 	float total = 0;
@@ -29,22 +45,11 @@ float noise(float2 position)
 	return total;
 }
 
-float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
-{
-	float2 p = texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
-	float2 q = float2(noise(p * 2.3), noise(p * 2.3));
-	float2 r = noise(q / 4 + 0.2);
-	float total = noise(p + 4.0 * r);
-
-	float4 color = float4(total, total, total, 1);
-
-	return color;
-}
-
 technique Main
 {
     pass Base
     {
-        PixelShader = compile ps_2_0 PixelShaderFunction();
+		VertexShader = compile vs_3_0 VSBase();
+        PixelShader = compile ps_3_0 PSBaseNoise();
     }
 }
