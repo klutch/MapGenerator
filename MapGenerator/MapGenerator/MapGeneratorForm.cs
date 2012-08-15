@@ -14,14 +14,24 @@ namespace MapGenerator
         public int width;
         public int height;
         public int seed;
+
         public int randomTextureWidth;
         public int randomTextureHeight;
         public float randomTextureScale;
+
         public float noiseFrequency;
         public float noiseGain;
         public float noiseLacunarity;
-        public float waterLevel;
         public float brightness;
+
+        public bool fbm1;
+        public bool fbm2;
+        public bool fbm3;
+        public float fbm1Divisor;
+        public float fbm2Divisor;
+        public float fbm3Divisor;
+
+        public float waterLevel;
     };
 
     public partial class MapGeneratorForm : Form
@@ -69,17 +79,28 @@ namespace MapGenerator
         public MapGeneratorOptions getOptions()
         {
             MapGeneratorOptions options = new MapGeneratorOptions();
+
             options.width = int.Parse(widthBox.Text);
             options.height = int.Parse(heightBox.Text);
             options.seed = int.Parse(randomSeedBox.Text);
+            
             options.randomTextureWidth = int.Parse(randomTextureWidthBox.Text);
             options.randomTextureHeight = int.Parse(randomTextureHeightBox.Text);
             options.randomTextureScale = float.Parse(randomTextureScaleBox.Text);
+            
             options.noiseFrequency = float.Parse(noiseFrequencyBox.Text);
             options.noiseGain = float.Parse(noiseGainBox.Text);
             options.noiseLacunarity = float.Parse(noiseLacunarityBox.Text);
-            options.waterLevel = float.Parse(waterLevelBox.Text);
             options.brightness = float.Parse(brightnessMultiplierBox.Text);
+
+            options.fbm1 = fbm1Checkbox.Checked;
+            options.fbm2 = fbm2Checkbox.Checked;
+            options.fbm3 = fbm3Checkbox.Checked;
+            options.fbm1Divisor = float.Parse(fbm1DivisorBox.Text);
+            options.fbm2Divisor = float.Parse(fbm2DivisorBox.Text);
+            options.fbm3Divisor = float.Parse(fbm3DivisorBox.Text);
+
+            options.waterLevel = float.Parse(waterLevelBox.Text);
 
             return options;
         }

@@ -126,6 +126,7 @@ namespace MapGenerator
             // Draw noise effect to render target
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
+            baseEffect.Parameters["offset"].SetValue(effectOffset);
             baseEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
             baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.randomTextureWidth, options.randomTextureHeight));
             baseEffect.Parameters["randomTextureScale"].SetValue(options.randomTextureScale);
@@ -133,7 +134,12 @@ namespace MapGenerator
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
             baseEffect.Parameters["brightness"].SetValue(options.brightness);
-            baseEffect.Parameters["offset"].SetValue(effectOffset);
+            baseEffect.Parameters["fbm1"].SetValue(options.fbm1);
+            baseEffect.Parameters["fbm2"].SetValue(options.fbm2);
+            baseEffect.Parameters["fbm3"].SetValue(options.fbm3);
+            baseEffect.Parameters["fbm1Divisor"].SetValue(options.fbm1Divisor);
+            baseEffect.Parameters["fbm2Divisor"].SetValue(options.fbm2Divisor);
+            baseEffect.Parameters["fbm3Divisor"].SetValue(options.fbm3Divisor);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();

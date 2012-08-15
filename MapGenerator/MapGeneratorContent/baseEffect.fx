@@ -14,6 +14,13 @@ float noiseGain;
 float noiseLacunarity;
 float brightness;
 
+bool fbm1;
+bool fbm2;
+bool fbm3;
+float fbm1Divisor;
+float fbm2Divisor;
+float fbm3Divisor;
+
 float4x4 matrixTransform;
 
 float2 frequencyModifier[] = 
@@ -63,9 +70,16 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 
 	// Calculate noise
 	float n = noise(p);
-	n *= noise(p + n / 2);
-	n *= noise(p + n / 4);
-	n *= noise(p + n / 8);
+	
+	if (fbm1)
+		n *= noise(p + n / fbm1Divisor);
+
+	if (fbm2)
+		n *= noise(p + n / fbm2Divisor);
+
+	if (fbm3)
+		n *= noise(p + n / fbm3Divisor);
+
 	n *= brightness;
 
 	return float4(n, n, n, 1);
