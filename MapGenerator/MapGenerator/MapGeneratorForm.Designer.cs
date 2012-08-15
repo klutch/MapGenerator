@@ -35,6 +35,10 @@ namespace MapGenerator
         /// </summary>
         private void InitializeComponent()
         {
+            this.KeyDown += new KeyEventHandler(MapGeneratorForm_KeyDown);
+            this.KeyUp += new KeyEventHandler(MapGeneratorForm_KeyUp);
+            this.KeyPreview = true;
+
             this.surface = new System.Windows.Forms.PictureBox();
             this.randomSeedBox = new System.Windows.Forms.TextBox();
             this.randomSeedLabel = new System.Windows.Forms.Label();
@@ -459,19 +463,47 @@ namespace MapGenerator
 
         }
 
+        void MapGeneratorForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Control || e.KeyCode == Keys.LControlKey)
+                ctrl = false;
+        }
+
+        void MapGeneratorForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Control || e.KeyCode == Keys.LControlKey)
+                ctrl = true;
+        }
+
         void MapGeneratorForm_MouseWheel(object sender, MouseEventArgs e)
         {
             if (e.X >= surface.Left && e.X <= surface.Left + surface.Width &&
                 e.Y >= 0 && e.Y <= surface.Height)
             {
-                float scaleModified = 0.0005f;
-                main.scale += scaleModified * e.Delta;
+                if (ctrl)
+                {
+                    // Adjust scale of render target
+                    main.scale += 0.0005f * e.Delta;
+                }
+                else
+                {
+                    // Adjust scale of effect
+                    float scale = float.Parse(randomTextureScaleBox.Text);
+                    scale += 0.005f * e.Delta;
+                    randomTextureScaleBox.Text = string.Format("{0}", scale);
+                    main.generateMap(getOptions());
+                }
             }
         }
 
         void surface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && !ctrl)
+            {
+                main.effectOffset += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
+                main.generateMap(getOptions());
+            }
+            else if (e.Button == MouseButtons.Left && ctrl)
             {
                 main.view.X += e.X - lastDragPosition.X;
                 main.view.Y += e.Y - lastDragPosition.Y;

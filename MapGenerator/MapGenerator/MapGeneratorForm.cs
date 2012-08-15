@@ -38,6 +38,7 @@ namespace MapGenerator
     {
         public Main main;
         private Point lastDragPosition;
+        private bool ctrl;
 
         public MapGeneratorForm()
         {

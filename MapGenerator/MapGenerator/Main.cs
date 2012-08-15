@@ -25,14 +25,13 @@ namespace MapGenerator
         private KeyboardState oldKeyState;
         private MouseState newMouseState;
         private MouseState oldMouseState;
-        private Vector2 lastMousePosition;
 
         private Effect baseEffect;
         private Effect waterEffect;
         public Texture2D baseNoise;
         public Texture2D baseWater;
         private Texture2D randomTexture;
-        private Vector2 effectOffset;
+        public Vector2 effectOffset;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -201,16 +200,8 @@ namespace MapGenerator
             if (newKeyState.IsKeyDown(Keys.Enter) && oldKeyState.IsKeyUp(Keys.Enter))
                 generateMap(mapGeneratorForm.getOptions());
 
-            if (newMouseState.RightButton == ButtonState.Pressed)
-            {
-                effectOffset += new Vector2(newMouseState.X - lastMousePosition.X, newMouseState.Y - lastMousePosition.Y);
-                generateMap(mapGeneratorForm.getOptions());
-            }
-
             oldKeyState = newKeyState;
             oldMouseState = newMouseState;
-            lastMousePosition.X = newMouseState.X;
-            lastMousePosition.Y = newMouseState.Y;
 
             base.Update(gameTime);
         }
