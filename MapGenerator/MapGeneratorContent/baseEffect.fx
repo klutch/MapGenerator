@@ -66,7 +66,7 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 	// Set position
 	float2 p = 
 		(offset / renderTargetSize) - 
-		0.5 + texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
+		texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
 
 	// Calculate noise
 	float n = noise(p);
