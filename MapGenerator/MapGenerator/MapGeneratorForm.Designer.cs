@@ -35,10 +35,6 @@ namespace MapGenerator
         /// </summary>
         private void InitializeComponent()
         {
-            this.KeyDown += new KeyEventHandler(MapGeneratorForm_KeyDown);
-            this.KeyUp += new KeyEventHandler(MapGeneratorForm_KeyUp);
-            this.KeyPreview = true;
-
             this.surface = new System.Windows.Forms.PictureBox();
             this.randomSeedBox = new System.Windows.Forms.TextBox();
             this.randomSeedLabel = new System.Windows.Forms.Label();
@@ -53,6 +49,9 @@ namespace MapGenerator
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.positionYBox = new System.Windows.Forms.TextBox();
+            this.positionXBox = new System.Windows.Forms.TextBox();
+            this.positionLabel = new System.Windows.Forms.Label();
             this.fbm3DivisorLabel = new System.Windows.Forms.Label();
             this.fbm3DivisorBox = new System.Windows.Forms.TextBox();
             this.fbm3Checkbox = new System.Windows.Forms.CheckBox();
@@ -70,8 +69,8 @@ namespace MapGenerator
             this.gainLabel = new System.Windows.Forms.Label();
             this.noiseFrequencyBox = new System.Windows.Forms.TextBox();
             this.frequencyLabel = new System.Windows.Forms.Label();
-            this.randomTextureScaleBox = new System.Windows.Forms.TextBox();
-            this.randomTextureScaleLabel = new System.Windows.Forms.Label();
+            this.scaleBox = new System.Windows.Forms.TextBox();
+            this.scaleLabel = new System.Windows.Forms.Label();
             this.waterTab = new System.Windows.Forms.TabPage();
             this.waterLevelBox = new System.Windows.Forms.TextBox();
             this.waterLevelLabel = new System.Windows.Forms.Label();
@@ -156,15 +155,15 @@ namespace MapGenerator
             // randomTextureDimensionsLabel
             // 
             this.randomTextureDimensionsLabel.AutoSize = true;
-            this.randomTextureDimensionsLabel.Location = new System.Drawing.Point(6, 61);
+            this.randomTextureDimensionsLabel.Location = new System.Drawing.Point(6, 110);
             this.randomTextureDimensionsLabel.Name = "randomTextureDimensionsLabel";
-            this.randomTextureDimensionsLabel.Size = new System.Drawing.Size(130, 13);
+            this.randomTextureDimensionsLabel.Size = new System.Drawing.Size(137, 13);
             this.randomTextureDimensionsLabel.TabIndex = 0;
-            this.randomTextureDimensionsLabel.Text = "Noise Texture Dimensions";
+            this.randomTextureDimensionsLabel.Text = "Source Texture Dimensions";
             // 
             // randomTextureWidthBox
             // 
-            this.randomTextureWidthBox.Location = new System.Drawing.Point(9, 78);
+            this.randomTextureWidthBox.Location = new System.Drawing.Point(9, 127);
             this.randomTextureWidthBox.Name = "randomTextureWidthBox";
             this.randomTextureWidthBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureWidthBox.TabIndex = 4;
@@ -172,7 +171,7 @@ namespace MapGenerator
             // 
             // randomTextureHeightBox
             // 
-            this.randomTextureHeightBox.Location = new System.Drawing.Point(121, 77);
+            this.randomTextureHeightBox.Location = new System.Drawing.Point(121, 126);
             this.randomTextureHeightBox.Name = "randomTextureHeightBox";
             this.randomTextureHeightBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureHeightBox.TabIndex = 5;
@@ -205,6 +204,9 @@ namespace MapGenerator
             // 
             // noiseTab
             // 
+            this.noiseTab.Controls.Add(this.positionYBox);
+            this.noiseTab.Controls.Add(this.positionXBox);
+            this.noiseTab.Controls.Add(this.positionLabel);
             this.noiseTab.Controls.Add(this.fbm3DivisorLabel);
             this.noiseTab.Controls.Add(this.fbm3DivisorBox);
             this.noiseTab.Controls.Add(this.fbm3Checkbox);
@@ -222,8 +224,8 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.gainLabel);
             this.noiseTab.Controls.Add(this.noiseFrequencyBox);
             this.noiseTab.Controls.Add(this.frequencyLabel);
-            this.noiseTab.Controls.Add(this.randomTextureScaleBox);
-            this.noiseTab.Controls.Add(this.randomTextureScaleLabel);
+            this.noiseTab.Controls.Add(this.scaleBox);
+            this.noiseTab.Controls.Add(this.scaleLabel);
             this.noiseTab.Controls.Add(this.randomTextureHeightBox);
             this.noiseTab.Controls.Add(this.randomSeedLabel);
             this.noiseTab.Controls.Add(this.randomTextureDimensionsLabel);
@@ -237,10 +239,35 @@ namespace MapGenerator
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
             // 
+            // positionYBox
+            // 
+            this.positionYBox.Location = new System.Drawing.Point(121, 78);
+            this.positionYBox.Name = "positionYBox";
+            this.positionYBox.Size = new System.Drawing.Size(100, 20);
+            this.positionYBox.TabIndex = 30;
+            this.positionYBox.Text = "0.0000";
+            // 
+            // positionXBox
+            // 
+            this.positionXBox.Location = new System.Drawing.Point(9, 78);
+            this.positionXBox.Name = "positionXBox";
+            this.positionXBox.Size = new System.Drawing.Size(100, 20);
+            this.positionXBox.TabIndex = 29;
+            this.positionXBox.Text = "0.0000";
+            // 
+            // positionLabel
+            // 
+            this.positionLabel.AutoSize = true;
+            this.positionLabel.Location = new System.Drawing.Point(6, 61);
+            this.positionLabel.Name = "positionLabel";
+            this.positionLabel.Size = new System.Drawing.Size(44, 13);
+            this.positionLabel.TabIndex = 28;
+            this.positionLabel.Text = "Position";
+            // 
             // fbm3DivisorLabel
             // 
             this.fbm3DivisorLabel.AutoSize = true;
-            this.fbm3DivisorLabel.Location = new System.Drawing.Point(70, 354);
+            this.fbm3DivisorLabel.Location = new System.Drawing.Point(70, 403);
             this.fbm3DivisorLabel.Name = "fbm3DivisorLabel";
             this.fbm3DivisorLabel.Size = new System.Drawing.Size(39, 13);
             this.fbm3DivisorLabel.TabIndex = 27;
@@ -248,7 +275,7 @@ namespace MapGenerator
             // 
             // fbm3DivisorBox
             // 
-            this.fbm3DivisorBox.Location = new System.Drawing.Point(121, 351);
+            this.fbm3DivisorBox.Location = new System.Drawing.Point(121, 400);
             this.fbm3DivisorBox.Name = "fbm3DivisorBox";
             this.fbm3DivisorBox.Size = new System.Drawing.Size(100, 20);
             this.fbm3DivisorBox.TabIndex = 26;
@@ -259,7 +286,7 @@ namespace MapGenerator
             this.fbm3Checkbox.AutoSize = true;
             this.fbm3Checkbox.Checked = true;
             this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 328);
+            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 377);
             this.fbm3Checkbox.Name = "fbm3Checkbox";
             this.fbm3Checkbox.Size = new System.Drawing.Size(146, 17);
             this.fbm3Checkbox.TabIndex = 25;
@@ -270,7 +297,7 @@ namespace MapGenerator
             // fbm2DivisorLabel
             // 
             this.fbm2DivisorLabel.AutoSize = true;
-            this.fbm2DivisorLabel.Location = new System.Drawing.Point(70, 296);
+            this.fbm2DivisorLabel.Location = new System.Drawing.Point(70, 345);
             this.fbm2DivisorLabel.Name = "fbm2DivisorLabel";
             this.fbm2DivisorLabel.Size = new System.Drawing.Size(39, 13);
             this.fbm2DivisorLabel.TabIndex = 24;
@@ -278,7 +305,7 @@ namespace MapGenerator
             // 
             // fbm2DivisorBox
             // 
-            this.fbm2DivisorBox.Location = new System.Drawing.Point(121, 293);
+            this.fbm2DivisorBox.Location = new System.Drawing.Point(121, 342);
             this.fbm2DivisorBox.Name = "fbm2DivisorBox";
             this.fbm2DivisorBox.Size = new System.Drawing.Size(100, 20);
             this.fbm2DivisorBox.TabIndex = 23;
@@ -289,7 +316,7 @@ namespace MapGenerator
             this.fbm2Checkbox.AutoSize = true;
             this.fbm2Checkbox.Checked = true;
             this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 270);
+            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 319);
             this.fbm2Checkbox.Name = "fbm2Checkbox";
             this.fbm2Checkbox.Size = new System.Drawing.Size(146, 17);
             this.fbm2Checkbox.TabIndex = 22;
@@ -300,7 +327,7 @@ namespace MapGenerator
             // fbmDivisorLabel
             // 
             this.fbmDivisorLabel.AutoSize = true;
-            this.fbmDivisorLabel.Location = new System.Drawing.Point(70, 238);
+            this.fbmDivisorLabel.Location = new System.Drawing.Point(70, 287);
             this.fbmDivisorLabel.Name = "fbmDivisorLabel";
             this.fbmDivisorLabel.Size = new System.Drawing.Size(39, 13);
             this.fbmDivisorLabel.TabIndex = 21;
@@ -308,7 +335,7 @@ namespace MapGenerator
             // 
             // fbm1DivisorBox
             // 
-            this.fbm1DivisorBox.Location = new System.Drawing.Point(121, 235);
+            this.fbm1DivisorBox.Location = new System.Drawing.Point(121, 284);
             this.fbm1DivisorBox.Name = "fbm1DivisorBox";
             this.fbm1DivisorBox.Size = new System.Drawing.Size(100, 20);
             this.fbm1DivisorBox.TabIndex = 20;
@@ -319,7 +346,7 @@ namespace MapGenerator
             this.fbm1Checkbox.AutoSize = true;
             this.fbm1Checkbox.Checked = true;
             this.fbm1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 212);
+            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 261);
             this.fbm1Checkbox.Name = "fbm1Checkbox";
             this.fbm1Checkbox.Size = new System.Drawing.Size(146, 17);
             this.fbm1Checkbox.TabIndex = 19;
@@ -329,7 +356,7 @@ namespace MapGenerator
             // 
             // brightnessMultiplierBox
             // 
-            this.brightnessMultiplierBox.Location = new System.Drawing.Point(121, 176);
+            this.brightnessMultiplierBox.Location = new System.Drawing.Point(121, 225);
             this.brightnessMultiplierBox.Name = "brightnessMultiplierBox";
             this.brightnessMultiplierBox.Size = new System.Drawing.Size(100, 20);
             this.brightnessMultiplierBox.TabIndex = 18;
@@ -338,7 +365,7 @@ namespace MapGenerator
             // brightnessLabel
             // 
             this.brightnessLabel.AutoSize = true;
-            this.brightnessLabel.Location = new System.Drawing.Point(118, 159);
+            this.brightnessLabel.Location = new System.Drawing.Point(118, 208);
             this.brightnessLabel.Name = "brightnessLabel";
             this.brightnessLabel.Size = new System.Drawing.Size(56, 13);
             this.brightnessLabel.TabIndex = 17;
@@ -346,7 +373,7 @@ namespace MapGenerator
             // 
             // noiseLacunarityBox
             // 
-            this.noiseLacunarityBox.Location = new System.Drawing.Point(9, 176);
+            this.noiseLacunarityBox.Location = new System.Drawing.Point(9, 225);
             this.noiseLacunarityBox.Name = "noiseLacunarityBox";
             this.noiseLacunarityBox.Size = new System.Drawing.Size(100, 20);
             this.noiseLacunarityBox.TabIndex = 16;
@@ -355,7 +382,7 @@ namespace MapGenerator
             // lacunarityLabel
             // 
             this.lacunarityLabel.AutoSize = true;
-            this.lacunarityLabel.Location = new System.Drawing.Point(6, 159);
+            this.lacunarityLabel.Location = new System.Drawing.Point(6, 208);
             this.lacunarityLabel.Name = "lacunarityLabel";
             this.lacunarityLabel.Size = new System.Drawing.Size(56, 13);
             this.lacunarityLabel.TabIndex = 15;
@@ -363,7 +390,7 @@ namespace MapGenerator
             // 
             // noiseGainBox
             // 
-            this.noiseGainBox.Location = new System.Drawing.Point(121, 127);
+            this.noiseGainBox.Location = new System.Drawing.Point(121, 176);
             this.noiseGainBox.Name = "noiseGainBox";
             this.noiseGainBox.Size = new System.Drawing.Size(100, 20);
             this.noiseGainBox.TabIndex = 12;
@@ -372,7 +399,7 @@ namespace MapGenerator
             // gainLabel
             // 
             this.gainLabel.AutoSize = true;
-            this.gainLabel.Location = new System.Drawing.Point(118, 110);
+            this.gainLabel.Location = new System.Drawing.Point(118, 159);
             this.gainLabel.Name = "gainLabel";
             this.gainLabel.Size = new System.Drawing.Size(29, 13);
             this.gainLabel.TabIndex = 11;
@@ -380,7 +407,7 @@ namespace MapGenerator
             // 
             // noiseFrequencyBox
             // 
-            this.noiseFrequencyBox.Location = new System.Drawing.Point(9, 127);
+            this.noiseFrequencyBox.Location = new System.Drawing.Point(9, 176);
             this.noiseFrequencyBox.Name = "noiseFrequencyBox";
             this.noiseFrequencyBox.Size = new System.Drawing.Size(100, 20);
             this.noiseFrequencyBox.TabIndex = 10;
@@ -389,28 +416,28 @@ namespace MapGenerator
             // frequencyLabel
             // 
             this.frequencyLabel.AutoSize = true;
-            this.frequencyLabel.Location = new System.Drawing.Point(6, 110);
+            this.frequencyLabel.Location = new System.Drawing.Point(6, 159);
             this.frequencyLabel.Name = "frequencyLabel";
             this.frequencyLabel.Size = new System.Drawing.Size(57, 13);
             this.frequencyLabel.TabIndex = 9;
             this.frequencyLabel.Text = "Frequency";
             // 
-            // randomTextureScaleBox
+            // scaleBox
             // 
-            this.randomTextureScaleBox.Location = new System.Drawing.Point(121, 29);
-            this.randomTextureScaleBox.Name = "randomTextureScaleBox";
-            this.randomTextureScaleBox.Size = new System.Drawing.Size(100, 20);
-            this.randomTextureScaleBox.TabIndex = 8;
-            this.randomTextureScaleBox.Text = "32.00";
+            this.scaleBox.Location = new System.Drawing.Point(121, 29);
+            this.scaleBox.Name = "scaleBox";
+            this.scaleBox.Size = new System.Drawing.Size(100, 20);
+            this.scaleBox.TabIndex = 8;
+            this.scaleBox.Text = "32.00";
             // 
-            // randomTextureScaleLabel
+            // scaleLabel
             // 
-            this.randomTextureScaleLabel.AutoSize = true;
-            this.randomTextureScaleLabel.Location = new System.Drawing.Point(118, 12);
-            this.randomTextureScaleLabel.Name = "randomTextureScaleLabel";
-            this.randomTextureScaleLabel.Size = new System.Drawing.Size(73, 13);
-            this.randomTextureScaleLabel.TabIndex = 7;
-            this.randomTextureScaleLabel.Text = "Texture Scale";
+            this.scaleLabel.AutoSize = true;
+            this.scaleLabel.Location = new System.Drawing.Point(118, 12);
+            this.scaleLabel.Name = "scaleLabel";
+            this.scaleLabel.Size = new System.Drawing.Size(34, 13);
+            this.scaleLabel.TabIndex = 7;
+            this.scaleLabel.Text = "Scale";
             // 
             // waterTab
             // 
@@ -448,8 +475,11 @@ namespace MapGenerator
             this.Controls.Add(this.mainOptionsControl);
             this.Controls.Add(this.generateButton);
             this.Controls.Add(this.surface);
+            this.KeyPreview = true;
             this.Name = "MapGeneratorForm";
             this.Text = "Map Generator";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MapGeneratorForm_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MapGeneratorForm_KeyUp);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MapGeneratorForm_MouseWheel);
             ((System.ComponentModel.ISupportInitialize)(this.surface)).EndInit();
             this.mainOptionsControl.ResumeLayout(false);
@@ -488,9 +518,9 @@ namespace MapGenerator
                 else
                 {
                     // Adjust scale of effect
-                    float scale = float.Parse(randomTextureScaleBox.Text);
+                    float scale = float.Parse(scaleBox.Text);
                     scale += 0.005f * e.Delta;
-                    randomTextureScaleBox.Text = string.Format("{0}", scale);
+                    scaleBox.Text = string.Format("{0}", scale);
                     main.generateMap(getOptions());
                 }
             }
@@ -500,7 +530,11 @@ namespace MapGenerator
         {
             if (e.Button == MouseButtons.Left && !ctrl)
             {
-                main.effectOffset += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
+                effectPosition += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
+
+                positionXBox.Text = string.Format("{0}", effectPosition.X);
+                positionYBox.Text = string.Format("{0}", effectPosition.Y);
+
                 main.generateMap(getOptions());
             }
             else if (e.Button == MouseButtons.Left && ctrl)
@@ -529,8 +563,8 @@ namespace MapGenerator
         private TabControl mainOptionsControl;
         private TabPage outputTab;
         private TabPage noiseTab;
-        private Label randomTextureScaleLabel;
-        private TextBox randomTextureScaleBox;
+        private Label scaleLabel;
+        private TextBox scaleBox;
         private TabPage waterTab;
         private Label frequencyLabel;
         private TextBox noiseFrequencyBox;
@@ -551,5 +585,8 @@ namespace MapGenerator
         private Label fbm3DivisorLabel;
         private TextBox fbm3DivisorBox;
         private CheckBox fbm3Checkbox;
+        private TextBox positionYBox;
+        private TextBox positionXBox;
+        private Label positionLabel;
     }
 }

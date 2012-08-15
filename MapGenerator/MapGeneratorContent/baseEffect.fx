@@ -6,9 +6,9 @@ sampler baseSampler : register(s0) = sampler_state
 
 float2 randomTextureSize;
 float2 renderTargetSize;
-float randomTextureScale;
 
-float2 offset;
+float2 position;
+float scale;
 float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
@@ -65,8 +65,8 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	// Set position
 	float2 p = 
-		(offset / renderTargetSize) - 
-		texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
+		(position / renderTargetSize) - 
+		texCoords * (renderTargetSize / randomTextureSize) / scale;
 
 	// Calculate noise
 	float n = noise(p);

@@ -28,10 +28,9 @@ namespace MapGenerator
 
         private Effect baseEffect;
         private Effect waterEffect;
-        public Texture2D baseNoise;
-        public Texture2D baseWater;
+        public RenderTarget2D baseNoise;
+        public RenderTarget2D baseWater;
         private Texture2D randomTexture;
-        public Vector2 effectOffset;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -125,10 +124,10 @@ namespace MapGenerator
             // Draw noise effect to render target
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
-            baseEffect.Parameters["offset"].SetValue(effectOffset);
+            baseEffect.Parameters["position"].SetValue(options.position);
+            baseEffect.Parameters["scale"].SetValue(options.scale);
             baseEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
             baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.randomTextureWidth, options.randomTextureHeight));
-            baseEffect.Parameters["randomTextureScale"].SetValue(options.randomTextureScale);
             baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
@@ -148,9 +147,12 @@ namespace MapGenerator
 
             // Store base noise texture
             data = new Color[options.width * options.height];
-            renderTarget.GetData<Color>(data);
-            baseNoise = new Texture2D(GraphicsDevice, options.width, options.height);
-            baseNoise.SetData<Color>(data);
+            baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            GraphicsDevice.SetRenderTarget(baseNoise);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+            GraphicsDevice.SetRenderTarget(null);
 
             // Draw water effect to render target
             GraphicsDevice.SetRenderTarget(renderTarget);
@@ -164,9 +166,12 @@ namespace MapGenerator
             GraphicsDevice.SetRenderTarget(null);
 
             // Store base water texture
-            renderTarget.GetData<Color>(data);
-            baseWater = new Texture2D(GraphicsDevice, options.width, options.height);
-            baseWater.SetData<Color>(data);
+            baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            GraphicsDevice.SetRenderTarget(baseWater);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+            GraphicsDevice.SetRenderTarget(null);
 
             // Draw textures
             GraphicsDevice.SetRenderTarget(renderTarget);

@@ -14,10 +14,11 @@ namespace MapGenerator
         public int width;
         public int height;
         public int seed;
+        public float scale;
+        public Microsoft.Xna.Framework.Vector2 position;
 
         public int randomTextureWidth;
         public int randomTextureHeight;
-        public float randomTextureScale;
 
         public float noiseFrequency;
         public float noiseGain;
@@ -39,6 +40,7 @@ namespace MapGenerator
         public Main main;
         private Point lastDragPosition;
         private bool ctrl;
+        private Microsoft.Xna.Framework.Vector2 effectPosition;
 
         public MapGeneratorForm()
         {
@@ -84,10 +86,12 @@ namespace MapGenerator
             options.width = int.Parse(widthBox.Text);
             options.height = int.Parse(heightBox.Text);
             options.seed = int.Parse(randomSeedBox.Text);
+            options.scale = float.Parse(scaleBox.Text);
+            options.position.X = float.Parse(positionXBox.Text);
+            options.position.Y = float.Parse(positionYBox.Text);
             
             options.randomTextureWidth = int.Parse(randomTextureWidthBox.Text);
             options.randomTextureHeight = int.Parse(randomTextureHeightBox.Text);
-            options.randomTextureScale = float.Parse(randomTextureScaleBox.Text);
             
             options.noiseFrequency = float.Parse(noiseFrequencyBox.Text);
             options.noiseGain = float.Parse(noiseGainBox.Text);
