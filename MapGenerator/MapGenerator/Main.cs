@@ -142,9 +142,6 @@ namespace MapGenerator
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();
 
-            // Reset render target
-            GraphicsDevice.SetRenderTarget(null);
-
             // Store base noise texture
             data = new Color[options.width * options.height];
             baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
@@ -152,7 +149,6 @@ namespace MapGenerator
             spriteBatch.Begin();
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
-            GraphicsDevice.SetRenderTarget(null);
 
             // Draw water effect to render target
             GraphicsDevice.SetRenderTarget(renderTarget);
@@ -162,16 +158,12 @@ namespace MapGenerator
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.End();
 
-            // Reset render target
-            GraphicsDevice.SetRenderTarget(null);
-
             // Store base water texture
             baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseWater);
             spriteBatch.Begin();
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
-            GraphicsDevice.SetRenderTarget(null);
 
             // Draw textures
             GraphicsDevice.SetRenderTarget(renderTarget);
