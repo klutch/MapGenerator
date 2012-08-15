@@ -13,6 +13,25 @@ float noiseGain;
 float noiseLacunarity;
 float4x4 matrixTransform;
 
+// Noise
+float noise(float2 position)
+{
+	float total = 0;
+	float frequency = noiseFrequency;
+	float amplitude = noiseGain;
+
+	float sign = 1;
+	for (int i = 0; i < 8; i++)
+	{
+		total += tex2D(baseSampler, (position / 1.8) * frequency * sign) * amplitude;
+		frequency *= noiseLacunarity;
+		amplitude *= noiseGain;
+		sign *= -1;
+	}
+
+	return total;
+}
+
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
 { 
@@ -24,25 +43,11 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	float2 p = texCoords * (renderTargetSize / randomTextureSize) / randomTextureScale;
 	float n = noise(p);
+	n *= noise(p + n / 2);
+	n *= noise(p + n / 4);
+	n *= noise(p + n / 8);
 
 	return float4(n, n, n, 1);
-}
-
-// Noise
-float noise(float2 position)
-{
-	float total = 0;
-	float frequency = noiseFrequency;
-	float amplitude = noiseGain;
-
-	for (int i = 0; i < 8; i++)
-	{
-		total += tex2D(baseSampler, (position / 1.8) * frequency) * amplitude;
-		frequency *= noiseLacunarity;
-		amplitude *= noiseGain;
-	}
-
-	return total;
 }
 
 technique Main
