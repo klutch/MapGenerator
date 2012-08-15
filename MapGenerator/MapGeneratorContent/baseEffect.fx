@@ -13,6 +13,18 @@ float noiseGain;
 float noiseLacunarity;
 float4x4 matrixTransform;
 
+float2 frequencyModifier[] = 
+{
+	float2(1, 1),
+	float2(1, 0.5),
+	float2(0.5, 1),
+	float2(0.5, 0.5),
+	float2(0.3, 0.3),
+	float2(0.3, 0.15),
+	float2(0.15, 0.3),
+	float2(0.15, 0.15)
+};
+
 // Noise
 float noise(float2 position)
 {
@@ -20,13 +32,13 @@ float noise(float2 position)
 	float frequency = noiseFrequency;
 	float amplitude = noiseGain;
 
-	float sign = 1;
+	float signModifier = 1;
 	for (int i = 0; i < 8; i++)
 	{
-		total += tex2D(baseSampler, (position / 1.8) * frequency * sign) * amplitude;
+		total += tex2D(baseSampler, (position / 1.8) * frequency * signModifier * frequencyModifier[i]) * amplitude;
 		frequency *= noiseLacunarity;
 		amplitude *= noiseGain;
-		sign *= -1;
+		signModifier *= -1;
 	}
 
 	return total;
