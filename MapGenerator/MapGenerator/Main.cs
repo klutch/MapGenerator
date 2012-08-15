@@ -198,8 +198,8 @@ namespace MapGenerator
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
+            spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
 
             // Reset render target
