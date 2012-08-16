@@ -141,9 +141,15 @@ namespace MapGenerator
             baseEffect.Parameters["fbm1"].SetValue(options.fbm1);
             baseEffect.Parameters["fbm2"].SetValue(options.fbm2);
             baseEffect.Parameters["fbm3"].SetValue(options.fbm3);
-            baseEffect.Parameters["fbm1Divisor"].SetValue(options.fbm1Divisor);
-            baseEffect.Parameters["fbm2Divisor"].SetValue(options.fbm2Divisor);
-            baseEffect.Parameters["fbm3Divisor"].SetValue(options.fbm3Divisor);
+            baseEffect.Parameters["fbm1NoiseOnly"].SetValue(options.fbm1NoiseOnly);
+            baseEffect.Parameters["fbm2NoiseOnly"].SetValue(options.fbm2NoiseOnly);
+            baseEffect.Parameters["fbm3NoiseOnly"].SetValue(options.fbm3NoiseOnly);
+            baseEffect.Parameters["fbm1Offset"].SetValue(options.fbm1Offset);
+            baseEffect.Parameters["fbm2Offset"].SetValue(options.fbm2Offset);
+            baseEffect.Parameters["fbm3Offset"].SetValue(options.fbm3Offset);
+            baseEffect.Parameters["fbm1Opacity"].SetValue(options.fbm1Opacity);
+            baseEffect.Parameters["fbm2Opacity"].SetValue(options.fbm2Opacity);
+            baseEffect.Parameters["fbm3Opacity"].SetValue(options.fbm3Opacity);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();

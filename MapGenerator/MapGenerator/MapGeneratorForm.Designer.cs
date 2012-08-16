@@ -49,17 +49,32 @@ namespace MapGenerator
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.fbm3PositionAndNoise = new System.Windows.Forms.RadioButton();
+            this.fbm3NoiseOnly = new System.Windows.Forms.RadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.fbm2PositionAndNoise = new System.Windows.Forms.RadioButton();
+            this.fbm2NoiseOnly = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.fbm1PositionAndNoise = new System.Windows.Forms.RadioButton();
+            this.fbm1NoiseOnly = new System.Windows.Forms.RadioButton();
+            this.fbm3OffsetLabel = new System.Windows.Forms.Label();
+            this.fbm3OffsetY = new System.Windows.Forms.NumericUpDown();
+            this.fbm3OffsetX = new System.Windows.Forms.NumericUpDown();
+            this.fbm3Opacity = new System.Windows.Forms.NumericUpDown();
+            this.fbm3Checkbox = new System.Windows.Forms.CheckBox();
+            this.fbm2OffsetLabel = new System.Windows.Forms.Label();
+            this.fbm2OffsetY = new System.Windows.Forms.NumericUpDown();
+            this.fbm2OffsetX = new System.Windows.Forms.NumericUpDown();
+            this.fbm2Opacity = new System.Windows.Forms.NumericUpDown();
+            this.fbm2Checkbox = new System.Windows.Forms.CheckBox();
+            this.fbm1OffsetLabel = new System.Windows.Forms.Label();
+            this.fbm1OffsetY = new System.Windows.Forms.NumericUpDown();
+            this.fbm1OffsetX = new System.Windows.Forms.NumericUpDown();
+            this.fbm1Opacity = new System.Windows.Forms.NumericUpDown();
             this.positionYBox = new System.Windows.Forms.TextBox();
             this.positionXBox = new System.Windows.Forms.TextBox();
             this.positionLabel = new System.Windows.Forms.Label();
-            this.fbm3DivisorLabel = new System.Windows.Forms.Label();
-            this.fbm3DivisorBox = new System.Windows.Forms.TextBox();
-            this.fbm3Checkbox = new System.Windows.Forms.CheckBox();
-            this.fbm2DivisorLabel = new System.Windows.Forms.Label();
-            this.fbm2DivisorBox = new System.Windows.Forms.TextBox();
-            this.fbm2Checkbox = new System.Windows.Forms.CheckBox();
-            this.fbmDivisorLabel = new System.Windows.Forms.Label();
-            this.fbm1DivisorBox = new System.Windows.Forms.TextBox();
             this.fbm1Checkbox = new System.Windows.Forms.CheckBox();
             this.brightnessMultiplierBox = new System.Windows.Forms.TextBox();
             this.brightnessLabel = new System.Windows.Forms.Label();
@@ -79,14 +94,26 @@ namespace MapGenerator
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
             this.noiseTab.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3Opacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2Opacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).BeginInit();
             this.waterTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // surface
             // 
-            this.surface.Location = new System.Drawing.Point(246, 0);
+            this.surface.Location = new System.Drawing.Point(258, 0);
             this.surface.Name = "surface";
-            this.surface.Size = new System.Drawing.Size(680, 561);
+            this.surface.Size = new System.Drawing.Size(668, 561);
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
             this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.surface_MouseMove);
@@ -188,7 +215,7 @@ namespace MapGenerator
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
-            this.mainOptionsControl.Size = new System.Drawing.Size(246, 517);
+            this.mainOptionsControl.Size = new System.Drawing.Size(258, 517);
             this.mainOptionsControl.TabIndex = 11;
             // 
             // outputTab
@@ -200,7 +227,7 @@ namespace MapGenerator
             this.outputTab.Location = new System.Drawing.Point(4, 25);
             this.outputTab.Name = "outputTab";
             this.outputTab.Padding = new System.Windows.Forms.Padding(3);
-            this.outputTab.Size = new System.Drawing.Size(232, 488);
+            this.outputTab.Size = new System.Drawing.Size(250, 488);
             this.outputTab.TabIndex = 0;
             this.outputTab.Text = "Output";
             this.outputTab.UseVisualStyleBackColor = true;
@@ -208,17 +235,26 @@ namespace MapGenerator
             // noiseTab
             // 
             this.noiseTab.AutoScroll = true;
+            this.noiseTab.Controls.Add(this.panel3);
+            this.noiseTab.Controls.Add(this.panel2);
+            this.noiseTab.Controls.Add(this.panel1);
+            this.noiseTab.Controls.Add(this.fbm3OffsetLabel);
+            this.noiseTab.Controls.Add(this.fbm3OffsetY);
+            this.noiseTab.Controls.Add(this.fbm3OffsetX);
+            this.noiseTab.Controls.Add(this.fbm3Opacity);
+            this.noiseTab.Controls.Add(this.fbm3Checkbox);
+            this.noiseTab.Controls.Add(this.fbm2OffsetLabel);
+            this.noiseTab.Controls.Add(this.fbm2OffsetY);
+            this.noiseTab.Controls.Add(this.fbm2OffsetX);
+            this.noiseTab.Controls.Add(this.fbm2Opacity);
+            this.noiseTab.Controls.Add(this.fbm2Checkbox);
+            this.noiseTab.Controls.Add(this.fbm1OffsetLabel);
+            this.noiseTab.Controls.Add(this.fbm1OffsetY);
+            this.noiseTab.Controls.Add(this.fbm1OffsetX);
+            this.noiseTab.Controls.Add(this.fbm1Opacity);
             this.noiseTab.Controls.Add(this.positionYBox);
             this.noiseTab.Controls.Add(this.positionXBox);
             this.noiseTab.Controls.Add(this.positionLabel);
-            this.noiseTab.Controls.Add(this.fbm3DivisorLabel);
-            this.noiseTab.Controls.Add(this.fbm3DivisorBox);
-            this.noiseTab.Controls.Add(this.fbm3Checkbox);
-            this.noiseTab.Controls.Add(this.fbm2DivisorLabel);
-            this.noiseTab.Controls.Add(this.fbm2DivisorBox);
-            this.noiseTab.Controls.Add(this.fbm2Checkbox);
-            this.noiseTab.Controls.Add(this.fbmDivisorLabel);
-            this.noiseTab.Controls.Add(this.fbm1DivisorBox);
             this.noiseTab.Controls.Add(this.fbm1Checkbox);
             this.noiseTab.Controls.Add(this.brightnessMultiplierBox);
             this.noiseTab.Controls.Add(this.brightnessLabel);
@@ -238,10 +274,391 @@ namespace MapGenerator
             this.noiseTab.Location = new System.Drawing.Point(4, 25);
             this.noiseTab.Name = "noiseTab";
             this.noiseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.noiseTab.Size = new System.Drawing.Size(238, 488);
+            this.noiseTab.Size = new System.Drawing.Size(250, 488);
             this.noiseTab.TabIndex = 1;
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.fbm3PositionAndNoise);
+            this.panel3.Controls.Add(this.fbm3NoiseOnly);
+            this.panel3.Location = new System.Drawing.Point(9, 494);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(100, 47);
+            this.panel3.TabIndex = 54;
+            // 
+            // fbm3PositionAndNoise
+            // 
+            this.fbm3PositionAndNoise.AutoSize = true;
+            this.fbm3PositionAndNoise.Checked = true;
+            this.fbm3PositionAndNoise.Location = new System.Drawing.Point(0, 0);
+            this.fbm3PositionAndNoise.Name = "fbm3PositionAndNoise";
+            this.fbm3PositionAndNoise.Size = new System.Drawing.Size(101, 17);
+            this.fbm3PositionAndNoise.TabIndex = 34;
+            this.fbm3PositionAndNoise.TabStop = true;
+            this.fbm3PositionAndNoise.Text = "Position + Noise";
+            this.fbm3PositionAndNoise.UseVisualStyleBackColor = true;
+            this.fbm3PositionAndNoise.CheckedChanged += new System.EventHandler(this.fbm3PositionAndNoise_CheckedChanged);
+            // 
+            // fbm3NoiseOnly
+            // 
+            this.fbm3NoiseOnly.AutoSize = true;
+            this.fbm3NoiseOnly.Location = new System.Drawing.Point(0, 23);
+            this.fbm3NoiseOnly.Name = "fbm3NoiseOnly";
+            this.fbm3NoiseOnly.Size = new System.Drawing.Size(76, 17);
+            this.fbm3NoiseOnly.TabIndex = 33;
+            this.fbm3NoiseOnly.Text = "Noise Only";
+            this.fbm3NoiseOnly.UseVisualStyleBackColor = true;
+            this.fbm3NoiseOnly.CheckedChanged += new System.EventHandler(this.fbm3NoiseOnly_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.fbm2PositionAndNoise);
+            this.panel2.Controls.Add(this.fbm2NoiseOnly);
+            this.panel2.Location = new System.Drawing.Point(9, 399);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(100, 47);
+            this.panel2.TabIndex = 53;
+            // 
+            // fbm2PositionAndNoise
+            // 
+            this.fbm2PositionAndNoise.AutoSize = true;
+            this.fbm2PositionAndNoise.Checked = true;
+            this.fbm2PositionAndNoise.Location = new System.Drawing.Point(0, 0);
+            this.fbm2PositionAndNoise.Name = "fbm2PositionAndNoise";
+            this.fbm2PositionAndNoise.Size = new System.Drawing.Size(101, 17);
+            this.fbm2PositionAndNoise.TabIndex = 34;
+            this.fbm2PositionAndNoise.TabStop = true;
+            this.fbm2PositionAndNoise.Text = "Position + Noise";
+            this.fbm2PositionAndNoise.UseVisualStyleBackColor = true;
+            this.fbm2PositionAndNoise.CheckedChanged += new System.EventHandler(this.fbm2PositionAndNoise_CheckedChanged);
+            // 
+            // fbm2NoiseOnly
+            // 
+            this.fbm2NoiseOnly.AutoSize = true;
+            this.fbm2NoiseOnly.Location = new System.Drawing.Point(0, 23);
+            this.fbm2NoiseOnly.Name = "fbm2NoiseOnly";
+            this.fbm2NoiseOnly.Size = new System.Drawing.Size(76, 17);
+            this.fbm2NoiseOnly.TabIndex = 33;
+            this.fbm2NoiseOnly.Text = "Noise Only";
+            this.fbm2NoiseOnly.UseVisualStyleBackColor = true;
+            this.fbm2NoiseOnly.CheckedChanged += new System.EventHandler(this.fbm2NoiseOnly_CheckedChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.fbm1PositionAndNoise);
+            this.panel1.Controls.Add(this.fbm1NoiseOnly);
+            this.panel1.Location = new System.Drawing.Point(9, 301);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 47);
+            this.panel1.TabIndex = 52;
+            // 
+            // fbm1PositionAndNoise
+            // 
+            this.fbm1PositionAndNoise.AutoSize = true;
+            this.fbm1PositionAndNoise.Checked = true;
+            this.fbm1PositionAndNoise.Location = new System.Drawing.Point(0, 0);
+            this.fbm1PositionAndNoise.Name = "fbm1PositionAndNoise";
+            this.fbm1PositionAndNoise.Size = new System.Drawing.Size(101, 17);
+            this.fbm1PositionAndNoise.TabIndex = 34;
+            this.fbm1PositionAndNoise.TabStop = true;
+            this.fbm1PositionAndNoise.Text = "Position + Noise";
+            this.fbm1PositionAndNoise.UseVisualStyleBackColor = true;
+            this.fbm1PositionAndNoise.CheckedChanged += new System.EventHandler(this.fbm1PositionAndNoise_CheckedChanged);
+            // 
+            // fbm1NoiseOnly
+            // 
+            this.fbm1NoiseOnly.AutoSize = true;
+            this.fbm1NoiseOnly.Location = new System.Drawing.Point(0, 23);
+            this.fbm1NoiseOnly.Name = "fbm1NoiseOnly";
+            this.fbm1NoiseOnly.Size = new System.Drawing.Size(76, 17);
+            this.fbm1NoiseOnly.TabIndex = 33;
+            this.fbm1NoiseOnly.Text = "Noise Only";
+            this.fbm1NoiseOnly.UseVisualStyleBackColor = true;
+            this.fbm1NoiseOnly.CheckedChanged += new System.EventHandler(this.fbm1NoiseOnly_CheckedChanged);
+            // 
+            // fbm3OffsetLabel
+            // 
+            this.fbm3OffsetLabel.AutoSize = true;
+            this.fbm3OffsetLabel.Location = new System.Drawing.Point(116, 501);
+            this.fbm3OffsetLabel.Name = "fbm3OffsetLabel";
+            this.fbm3OffsetLabel.Size = new System.Drawing.Size(35, 13);
+            this.fbm3OffsetLabel.TabIndex = 51;
+            this.fbm3OffsetLabel.Text = "Offset";
+            // 
+            // fbm3OffsetY
+            // 
+            this.fbm3OffsetY.DecimalPlaces = 3;
+            this.fbm3OffsetY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.fbm3OffsetY.Location = new System.Drawing.Point(171, 517);
+            this.fbm3OffsetY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.fbm3OffsetY.Name = "fbm3OffsetY";
+            this.fbm3OffsetY.Size = new System.Drawing.Size(50, 20);
+            this.fbm3OffsetY.TabIndex = 50;
+            this.fbm3OffsetY.Value = new decimal(new int[] {
+            125,
+            0,
+            0,
+            196608});
+            this.fbm3OffsetY.ValueChanged += new System.EventHandler(this.fbm3OffsetY_ValueChanged);
+            // 
+            // fbm3OffsetX
+            // 
+            this.fbm3OffsetX.DecimalPlaces = 3;
+            this.fbm3OffsetX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.fbm3OffsetX.Location = new System.Drawing.Point(121, 517);
+            this.fbm3OffsetX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.fbm3OffsetX.Name = "fbm3OffsetX";
+            this.fbm3OffsetX.Size = new System.Drawing.Size(50, 20);
+            this.fbm3OffsetX.TabIndex = 49;
+            this.fbm3OffsetX.Value = new decimal(new int[] {
+            125,
+            0,
+            0,
+            196608});
+            this.fbm3OffsetX.ValueChanged += new System.EventHandler(this.fbm3OffsetX_ValueChanged);
+            // 
+            // fbm3Opacity
+            // 
+            this.fbm3Opacity.DecimalPlaces = 2;
+            this.fbm3Opacity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.fbm3Opacity.Location = new System.Drawing.Point(121, 470);
+            this.fbm3Opacity.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.fbm3Opacity.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            -2147483648});
+            this.fbm3Opacity.Name = "fbm3Opacity";
+            this.fbm3Opacity.Size = new System.Drawing.Size(100, 20);
+            this.fbm3Opacity.TabIndex = 46;
+            this.fbm3Opacity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm3Opacity.ValueChanged += new System.EventHandler(this.fbm3Opacity_ValueChanged);
+            // 
+            // fbm3Checkbox
+            // 
+            this.fbm3Checkbox.AutoSize = true;
+            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 471);
+            this.fbm3Checkbox.Name = "fbm3Checkbox";
+            this.fbm3Checkbox.Size = new System.Drawing.Size(110, 17);
+            this.fbm3Checkbox.TabIndex = 45;
+            this.fbm3Checkbox.Text = "Fractional Layer 3";
+            this.fbm3Checkbox.UseVisualStyleBackColor = true;
+            this.fbm3Checkbox.CheckedChanged += new System.EventHandler(this.fbm3Checkbox_CheckedChanged);
+            // 
+            // fbm2OffsetLabel
+            // 
+            this.fbm2OffsetLabel.AutoSize = true;
+            this.fbm2OffsetLabel.Location = new System.Drawing.Point(116, 406);
+            this.fbm2OffsetLabel.Name = "fbm2OffsetLabel";
+            this.fbm2OffsetLabel.Size = new System.Drawing.Size(35, 13);
+            this.fbm2OffsetLabel.TabIndex = 44;
+            this.fbm2OffsetLabel.Text = "Offset";
+            // 
+            // fbm2OffsetY
+            // 
+            this.fbm2OffsetY.DecimalPlaces = 3;
+            this.fbm2OffsetY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.fbm2OffsetY.Location = new System.Drawing.Point(171, 422);
+            this.fbm2OffsetY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.fbm2OffsetY.Name = "fbm2OffsetY";
+            this.fbm2OffsetY.Size = new System.Drawing.Size(50, 20);
+            this.fbm2OffsetY.TabIndex = 43;
+            this.fbm2OffsetY.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.fbm2OffsetY.ValueChanged += new System.EventHandler(this.fbm2OffsetY_ValueChanged);
+            // 
+            // fbm2OffsetX
+            // 
+            this.fbm2OffsetX.DecimalPlaces = 3;
+            this.fbm2OffsetX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.fbm2OffsetX.Location = new System.Drawing.Point(121, 422);
+            this.fbm2OffsetX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.fbm2OffsetX.Name = "fbm2OffsetX";
+            this.fbm2OffsetX.Size = new System.Drawing.Size(50, 20);
+            this.fbm2OffsetX.TabIndex = 42;
+            this.fbm2OffsetX.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.fbm2OffsetX.ValueChanged += new System.EventHandler(this.fbm2OffsetX_ValueChanged);
+            // 
+            // fbm2Opacity
+            // 
+            this.fbm2Opacity.DecimalPlaces = 2;
+            this.fbm2Opacity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.fbm2Opacity.Location = new System.Drawing.Point(121, 375);
+            this.fbm2Opacity.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.fbm2Opacity.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            -2147483648});
+            this.fbm2Opacity.Name = "fbm2Opacity";
+            this.fbm2Opacity.Size = new System.Drawing.Size(100, 20);
+            this.fbm2Opacity.TabIndex = 39;
+            this.fbm2Opacity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm2Opacity.ValueChanged += new System.EventHandler(this.fbm2Opacity_ValueChanged);
+            // 
+            // fbm2Checkbox
+            // 
+            this.fbm2Checkbox.AutoSize = true;
+            this.fbm2Checkbox.Checked = true;
+            this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 376);
+            this.fbm2Checkbox.Name = "fbm2Checkbox";
+            this.fbm2Checkbox.Size = new System.Drawing.Size(110, 17);
+            this.fbm2Checkbox.TabIndex = 38;
+            this.fbm2Checkbox.Text = "Fractional Layer 2";
+            this.fbm2Checkbox.UseVisualStyleBackColor = true;
+            this.fbm2Checkbox.CheckedChanged += new System.EventHandler(this.fbm2Checkbox_CheckedChanged);
+            // 
+            // fbm1OffsetLabel
+            // 
+            this.fbm1OffsetLabel.AutoSize = true;
+            this.fbm1OffsetLabel.Location = new System.Drawing.Point(116, 308);
+            this.fbm1OffsetLabel.Name = "fbm1OffsetLabel";
+            this.fbm1OffsetLabel.Size = new System.Drawing.Size(35, 13);
+            this.fbm1OffsetLabel.TabIndex = 37;
+            this.fbm1OffsetLabel.Text = "Offset";
+            // 
+            // fbm1OffsetY
+            // 
+            this.fbm1OffsetY.DecimalPlaces = 3;
+            this.fbm1OffsetY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.fbm1OffsetY.Location = new System.Drawing.Point(171, 324);
+            this.fbm1OffsetY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.fbm1OffsetY.Name = "fbm1OffsetY";
+            this.fbm1OffsetY.Size = new System.Drawing.Size(50, 20);
+            this.fbm1OffsetY.TabIndex = 36;
+            this.fbm1OffsetY.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.fbm1OffsetY.ValueChanged += new System.EventHandler(this.fbm1OffsetY_ValueChanged);
+            // 
+            // fbm1OffsetX
+            // 
+            this.fbm1OffsetX.DecimalPlaces = 3;
+            this.fbm1OffsetX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.fbm1OffsetX.Location = new System.Drawing.Point(121, 324);
+            this.fbm1OffsetX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.fbm1OffsetX.Name = "fbm1OffsetX";
+            this.fbm1OffsetX.Size = new System.Drawing.Size(50, 20);
+            this.fbm1OffsetX.TabIndex = 35;
+            this.fbm1OffsetX.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.fbm1OffsetX.ValueChanged += new System.EventHandler(this.fbm1OffsetX_ValueChanged);
+            // 
+            // fbm1Opacity
+            // 
+            this.fbm1Opacity.DecimalPlaces = 2;
+            this.fbm1Opacity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.fbm1Opacity.Location = new System.Drawing.Point(121, 277);
+            this.fbm1Opacity.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.fbm1Opacity.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            -2147483648});
+            this.fbm1Opacity.Name = "fbm1Opacity";
+            this.fbm1Opacity.Size = new System.Drawing.Size(100, 20);
+            this.fbm1Opacity.TabIndex = 31;
+            this.fbm1Opacity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm1Opacity.ValueChanged += new System.EventHandler(this.fbm1Opacity_ValueChanged);
             // 
             // positionYBox
             // 
@@ -268,91 +685,16 @@ namespace MapGenerator
             this.positionLabel.TabIndex = 28;
             this.positionLabel.Text = "Position";
             // 
-            // fbm3DivisorLabel
-            // 
-            this.fbm3DivisorLabel.AutoSize = true;
-            this.fbm3DivisorLabel.Location = new System.Drawing.Point(70, 403);
-            this.fbm3DivisorLabel.Name = "fbm3DivisorLabel";
-            this.fbm3DivisorLabel.Size = new System.Drawing.Size(39, 13);
-            this.fbm3DivisorLabel.TabIndex = 27;
-            this.fbm3DivisorLabel.Text = "Divisor";
-            // 
-            // fbm3DivisorBox
-            // 
-            this.fbm3DivisorBox.Location = new System.Drawing.Point(121, 400);
-            this.fbm3DivisorBox.Name = "fbm3DivisorBox";
-            this.fbm3DivisorBox.Size = new System.Drawing.Size(100, 20);
-            this.fbm3DivisorBox.TabIndex = 26;
-            this.fbm3DivisorBox.Text = "8.00";
-            // 
-            // fbm3Checkbox
-            // 
-            this.fbm3Checkbox.AutoSize = true;
-            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 377);
-            this.fbm3Checkbox.Name = "fbm3Checkbox";
-            this.fbm3Checkbox.Size = new System.Drawing.Size(146, 17);
-            this.fbm3Checkbox.TabIndex = 25;
-            this.fbm3Checkbox.Text = "Enable Fractional Layer 3";
-            this.fbm3Checkbox.UseVisualStyleBackColor = true;
-            this.fbm3Checkbox.CheckedChanged += new System.EventHandler(this.fbm3Checkbox_CheckedChanged);
-            // 
-            // fbm2DivisorLabel
-            // 
-            this.fbm2DivisorLabel.AutoSize = true;
-            this.fbm2DivisorLabel.Location = new System.Drawing.Point(70, 345);
-            this.fbm2DivisorLabel.Name = "fbm2DivisorLabel";
-            this.fbm2DivisorLabel.Size = new System.Drawing.Size(39, 13);
-            this.fbm2DivisorLabel.TabIndex = 24;
-            this.fbm2DivisorLabel.Text = "Divisor";
-            // 
-            // fbm2DivisorBox
-            // 
-            this.fbm2DivisorBox.Location = new System.Drawing.Point(121, 342);
-            this.fbm2DivisorBox.Name = "fbm2DivisorBox";
-            this.fbm2DivisorBox.Size = new System.Drawing.Size(100, 20);
-            this.fbm2DivisorBox.TabIndex = 23;
-            this.fbm2DivisorBox.Text = "4.00";
-            // 
-            // fbm2Checkbox
-            // 
-            this.fbm2Checkbox.AutoSize = true;
-            this.fbm2Checkbox.Checked = true;
-            this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 319);
-            this.fbm2Checkbox.Name = "fbm2Checkbox";
-            this.fbm2Checkbox.Size = new System.Drawing.Size(146, 17);
-            this.fbm2Checkbox.TabIndex = 22;
-            this.fbm2Checkbox.Text = "Enable Fractional Layer 2";
-            this.fbm2Checkbox.UseVisualStyleBackColor = true;
-            this.fbm2Checkbox.CheckedChanged += new System.EventHandler(this.fbm2Checkbox_CheckedChanged);
-            // 
-            // fbmDivisorLabel
-            // 
-            this.fbmDivisorLabel.AutoSize = true;
-            this.fbmDivisorLabel.Location = new System.Drawing.Point(70, 287);
-            this.fbmDivisorLabel.Name = "fbmDivisorLabel";
-            this.fbmDivisorLabel.Size = new System.Drawing.Size(39, 13);
-            this.fbmDivisorLabel.TabIndex = 21;
-            this.fbmDivisorLabel.Text = "Divisor";
-            // 
-            // fbm1DivisorBox
-            // 
-            this.fbm1DivisorBox.Location = new System.Drawing.Point(121, 284);
-            this.fbm1DivisorBox.Name = "fbm1DivisorBox";
-            this.fbm1DivisorBox.Size = new System.Drawing.Size(100, 20);
-            this.fbm1DivisorBox.TabIndex = 20;
-            this.fbm1DivisorBox.Text = "2.00";
-            // 
             // fbm1Checkbox
             // 
             this.fbm1Checkbox.AutoSize = true;
             this.fbm1Checkbox.Checked = true;
             this.fbm1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 261);
+            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 278);
             this.fbm1Checkbox.Name = "fbm1Checkbox";
-            this.fbm1Checkbox.Size = new System.Drawing.Size(146, 17);
+            this.fbm1Checkbox.Size = new System.Drawing.Size(110, 17);
             this.fbm1Checkbox.TabIndex = 19;
-            this.fbm1Checkbox.Text = "Enable Fractional Layer 1";
+            this.fbm1Checkbox.Text = "Fractional Layer 1";
             this.fbm1Checkbox.UseVisualStyleBackColor = true;
             this.fbm1Checkbox.CheckedChanged += new System.EventHandler(this.fbm1Checkbox_CheckedChanged);
             // 
@@ -447,7 +789,7 @@ namespace MapGenerator
             this.waterTab.Controls.Add(this.waterLevelLabel);
             this.waterTab.Location = new System.Drawing.Point(4, 25);
             this.waterTab.Name = "waterTab";
-            this.waterTab.Size = new System.Drawing.Size(232, 488);
+            this.waterTab.Size = new System.Drawing.Size(250, 488);
             this.waterTab.TabIndex = 2;
             this.waterTab.Text = "Water";
             this.waterTab.UseVisualStyleBackColor = true;
@@ -473,7 +815,7 @@ namespace MapGenerator
             // 
             this.floraTab.Location = new System.Drawing.Point(4, 25);
             this.floraTab.Name = "floraTab";
-            this.floraTab.Size = new System.Drawing.Size(232, 488);
+            this.floraTab.Size = new System.Drawing.Size(250, 488);
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
@@ -498,6 +840,21 @@ namespace MapGenerator
             this.outputTab.PerformLayout();
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3Opacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2Opacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).EndInit();
             this.waterTab.ResumeLayout(false);
             this.waterTab.PerformLayout();
             this.ResumeLayout(false);
@@ -587,18 +944,33 @@ namespace MapGenerator
         private Label waterLevelLabel;
         private TextBox brightnessMultiplierBox;
         private Label brightnessLabel;
-        private Label fbm2DivisorLabel;
-        private TextBox fbm2DivisorBox;
-        private CheckBox fbm2Checkbox;
-        private Label fbmDivisorLabel;
-        private TextBox fbm1DivisorBox;
         private CheckBox fbm1Checkbox;
-        private Label fbm3DivisorLabel;
-        private TextBox fbm3DivisorBox;
-        private CheckBox fbm3Checkbox;
         private TextBox positionYBox;
         private TextBox positionXBox;
         private Label positionLabel;
         private TabPage floraTab;
+        private Label fbm1OffsetLabel;
+        private NumericUpDown fbm1OffsetY;
+        private NumericUpDown fbm1OffsetX;
+        private RadioButton fbm1PositionAndNoise;
+        private RadioButton fbm1NoiseOnly;
+        private NumericUpDown fbm1Opacity;
+        private Label fbm2OffsetLabel;
+        private NumericUpDown fbm2OffsetY;
+        private NumericUpDown fbm2OffsetX;
+        private NumericUpDown fbm2Opacity;
+        private CheckBox fbm2Checkbox;
+        private Label fbm3OffsetLabel;
+        private NumericUpDown fbm3OffsetY;
+        private NumericUpDown fbm3OffsetX;
+        private NumericUpDown fbm3Opacity;
+        private CheckBox fbm3Checkbox;
+        private Panel panel1;
+        private Panel panel3;
+        private RadioButton fbm3PositionAndNoise;
+        private RadioButton fbm3NoiseOnly;
+        private Panel panel2;
+        private RadioButton fbm2PositionAndNoise;
+        private RadioButton fbm2NoiseOnly;
     }
 }

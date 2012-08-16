@@ -28,9 +28,15 @@ namespace MapGenerator
         public bool fbm1;
         public bool fbm2;
         public bool fbm3;
-        public float fbm1Divisor;
-        public float fbm2Divisor;
-        public float fbm3Divisor;
+        public bool fbm1NoiseOnly;
+        public bool fbm2NoiseOnly;
+        public bool fbm3NoiseOnly;
+        public Microsoft.Xna.Framework.Vector2 fbm1Offset;
+        public Microsoft.Xna.Framework.Vector2 fbm2Offset;
+        public Microsoft.Xna.Framework.Vector2 fbm3Offset;
+        public float fbm1Opacity;
+        public float fbm2Opacity;
+        public float fbm3Opacity;
 
         public float waterLevel;
     };
@@ -101,16 +107,100 @@ namespace MapGenerator
             options.fbm1 = fbm1Checkbox.Checked;
             options.fbm2 = fbm2Checkbox.Checked;
             options.fbm3 = fbm3Checkbox.Checked;
-            options.fbm1Divisor = float.Parse(fbm1DivisorBox.Text);
-            options.fbm2Divisor = float.Parse(fbm2DivisorBox.Text);
-            options.fbm3Divisor = float.Parse(fbm3DivisorBox.Text);
+            options.fbm1NoiseOnly = fbm1NoiseOnly.Checked;
+            options.fbm2NoiseOnly = fbm2NoiseOnly.Checked;
+            options.fbm3NoiseOnly = fbm3NoiseOnly.Checked;
+            options.fbm1Offset = new Microsoft.Xna.Framework.Vector2(
+                (float)fbm1OffsetX.Value, (float)fbm1OffsetY.Value);
+            options.fbm2Offset = new Microsoft.Xna.Framework.Vector2(
+                (float)fbm2OffsetX.Value, (float)fbm2OffsetY.Value);
+            options.fbm3Offset = new Microsoft.Xna.Framework.Vector2(
+                (float)fbm3OffsetX.Value, (float)fbm3OffsetY.Value);
+            options.fbm1Opacity = (float)fbm1Opacity.Value;
+            options.fbm2Opacity = (float)fbm2Opacity.Value;
+            options.fbm3Opacity = (float)fbm3Opacity.Value;
 
             options.waterLevel = float.Parse(waterLevelBox.Text);
 
             return options;
         }
 
-        private void fbm3Checkbox_CheckedChanged(object sender, EventArgs e)
+        private void fbm1Opacity_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm2Opacity_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm3Opacity_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm1OffsetX_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm1OffsetY_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm1PositionAndNoise_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm1NoiseOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm2PositionAndNoise_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm2NoiseOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm2OffsetX_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm2OffsetY_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm3PositionAndNoise_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm3NoiseOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm3OffsetX_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm3OffsetY_ValueChanged(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
+        }
+
+        private void fbm1Checkbox_CheckedChanged(object sender, EventArgs e)
         {
             main.generateMap(getOptions());
         }
@@ -120,7 +210,7 @@ namespace MapGenerator
             main.generateMap(getOptions());
         }
 
-        private void fbm1Checkbox_CheckedChanged(object sender, EventArgs e)
+        private void fbm3Checkbox_CheckedChanged(object sender, EventArgs e)
         {
             main.generateMap(getOptions());
         }
