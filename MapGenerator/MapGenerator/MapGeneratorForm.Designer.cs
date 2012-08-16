@@ -84,9 +84,9 @@ namespace MapGenerator
             // 
             // surface
             // 
-            this.surface.Location = new System.Drawing.Point(240, 0);
+            this.surface.Location = new System.Drawing.Point(246, 0);
             this.surface.Name = "surface";
-            this.surface.Size = new System.Drawing.Size(686, 561);
+            this.surface.Size = new System.Drawing.Size(680, 561);
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
             this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.surface_MouseMove);
@@ -180,6 +180,7 @@ namespace MapGenerator
             // 
             // mainOptionsControl
             // 
+            this.mainOptionsControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.mainOptionsControl.Controls.Add(this.outputTab);
             this.mainOptionsControl.Controls.Add(this.noiseTab);
             this.mainOptionsControl.Controls.Add(this.waterTab);
@@ -187,7 +188,7 @@ namespace MapGenerator
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
-            this.mainOptionsControl.Size = new System.Drawing.Size(240, 517);
+            this.mainOptionsControl.Size = new System.Drawing.Size(246, 517);
             this.mainOptionsControl.TabIndex = 11;
             // 
             // outputTab
@@ -196,16 +197,17 @@ namespace MapGenerator
             this.outputTab.Controls.Add(this.heightLabel);
             this.outputTab.Controls.Add(this.widthBox);
             this.outputTab.Controls.Add(this.heightBox);
-            this.outputTab.Location = new System.Drawing.Point(4, 22);
+            this.outputTab.Location = new System.Drawing.Point(4, 25);
             this.outputTab.Name = "outputTab";
             this.outputTab.Padding = new System.Windows.Forms.Padding(3);
-            this.outputTab.Size = new System.Drawing.Size(232, 491);
+            this.outputTab.Size = new System.Drawing.Size(232, 488);
             this.outputTab.TabIndex = 0;
             this.outputTab.Text = "Output";
             this.outputTab.UseVisualStyleBackColor = true;
             // 
             // noiseTab
             // 
+            this.noiseTab.AutoScroll = true;
             this.noiseTab.Controls.Add(this.positionYBox);
             this.noiseTab.Controls.Add(this.positionXBox);
             this.noiseTab.Controls.Add(this.positionLabel);
@@ -233,10 +235,10 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.randomTextureDimensionsLabel);
             this.noiseTab.Controls.Add(this.randomSeedBox);
             this.noiseTab.Controls.Add(this.randomTextureWidthBox);
-            this.noiseTab.Location = new System.Drawing.Point(4, 22);
+            this.noiseTab.Location = new System.Drawing.Point(4, 25);
             this.noiseTab.Name = "noiseTab";
             this.noiseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.noiseTab.Size = new System.Drawing.Size(232, 491);
+            this.noiseTab.Size = new System.Drawing.Size(238, 488);
             this.noiseTab.TabIndex = 1;
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
@@ -443,9 +445,9 @@ namespace MapGenerator
             // 
             this.waterTab.Controls.Add(this.waterLevelBox);
             this.waterTab.Controls.Add(this.waterLevelLabel);
-            this.waterTab.Location = new System.Drawing.Point(4, 22);
+            this.waterTab.Location = new System.Drawing.Point(4, 25);
             this.waterTab.Name = "waterTab";
-            this.waterTab.Size = new System.Drawing.Size(232, 491);
+            this.waterTab.Size = new System.Drawing.Size(232, 488);
             this.waterTab.TabIndex = 2;
             this.waterTab.Text = "Water";
             this.waterTab.UseVisualStyleBackColor = true;
@@ -469,9 +471,9 @@ namespace MapGenerator
             // 
             // floraTab
             // 
-            this.floraTab.Location = new System.Drawing.Point(4, 22);
+            this.floraTab.Location = new System.Drawing.Point(4, 25);
             this.floraTab.Name = "floraTab";
-            this.floraTab.Size = new System.Drawing.Size(232, 491);
+            this.floraTab.Size = new System.Drawing.Size(232, 488);
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
