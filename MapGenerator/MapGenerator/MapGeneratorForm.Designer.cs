@@ -168,7 +168,7 @@ namespace MapGenerator
             this.randomTextureWidthBox.Name = "randomTextureWidthBox";
             this.randomTextureWidthBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureWidthBox.TabIndex = 4;
-            this.randomTextureWidthBox.Text = "64";
+            this.randomTextureWidthBox.Text = "32";
             // 
             // randomTextureHeightBox
             // 
@@ -176,7 +176,7 @@ namespace MapGenerator
             this.randomTextureHeightBox.Name = "randomTextureHeightBox";
             this.randomTextureHeightBox.Size = new System.Drawing.Size(100, 20);
             this.randomTextureHeightBox.TabIndex = 5;
-            this.randomTextureHeightBox.Text = "64";
+            this.randomTextureHeightBox.Text = "32";
             // 
             // mainOptionsControl
             // 
@@ -286,8 +286,6 @@ namespace MapGenerator
             // fbm3Checkbox
             // 
             this.fbm3Checkbox.AutoSize = true;
-            this.fbm3Checkbox.Checked = true;
-            this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fbm3Checkbox.Location = new System.Drawing.Point(9, 377);
             this.fbm3Checkbox.Name = "fbm3Checkbox";
             this.fbm3Checkbox.Size = new System.Drawing.Size(146, 17);
@@ -379,7 +377,7 @@ namespace MapGenerator
             this.noiseLacunarityBox.Name = "noiseLacunarityBox";
             this.noiseLacunarityBox.Size = new System.Drawing.Size(100, 20);
             this.noiseLacunarityBox.TabIndex = 16;
-            this.noiseLacunarityBox.Text = "2";
+            this.noiseLacunarityBox.Text = "1.6";
             // 
             // lacunarityLabel
             // 
