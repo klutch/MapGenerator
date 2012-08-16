@@ -896,6 +896,10 @@ namespace MapGenerator
 
         void surface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            // Steal focus
+            surface.Focus();
+
+            // Handle mouse input
             if (e.Button == MouseButtons.Left && !ctrl)
             {
                 effectPosition += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
