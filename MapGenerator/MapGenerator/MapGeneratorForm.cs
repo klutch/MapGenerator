@@ -47,9 +47,11 @@ namespace MapGenerator
         private Point lastDragPosition;
         private bool ctrl;
         private Microsoft.Xna.Framework.Vector2 effectPosition;
+        private MapGeneratorOptions options;
 
         public MapGeneratorForm()
         {
+            options = new MapGeneratorOptions();
             InitializeComponent();
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
             Resize += new EventHandler(MapGeneratorForm_Resize);
@@ -87,10 +89,8 @@ namespace MapGenerator
 
         public MapGeneratorOptions getOptions()
         {
-            MapGeneratorOptions options = new MapGeneratorOptions();
-
-            options.width = int.Parse(widthBox.Text);
-            options.height = int.Parse(heightBox.Text);
+            options.width = (int)renderWidth.Value;
+            options.height = (int)renderHeight.Value;
             options.seed = (int)noiseSeed.Value;
             options.scale = (float)noiseScale.Value;
             options.position.X = (float)noisePositionX.Value;
@@ -120,7 +120,7 @@ namespace MapGenerator
             options.fbm2Opacity = (float)fbm2Opacity.Value;
             options.fbm3Opacity = (float)fbm3Opacity.Value;
 
-            options.waterLevel = float.Parse(waterLevelBox.Text);
+            options.waterLevel = (float)waterLevel.Value;
 
             return options;
         }

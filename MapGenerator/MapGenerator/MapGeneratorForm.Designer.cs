@@ -40,11 +40,8 @@ namespace MapGenerator
             this.generateButton = new System.Windows.Forms.Button();
             this.widthLabel = new System.Windows.Forms.Label();
             this.heightLabel = new System.Windows.Forms.Label();
-            this.widthBox = new System.Windows.Forms.TextBox();
-            this.heightBox = new System.Windows.Forms.TextBox();
             this.randomTextureDimensionsLabel = new System.Windows.Forms.Label();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
-            this.outputTab = new System.Windows.Forms.TabPage();
             this.noiseTab = new System.Windows.Forms.TabPage();
             this.noiseBrightness = new System.Windows.Forms.NumericUpDown();
             this.noiseLacunarity = new System.Windows.Forms.NumericUpDown();
@@ -87,12 +84,14 @@ namespace MapGenerator
             this.frequencyLabel = new System.Windows.Forms.Label();
             this.scaleLabel = new System.Windows.Forms.Label();
             this.waterTab = new System.Windows.Forms.TabPage();
-            this.waterLevelBox = new System.Windows.Forms.TextBox();
+            this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
+            this.renderTab = new System.Windows.Forms.TabPage();
+            this.renderHeight = new System.Windows.Forms.NumericUpDown();
+            this.renderWidth = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
-            this.outputTab.SuspendLayout();
             this.noiseTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).BeginInit();
@@ -117,6 +116,10 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).BeginInit();
             this.waterTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
+            this.renderTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -166,22 +169,6 @@ namespace MapGenerator
             this.heightLabel.TabIndex = 0;
             this.heightLabel.Text = "Height";
             // 
-            // widthBox
-            // 
-            this.widthBox.Location = new System.Drawing.Point(8, 29);
-            this.widthBox.Name = "widthBox";
-            this.widthBox.Size = new System.Drawing.Size(100, 20);
-            this.widthBox.TabIndex = 1;
-            this.widthBox.Text = "1680";
-            // 
-            // heightBox
-            // 
-            this.heightBox.Location = new System.Drawing.Point(120, 29);
-            this.heightBox.Name = "heightBox";
-            this.heightBox.Size = new System.Drawing.Size(100, 20);
-            this.heightBox.TabIndex = 2;
-            this.heightBox.Text = "1050";
-            // 
             // randomTextureDimensionsLabel
             // 
             this.randomTextureDimensionsLabel.AutoSize = true;
@@ -194,29 +181,15 @@ namespace MapGenerator
             // mainOptionsControl
             // 
             this.mainOptionsControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.mainOptionsControl.Controls.Add(this.outputTab);
             this.mainOptionsControl.Controls.Add(this.noiseTab);
             this.mainOptionsControl.Controls.Add(this.waterTab);
             this.mainOptionsControl.Controls.Add(this.floraTab);
+            this.mainOptionsControl.Controls.Add(this.renderTab);
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
             this.mainOptionsControl.Size = new System.Drawing.Size(258, 517);
             this.mainOptionsControl.TabIndex = 11;
-            // 
-            // outputTab
-            // 
-            this.outputTab.Controls.Add(this.widthLabel);
-            this.outputTab.Controls.Add(this.heightLabel);
-            this.outputTab.Controls.Add(this.widthBox);
-            this.outputTab.Controls.Add(this.heightBox);
-            this.outputTab.Location = new System.Drawing.Point(4, 25);
-            this.outputTab.Name = "outputTab";
-            this.outputTab.Padding = new System.Windows.Forms.Padding(3);
-            this.outputTab.Size = new System.Drawing.Size(250, 488);
-            this.outputTab.TabIndex = 0;
-            this.outputTab.Text = "Output";
-            this.outputTab.UseVisualStyleBackColor = true;
             // 
             // noiseTab
             // 
@@ -653,7 +626,7 @@ namespace MapGenerator
             1,
             0,
             0,
-            65536});
+            131072});
             this.fbm3Opacity.Location = new System.Drawing.Point(121, 470);
             this.fbm3Opacity.Maximum = new decimal(new int[] {
             10,
@@ -750,7 +723,7 @@ namespace MapGenerator
             1,
             0,
             0,
-            65536});
+            131072});
             this.fbm2Opacity.Location = new System.Drawing.Point(121, 375);
             this.fbm2Opacity.Maximum = new decimal(new int[] {
             10,
@@ -849,7 +822,7 @@ namespace MapGenerator
             1,
             0,
             0,
-            65536});
+            131072});
             this.fbm1Opacity.Location = new System.Drawing.Point(121, 277);
             this.fbm1Opacity.Maximum = new decimal(new int[] {
             10,
@@ -940,7 +913,7 @@ namespace MapGenerator
             // 
             // waterTab
             // 
-            this.waterTab.Controls.Add(this.waterLevelBox);
+            this.waterTab.Controls.Add(this.waterLevel);
             this.waterTab.Controls.Add(this.waterLevelLabel);
             this.waterTab.Location = new System.Drawing.Point(4, 25);
             this.waterTab.Name = "waterTab";
@@ -949,18 +922,34 @@ namespace MapGenerator
             this.waterTab.Text = "Water";
             this.waterTab.UseVisualStyleBackColor = true;
             // 
-            // waterLevelBox
+            // waterLevel
             // 
-            this.waterLevelBox.Location = new System.Drawing.Point(12, 30);
-            this.waterLevelBox.Name = "waterLevelBox";
-            this.waterLevelBox.Size = new System.Drawing.Size(100, 20);
-            this.waterLevelBox.TabIndex = 1;
-            this.waterLevelBox.Text = "0.10";
+            this.waterLevel.DecimalPlaces = 4;
+            this.waterLevel.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.waterLevel.Location = new System.Drawing.Point(8, 29);
+            this.waterLevel.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.waterLevel.Name = "waterLevel";
+            this.waterLevel.Size = new System.Drawing.Size(100, 20);
+            this.waterLevel.TabIndex = 32;
+            this.waterLevel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.waterLevel.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // waterLevelLabel
             // 
             this.waterLevelLabel.AutoSize = true;
-            this.waterLevelLabel.Location = new System.Drawing.Point(9, 13);
+            this.waterLevelLabel.Location = new System.Drawing.Point(5, 13);
             this.waterLevelLabel.Name = "waterLevelLabel";
             this.waterLevelLabel.Size = new System.Drawing.Size(65, 13);
             this.waterLevelLabel.TabIndex = 0;
@@ -974,6 +963,54 @@ namespace MapGenerator
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
+            // 
+            // renderTab
+            // 
+            this.renderTab.Controls.Add(this.renderHeight);
+            this.renderTab.Controls.Add(this.renderWidth);
+            this.renderTab.Controls.Add(this.widthLabel);
+            this.renderTab.Controls.Add(this.heightLabel);
+            this.renderTab.Location = new System.Drawing.Point(4, 25);
+            this.renderTab.Name = "renderTab";
+            this.renderTab.Padding = new System.Windows.Forms.Padding(3);
+            this.renderTab.Size = new System.Drawing.Size(250, 488);
+            this.renderTab.TabIndex = 0;
+            this.renderTab.Text = "Render";
+            this.renderTab.UseVisualStyleBackColor = true;
+            // 
+            // renderHeight
+            // 
+            this.renderHeight.Location = new System.Drawing.Point(120, 28);
+            this.renderHeight.Maximum = new decimal(new int[] {
+            4096,
+            0,
+            0,
+            0});
+            this.renderHeight.Name = "renderHeight";
+            this.renderHeight.Size = new System.Drawing.Size(101, 20);
+            this.renderHeight.TabIndex = 58;
+            this.renderHeight.Value = new decimal(new int[] {
+            1050,
+            0,
+            0,
+            0});
+            // 
+            // renderWidth
+            // 
+            this.renderWidth.Location = new System.Drawing.Point(11, 28);
+            this.renderWidth.Maximum = new decimal(new int[] {
+            4096,
+            0,
+            0,
+            0});
+            this.renderWidth.Name = "renderWidth";
+            this.renderWidth.Size = new System.Drawing.Size(101, 20);
+            this.renderWidth.TabIndex = 57;
+            this.renderWidth.Value = new decimal(new int[] {
+            1680,
+            0,
+            0,
+            0});
             // 
             // MapGeneratorForm
             // 
@@ -991,8 +1028,6 @@ namespace MapGenerator
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MapGeneratorForm_MouseWheel);
             ((System.ComponentModel.ISupportInitialize)(this.surface)).EndInit();
             this.mainOptionsControl.ResumeLayout(false);
-            this.outputTab.ResumeLayout(false);
-            this.outputTab.PerformLayout();
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).EndInit();
@@ -1022,6 +1057,11 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).EndInit();
             this.waterTab.ResumeLayout(false);
             this.waterTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
+            this.renderTab.ResumeLayout(false);
+            this.renderTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1091,18 +1131,15 @@ namespace MapGenerator
         private System.Windows.Forms.Button generateButton;
         private System.Windows.Forms.Label widthLabel;
         private System.Windows.Forms.Label heightLabel;
-        private System.Windows.Forms.TextBox widthBox;
-        private System.Windows.Forms.TextBox heightBox;
         private System.Windows.Forms.Label randomTextureDimensionsLabel;
         private TabControl mainOptionsControl;
-        private TabPage outputTab;
+        private TabPage renderTab;
         private TabPage noiseTab;
         private Label scaleLabel;
         private TabPage waterTab;
         private Label frequencyLabel;
         private Label lacunarityLabel;
         private Label gainLabel;
-        private TextBox waterLevelBox;
         private Label waterLevelLabel;
         private Label brightnessLabel;
         private CheckBox fbm1Checkbox;
@@ -1141,5 +1178,8 @@ namespace MapGenerator
         private NumericUpDown noisePositionX;
         private NumericUpDown noiseSeed;
         private NumericUpDown noiseScale;
+        private NumericUpDown renderHeight;
+        private NumericUpDown renderWidth;
+        private NumericUpDown waterLevel;
     }
 }
