@@ -36,7 +36,6 @@ namespace MapGenerator
         private void InitializeComponent()
         {
             this.surface = new System.Windows.Forms.PictureBox();
-            this.randomSeedBox = new System.Windows.Forms.TextBox();
             this.randomSeedLabel = new System.Windows.Forms.Label();
             this.generateButton = new System.Windows.Forms.Button();
             this.widthLabel = new System.Windows.Forms.Label();
@@ -44,11 +43,19 @@ namespace MapGenerator
             this.widthBox = new System.Windows.Forms.TextBox();
             this.heightBox = new System.Windows.Forms.TextBox();
             this.randomTextureDimensionsLabel = new System.Windows.Forms.Label();
-            this.randomTextureWidthBox = new System.Windows.Forms.TextBox();
-            this.randomTextureHeightBox = new System.Windows.Forms.TextBox();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.outputTab = new System.Windows.Forms.TabPage();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.noiseBrightness = new System.Windows.Forms.NumericUpDown();
+            this.noiseLacunarity = new System.Windows.Forms.NumericUpDown();
+            this.noiseGain = new System.Windows.Forms.NumericUpDown();
+            this.noiseFrequency = new System.Windows.Forms.NumericUpDown();
+            this.noiseTextureHeight = new System.Windows.Forms.NumericUpDown();
+            this.noiseTextureWidth = new System.Windows.Forms.NumericUpDown();
+            this.noisePositionY = new System.Windows.Forms.NumericUpDown();
+            this.noisePositionX = new System.Windows.Forms.NumericUpDown();
+            this.noiseSeed = new System.Windows.Forms.NumericUpDown();
+            this.noiseScale = new System.Windows.Forms.NumericUpDown();
             this.panel3 = new System.Windows.Forms.Panel();
             this.fbm3PositionAndNoise = new System.Windows.Forms.RadioButton();
             this.fbm3NoiseOnly = new System.Windows.Forms.RadioButton();
@@ -72,19 +79,12 @@ namespace MapGenerator
             this.fbm1OffsetY = new System.Windows.Forms.NumericUpDown();
             this.fbm1OffsetX = new System.Windows.Forms.NumericUpDown();
             this.fbm1Opacity = new System.Windows.Forms.NumericUpDown();
-            this.positionYBox = new System.Windows.Forms.TextBox();
-            this.positionXBox = new System.Windows.Forms.TextBox();
             this.positionLabel = new System.Windows.Forms.Label();
             this.fbm1Checkbox = new System.Windows.Forms.CheckBox();
-            this.brightnessMultiplierBox = new System.Windows.Forms.TextBox();
             this.brightnessLabel = new System.Windows.Forms.Label();
-            this.noiseLacunarityBox = new System.Windows.Forms.TextBox();
             this.lacunarityLabel = new System.Windows.Forms.Label();
-            this.noiseGainBox = new System.Windows.Forms.TextBox();
             this.gainLabel = new System.Windows.Forms.Label();
-            this.noiseFrequencyBox = new System.Windows.Forms.TextBox();
             this.frequencyLabel = new System.Windows.Forms.Label();
-            this.scaleBox = new System.Windows.Forms.TextBox();
             this.scaleLabel = new System.Windows.Forms.Label();
             this.waterTab = new System.Windows.Forms.TabPage();
             this.waterLevelBox = new System.Windows.Forms.TextBox();
@@ -94,6 +94,16 @@ namespace MapGenerator
             this.mainOptionsControl.SuspendLayout();
             this.outputTab.SuspendLayout();
             this.noiseTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseGain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseTextureHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseTextureWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noisePositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noisePositionX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseScale)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -117,14 +127,6 @@ namespace MapGenerator
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
             this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.surface_MouseMove);
-            // 
-            // randomSeedBox
-            // 
-            this.randomSeedBox.Location = new System.Drawing.Point(9, 29);
-            this.randomSeedBox.Name = "randomSeedBox";
-            this.randomSeedBox.Size = new System.Drawing.Size(100, 20);
-            this.randomSeedBox.TabIndex = 3;
-            this.randomSeedBox.Text = "123456";
             // 
             // randomSeedLabel
             // 
@@ -189,22 +191,6 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel.TabIndex = 0;
             this.randomTextureDimensionsLabel.Text = "Source Texture Dimensions";
             // 
-            // randomTextureWidthBox
-            // 
-            this.randomTextureWidthBox.Location = new System.Drawing.Point(9, 127);
-            this.randomTextureWidthBox.Name = "randomTextureWidthBox";
-            this.randomTextureWidthBox.Size = new System.Drawing.Size(100, 20);
-            this.randomTextureWidthBox.TabIndex = 4;
-            this.randomTextureWidthBox.Text = "32";
-            // 
-            // randomTextureHeightBox
-            // 
-            this.randomTextureHeightBox.Location = new System.Drawing.Point(121, 126);
-            this.randomTextureHeightBox.Name = "randomTextureHeightBox";
-            this.randomTextureHeightBox.Size = new System.Drawing.Size(100, 20);
-            this.randomTextureHeightBox.TabIndex = 5;
-            this.randomTextureHeightBox.Text = "32";
-            // 
             // mainOptionsControl
             // 
             this.mainOptionsControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
@@ -235,6 +221,16 @@ namespace MapGenerator
             // noiseTab
             // 
             this.noiseTab.AutoScroll = true;
+            this.noiseTab.Controls.Add(this.noiseBrightness);
+            this.noiseTab.Controls.Add(this.noiseLacunarity);
+            this.noiseTab.Controls.Add(this.noiseGain);
+            this.noiseTab.Controls.Add(this.noiseFrequency);
+            this.noiseTab.Controls.Add(this.noiseTextureHeight);
+            this.noiseTab.Controls.Add(this.noiseTextureWidth);
+            this.noiseTab.Controls.Add(this.noisePositionY);
+            this.noiseTab.Controls.Add(this.noisePositionX);
+            this.noiseTab.Controls.Add(this.noiseSeed);
+            this.noiseTab.Controls.Add(this.noiseScale);
             this.noiseTab.Controls.Add(this.panel3);
             this.noiseTab.Controls.Add(this.panel2);
             this.noiseTab.Controls.Add(this.panel1);
@@ -252,25 +248,15 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.fbm1OffsetY);
             this.noiseTab.Controls.Add(this.fbm1OffsetX);
             this.noiseTab.Controls.Add(this.fbm1Opacity);
-            this.noiseTab.Controls.Add(this.positionYBox);
-            this.noiseTab.Controls.Add(this.positionXBox);
             this.noiseTab.Controls.Add(this.positionLabel);
             this.noiseTab.Controls.Add(this.fbm1Checkbox);
-            this.noiseTab.Controls.Add(this.brightnessMultiplierBox);
             this.noiseTab.Controls.Add(this.brightnessLabel);
-            this.noiseTab.Controls.Add(this.noiseLacunarityBox);
             this.noiseTab.Controls.Add(this.lacunarityLabel);
-            this.noiseTab.Controls.Add(this.noiseGainBox);
             this.noiseTab.Controls.Add(this.gainLabel);
-            this.noiseTab.Controls.Add(this.noiseFrequencyBox);
             this.noiseTab.Controls.Add(this.frequencyLabel);
-            this.noiseTab.Controls.Add(this.scaleBox);
             this.noiseTab.Controls.Add(this.scaleLabel);
-            this.noiseTab.Controls.Add(this.randomTextureHeightBox);
             this.noiseTab.Controls.Add(this.randomSeedLabel);
             this.noiseTab.Controls.Add(this.randomTextureDimensionsLabel);
-            this.noiseTab.Controls.Add(this.randomSeedBox);
-            this.noiseTab.Controls.Add(this.randomTextureWidthBox);
             this.noiseTab.Location = new System.Drawing.Point(4, 25);
             this.noiseTab.Name = "noiseTab";
             this.noiseTab.Padding = new System.Windows.Forms.Padding(3);
@@ -278,6 +264,231 @@ namespace MapGenerator
             this.noiseTab.TabIndex = 1;
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
+            // 
+            // noiseBrightness
+            // 
+            this.noiseBrightness.DecimalPlaces = 4;
+            this.noiseBrightness.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.noiseBrightness.Location = new System.Drawing.Point(119, 225);
+            this.noiseBrightness.Name = "noiseBrightness";
+            this.noiseBrightness.Size = new System.Drawing.Size(102, 20);
+            this.noiseBrightness.TabIndex = 64;
+            this.noiseBrightness.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noiseBrightness.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noiseLacunarity
+            // 
+            this.noiseLacunarity.DecimalPlaces = 4;
+            this.noiseLacunarity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.noiseLacunarity.Location = new System.Drawing.Point(9, 225);
+            this.noiseLacunarity.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.noiseLacunarity.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            -2147483648});
+            this.noiseLacunarity.Name = "noiseLacunarity";
+            this.noiseLacunarity.Size = new System.Drawing.Size(100, 20);
+            this.noiseLacunarity.TabIndex = 63;
+            this.noiseLacunarity.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            65536});
+            this.noiseLacunarity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noiseGain
+            // 
+            this.noiseGain.DecimalPlaces = 4;
+            this.noiseGain.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.noiseGain.Location = new System.Drawing.Point(119, 176);
+            this.noiseGain.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.noiseGain.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            -2147483648});
+            this.noiseGain.Name = "noiseGain";
+            this.noiseGain.Size = new System.Drawing.Size(102, 20);
+            this.noiseGain.TabIndex = 62;
+            this.noiseGain.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            65536});
+            this.noiseGain.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noiseFrequency
+            // 
+            this.noiseFrequency.DecimalPlaces = 4;
+            this.noiseFrequency.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.noiseFrequency.Location = new System.Drawing.Point(7, 176);
+            this.noiseFrequency.Maximum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            0});
+            this.noiseFrequency.Minimum = new decimal(new int[] {
+            512,
+            0,
+            0,
+            -2147483648});
+            this.noiseFrequency.Name = "noiseFrequency";
+            this.noiseFrequency.Size = new System.Drawing.Size(102, 20);
+            this.noiseFrequency.TabIndex = 61;
+            this.noiseFrequency.Value = new decimal(new int[] {
+            23,
+            0,
+            0,
+            131072});
+            this.noiseFrequency.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noiseTextureHeight
+            // 
+            this.noiseTextureHeight.Location = new System.Drawing.Point(121, 127);
+            this.noiseTextureHeight.Maximum = new decimal(new int[] {
+            4096,
+            0,
+            0,
+            0});
+            this.noiseTextureHeight.Name = "noiseTextureHeight";
+            this.noiseTextureHeight.Size = new System.Drawing.Size(100, 20);
+            this.noiseTextureHeight.TabIndex = 60;
+            this.noiseTextureHeight.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.noiseTextureHeight.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noiseTextureWidth
+            // 
+            this.noiseTextureWidth.Location = new System.Drawing.Point(9, 127);
+            this.noiseTextureWidth.Maximum = new decimal(new int[] {
+            4096,
+            0,
+            0,
+            0});
+            this.noiseTextureWidth.Name = "noiseTextureWidth";
+            this.noiseTextureWidth.Size = new System.Drawing.Size(100, 20);
+            this.noiseTextureWidth.TabIndex = 59;
+            this.noiseTextureWidth.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.noiseTextureWidth.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noisePositionY
+            // 
+            this.noisePositionY.DecimalPlaces = 4;
+            this.noisePositionY.Location = new System.Drawing.Point(121, 78);
+            this.noisePositionY.Maximum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            0});
+            this.noisePositionY.Minimum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            -2147483648});
+            this.noisePositionY.Name = "noisePositionY";
+            this.noisePositionY.Size = new System.Drawing.Size(100, 20);
+            this.noisePositionY.TabIndex = 58;
+            this.noisePositionY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noisePositionX
+            // 
+            this.noisePositionX.DecimalPlaces = 4;
+            this.noisePositionX.Location = new System.Drawing.Point(9, 78);
+            this.noisePositionX.Maximum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            0});
+            this.noisePositionX.Minimum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            -2147483648});
+            this.noisePositionX.Name = "noisePositionX";
+            this.noisePositionX.Size = new System.Drawing.Size(100, 20);
+            this.noisePositionX.TabIndex = 57;
+            this.noisePositionX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // noiseSeed
+            // 
+            this.noiseSeed.Location = new System.Drawing.Point(8, 29);
+            this.noiseSeed.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.noiseSeed.Name = "noiseSeed";
+            this.noiseSeed.Size = new System.Drawing.Size(101, 20);
+            this.noiseSeed.TabIndex = 56;
+            this.noiseSeed.Value = new decimal(new int[] {
+            123456,
+            0,
+            0,
+            0});
+            // 
+            // noiseScale
+            // 
+            this.noiseScale.DecimalPlaces = 4;
+            this.noiseScale.Increment = new decimal(new int[] {
+            6,
+            0,
+            0,
+            65536});
+            this.noiseScale.Location = new System.Drawing.Point(121, 29);
+            this.noiseScale.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.noiseScale.Minimum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            -2147483648});
+            this.noiseScale.Name = "noiseScale";
+            this.noiseScale.Size = new System.Drawing.Size(100, 20);
+            this.noiseScale.TabIndex = 55;
+            this.noiseScale.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
             // 
             // panel3
             // 
@@ -299,7 +510,7 @@ namespace MapGenerator
             this.fbm3PositionAndNoise.TabStop = true;
             this.fbm3PositionAndNoise.Text = "Position + Noise";
             this.fbm3PositionAndNoise.UseVisualStyleBackColor = true;
-            this.fbm3PositionAndNoise.CheckedChanged += new System.EventHandler(this.fbm3PositionAndNoise_CheckedChanged);
+            this.fbm3PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm3NoiseOnly
             // 
@@ -310,7 +521,7 @@ namespace MapGenerator
             this.fbm3NoiseOnly.TabIndex = 33;
             this.fbm3NoiseOnly.Text = "Noise Only";
             this.fbm3NoiseOnly.UseVisualStyleBackColor = true;
-            this.fbm3NoiseOnly.CheckedChanged += new System.EventHandler(this.fbm3NoiseOnly_CheckedChanged);
+            this.fbm3NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // panel2
             // 
@@ -332,7 +543,7 @@ namespace MapGenerator
             this.fbm2PositionAndNoise.TabStop = true;
             this.fbm2PositionAndNoise.Text = "Position + Noise";
             this.fbm2PositionAndNoise.UseVisualStyleBackColor = true;
-            this.fbm2PositionAndNoise.CheckedChanged += new System.EventHandler(this.fbm2PositionAndNoise_CheckedChanged);
+            this.fbm2PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm2NoiseOnly
             // 
@@ -343,7 +554,7 @@ namespace MapGenerator
             this.fbm2NoiseOnly.TabIndex = 33;
             this.fbm2NoiseOnly.Text = "Noise Only";
             this.fbm2NoiseOnly.UseVisualStyleBackColor = true;
-            this.fbm2NoiseOnly.CheckedChanged += new System.EventHandler(this.fbm2NoiseOnly_CheckedChanged);
+            this.fbm2NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // panel1
             // 
@@ -365,7 +576,7 @@ namespace MapGenerator
             this.fbm1PositionAndNoise.TabStop = true;
             this.fbm1PositionAndNoise.Text = "Position + Noise";
             this.fbm1PositionAndNoise.UseVisualStyleBackColor = true;
-            this.fbm1PositionAndNoise.CheckedChanged += new System.EventHandler(this.fbm1PositionAndNoise_CheckedChanged);
+            this.fbm1PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm1NoiseOnly
             // 
@@ -376,7 +587,7 @@ namespace MapGenerator
             this.fbm1NoiseOnly.TabIndex = 33;
             this.fbm1NoiseOnly.Text = "Noise Only";
             this.fbm1NoiseOnly.UseVisualStyleBackColor = true;
-            this.fbm1NoiseOnly.CheckedChanged += new System.EventHandler(this.fbm1NoiseOnly_CheckedChanged);
+            this.fbm1NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm3OffsetLabel
             // 
@@ -409,7 +620,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm3OffsetY.ValueChanged += new System.EventHandler(this.fbm3OffsetY_ValueChanged);
+            this.fbm3OffsetY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm3OffsetX
             // 
@@ -433,11 +644,11 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm3OffsetX.ValueChanged += new System.EventHandler(this.fbm3OffsetX_ValueChanged);
+            this.fbm3OffsetX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm3Opacity
             // 
-            this.fbm3Opacity.DecimalPlaces = 2;
+            this.fbm3Opacity.DecimalPlaces = 4;
             this.fbm3Opacity.Increment = new decimal(new int[] {
             1,
             0,
@@ -462,7 +673,7 @@ namespace MapGenerator
             0,
             0,
             0});
-            this.fbm3Opacity.ValueChanged += new System.EventHandler(this.fbm3Opacity_ValueChanged);
+            this.fbm3Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm3Checkbox
             // 
@@ -473,7 +684,7 @@ namespace MapGenerator
             this.fbm3Checkbox.TabIndex = 45;
             this.fbm3Checkbox.Text = "Fractional Layer 3";
             this.fbm3Checkbox.UseVisualStyleBackColor = true;
-            this.fbm3Checkbox.CheckedChanged += new System.EventHandler(this.fbm3Checkbox_CheckedChanged);
+            this.fbm3Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm2OffsetLabel
             // 
@@ -506,7 +717,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.fbm2OffsetY.ValueChanged += new System.EventHandler(this.fbm2OffsetY_ValueChanged);
+            this.fbm2OffsetY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm2OffsetX
             // 
@@ -530,11 +741,11 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.fbm2OffsetX.ValueChanged += new System.EventHandler(this.fbm2OffsetX_ValueChanged);
+            this.fbm2OffsetX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm2Opacity
             // 
-            this.fbm2Opacity.DecimalPlaces = 2;
+            this.fbm2Opacity.DecimalPlaces = 4;
             this.fbm2Opacity.Increment = new decimal(new int[] {
             1,
             0,
@@ -559,7 +770,7 @@ namespace MapGenerator
             0,
             0,
             0});
-            this.fbm2Opacity.ValueChanged += new System.EventHandler(this.fbm2Opacity_ValueChanged);
+            this.fbm2Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm2Checkbox
             // 
@@ -572,7 +783,7 @@ namespace MapGenerator
             this.fbm2Checkbox.TabIndex = 38;
             this.fbm2Checkbox.Text = "Fractional Layer 2";
             this.fbm2Checkbox.UseVisualStyleBackColor = true;
-            this.fbm2Checkbox.CheckedChanged += new System.EventHandler(this.fbm2Checkbox_CheckedChanged);
+            this.fbm2Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm1OffsetLabel
             // 
@@ -605,7 +816,7 @@ namespace MapGenerator
             0,
             0,
             65536});
-            this.fbm1OffsetY.ValueChanged += new System.EventHandler(this.fbm1OffsetY_ValueChanged);
+            this.fbm1OffsetY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm1OffsetX
             // 
@@ -629,11 +840,11 @@ namespace MapGenerator
             0,
             0,
             65536});
-            this.fbm1OffsetX.ValueChanged += new System.EventHandler(this.fbm1OffsetX_ValueChanged);
+            this.fbm1OffsetX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm1Opacity
             // 
-            this.fbm1Opacity.DecimalPlaces = 2;
+            this.fbm1Opacity.DecimalPlaces = 4;
             this.fbm1Opacity.Increment = new decimal(new int[] {
             1,
             0,
@@ -658,23 +869,7 @@ namespace MapGenerator
             0,
             0,
             0});
-            this.fbm1Opacity.ValueChanged += new System.EventHandler(this.fbm1Opacity_ValueChanged);
-            // 
-            // positionYBox
-            // 
-            this.positionYBox.Location = new System.Drawing.Point(121, 78);
-            this.positionYBox.Name = "positionYBox";
-            this.positionYBox.Size = new System.Drawing.Size(100, 20);
-            this.positionYBox.TabIndex = 30;
-            this.positionYBox.Text = "0.0000";
-            // 
-            // positionXBox
-            // 
-            this.positionXBox.Location = new System.Drawing.Point(9, 78);
-            this.positionXBox.Name = "positionXBox";
-            this.positionXBox.Size = new System.Drawing.Size(100, 20);
-            this.positionXBox.TabIndex = 29;
-            this.positionXBox.Text = "0.0000";
+            this.fbm1Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // positionLabel
             // 
@@ -696,15 +891,7 @@ namespace MapGenerator
             this.fbm1Checkbox.TabIndex = 19;
             this.fbm1Checkbox.Text = "Fractional Layer 1";
             this.fbm1Checkbox.UseVisualStyleBackColor = true;
-            this.fbm1Checkbox.CheckedChanged += new System.EventHandler(this.fbm1Checkbox_CheckedChanged);
-            // 
-            // brightnessMultiplierBox
-            // 
-            this.brightnessMultiplierBox.Location = new System.Drawing.Point(121, 225);
-            this.brightnessMultiplierBox.Name = "brightnessMultiplierBox";
-            this.brightnessMultiplierBox.Size = new System.Drawing.Size(100, 20);
-            this.brightnessMultiplierBox.TabIndex = 18;
-            this.brightnessMultiplierBox.Text = "1.00";
+            this.fbm1Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // brightnessLabel
             // 
@@ -715,14 +902,6 @@ namespace MapGenerator
             this.brightnessLabel.TabIndex = 17;
             this.brightnessLabel.Text = "Brightness";
             // 
-            // noiseLacunarityBox
-            // 
-            this.noiseLacunarityBox.Location = new System.Drawing.Point(9, 225);
-            this.noiseLacunarityBox.Name = "noiseLacunarityBox";
-            this.noiseLacunarityBox.Size = new System.Drawing.Size(100, 20);
-            this.noiseLacunarityBox.TabIndex = 16;
-            this.noiseLacunarityBox.Text = "1.6";
-            // 
             // lacunarityLabel
             // 
             this.lacunarityLabel.AutoSize = true;
@@ -731,14 +910,6 @@ namespace MapGenerator
             this.lacunarityLabel.Size = new System.Drawing.Size(56, 13);
             this.lacunarityLabel.TabIndex = 15;
             this.lacunarityLabel.Text = "Lacunarity";
-            // 
-            // noiseGainBox
-            // 
-            this.noiseGainBox.Location = new System.Drawing.Point(121, 176);
-            this.noiseGainBox.Name = "noiseGainBox";
-            this.noiseGainBox.Size = new System.Drawing.Size(100, 20);
-            this.noiseGainBox.TabIndex = 12;
-            this.noiseGainBox.Text = "0.6";
             // 
             // gainLabel
             // 
@@ -749,14 +920,6 @@ namespace MapGenerator
             this.gainLabel.TabIndex = 11;
             this.gainLabel.Text = "Gain";
             // 
-            // noiseFrequencyBox
-            // 
-            this.noiseFrequencyBox.Location = new System.Drawing.Point(9, 176);
-            this.noiseFrequencyBox.Name = "noiseFrequencyBox";
-            this.noiseFrequencyBox.Size = new System.Drawing.Size(100, 20);
-            this.noiseFrequencyBox.TabIndex = 10;
-            this.noiseFrequencyBox.Text = "0.23";
-            // 
             // frequencyLabel
             // 
             this.frequencyLabel.AutoSize = true;
@@ -765,14 +928,6 @@ namespace MapGenerator
             this.frequencyLabel.Size = new System.Drawing.Size(57, 13);
             this.frequencyLabel.TabIndex = 9;
             this.frequencyLabel.Text = "Frequency";
-            // 
-            // scaleBox
-            // 
-            this.scaleBox.Location = new System.Drawing.Point(121, 29);
-            this.scaleBox.Name = "scaleBox";
-            this.scaleBox.Size = new System.Drawing.Size(100, 20);
-            this.scaleBox.TabIndex = 8;
-            this.scaleBox.Text = "32.00";
             // 
             // scaleLabel
             // 
@@ -840,6 +995,16 @@ namespace MapGenerator
             this.outputTab.PerformLayout();
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseGain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseTextureHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseTextureWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noisePositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noisePositionX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseScale)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -886,9 +1051,9 @@ namespace MapGenerator
                 else
                 {
                     // Adjust scale of effect
-                    float scale = float.Parse(scaleBox.Text);
+                    float scale = (float)noiseScale.Value;
                     scale += 0.005f * e.Delta;
-                    scaleBox.Text = string.Format("{0}", scale);
+                    noiseScale.Value = (decimal)scale;
                     main.generateMap(getOptions());
                 }
             }
@@ -904,8 +1069,8 @@ namespace MapGenerator
             {
                 effectPosition += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
 
-                positionXBox.Text = string.Format("{0}", effectPosition.X);
-                positionYBox.Text = string.Format("{0}", effectPosition.Y);
+                noisePositionX.Value = (decimal)effectPosition.X;
+                noisePositionY.Value = (decimal)effectPosition.Y;
 
                 main.generateMap(getOptions());
             }
@@ -922,7 +1087,6 @@ namespace MapGenerator
         #endregion
 
         private System.Windows.Forms.PictureBox surface;
-        private System.Windows.Forms.TextBox randomSeedBox;
         private System.Windows.Forms.Label randomSeedLabel;
         private System.Windows.Forms.Button generateButton;
         private System.Windows.Forms.Label widthLabel;
@@ -930,27 +1094,18 @@ namespace MapGenerator
         private System.Windows.Forms.TextBox widthBox;
         private System.Windows.Forms.TextBox heightBox;
         private System.Windows.Forms.Label randomTextureDimensionsLabel;
-        private System.Windows.Forms.TextBox randomTextureWidthBox;
-        private System.Windows.Forms.TextBox randomTextureHeightBox;
         private TabControl mainOptionsControl;
         private TabPage outputTab;
         private TabPage noiseTab;
         private Label scaleLabel;
-        private TextBox scaleBox;
         private TabPage waterTab;
         private Label frequencyLabel;
-        private TextBox noiseFrequencyBox;
-        private TextBox noiseLacunarityBox;
         private Label lacunarityLabel;
-        private TextBox noiseGainBox;
         private Label gainLabel;
         private TextBox waterLevelBox;
         private Label waterLevelLabel;
-        private TextBox brightnessMultiplierBox;
         private Label brightnessLabel;
         private CheckBox fbm1Checkbox;
-        private TextBox positionYBox;
-        private TextBox positionXBox;
         private Label positionLabel;
         private TabPage floraTab;
         private Label fbm1OffsetLabel;
@@ -976,5 +1131,15 @@ namespace MapGenerator
         private Panel panel2;
         private RadioButton fbm2PositionAndNoise;
         private RadioButton fbm2NoiseOnly;
+        private NumericUpDown noiseBrightness;
+        private NumericUpDown noiseLacunarity;
+        private NumericUpDown noiseGain;
+        private NumericUpDown noiseFrequency;
+        private NumericUpDown noiseTextureHeight;
+        private NumericUpDown noiseTextureWidth;
+        private NumericUpDown noisePositionY;
+        private NumericUpDown noisePositionX;
+        private NumericUpDown noiseSeed;
+        private NumericUpDown noiseScale;
     }
 }

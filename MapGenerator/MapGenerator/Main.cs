@@ -104,16 +104,16 @@ namespace MapGenerator
             random = new Random(options.seed);
 
             // Initialize random texture
-            Color[] data = new Color[options.randomTextureWidth * options.randomTextureHeight];
-            for (int i = 0; i < options.randomTextureWidth; i++)
+            Color[] data = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
+            for (int i = 0; i < options.noiseTextureWidth; i++)
             {
-                for (int j = 0; j < options.randomTextureHeight; j++)
+                for (int j = 0; j < options.noiseTextureHeight; j++)
                 {
                     float randomNumber = (float)random.NextDouble();
-                    data[i + j * options.randomTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
+                    data[i + j * options.noiseTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
                 }
             }
-            randomTexture = new Texture2D(GraphicsDevice, options.randomTextureWidth, options.randomTextureHeight);
+            randomTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
             randomTexture.SetData<Color>(data);
 
             // Initialize vertex shader properties
@@ -133,11 +133,11 @@ namespace MapGenerator
             baseEffect.Parameters["position"].SetValue(options.position);
             baseEffect.Parameters["scale"].SetValue(options.scale);
             baseEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
-            baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.randomTextureWidth, options.randomTextureHeight));
+            baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
             baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
-            baseEffect.Parameters["brightness"].SetValue(options.brightness);
+            baseEffect.Parameters["brightness"].SetValue(options.noiseBrightness);
             baseEffect.Parameters["fbm1"].SetValue(options.fbm1);
             baseEffect.Parameters["fbm2"].SetValue(options.fbm2);
             baseEffect.Parameters["fbm3"].SetValue(options.fbm3);
