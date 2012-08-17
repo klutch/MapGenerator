@@ -33,6 +33,7 @@ namespace MapGenerator
         public RenderTarget2D baseWater;
         public RenderTarget2D baseFlora;
         private Texture2D randomTexture;
+        private int lastCreatedSeed;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -93,28 +94,29 @@ namespace MapGenerator
         // generateMap
         public void generateMap(MapGeneratorOptions options)
         {
-            // Destroy existing render target
-            if (renderTarget != null)
+            // Only create a new random texture if it's needed
+            Color[] data;
+            if (lastCreatedSeed != options.seed || randomTexture == null)
             {
-                renderTarget.Dispose();
-                renderTarget = null;
-            }
+                // Initialize random number generator
+                random = new Random(options.seed);
 
-            // Initialize random number generator
-            random = new Random(options.seed);
-
-            // Initialize random texture
-            Color[] data = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
-            for (int i = 0; i < options.noiseTextureWidth; i++)
-            {
-                for (int j = 0; j < options.noiseTextureHeight; j++)
+                // Initialize random texture
+                data = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
+                for (int i = 0; i < options.noiseTextureWidth; i++)
                 {
-                    float randomNumber = (float)random.NextDouble();
-                    data[i + j * options.noiseTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
+                    for (int j = 0; j < options.noiseTextureHeight; j++)
+                    {
+                        float randomNumber = (float)random.NextDouble();
+                        data[i + j * options.noiseTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
+                    }
                 }
+                randomTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
+                randomTexture.SetData<Color>(data);
+
+                // Store this seed
+                lastCreatedSeed = options.seed;
             }
-            randomTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
-            randomTexture.SetData<Color>(data);
 
             // Initialize vertex shader properties
             Matrix projection = Matrix.CreateOrthographicOffCenter(0, options.width, options.height, 0, 0, 1);
@@ -122,8 +124,12 @@ namespace MapGenerator
             Matrix matrixTransform = halfPixelOffset * projection;
             baseEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
 
-            // Initialize render target
-            renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            // Only create a new renderTarget instance if it's needed
+            if (renderTarget == null || renderTarget.Width != options.width || renderTarget.Height != options.height)
+            {
+                // Initialize render target
+                renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            }
             
             //////////////////////////////////////
             // Draw noise effect to render target
