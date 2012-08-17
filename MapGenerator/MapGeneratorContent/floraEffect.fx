@@ -4,7 +4,7 @@ sampler baseSampler : register(s0);
 float2 renderTargetSize;
 float4x4 matrixTransform;
 
-float2 range1 = float2(0, 0.3);
+static float2 range1 = float2(0, 0.3);
 
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
