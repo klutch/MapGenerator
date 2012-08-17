@@ -434,6 +434,7 @@ namespace MapGenerator
             0,
             0,
             0});
+            this.noiseSeed.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // noiseScale
             // 
@@ -475,12 +476,10 @@ namespace MapGenerator
             // fbm3PositionAndNoise
             // 
             this.fbm3PositionAndNoise.AutoSize = true;
-            this.fbm3PositionAndNoise.Checked = true;
             this.fbm3PositionAndNoise.Location = new System.Drawing.Point(0, 0);
             this.fbm3PositionAndNoise.Name = "fbm3PositionAndNoise";
             this.fbm3PositionAndNoise.Size = new System.Drawing.Size(101, 17);
             this.fbm3PositionAndNoise.TabIndex = 34;
-            this.fbm3PositionAndNoise.TabStop = true;
             this.fbm3PositionAndNoise.Text = "Position + Noise";
             this.fbm3PositionAndNoise.UseVisualStyleBackColor = true;
             this.fbm3PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
@@ -488,10 +487,12 @@ namespace MapGenerator
             // fbm3NoiseOnly
             // 
             this.fbm3NoiseOnly.AutoSize = true;
+            this.fbm3NoiseOnly.Checked = true;
             this.fbm3NoiseOnly.Location = new System.Drawing.Point(0, 23);
             this.fbm3NoiseOnly.Name = "fbm3NoiseOnly";
             this.fbm3NoiseOnly.Size = new System.Drawing.Size(76, 17);
             this.fbm3NoiseOnly.TabIndex = 33;
+            this.fbm3NoiseOnly.TabStop = true;
             this.fbm3NoiseOnly.Text = "Noise Only";
             this.fbm3NoiseOnly.UseVisualStyleBackColor = true;
             this.fbm3NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
@@ -642,15 +643,17 @@ namespace MapGenerator
             this.fbm3Opacity.Size = new System.Drawing.Size(100, 20);
             this.fbm3Opacity.TabIndex = 46;
             this.fbm3Opacity.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
-            0});
+            65536});
             this.fbm3Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm3Checkbox
             // 
             this.fbm3Checkbox.AutoSize = true;
+            this.fbm3Checkbox.Checked = true;
+            this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fbm3Checkbox.Location = new System.Drawing.Point(9, 471);
             this.fbm3Checkbox.Name = "fbm3Checkbox";
             this.fbm3Checkbox.Size = new System.Drawing.Size(110, 17);
@@ -788,7 +791,7 @@ namespace MapGenerator
             5,
             0,
             0,
-            65536});
+            -2147418112});
             this.fbm1OffsetY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm1OffsetX
@@ -809,7 +812,7 @@ namespace MapGenerator
             this.fbm1OffsetX.Size = new System.Drawing.Size(50, 20);
             this.fbm1OffsetX.TabIndex = 35;
             this.fbm1OffsetX.Value = new decimal(new int[] {
-            5,
+            2,
             0,
             0,
             65536});
