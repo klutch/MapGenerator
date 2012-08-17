@@ -87,9 +87,16 @@ namespace MapGenerator
             this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
+            this.flora1Frequency = new System.Windows.Forms.NumericUpDown();
+            this.flora1RangeX = new System.Windows.Forms.NumericUpDown();
+            this.flora1RangeY = new System.Windows.Forms.NumericUpDown();
+            this.flora1FrequencyLabel = new System.Windows.Forms.Label();
+            this.flora1RangeLabel = new System.Windows.Forms.Label();
+            this.flora1Checkbox = new System.Windows.Forms.CheckBox();
             this.renderTab = new System.Windows.Forms.TabPage();
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -117,6 +124,10 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).BeginInit();
             this.waterTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
+            this.floraTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1RangeY)).BeginInit();
             this.renderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
@@ -960,12 +971,115 @@ namespace MapGenerator
             // 
             // floraTab
             // 
+            this.floraTab.Controls.Add(this.flora1Frequency);
+            this.floraTab.Controls.Add(this.flora1RangeX);
+            this.floraTab.Controls.Add(this.flora1RangeY);
+            this.floraTab.Controls.Add(this.flora1FrequencyLabel);
+            this.floraTab.Controls.Add(this.flora1RangeLabel);
+            this.floraTab.Controls.Add(this.flora1Checkbox);
             this.floraTab.Location = new System.Drawing.Point(4, 25);
             this.floraTab.Name = "floraTab";
             this.floraTab.Size = new System.Drawing.Size(250, 488);
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
+            // 
+            // flora1Frequency
+            // 
+            this.flora1Frequency.DecimalPlaces = 4;
+            this.flora1Frequency.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora1Frequency.Location = new System.Drawing.Point(8, 97);
+            this.flora1Frequency.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.flora1Frequency.Name = "flora1Frequency";
+            this.flora1Frequency.Size = new System.Drawing.Size(101, 20);
+            this.flora1Frequency.TabIndex = 59;
+            // 
+            // flora1RangeX
+            // 
+            this.flora1RangeX.DecimalPlaces = 4;
+            this.flora1RangeX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora1RangeX.Location = new System.Drawing.Point(8, 48);
+            this.flora1RangeX.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.flora1RangeX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.flora1RangeX.Name = "flora1RangeX";
+            this.flora1RangeX.Size = new System.Drawing.Size(101, 20);
+            this.flora1RangeX.TabIndex = 58;
+            // 
+            // flora1RangeY
+            // 
+            this.flora1RangeY.DecimalPlaces = 4;
+            this.flora1RangeY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora1RangeY.Location = new System.Drawing.Point(121, 48);
+            this.flora1RangeY.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.flora1RangeY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.flora1RangeY.Name = "flora1RangeY";
+            this.flora1RangeY.Size = new System.Drawing.Size(100, 20);
+            this.flora1RangeY.TabIndex = 57;
+            this.flora1RangeY.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            65536});
+            // 
+            // flora1FrequencyLabel
+            // 
+            this.flora1FrequencyLabel.AutoSize = true;
+            this.flora1FrequencyLabel.Location = new System.Drawing.Point(5, 80);
+            this.flora1FrequencyLabel.Name = "flora1FrequencyLabel";
+            this.flora1FrequencyLabel.Size = new System.Drawing.Size(57, 13);
+            this.flora1FrequencyLabel.TabIndex = 4;
+            this.flora1FrequencyLabel.Text = "Frequency";
+            // 
+            // flora1RangeLabel
+            // 
+            this.flora1RangeLabel.AutoSize = true;
+            this.flora1RangeLabel.Location = new System.Drawing.Point(5, 32);
+            this.flora1RangeLabel.Name = "flora1RangeLabel";
+            this.flora1RangeLabel.Size = new System.Drawing.Size(39, 13);
+            this.flora1RangeLabel.TabIndex = 2;
+            this.flora1RangeLabel.Text = "Range";
+            // 
+            // flora1Checkbox
+            // 
+            this.flora1Checkbox.AutoSize = true;
+            this.flora1Checkbox.Location = new System.Drawing.Point(8, 12);
+            this.flora1Checkbox.Name = "flora1Checkbox";
+            this.flora1Checkbox.Size = new System.Drawing.Size(97, 17);
+            this.flora1Checkbox.TabIndex = 0;
+            this.flora1Checkbox.Text = "Enable Layer 1";
+            this.flora1Checkbox.UseVisualStyleBackColor = true;
             // 
             // renderTab
             // 
@@ -1015,6 +1129,10 @@ namespace MapGenerator
             0,
             0});
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1061,6 +1179,11 @@ namespace MapGenerator
             this.waterTab.ResumeLayout(false);
             this.waterTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
+            this.floraTab.ResumeLayout(false);
+            this.floraTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1RangeY)).EndInit();
             this.renderTab.ResumeLayout(false);
             this.renderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
@@ -1184,5 +1307,12 @@ namespace MapGenerator
         private NumericUpDown renderHeight;
         private NumericUpDown renderWidth;
         private NumericUpDown waterLevel;
+        private NumericUpDown flora1Frequency;
+        private NumericUpDown flora1RangeX;
+        private NumericUpDown flora1RangeY;
+        private Label flora1FrequencyLabel;
+        private Label flora1RangeLabel;
+        private CheckBox flora1Checkbox;
+        private OpenFileDialog openFileDialog1;
     }
 }

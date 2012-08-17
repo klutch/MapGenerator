@@ -38,6 +38,9 @@ namespace MapGenerator
         public float fbm2Opacity;
         public float fbm3Opacity;
 
+        public bool flora1;
+        public Microsoft.Xna.Framework.Vector2 flora1Range;
+
         public float waterLevel;
     };
 
@@ -89,6 +92,7 @@ namespace MapGenerator
 
         public MapGeneratorOptions getOptions()
         {
+            // General
             options.width = (int)renderWidth.Value;
             options.height = (int)renderHeight.Value;
             options.seed = (int)noiseSeed.Value;
@@ -96,14 +100,15 @@ namespace MapGenerator
             options.position.X = (float)noisePositionX.Value;
             options.position.Y = (float)noisePositionY.Value;
 
+            // Noise texture
             options.noiseTextureWidth = (int)noiseTextureWidth.Value;
             options.noiseTextureHeight = (int)noiseTextureHeight.Value;
-
             options.noiseFrequency = (float)noiseFrequency.Value;
             options.noiseGain = (float)noiseGain.Value;
             options.noiseLacunarity = (float)noiseLacunarity.Value;
             options.noiseBrightness = (float)noiseBrightness.Value;
 
+            // Fractional brownian motion
             options.fbm1 = fbm1Checkbox.Checked;
             options.fbm2 = fbm2Checkbox.Checked;
             options.fbm3 = fbm3Checkbox.Checked;
@@ -120,7 +125,13 @@ namespace MapGenerator
             options.fbm2Opacity = (float)fbm2Opacity.Value;
             options.fbm3Opacity = (float)fbm3Opacity.Value;
 
+            // Water
             options.waterLevel = (float)waterLevel.Value;
+
+            // Flora
+            options.flora1 = flora1Checkbox.Checked;
+            options.flora1Range.X = (float)flora1RangeX.Value;
+            options.flora1Range.Y = (float)flora1RangeY.Value;
 
             return options;
         }

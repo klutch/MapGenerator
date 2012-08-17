@@ -192,6 +192,8 @@ namespace MapGenerator
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Transparent);
             floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+            floraEffect.Parameters["flora1"].SetValue(options.flora1);
+            floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.End();
