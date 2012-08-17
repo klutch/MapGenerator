@@ -50,20 +50,26 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 	
 	if (fbm1)
 	{
-		float2 coords = fbm1NoiseOnly ? n : p + n;
-		n *= lerp(n, noise(baseSampler, coords * fbm1Offset, noiseFrequency, noiseGain, noiseLacunarity), fbm1Opacity);
+		float2 coords = fbm1NoiseOnly ?
+			noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity) : 
+			p + n * fbm1Offset;
+		n *= lerp(n, noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm1Opacity);
 	}
 
 	if (fbm2)
 	{
-		float2 coords = fbm2NoiseOnly ? n : p + n;
-		n *= lerp(n, noise(baseSampler, coords * fbm2Offset, noiseFrequency, noiseGain, noiseLacunarity), fbm2Opacity);
+		float2 coords = fbm2NoiseOnly ? 
+			noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity) :
+			p + n * fbm2Offset;
+		n *= lerp(n, noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm2Opacity);
 	}
 
 	if (fbm3)
 	{
-		float2 coords = fbm3NoiseOnly ? n : p + n;
-		n *= lerp(n, noise(baseSampler, coords * fbm3Offset, noiseFrequency, noiseGain, noiseLacunarity), fbm3Opacity);
+		float2 coords = fbm3NoiseOnly ?
+		noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity) :
+		p + n * fbm3Offset;
+		n *= lerp(n, noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm3Opacity);
 	}
 
 	n *= brightness;
