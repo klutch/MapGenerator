@@ -34,6 +34,7 @@ namespace MapGenerator
         public RenderTarget2D baseWater;
         public RenderTarget2D baseFlora;
         private Texture2D randomTexture;
+        private Color[] randomTextureData;
         private int lastCreatedSeed;
         private List<Texture2D> flora1Textures;
 
@@ -122,24 +123,23 @@ namespace MapGenerator
         public void generateMap(MapGeneratorOptions options)
         {
             // Only create a new random texture if it's needed
-            Color[] data;
             if (lastCreatedSeed != options.seed || randomTexture == null)
             {
                 // Initialize random number generator
                 random = new Random(options.seed);
 
                 // Initialize random texture
-                data = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
+                randomTextureData = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
                 for (int i = 0; i < options.noiseTextureWidth; i++)
                 {
                     for (int j = 0; j < options.noiseTextureHeight; j++)
                     {
                         float randomNumber = (float)random.NextDouble();
-                        data[i + j * options.noiseTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
+                        randomTextureData[i + j * options.noiseTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
                     }
                 }
                 randomTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
-                randomTexture.SetData<Color>(data);
+                randomTexture.SetData<Color>(randomTextureData);
 
                 // Store this seed
                 lastCreatedSeed = options.seed;
@@ -188,7 +188,7 @@ namespace MapGenerator
             spriteBatch.End();
 
             // Store base noise texture
-            data = new Color[options.width * options.height];
+            Color[] data = new Color[options.width * options.height];
             baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseNoise);
             spriteBatch.Begin();
@@ -234,20 +234,31 @@ namespace MapGenerator
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             Color textureColor;
-            for (int i = 0; i < options.width; i += 4)
+            for (int i = 0; i < options.width; i++)
             {
-                for (int j = 0; j < options.height; j += 4)
+                for (int j = 0; j < options.height; j++)
                 {
+                    // Get pixel data created by the flora effect
                     Color pixel = data[i + j * options.width];
                     float alpha = (float)pixel.A / 255f;
+
+                    // Get a pseudo-random number
                     float chance = (float)random.NextDouble();
+                    //Console.WriteLine(chance);
+
+                    // Compare random number to the flora frequency and its distance away from the middle of its range (alpha)
                     if (chance <= options.flora1Frequency * alpha)
                     {
+                        // Get a texture
                         int textureIndex = random.Next(flora1Textures.Count - 1);
-                        float angle = (float)random.NextDouble() * 6.28f;
                         Texture2D texture = flora1Textures[textureIndex];
+
+                        // Drawing properties
+                        float angle = chance * 6.28f;
                         float colorValue = (float)pixel.G / 75;
                         textureColor = new Color(colorValue, colorValue, colorValue, 1);
+
+                        // Draw
                         spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);
                     }
                 }
