@@ -151,11 +151,14 @@ namespace MapGenerator
             Matrix matrixTransform = halfPixelOffset * projection;
             baseEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
 
-            // Only create a new renderTarget instance if it's needed
+            // Only create new render targets if it's needed
             if (renderTarget == null || renderTarget.Width != options.width || renderTarget.Height != options.height)
             {
                 // Initialize render target
                 renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
             
             //////////////////////////////////////
@@ -189,7 +192,6 @@ namespace MapGenerator
 
             // Store base noise texture
             Color[] data = new Color[options.width * options.height];
-            baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseNoise);
             spriteBatch.Begin();
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
@@ -206,7 +208,6 @@ namespace MapGenerator
             spriteBatch.End();
 
             // Store base water texture
-            baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseWater);
             GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
@@ -228,7 +229,6 @@ namespace MapGenerator
             // Get pixel information from render target and use it to draw flora sprites
             GraphicsDevice.SetRenderTarget(null);
             renderTarget.GetData<Color>(data);
-            baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseFlora);
             GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
@@ -265,13 +265,14 @@ namespace MapGenerator
             }
             spriteBatch.End();
 
+            /*
             // Store base flora texture
-            //baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
-            //GraphicsDevice.SetRenderTarget(baseFlora);
-            //GraphicsDevice.Clear(Color.Transparent);
-            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            //spriteBatch.End();
+            GraphicsDevice.SetRenderTarget(baseFlora);
+            GraphicsDevice.Clear(Color.Transparent);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+            */
 
             // Draw all textures
             GraphicsDevice.SetRenderTarget(renderTarget);
