@@ -40,6 +40,8 @@ namespace MapGenerator
 
         public bool flora1;
         public Microsoft.Xna.Framework.Vector2 flora1Range;
+        public float flora1Frequency;
+        public float flora1Scale;
 
         public float waterLevel;
     };
@@ -132,6 +134,8 @@ namespace MapGenerator
             options.flora1 = flora1Checkbox.Checked;
             options.flora1Range.X = (float)flora1RangeX.Value;
             options.flora1Range.Y = (float)flora1RangeY.Value;
+            options.flora1Frequency = (float)flora1Frequency.Value;
+            options.flora1Scale = (float)flora1Scale.Value;
 
             return options;
         }

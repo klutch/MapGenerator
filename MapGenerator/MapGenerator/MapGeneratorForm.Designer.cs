@@ -87,6 +87,9 @@ namespace MapGenerator
             this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
+            this.flora1Scale = new System.Windows.Forms.NumericUpDown();
+            this.flora1ScaleLabel = new System.Windows.Forms.Label();
+            this.flora1SelectTexture = new System.Windows.Forms.Button();
             this.flora1Frequency = new System.Windows.Forms.NumericUpDown();
             this.flora1RangeX = new System.Windows.Forms.NumericUpDown();
             this.flora1RangeY = new System.Windows.Forms.NumericUpDown();
@@ -96,7 +99,6 @@ namespace MapGenerator
             this.renderTab = new System.Windows.Forms.TabPage();
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
-            this.flora1SelectTexture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -125,6 +127,7 @@ namespace MapGenerator
             this.waterTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
             this.floraTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeY)).BeginInit();
@@ -971,6 +974,8 @@ namespace MapGenerator
             // 
             // floraTab
             // 
+            this.floraTab.Controls.Add(this.flora1Scale);
+            this.floraTab.Controls.Add(this.flora1ScaleLabel);
             this.floraTab.Controls.Add(this.flora1SelectTexture);
             this.floraTab.Controls.Add(this.flora1Frequency);
             this.floraTab.Controls.Add(this.flora1RangeX);
@@ -984,6 +989,48 @@ namespace MapGenerator
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
+            // 
+            // flora1Scale
+            // 
+            this.flora1Scale.DecimalPlaces = 4;
+            this.flora1Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora1Scale.Location = new System.Drawing.Point(124, 97);
+            this.flora1Scale.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.flora1Scale.Name = "flora1Scale";
+            this.flora1Scale.Size = new System.Drawing.Size(97, 20);
+            this.flora1Scale.TabIndex = 62;
+            this.flora1Scale.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+            // 
+            // flora1ScaleLabel
+            // 
+            this.flora1ScaleLabel.AutoSize = true;
+            this.flora1ScaleLabel.Location = new System.Drawing.Point(121, 80);
+            this.flora1ScaleLabel.Name = "flora1ScaleLabel";
+            this.flora1ScaleLabel.Size = new System.Drawing.Size(73, 13);
+            this.flora1ScaleLabel.TabIndex = 61;
+            this.flora1ScaleLabel.Text = "Texture Scale";
+            // 
+            // flora1SelectTexture
+            // 
+            this.flora1SelectTexture.Location = new System.Drawing.Point(121, 12);
+            this.flora1SelectTexture.Name = "flora1SelectTexture";
+            this.flora1SelectTexture.Size = new System.Drawing.Size(100, 23);
+            this.flora1SelectTexture.TabIndex = 60;
+            this.flora1SelectTexture.Text = "Select Texture";
+            this.flora1SelectTexture.UseVisualStyleBackColor = true;
+            this.flora1SelectTexture.Click += new System.EventHandler(this.flora1SelectTexture_Click);
             // 
             // flora1Frequency
             // 
@@ -1002,6 +1049,11 @@ namespace MapGenerator
             this.flora1Frequency.Name = "flora1Frequency";
             this.flora1Frequency.Size = new System.Drawing.Size(101, 20);
             this.flora1Frequency.TabIndex = 59;
+            this.flora1Frequency.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            196608});
             this.flora1Frequency.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // flora1RangeX
@@ -1136,16 +1188,6 @@ namespace MapGenerator
             0,
             0});
             // 
-            // flora1SelectTexture
-            // 
-            this.flora1SelectTexture.Location = new System.Drawing.Point(121, 12);
-            this.flora1SelectTexture.Name = "flora1SelectTexture";
-            this.flora1SelectTexture.Size = new System.Drawing.Size(100, 23);
-            this.flora1SelectTexture.TabIndex = 60;
-            this.flora1SelectTexture.Text = "Select Texture";
-            this.flora1SelectTexture.UseVisualStyleBackColor = true;
-            this.flora1SelectTexture.Click += new System.EventHandler(this.flora1SelectTexture_Click);
-            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1194,6 +1236,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
             this.floraTab.ResumeLayout(false);
             this.floraTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeY)).EndInit();
@@ -1327,5 +1370,7 @@ namespace MapGenerator
         private Label flora1RangeLabel;
         private CheckBox flora1Checkbox;
         private Button flora1SelectTexture;
+        private NumericUpDown flora1Scale;
+        private Label flora1ScaleLabel;
     }
 }

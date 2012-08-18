@@ -225,13 +225,42 @@ namespace MapGenerator
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.End();
 
-            // Store base flora texture
+            // Get pixel information from render target and use it to draw flora sprites
+            GraphicsDevice.SetRenderTarget(null);
+            renderTarget.GetData<Color>(data);
             baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             GraphicsDevice.SetRenderTarget(baseFlora);
             GraphicsDevice.Clear(Color.Transparent);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            Color textureColor;
+            for (int i = 0; i < options.width; i += 4)
+            {
+                for (int j = 0; j < options.height; j += 4)
+                {
+                    Color pixel = data[i + j * options.width];
+                    float alpha = (float)pixel.A / 255f;
+                    float chance = (float)random.NextDouble();
+                    if (chance <= options.flora1Frequency * alpha)
+                    {
+                        int textureIndex = random.Next(flora1Textures.Count - 1);
+                        float angle = (float)random.NextDouble() * 6.28f;
+                        Texture2D texture = flora1Textures[textureIndex];
+                        float colorValue = (float)pixel.G / 75;
+                        textureColor = new Color(colorValue, colorValue, colorValue, 1);
+                        spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);
+                    }
+                }
+            }
             spriteBatch.End();
+
+            // Store base flora texture
+            //baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+            //GraphicsDevice.SetRenderTarget(baseFlora);
+            //GraphicsDevice.Clear(Color.Transparent);
+            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            //spriteBatch.End();
 
             // Draw all textures
             GraphicsDevice.SetRenderTarget(renderTarget);
