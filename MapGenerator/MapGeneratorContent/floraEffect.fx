@@ -12,6 +12,16 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 	position = mul(position, matrixTransform); 
 }
 
+// XNA uses the March 2009 directx sdk, which has a buggy hlsl compiler that tries to
+// use 'preshaders'. Disabling preshaders allows the shader to compile, but there's no way
+// to do that from Visual Studio (that I'm aware of). Things like saturate, clamp, abs, etc
+// can't be used on external parameters in Release mode with preshaders enabled, so I have
+// to write my own absolute function :(
+float absolute(float value)
+{
+	return sqrt(value * value);
+}
+
 // Pixel shader
 float4 PSBaseFlora(float2 texCoords:TEXCOORD0) : COLOR0
 {
@@ -20,15 +30,13 @@ float4 PSBaseFlora(float2 texCoords:TEXCOORD0) : COLOR0
 	float total = (base.r + base.g + base.b) / 3;
 
 	// Flora layer 1
-	if (flora1)
+	if (flora1 && total >= flora1Range.x && total <= flora1Range.y)
 	{
-		float range1Mean = (flora1Range.x + flora1Range.y) / 2;
-		if (total >= flora1Range.x && total <= flora1Range.y)
-		{
-			float max = abs(flora1Range.x - range1Mean);
-			float alpha = 1 - (abs(total - range1Mean) / max);
-			result.ga = float2(total, alpha);
-		}
+		float mean = (flora1Range.x + flora1Range.y) / 2;
+		float max = absolute(flora1Range.x - mean);
+		float alpha = max >= 0.00001 ? 1 - (absolute(total - mean) / max) : 0;
+
+		result.ga = float2(total, alpha);
 	}
 
 	return result;

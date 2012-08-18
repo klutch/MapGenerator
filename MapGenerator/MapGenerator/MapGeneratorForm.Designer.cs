@@ -1001,6 +1001,7 @@ namespace MapGenerator
             this.flora1Frequency.Name = "flora1Frequency";
             this.flora1Frequency.Size = new System.Drawing.Size(101, 20);
             this.flora1Frequency.TabIndex = 59;
+            this.flora1Frequency.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // flora1RangeX
             // 
@@ -1024,6 +1025,7 @@ namespace MapGenerator
             this.flora1RangeX.Name = "flora1RangeX";
             this.flora1RangeX.Size = new System.Drawing.Size(101, 20);
             this.flora1RangeX.TabIndex = 58;
+            this.flora1RangeX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // flora1RangeY
             // 
@@ -1052,6 +1054,7 @@ namespace MapGenerator
             0,
             0,
             65536});
+            this.flora1RangeY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // flora1FrequencyLabel
             // 
@@ -1074,12 +1077,15 @@ namespace MapGenerator
             // flora1Checkbox
             // 
             this.flora1Checkbox.AutoSize = true;
+            this.flora1Checkbox.Checked = true;
+            this.flora1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.flora1Checkbox.Location = new System.Drawing.Point(8, 12);
             this.flora1Checkbox.Name = "flora1Checkbox";
             this.flora1Checkbox.Size = new System.Drawing.Size(97, 17);
             this.flora1Checkbox.TabIndex = 0;
             this.flora1Checkbox.Text = "Enable Layer 1";
             this.flora1Checkbox.UseVisualStyleBackColor = true;
+            this.flora1Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // renderTab
             // 
