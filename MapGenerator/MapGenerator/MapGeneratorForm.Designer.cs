@@ -96,7 +96,6 @@ namespace MapGenerator
             this.renderTab = new System.Windows.Forms.TabPage();
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -1135,10 +1134,6 @@ namespace MapGenerator
             0,
             0});
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1319,6 +1314,5 @@ namespace MapGenerator
         private Label flora1FrequencyLabel;
         private Label flora1RangeLabel;
         private CheckBox flora1Checkbox;
-        private OpenFileDialog openFileDialog1;
     }
 }
