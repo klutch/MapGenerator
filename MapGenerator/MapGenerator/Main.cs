@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -34,6 +35,7 @@ namespace MapGenerator
         public RenderTarget2D baseFlora;
         private Texture2D randomTexture;
         private int lastCreatedSeed;
+        private List<Texture2D> flora1Textures;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -58,6 +60,11 @@ namespace MapGenerator
             graphics.PreferredBackBufferHeight = surface.Height;
             graphics.ApplyChanges();
 
+            // Load default flora texture
+            flora1Textures = new List<Texture2D>();
+            setFlora1Textures(new string[] { string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory) });
+
+            // Initialize view position
             view = new Vector2(surface.Width, surface.Height) / 2;
 
             base.Initialize();
@@ -89,6 +96,26 @@ namespace MapGenerator
         // UnloadContent
         protected override void UnloadContent()
         {
+        }
+
+        // setFlora1Textures
+        public void setFlora1Textures(string[] filePaths)
+        {
+            flora1Textures.Clear();
+            foreach (string filePath in filePaths)
+            {
+                try
+                {
+                    FileStream fileStream = new FileStream(filePath, FileMode.Open);
+                    flora1Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
+                    fileStream.Close();
+                }
+                catch (FileNotFoundException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format(
+                        "Error loading default flora texture file at: {0}\nEither replace this file and reload the program, or select a new texture in the 'Flora' section.", e.FileName));
+                }
+            }
         }
 
         // generateMap

@@ -140,5 +140,22 @@ namespace MapGenerator
         {
             main.generateMap(getOptions());
         }
+
+        private void flora1SelectTexture_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select a plant texture";
+            fileDialog.Filter = "PNG|*.png";
+            fileDialog.Multiselect = true;
+            fileDialog.InitialDirectory = string.Format("{0}textures\\", AppDomain.CurrentDomain.BaseDirectory);
+
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.setFlora1Textures(fileDialog.FileNames);
+                }
+            }));
+        }
     }
 }

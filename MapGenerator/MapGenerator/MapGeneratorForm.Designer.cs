@@ -96,6 +96,7 @@ namespace MapGenerator
             this.renderTab = new System.Windows.Forms.TabPage();
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
+            this.flora1SelectTexture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -970,6 +971,7 @@ namespace MapGenerator
             // 
             // floraTab
             // 
+            this.floraTab.Controls.Add(this.flora1SelectTexture);
             this.floraTab.Controls.Add(this.flora1Frequency);
             this.floraTab.Controls.Add(this.flora1RangeX);
             this.floraTab.Controls.Add(this.flora1RangeY);
@@ -1133,6 +1135,16 @@ namespace MapGenerator
             0,
             0,
             0});
+            // 
+            // flora1SelectTexture
+            // 
+            this.flora1SelectTexture.Location = new System.Drawing.Point(121, 12);
+            this.flora1SelectTexture.Name = "flora1SelectTexture";
+            this.flora1SelectTexture.Size = new System.Drawing.Size(100, 23);
+            this.flora1SelectTexture.TabIndex = 60;
+            this.flora1SelectTexture.Text = "Select Texture";
+            this.flora1SelectTexture.UseVisualStyleBackColor = true;
+            this.flora1SelectTexture.Click += new System.EventHandler(this.flora1SelectTexture_Click);
             // 
             // MapGeneratorForm
             // 
@@ -1314,5 +1326,6 @@ namespace MapGenerator
         private Label flora1FrequencyLabel;
         private Label flora1RangeLabel;
         private CheckBox flora1Checkbox;
+        private Button flora1SelectTexture;
     }
 }
