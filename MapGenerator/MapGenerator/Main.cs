@@ -109,6 +109,7 @@ namespace MapGenerator
                 {
                     FileStream fileStream = new FileStream(filePath, FileMode.Open);
                     flora1Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
+                    Console.WriteLine("Loade: {0} ({1} bytes)", filePath, fileStream.Length);
                     fileStream.Close();
                 }
                 catch (FileNotFoundException e)
@@ -250,7 +251,7 @@ namespace MapGenerator
                     if (chance <= options.flora1Frequency * alpha)
                     {
                         // Get a texture
-                        int textureIndex = random.Next(flora1Textures.Count - 1);
+                        int textureIndex = random.Next(flora1Textures.Count);
                         Texture2D texture = flora1Textures[textureIndex];
 
                         // Drawing properties
