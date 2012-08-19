@@ -218,53 +218,57 @@ namespace MapGenerator
             ////////////////////////////////
             // Draw flora effect
             ////////////////////////////////
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(Color.Transparent);
-            floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
-            floraEffect.Parameters["flora1"].SetValue(options.flora1);
-            floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
-            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            spriteBatch.End();
-
-            // Get pixel information from render target and use it to draw flora sprites
-            GraphicsDevice.SetRenderTarget(null);
-            renderTarget.GetData<Color>(data);
-            GraphicsDevice.SetRenderTarget(baseFlora);
-            GraphicsDevice.Clear(Color.Transparent);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            Color textureColor;
-            for (int i = 0; i < options.width; i++)
+            if (options.flora1)
             {
-                for (int j = 0; j < options.height; j++)
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+                floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+                floraEffect.Parameters["flora1"].SetValue(options.flora1);
+                floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Get pixel information from render target and use it to draw flora sprites
+                GraphicsDevice.SetRenderTarget(null);
+                renderTarget.GetData<Color>(data);
+                GraphicsDevice.SetRenderTarget(baseFlora);
+                GraphicsDevice.Clear(Color.Transparent);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                Color textureColor;
+                for (int i = 0; i < options.width; i++)
                 {
-                    // Get pixel data created by the flora effect
-                    Color pixel = data[i + j * options.width];
-                    float alpha = (float)pixel.A / 255f;
-
-                    // Get a pseudo-random number
-                    float chance = (float)random.NextDouble();
-                    //Console.WriteLine(chance);
-
-                    // Compare random number to the flora frequency and its distance away from the middle of its range (alpha)
-                    if (chance <= options.flora1Frequency * alpha)
+                    for (int j = 0; j < options.height; j++)
                     {
-                        // Get a texture
-                        int textureIndex = random.Next(flora1Textures.Count);
-                        Texture2D texture = flora1Textures[textureIndex];
+                        // Get pixel data created by the flora effect
+                        Color pixel = data[i + j * options.width];
+                        float alpha = (float)pixel.A / 255f;
 
-                        // Drawing properties
-                        float angle = chance * 6.28f;
-                        float colorValue = (float)pixel.G / 75;
-                        textureColor = new Color(colorValue, colorValue, colorValue, 1);
+                        // Get a pseudo-random number
+                        float chance = (float)random.NextDouble();
+                        //Console.WriteLine(chance);
 
-                        // Draw
-                        spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);
+                        // Compare random number to the flora frequency and its distance away from the middle of its range (alpha)
+                        if (chance <= options.flora1Frequency * alpha)
+                        {
+                            // Get a texture
+                            int textureIndex = random.Next(flora1Textures.Count);
+                            Texture2D texture = flora1Textures[textureIndex];
+
+                            // Drawing properties
+                            float angle = (float)random.NextDouble() * 6.28f;
+                            float colorValue = (float)pixel.G / 75;
+                            colorValue *= 1 - chance;
+                            textureColor = new Color(colorValue, colorValue, colorValue, 1);
+
+                            // Draw
+                            spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);
+                        }
                     }
                 }
+                spriteBatch.End();
             }
-            spriteBatch.End();
 
             /*
             // Store base flora texture
@@ -281,7 +285,8 @@ namespace MapGenerator
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
+            if (options.flora1)
+                spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
             spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
 

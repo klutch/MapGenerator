@@ -53,6 +53,8 @@ namespace MapGenerator
         private bool ctrl;
         private Microsoft.Xna.Framework.Vector2 effectPosition;
         private MapGeneratorOptions options;
+        private bool blockGenerateMap;
+        private bool redrawMap;
 
         public MapGeneratorForm()
         {
@@ -142,7 +144,8 @@ namespace MapGenerator
 
         private void mapOptionsChanged(object sender, EventArgs e)
         {
-            main.generateMap(getOptions());
+            if (!blockGenerateMap)
+                main.generateMap(getOptions());
         }
 
         private void flora1SelectTexture_Click(object sender, EventArgs e)

@@ -1291,15 +1291,25 @@ namespace MapGenerator
             {
                 effectPosition += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
 
+                blockGenerateMap = true;
                 noisePositionX.Value = (decimal)effectPosition.X;
                 noisePositionY.Value = (decimal)effectPosition.Y;
+                blockGenerateMap = false;
 
-                main.generateMap(getOptions());
+                MapGeneratorOptions options = getOptions();
+                options.flora1 = false;
+                main.generateMap(options);
+                redrawMap = true;
             }
             else if (e.Button == MouseButtons.Left && ctrl)
             {
                 main.view.X += e.X - lastDragPosition.X;
                 main.view.Y += e.Y - lastDragPosition.Y;
+            }
+            else if (redrawMap)
+            {
+                redrawMap = false;
+                main.generateMap(getOptions());
             }
 
             lastDragPosition.X = e.X;
