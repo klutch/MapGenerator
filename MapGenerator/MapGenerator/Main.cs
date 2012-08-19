@@ -30,9 +30,10 @@ namespace MapGenerator
         private Effect baseEffect;
         private Effect waterEffect;
         private Effect floraEffect;
-        public RenderTarget2D baseNoise;
-        public RenderTarget2D baseWater;
-        public RenderTarget2D baseFlora;
+        private Effect detailEffect;
+        private RenderTarget2D baseNoise;
+        private RenderTarget2D baseWater;
+        private RenderTarget2D baseFlora;
         private Texture2D randomTexture;
         private Color[] randomTextureData;
         private int lastCreatedSeed;
@@ -92,6 +93,7 @@ namespace MapGenerator
             baseEffect = Content.Load<Effect>("baseEffect");
             waterEffect = Content.Load<Effect>("waterEffect");
             floraEffect = Content.Load<Effect>("floraEffect");
+            detailEffect = Content.Load<Effect>("detailEffect");
         }
 
         // UnloadContent
@@ -192,7 +194,24 @@ namespace MapGenerator
             spriteBatch.End();
 
             // Store base noise texture
-            Color[] data = new Color[options.width * options.height];
+            GraphicsDevice.SetRenderTarget(baseNoise);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+
+            //////////////////////////////////////////
+            // Draw detail effect
+            //////////////////////////////////////////
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+            detailEffect.Parameters["position"].SetValue(options.position);
+            detailEffect.Parameters["scale"].SetValue(options.scale);
+            detailEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Store (overwrite) base noise texture
             GraphicsDevice.SetRenderTarget(baseNoise);
             spriteBatch.Begin();
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
@@ -230,12 +249,13 @@ namespace MapGenerator
                 spriteBatch.End();
 
                 // Get pixel information from render target and use it to draw flora sprites
+                Color[] data = new Color[options.width * options.height];
                 GraphicsDevice.SetRenderTarget(null);
                 renderTarget.GetData<Color>(data);
                 GraphicsDevice.SetRenderTarget(baseFlora);
                 GraphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 Color textureColor;
                 for (int i = 0; i < options.width; i++)
                 {

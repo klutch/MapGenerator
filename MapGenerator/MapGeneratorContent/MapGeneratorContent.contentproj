@@ -70,6 +70,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="detailEffect.fx">
+      <Name>detailEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
     <None Include="noiseFunction.fx">
       <Name>noiseFunction</Name>
       <Importer>EffectImporter</Importer>
