@@ -53,15 +53,44 @@ float noise(sampler noiseSampler, float2 position, float frequency, float gain, 
 }
 
 // Worley noise
+float lengthSq(float2 p)
+{
+	return p.x * p.x + p.y * p.y;
+}
 float worley(float2 position)
 {
 	float shortestDistance = 1;
-	for (int i = 0; i < 32; i++)
+	for (int i = 0; i < 16; i++)
 	{
-		float2 diff = worleyTable[i] - position;
-		diff *= 2;
-		float distance = sqrt(diff.x * diff.x + diff.y * diff.y);
-		shortestDistance = min(shortestDistance, distance);
+		float2 worleyPoint1 = worleyTable[i] + floor(position);
+		float2 worleyPoint2 = worleyTable[i] + floor(position) + float2(0, -1);		// Top
+		float2 worleyPoint3 = worleyTable[i] + floor(position) + float2(1, -1);		// NE
+		float2 worleyPoint4 = worleyTable[i] + floor(position) + float2(1, 0);		// E
+		float2 worleyPoint5 = worleyTable[i] + floor(position) + float2(1, 1);		// SE
+		float2 worleyPoint6 = worleyTable[i] + floor(position) + float2(0, 1);		// S
+		float2 worleyPoint7 = worleyTable[i] + floor(position) + float2(-1, 1);		// SW
+		float2 worleyPoint8 = worleyTable[i] + floor(position) + float2(-1, 0);		// W
+		float2 worleyPoint9 = worleyTable[i] + floor(position) + float2(-1, -1);	// NW
+
+		float distance1 = lengthSq(worleyPoint1 - position);
+		float distance2 = lengthSq(worleyPoint2 - position);
+		float distance3 = lengthSq(worleyPoint3 - position);
+		float distance4 = lengthSq(worleyPoint4 - position);
+		float distance5 = lengthSq(worleyPoint5 - position);
+		float distance6 = lengthSq(worleyPoint6 - position);
+		float distance7 = lengthSq(worleyPoint7 - position);
+		float distance8 = lengthSq(worleyPoint8 - position);
+		float distance9 = lengthSq(worleyPoint9 - position);
+
+		shortestDistance = min(shortestDistance, distance1);
+		shortestDistance = min(shortestDistance, distance2);
+		shortestDistance = min(shortestDistance, distance3);
+		shortestDistance = min(shortestDistance, distance4);
+		shortestDistance = min(shortestDistance, distance5);
+		shortestDistance = min(shortestDistance, distance6);
+		shortestDistance = min(shortestDistance, distance7);
+		shortestDistance = min(shortestDistance, distance8);
+		shortestDistance = min(shortestDistance, distance9);
 	}
-	return 1 - shortestDistance;
+	return 1 - sqrt(shortestDistance);
 }

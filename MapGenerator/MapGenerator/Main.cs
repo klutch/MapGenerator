@@ -205,6 +205,7 @@ namespace MapGenerator
             GraphicsDevice.SetRenderTarget(renderTarget);
             detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
             detailEffect.Parameters["position"].SetValue(options.position);
+            detailEffect.Parameters["noiseTextureSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
             detailEffect.Parameters["scale"].SetValue(options.scale);
             detailEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);

@@ -4,6 +4,7 @@ float4x4 matrixTransform;
 float2 position;
 float scale;
 float2 renderTargetSize;
+float2 noiseTextureSize;
 
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
@@ -14,9 +15,11 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 // Pixel shader
 float4 PSWorleyNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
-	float2 p = position / renderTargetSize - texCoords * float2(renderTargetSize.x / renderTargetSize.y, 1);
+	float2 p = 
+		(position / renderTargetSize) - 
+		texCoords * (renderTargetSize / noiseTextureSize) / scale;
 
-	float total = worley(texCoords - position / renderTargetSize);
+	float total = worley(p);
 	return float4(total, total, total, 1);
 }
 
