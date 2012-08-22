@@ -35,6 +35,7 @@ namespace MapGenerator
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
         private RenderTarget2D baseFlora;
+        private RenderTarget2D floraAlpha;
         private RenderTarget2D baseDetail;
         private RenderTarget2D detailAlpha;
         private Texture2D randomTexture;
@@ -206,6 +207,7 @@ namespace MapGenerator
                 baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseDetail = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 detailAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                floraAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
             
             //////////////////////////////////////
@@ -316,24 +318,24 @@ namespace MapGenerator
             ////////////////////////////////
             if (options.flora1)
             {
-                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.SetRenderTarget(floraAlpha);
                 GraphicsDevice.Clear(Color.Transparent);
                 floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
                 floraEffect.Parameters["flora1"].SetValue(options.flora1);
                 floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
+                //spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
                 spriteBatch.End();
 
                 // Get pixel information from render target and use it to draw flora sprites
                 Color[] data = new Color[options.width * options.height];
                 GraphicsDevice.SetRenderTarget(null);
-                renderTarget.GetData<Color>(data);
+                floraAlpha.GetData<Color>(data);
                 GraphicsDevice.SetRenderTarget(baseFlora);
                 GraphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
                 Color textureColor;
                 for (int i = 0; i < options.width; i++)
                 {

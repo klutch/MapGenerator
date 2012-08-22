@@ -18,7 +18,7 @@ float4 PSBaseFlora(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	float4 base = tex2D(baseSampler, texCoords);
 	float4 result = 0;
-	float total = (base.r + base.g + base.b) / 3;
+	float total = base.rgb * base.a;
 
 	// Flora layer 1
 	if (flora1 && total >= flora1Range.x && total <= flora1Range.y)
