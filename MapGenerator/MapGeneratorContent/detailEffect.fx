@@ -5,6 +5,7 @@ float2 position;
 float scale;
 float2 renderTargetSize;
 float2 noiseTextureSize;
+float seed;
 
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 

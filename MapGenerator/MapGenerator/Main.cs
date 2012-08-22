@@ -208,6 +208,7 @@ namespace MapGenerator
             detailEffect.Parameters["noiseTextureSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
             detailEffect.Parameters["scale"].SetValue(options.scale);
             detailEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
+            detailEffect.Parameters["seed"].SetValue(options.seed);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.End();
