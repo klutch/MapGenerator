@@ -80,6 +80,11 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </None>
+    <Compile Include="maskEffect.fx">
+      <Name>maskEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
     <None Include="noiseFunction.fx">
       <Name>noiseFunction</Name>
       <Importer>EffectImporter</Importer>

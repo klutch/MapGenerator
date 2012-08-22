@@ -25,8 +25,7 @@ float4 PSWorleyNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		float max = absolute(layer1Range.x - mean);
 		float alpha = max >= 0.00001 ? 1 - (absolute(total - mean) / max) : 0;
 
-		result.r = alpha;
-		result.a = alpha;
+		result.ga = float2(total, alpha);
 	}
 
 	return result;

@@ -31,10 +31,12 @@ namespace MapGenerator
         private Effect waterEffect;
         private Effect floraEffect;
         private Effect detailEffect;
+        private Effect maskEffect;
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
         private RenderTarget2D baseFlora;
         private RenderTarget2D baseDetail;
+        private RenderTarget2D detailAlpha;
         private Texture2D randomTexture;
         private Texture2D worleyTexture;
         private Color[] randomTextureData;
@@ -99,6 +101,7 @@ namespace MapGenerator
             waterEffect = Content.Load<Effect>("waterEffect");
             floraEffect = Content.Load<Effect>("floraEffect");
             detailEffect = Content.Load<Effect>("detailEffect");
+            maskEffect = Content.Load<Effect>("maskEffect");
         }
 
         // UnloadContent
@@ -151,12 +154,12 @@ namespace MapGenerator
         // generateMap
         public void generateMap(MapGeneratorOptions options)
         {
+            // Recreate random generator
+            random = new Random(options.seed);
+
             // Only create a new random texture if it's needed
             if (lastCreatedSeed != options.seed || randomTexture == null)
             {
-                // Initialize random number generator
-                random = new Random(options.seed);
-
                 // Initialize random texture
                 randomTextureData = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
                 for (int i = 0; i < options.noiseTextureWidth; i++)
@@ -202,6 +205,7 @@ namespace MapGenerator
                 baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseDetail = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                detailAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
             
             //////////////////////////////////////
@@ -244,7 +248,7 @@ namespace MapGenerator
             //////////////////////////////////////////
             if (options.detailsLayer1)
             {
-                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.SetRenderTarget(detailAlpha);
                 GraphicsDevice.Clear(Color.Transparent);
                 detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
                 detailEffect.Parameters["layer1"].SetValue(options.detailsLayer1);
@@ -253,18 +257,16 @@ namespace MapGenerator
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 spriteBatch.End();
 
-                // Get pixel information from render target and use it to draw flora sprites
+                // Get pixel information from render target and use it to draw sprites
                 Color[] data = new Color[options.width * options.height];
                 GraphicsDevice.SetRenderTarget(null);
-                renderTarget.GetData<Color>(data);
-                GraphicsDevice.SetRenderTarget(baseDetail);
+                detailAlpha.GetData<Color>(data);
+                GraphicsDevice.SetRenderTarget(renderTarget);
                 GraphicsDevice.Clear(Color.Transparent);
-                GraphicsDevice.Textures[1] = renderTarget;
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 Color textureColor;
-                float xIncrement = (options.width / options.detailsLayer1Frequency);
-                float yIncrement = (options.height / options.detailsLayer1Frequency);
+                float xIncrement = (options.width / (32 / options.detailsLayer1Scale));
+                float yIncrement = (options.height / (32 / options.detailsLayer1Scale));
                 for (float i = 0; i < options.width; i += xIncrement)
                 {
                     for (float j = 0; j < options.height; j += yIncrement)
@@ -277,10 +279,18 @@ namespace MapGenerator
                         Vector2 jitter = new Vector2(
                             ((float)random.NextDouble() * 2 - 1) * xIncrement * options.detailsLayer1Scale,
                             ((float)random.NextDouble() * 2 - 1) * yIncrement * options.detailsLayer1Scale);
-                        float angle = (alpha * 289) % 6.28f;
+                        float angle = chance * 6.28f;
                         spriteBatch.Draw(texture, new Vector2(i, j) + jitter, texture.Bounds, Color.White, angle, new Vector2(texture.Width, texture.Height) / 2, options.detailsLayer1Scale, SpriteEffects.None, 0);
                     }
                 }
+                spriteBatch.End();
+
+                // Draw baseDetail using mask effect
+                GraphicsDevice.SetRenderTarget(baseDetail);
+                GraphicsDevice.Clear(Color.Transparent);
+                GraphicsDevice.Textures[1] = detailAlpha;
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, maskEffect);
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
             }
 
@@ -313,6 +323,7 @@ namespace MapGenerator
                 floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
                 spriteBatch.End();
 
                 // Get pixel information from render target and use it to draw flora sprites
@@ -372,10 +383,10 @@ namespace MapGenerator
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            if (options.flora1)
-                spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
             if (options.detailsLayer1)
                 spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
+            if (options.flora1)
+                spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
             spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
 
