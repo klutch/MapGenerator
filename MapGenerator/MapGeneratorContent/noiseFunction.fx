@@ -77,5 +77,5 @@ float worley(sampler worleySampler, float2 position)
 		shortestDistance = min(shortestDistance, distance8);
 		shortestDistance = min(shortestDistance, distance9);
 	}
-	return 1 - sqrt(shortestDistance * 4);
+	return 1 - shortestDistance * 4;
 }

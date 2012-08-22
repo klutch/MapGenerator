@@ -216,6 +216,7 @@ namespace MapGenerator
             //////////////////////////////////////////
             // Draw detail effect
             //////////////////////////////////////////
+            /*
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Textures[1] = worleyTexture;
             detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
@@ -232,6 +233,7 @@ namespace MapGenerator
             spriteBatch.Begin();
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
+            */
 
             //////////////////////////////////////////
             // Draw water effect to render target
@@ -271,7 +273,7 @@ namespace MapGenerator
                 GraphicsDevice.SetRenderTarget(baseFlora);
                 GraphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 Color textureColor;
                 for (int i = 0; i < options.width; i++)
                 {

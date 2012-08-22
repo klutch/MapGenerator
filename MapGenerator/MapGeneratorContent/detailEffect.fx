@@ -22,9 +22,14 @@ float4 PSWorleyNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		texCoords * (renderTargetSize / noiseTextureSize) / scale;
 
 	float4 base = tex2D(baseSampler, texCoords);
-	float total = worley(worleySampler, p);
+	float total = worley(worleySampler, p / 4);
+	total *= worley(worleySampler, p / 2);
+	total *= worley(worleySampler, p);
+	total *= worley(worleySampler, p * 2);
+	total *= worley(worleySampler, p * 4);
+	total *= worley(worleySampler, p * 8);
 	return float4(total, total, total, 1);
-	return base;
+	//return base;
 }
 
 technique Main
