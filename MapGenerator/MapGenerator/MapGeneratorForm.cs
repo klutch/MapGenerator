@@ -196,7 +196,7 @@ namespace MapGenerator
                 directory.Create();
             fileDialog.InitialDirectory = baseDirectory;
             fileDialog.Title = "Save Composite";
-            fileDialog.Filter = "PNG Files (*.png)|*.png";
+            fileDialog.Filter = "JPEG Files (*.jpeg;*.jpg)|*.jpeg;*.jpg";
             Invoke((Action)(() =>
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)

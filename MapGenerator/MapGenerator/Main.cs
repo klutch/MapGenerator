@@ -361,7 +361,7 @@ namespace MapGenerator
         {
             string path = fileBase;
             FileStream fileStream = new FileStream(fileBase, FileMode.OpenOrCreate);
-            renderTarget.SaveAsPng(fileStream, renderTarget.Width, renderTarget.Height);
+            renderTarget.SaveAsJpeg(fileStream, renderTarget.Width, renderTarget.Height);
             fileStream.Close();
         }
 
