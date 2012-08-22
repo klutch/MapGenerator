@@ -260,19 +260,23 @@ namespace MapGenerator
                 GraphicsDevice.SetRenderTarget(baseDetail);
                 GraphicsDevice.Clear(Color.Transparent);
                 GraphicsDevice.Textures[1] = renderTarget;
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
                 //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 Color textureColor;
-                for (float i = 0; i < options.width; i += 86)
+                float xIncrement = (options.width / options.detailsLayer1Frequency);
+                float yIncrement = (options.height / options.detailsLayer1Frequency);
+                for (float i = 0; i < options.width; i += xIncrement)
                 {
-                    for (float j = 0; j < options.height; j += 86)
+                    for (float j = 0; j < options.height; j += yIncrement)
                     {
                         textureColor = data[(int)i + (int)j * options.width];
                         float alpha = (float)textureColor.R / 255f;
                         float chance = (float)random.NextDouble();
 
                         Texture2D texture = detailsLayer1Textures[random.Next(detailsLayer1Textures.Count)];
-                        Vector2 jitter = new Vector2((float)random.NextDouble() * 2 - 1, (float)random.NextDouble() * 2 - 1) * 16;
+                        Vector2 jitter = new Vector2(
+                            ((float)random.NextDouble() * 2 - 1) * xIncrement * options.detailsLayer1Scale,
+                            ((float)random.NextDouble() * 2 - 1) * yIncrement * options.detailsLayer1Scale);
                         float angle = (alpha * 289) % 6.28f;
                         spriteBatch.Draw(texture, new Vector2(i, j) + jitter, texture.Bounds, Color.White, angle, new Vector2(texture.Width, texture.Height) / 2, options.detailsLayer1Scale, SpriteEffects.None, 0);
                     }

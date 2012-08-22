@@ -1363,14 +1363,9 @@ namespace MapGenerator
             // detailsLayer1Frequency
             // 
             this.detailsLayer1Frequency.DecimalPlaces = 4;
-            this.detailsLayer1Frequency.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
             this.detailsLayer1Frequency.Location = new System.Drawing.Point(6, 98);
             this.detailsLayer1Frequency.Maximum = new decimal(new int[] {
-            10,
+            64,
             0,
             0,
             0});
@@ -1378,10 +1373,10 @@ namespace MapGenerator
             this.detailsLayer1Frequency.Size = new System.Drawing.Size(101, 20);
             this.detailsLayer1Frequency.TabIndex = 64;
             this.detailsLayer1Frequency.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
-            196608});
+            0});
             // 
             // detailsLayer1FrequencyLabel
             // 
