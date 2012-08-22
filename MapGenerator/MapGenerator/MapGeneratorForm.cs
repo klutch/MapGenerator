@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MapGenerator
 {
@@ -161,6 +162,46 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.setFlora1Textures(fileDialog.FileNames);
+                }
+            }));
+        }
+
+        private void saveLayersButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
+            // Create output directory if needed
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            if (!directory.Exists)
+                directory.Create();
+            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.Title = "Save Layers";
+
+            Invoke((Action)(() =>
+                {
+                    if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        main.saveLayers(fileDialog.FileName);
+                    }
+                }));
+        }
+
+        private void saveComposite_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
+            // Create output directory if needed
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            if (!directory.Exists)
+                directory.Create();
+            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.Title = "Save Composite";
+            fileDialog.Filter = "PNG Files (*.png)|*.png";
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.saveComposite(fileDialog.FileName);
                 }
             }));
         }

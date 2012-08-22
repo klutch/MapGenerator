@@ -339,6 +339,32 @@ namespace MapGenerator
             view = new Vector2(surface.Width, surface.Height) / 2;
         }
 
+        // saveLayers
+        public void saveLayers(string fileBase)
+        {
+            string path = fileBase;
+            FileStream fileStream = new FileStream(string.Format("{0}-baseNoise.png", path), FileMode.OpenOrCreate);
+            baseNoise.SaveAsPng(fileStream, baseNoise.Width, baseNoise.Height);
+            fileStream.Close();
+
+            fileStream = new FileStream(string.Format("{0}-baseFlora.png", path), FileMode.OpenOrCreate);
+            baseFlora.SaveAsPng(fileStream, baseFlora.Width, baseFlora.Height);
+            fileStream.Close();
+
+            fileStream = new FileStream(string.Format("{0}-baseWater.png", path), FileMode.OpenOrCreate);
+            baseWater.SaveAsPng(fileStream, baseWater.Width, baseWater.Height);
+            fileStream.Close();
+        }
+
+        // saveComposite
+        public void saveComposite(string fileBase)
+        {
+            string path = fileBase;
+            FileStream fileStream = new FileStream(fileBase, FileMode.OpenOrCreate);
+            renderTarget.SaveAsPng(fileStream, renderTarget.Width, renderTarget.Height);
+            fileStream.Close();
+        }
+
         // Update
         protected override void Update(GameTime gameTime)
         {

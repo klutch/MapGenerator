@@ -99,6 +99,8 @@ namespace MapGenerator
             this.renderTab = new System.Windows.Forms.TabPage();
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
+            this.saveLayersButton = new System.Windows.Forms.Button();
+            this.saveComposite = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -157,9 +159,9 @@ namespace MapGenerator
             // generateButton
             // 
             this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.generateButton.Location = new System.Drawing.Point(12, 526);
+            this.generateButton.Location = new System.Drawing.Point(4, 526);
             this.generateButton.Name = "generateButton";
-            this.generateButton.Size = new System.Drawing.Size(75, 23);
+            this.generateButton.Size = new System.Drawing.Size(63, 23);
             this.generateButton.TabIndex = 10;
             this.generateButton.Text = "Generate";
             this.generateButton.UseVisualStyleBackColor = true;
@@ -1188,11 +1190,35 @@ namespace MapGenerator
             0,
             0});
             // 
+            // saveLayersButton
+            // 
+            this.saveLayersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveLayersButton.Location = new System.Drawing.Point(73, 526);
+            this.saveLayersButton.Name = "saveLayersButton";
+            this.saveLayersButton.Size = new System.Drawing.Size(75, 23);
+            this.saveLayersButton.TabIndex = 12;
+            this.saveLayersButton.Text = "Save Layers";
+            this.saveLayersButton.UseVisualStyleBackColor = true;
+            this.saveLayersButton.Click += new System.EventHandler(this.saveLayersButton_Click);
+            // 
+            // saveComposite
+            // 
+            this.saveComposite.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveComposite.Location = new System.Drawing.Point(154, 526);
+            this.saveComposite.Name = "saveComposite";
+            this.saveComposite.Size = new System.Drawing.Size(100, 23);
+            this.saveComposite.TabIndex = 13;
+            this.saveComposite.Text = "Save Composite";
+            this.saveComposite.UseVisualStyleBackColor = true;
+            this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 561);
+            this.Controls.Add(this.saveComposite);
+            this.Controls.Add(this.saveLayersButton);
             this.Controls.Add(this.mainOptionsControl);
             this.Controls.Add(this.generateButton);
             this.Controls.Add(this.surface);
@@ -1382,5 +1408,7 @@ namespace MapGenerator
         private Button flora1SelectTexture;
         private NumericUpDown flora1Scale;
         private Label flora1ScaleLabel;
+        private Button saveLayersButton;
+        private Button saveComposite;
     }
 }
