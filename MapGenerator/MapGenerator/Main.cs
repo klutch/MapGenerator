@@ -35,6 +35,7 @@ namespace MapGenerator
         private RenderTarget2D baseWater;
         private RenderTarget2D baseFlora;
         private Texture2D randomTexture;
+        private Texture2D worleyTexture;
         private Color[] randomTextureData;
         private int lastCreatedSeed;
         private List<Texture2D> flora1Textures;
@@ -144,6 +145,19 @@ namespace MapGenerator
                 randomTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
                 randomTexture.SetData<Color>(randomTextureData);
 
+                // Initialize worley texture
+                worleyTexture = new Texture2D(GraphicsDevice, 16, 1);
+                Color[] worleyData = new Color[16];
+                for (int i = 0; i < 16; i++)
+                {
+                    float x = ((i % 4 + 0.5f) / 4f);
+                    x += (float)(random.NextDouble() * 2 - 1) / 3;
+                    float y = (float)(Math.Floor(i / 4f) + 0.5f) / 4f;
+                    y += (float)(random.NextDouble() * 2 - 1) / 3;
+                    worleyData[i] = new Color(x, y, 1, 1);
+                }
+                worleyTexture.SetData<Color>(worleyData);
+
                 // Store this seed
                 lastCreatedSeed = options.seed;
             }
@@ -203,12 +217,12 @@ namespace MapGenerator
             // Draw detail effect
             //////////////////////////////////////////
             GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Textures[1] = worleyTexture;
             detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
             detailEffect.Parameters["position"].SetValue(options.position);
             detailEffect.Parameters["noiseTextureSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
             detailEffect.Parameters["scale"].SetValue(options.scale);
             detailEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
-            detailEffect.Parameters["seed"].SetValue(options.seed);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.End();

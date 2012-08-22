@@ -1,11 +1,12 @@
 #include <noiseFunction.fx>
 
+sampler baseSampler : register(s0);
+sampler worleySampler : register(s1);
 float4x4 matrixTransform;
 float2 position;
 float scale;
 float2 renderTargetSize;
 float2 noiseTextureSize;
-float seed;
 
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
@@ -20,8 +21,10 @@ float4 PSWorleyNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		(position / renderTargetSize) - 
 		texCoords * (renderTargetSize / noiseTextureSize) / scale;
 
-	float total = worley(p);
+	float4 base = tex2D(baseSampler, texCoords);
+	float total = worley(worleySampler, p);
 	return float4(total, total, total, 1);
+	return base;
 }
 
 technique Main
