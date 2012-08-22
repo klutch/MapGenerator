@@ -44,6 +44,11 @@ namespace MapGenerator
         public float flora1Frequency;
         public float flora1Scale;
 
+        public bool detailsLayer1;
+        public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
+        public float detailsLayer1Frequency;
+        public float detailsLayer1Scale;
+
         public float waterLevel;
     };
 
@@ -140,6 +145,12 @@ namespace MapGenerator
             options.flora1Frequency = (float)flora1Frequency.Value;
             options.flora1Scale = (float)flora1Scale.Value;
 
+            // Details
+            options.detailsLayer1 = detailsLayer1Checkbox.Checked;
+            options.detailsLayer1Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer1RangeMin.Value, (float)detailsLayer1RangeMax.Value);
+            options.detailsLayer1Frequency = (float)detailsLayer1Frequency.Value;
+            options.detailsLayer1Scale = (float)detailsLayer1Scale.Value;
+
             return options;
         }
 
@@ -202,6 +213,92 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.saveComposite(fileDialog.FileName);
+                }
+            }));
+        }
+
+        private void surface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            // Steal focus
+            surface.Focus();
+
+            // Handle mouse input
+            if (e.Button == MouseButtons.Left && !ctrl)
+            {
+                effectPosition += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
+
+                blockGenerateMap = true;
+                noisePositionX.Value = (decimal)effectPosition.X;
+                noisePositionY.Value = (decimal)effectPosition.Y;
+                blockGenerateMap = false;
+
+                MapGeneratorOptions options = getOptions();
+                options.flora1 = false;
+                options.detailsLayer1 = false;
+                main.generateMap(options);
+                redrawMap = true;
+            }
+            else if (e.Button == MouseButtons.Left && ctrl)
+            {
+                main.view.X += e.X - lastDragPosition.X;
+                main.view.Y += e.Y - lastDragPosition.Y;
+            }
+            else if (redrawMap)
+            {
+                redrawMap = false;
+                main.generateMap(getOptions());
+            }
+
+            lastDragPosition.X = e.X;
+            lastDragPosition.Y = e.Y;
+        }
+
+        private void MapGeneratorForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Control || e.KeyCode == Keys.LControlKey)
+                ctrl = false;
+        }
+
+        private void MapGeneratorForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.Control || e.KeyCode == Keys.LControlKey)
+                ctrl = true;
+        }
+
+        private void MapGeneratorForm_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.X >= surface.Left && e.X <= surface.Left + surface.Width &&
+                e.Y >= 0 && e.Y <= surface.Height)
+            {
+                if (ctrl)
+                {
+                    // Adjust scale of render target
+                    main.scale += 0.0005f * e.Delta;
+                }
+                else
+                {
+                    // Adjust scale of effect
+                    float scale = (float)noiseScale.Value;
+                    scale += 0.005f * e.Delta;
+                    noiseScale.Value = (decimal)scale;
+                    main.generateMap(getOptions());
+                }
+            }
+        }
+
+        private void selectDetail1Textures_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select detail texture";
+            fileDialog.Filter = "PNG|*.png";
+            fileDialog.Multiselect = true;
+            fileDialog.InitialDirectory = string.Format("{0}textures\\details\\", AppDomain.CurrentDomain.BaseDirectory);
+
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.setDetailsLayer1Textures(fileDialog.FileNames);
                 }
             }));
         }

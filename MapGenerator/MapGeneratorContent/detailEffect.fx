@@ -1,12 +1,9 @@
-#include <noiseFunction.fx>
+#include <helper.fx>
 
 sampler baseSampler : register(s0);
-sampler worleySampler : register(s1);
 float4x4 matrixTransform;
-float2 position;
-float scale;
-float2 renderTargetSize;
-float2 noiseTextureSize;
+bool layer1;
+float2 layer1Range;
 
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
@@ -17,19 +14,22 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 // Pixel shader
 float4 PSWorleyNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
-	float2 p = 
-		(position / renderTargetSize) - 
-		texCoords * (renderTargetSize / noiseTextureSize) / scale;
-
 	float4 base = tex2D(baseSampler, texCoords);
-	float total = worley(worleySampler, p / 4);
-	total *= worley(worleySampler, p / 2);
-	total *= worley(worleySampler, p);
-	total *= worley(worleySampler, p * 2);
-	total *= worley(worleySampler, p * 4);
-	total *= worley(worleySampler, p * 8);
-	return float4(total, total, total, 1);
-	//return base;
+	float4 result = 0;
+	float total = (base.r + base.g + base.b) / 3;
+
+	// Details layer 1
+	if (layer1 && total >= layer1Range.x && total <= layer1Range.y)
+	{
+		float mean = (layer1Range.x + layer1Range.y) / 2;
+		float max = absolute(layer1Range.x - mean);
+		float alpha = max >= 0.00001 ? 1 - (absolute(total - mean) / max) : 0;
+
+		result.r = alpha;
+		result.a = alpha;
+	}
+
+	return result;
 }
 
 technique Main

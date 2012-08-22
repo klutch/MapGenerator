@@ -1,4 +1,5 @@
 #include <noiseFunction.fx>
+#include <helper.fx>
 
 sampler baseSampler : register(s0);
 float2 renderTargetSize;
@@ -10,16 +11,6 @@ float4x4 matrixTransform;
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
 { 
 	position = mul(position, matrixTransform); 
-}
-
-// XNA uses the March 2009 directx sdk, which has a buggy hlsl compiler that tries to
-// use 'preshaders'. Disabling preshaders allows the shader to compile, but there's no way
-// to do that from Visual Studio (that I'm aware of). Things like saturate, clamp, abs, etc
-// can't be used on external parameters in Release mode with preshaders enabled, so I have
-// to write my own absolute function :(
-float absolute(float value)
-{
-	return sqrt(value * value);
 }
 
 // Pixel shader

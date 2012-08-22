@@ -34,11 +34,13 @@ namespace MapGenerator
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
         private RenderTarget2D baseFlora;
+        private RenderTarget2D baseDetail;
         private Texture2D randomTexture;
         private Texture2D worleyTexture;
         private Color[] randomTextureData;
         private int lastCreatedSeed;
         private List<Texture2D> flora1Textures;
+        private List<Texture2D> detailsLayer1Textures;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -63,9 +65,11 @@ namespace MapGenerator
             graphics.PreferredBackBufferHeight = surface.Height;
             graphics.ApplyChanges();
 
-            // Load default flora texture
+            // Load default textures
             flora1Textures = new List<Texture2D>();
             setFlora1Textures(new string[] { string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory) });
+            detailsLayer1Textures = new List<Texture2D>();
+            setDetailsLayer1Textures(new string[] { string.Format("{0}textures\\details\\cracked_terrain.png", AppDomain.CurrentDomain.BaseDirectory) });
 
             // Initialize view position
             view = new Vector2(surface.Width, surface.Height) / 2;
@@ -112,13 +116,34 @@ namespace MapGenerator
                 {
                     FileStream fileStream = new FileStream(filePath, FileMode.Open);
                     flora1Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
-                    Console.WriteLine("Loade: {0} ({1} bytes)", filePath, fileStream.Length);
+                    Console.WriteLine("Loaded: {0} ({1} bytes)", filePath, fileStream.Length);
                     fileStream.Close();
                 }
                 catch (FileNotFoundException e)
                 {
                     System.Windows.Forms.MessageBox.Show(string.Format(
-                        "Error loading default flora texture file at: {0}\nEither replace this file and reload the program, or select a new texture in the 'Flora' section.", e.FileName));
+                        "Error loading texture file at: {0}\nEither replace this file and reload the program, or select a new texture in the 'Flora' section.", e.FileName));
+                }
+            }
+        }
+
+        // setDetailLayer1Textures
+        public void setDetailsLayer1Textures(string[] filePaths)
+        {
+            detailsLayer1Textures.Clear();
+            foreach (string filePath in filePaths)
+            {
+                try
+                {
+                    FileStream fileStream = new FileStream(filePath, FileMode.Open);
+                    detailsLayer1Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
+                    Console.WriteLine("Loaded: {0} ({1} bytes)", filePath, fileStream.Length);
+                    fileStream.Close();
+                }
+                catch (FileNotFoundException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format(
+                        "Error loading texture file at: {0}\nEither replace this file and reload the program, or select a new texture in the 'Details' section.", e.FileName));
                 }
             }
         }
@@ -176,6 +201,7 @@ namespace MapGenerator
                 baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                baseDetail = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
             
             //////////////////////////////////////
@@ -216,24 +242,43 @@ namespace MapGenerator
             //////////////////////////////////////////
             // Draw detail effect
             //////////////////////////////////////////
-            /*
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Textures[1] = worleyTexture;
-            detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
-            detailEffect.Parameters["position"].SetValue(options.position);
-            detailEffect.Parameters["noiseTextureSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
-            detailEffect.Parameters["scale"].SetValue(options.scale);
-            detailEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
-            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            spriteBatch.End();
+            if (options.detailsLayer1)
+            {
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+                detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+                detailEffect.Parameters["layer1"].SetValue(options.detailsLayer1);
+                detailEffect.Parameters["layer1Range"].SetValue(options.detailsLayer1Range);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.End();
 
-            // Store (overwrite) base noise texture
-            GraphicsDevice.SetRenderTarget(baseNoise);
-            spriteBatch.Begin();
-            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            spriteBatch.End();
-            */
+                // Get pixel information from render target and use it to draw flora sprites
+                Color[] data = new Color[options.width * options.height];
+                GraphicsDevice.SetRenderTarget(null);
+                renderTarget.GetData<Color>(data);
+                GraphicsDevice.SetRenderTarget(baseDetail);
+                GraphicsDevice.Clear(Color.Transparent);
+                GraphicsDevice.Textures[1] = renderTarget;
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
+                //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                Color textureColor;
+                for (float i = 0; i < options.width; i += 86)
+                {
+                    for (float j = 0; j < options.height; j += 86)
+                    {
+                        textureColor = data[(int)i + (int)j * options.width];
+                        float alpha = (float)textureColor.R / 255f;
+                        float chance = (float)random.NextDouble();
+
+                        Texture2D texture = detailsLayer1Textures[random.Next(detailsLayer1Textures.Count)];
+                        Vector2 jitter = new Vector2((float)random.NextDouble() * 2 - 1, (float)random.NextDouble() * 2 - 1) * 16;
+                        float angle = (alpha * 289) % 6.28f;
+                        spriteBatch.Draw(texture, new Vector2(i, j) + jitter, texture.Bounds, Color.White, angle, new Vector2(texture.Width, texture.Height) / 2, options.detailsLayer1Scale, SpriteEffects.None, 0);
+                    }
+                }
+                spriteBatch.End();
+            }
 
             //////////////////////////////////////////
             // Draw water effect to render target
@@ -325,6 +370,8 @@ namespace MapGenerator
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             if (options.flora1)
                 spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
+            if (options.detailsLayer1)
+                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
             spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
 
