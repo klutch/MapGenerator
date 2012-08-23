@@ -4,7 +4,7 @@ float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	float4 base = tex2D(baseSampler, texCoords);
 	float4 mask = tex2D(maskSampler, texCoords);
-	base.a *= mask.a;
+	base *= mask.a;
     return base;
 }
 

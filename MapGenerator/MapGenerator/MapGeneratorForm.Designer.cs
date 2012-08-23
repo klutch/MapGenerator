@@ -109,6 +109,13 @@ namespace MapGenerator
             this.detailsLayer1Checkbox = new System.Windows.Forms.CheckBox();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
+            this.detailsLayer2Scale = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer2ScaleLabel = new System.Windows.Forms.Label();
+            this.selectDetail2Textures = new System.Windows.Forms.Button();
+            this.detailsLayer2RangeMin = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer2RangeMax = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer2RangeLabel = new System.Windows.Forms.Label();
+            this.detailsLayer2Checkbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -148,6 +155,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2Scale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMax)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -1206,6 +1216,13 @@ namespace MapGenerator
             // 
             // detailsTab
             // 
+            this.detailsTab.Controls.Add(this.detailsLayer2Scale);
+            this.detailsTab.Controls.Add(this.detailsLayer2ScaleLabel);
+            this.detailsTab.Controls.Add(this.selectDetail2Textures);
+            this.detailsTab.Controls.Add(this.detailsLayer2RangeMin);
+            this.detailsTab.Controls.Add(this.detailsLayer2RangeMax);
+            this.detailsTab.Controls.Add(this.detailsLayer2RangeLabel);
+            this.detailsTab.Controls.Add(this.detailsLayer2Checkbox);
             this.detailsTab.Controls.Add(this.detailsLayer1Scale);
             this.detailsTab.Controls.Add(this.detailsLayer1ScaleLabel);
             this.detailsTab.Controls.Add(this.selectDetail1Textures);
@@ -1356,6 +1373,120 @@ namespace MapGenerator
             this.saveComposite.UseVisualStyleBackColor = true;
             this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
             // 
+            // detailsLayer2Scale
+            // 
+            this.detailsLayer2Scale.DecimalPlaces = 4;
+            this.detailsLayer2Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer2Scale.Location = new System.Drawing.Point(8, 230);
+            this.detailsLayer2Scale.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.detailsLayer2Scale.Name = "detailsLayer2Scale";
+            this.detailsLayer2Scale.Size = new System.Drawing.Size(101, 20);
+            this.detailsLayer2Scale.TabIndex = 73;
+            this.detailsLayer2Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // detailsLayer2ScaleLabel
+            // 
+            this.detailsLayer2ScaleLabel.AutoSize = true;
+            this.detailsLayer2ScaleLabel.Location = new System.Drawing.Point(5, 213);
+            this.detailsLayer2ScaleLabel.Name = "detailsLayer2ScaleLabel";
+            this.detailsLayer2ScaleLabel.Size = new System.Drawing.Size(73, 13);
+            this.detailsLayer2ScaleLabel.TabIndex = 72;
+            this.detailsLayer2ScaleLabel.Text = "Texture Scale";
+            // 
+            // selectDetail2Textures
+            // 
+            this.selectDetail2Textures.Location = new System.Drawing.Point(121, 145);
+            this.selectDetail2Textures.Name = "selectDetail2Textures";
+            this.selectDetail2Textures.Size = new System.Drawing.Size(100, 23);
+            this.selectDetail2Textures.TabIndex = 71;
+            this.selectDetail2Textures.Text = "Select Textures";
+            this.selectDetail2Textures.UseVisualStyleBackColor = true;
+            this.selectDetail2Textures.Click += new System.EventHandler(this.selectDetail2Textures_Click);
+            // 
+            // detailsLayer2RangeMin
+            // 
+            this.detailsLayer2RangeMin.DecimalPlaces = 4;
+            this.detailsLayer2RangeMin.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer2RangeMin.Location = new System.Drawing.Point(8, 181);
+            this.detailsLayer2RangeMin.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.detailsLayer2RangeMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.detailsLayer2RangeMin.Name = "detailsLayer2RangeMin";
+            this.detailsLayer2RangeMin.Size = new System.Drawing.Size(101, 20);
+            this.detailsLayer2RangeMin.TabIndex = 70;
+            // 
+            // detailsLayer2RangeMax
+            // 
+            this.detailsLayer2RangeMax.DecimalPlaces = 4;
+            this.detailsLayer2RangeMax.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer2RangeMax.Location = new System.Drawing.Point(121, 181);
+            this.detailsLayer2RangeMax.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.detailsLayer2RangeMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.detailsLayer2RangeMax.Name = "detailsLayer2RangeMax";
+            this.detailsLayer2RangeMax.Size = new System.Drawing.Size(100, 20);
+            this.detailsLayer2RangeMax.TabIndex = 69;
+            this.detailsLayer2RangeMax.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // detailsLayer2RangeLabel
+            // 
+            this.detailsLayer2RangeLabel.AutoSize = true;
+            this.detailsLayer2RangeLabel.Location = new System.Drawing.Point(5, 165);
+            this.detailsLayer2RangeLabel.Name = "detailsLayer2RangeLabel";
+            this.detailsLayer2RangeLabel.Size = new System.Drawing.Size(39, 13);
+            this.detailsLayer2RangeLabel.TabIndex = 68;
+            this.detailsLayer2RangeLabel.Text = "Range";
+            // 
+            // detailsLayer2Checkbox
+            // 
+            this.detailsLayer2Checkbox.AutoSize = true;
+            this.detailsLayer2Checkbox.Checked = true;
+            this.detailsLayer2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.detailsLayer2Checkbox.Location = new System.Drawing.Point(8, 145);
+            this.detailsLayer2Checkbox.Name = "detailsLayer2Checkbox";
+            this.detailsLayer2Checkbox.Size = new System.Drawing.Size(96, 17);
+            this.detailsLayer2Checkbox.TabIndex = 67;
+            this.detailsLayer2Checkbox.Text = "Details Layer 2";
+            this.detailsLayer2Checkbox.UseVisualStyleBackColor = true;
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1419,6 +1550,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2Scale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMax)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1499,5 +1633,12 @@ namespace MapGenerator
         private Button selectDetail1Textures;
         private NumericUpDown detailsLayer1Scale;
         private Label detailsLayer1ScaleLabel;
+        private NumericUpDown detailsLayer2Scale;
+        private Label detailsLayer2ScaleLabel;
+        private Button selectDetail2Textures;
+        private NumericUpDown detailsLayer2RangeMin;
+        private NumericUpDown detailsLayer2RangeMax;
+        private Label detailsLayer2RangeLabel;
+        private CheckBox detailsLayer2Checkbox;
     }
 }

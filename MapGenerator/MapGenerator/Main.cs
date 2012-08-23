@@ -44,6 +44,7 @@ namespace MapGenerator
         private int lastCreatedSeed;
         private List<Texture2D> flora1Textures;
         private List<Texture2D> detailsLayer1Textures;
+        private List<Texture2D> detailsLayer2Textures;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -73,6 +74,8 @@ namespace MapGenerator
             setFlora1Textures(new string[] { string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer1Textures = new List<Texture2D>();
             setDetailsLayer1Textures(new string[] { string.Format("{0}textures\\details\\cracked_terrain.png", AppDomain.CurrentDomain.BaseDirectory) });
+            detailsLayer2Textures = new List<Texture2D>();
+            setDetailsLayer2Textures(new string[] { string.Format("{0}textures\\details\\gravel.png", AppDomain.CurrentDomain.BaseDirectory) });
 
             // Initialize view position
             view = new Vector2(surface.Width, surface.Height) / 2;
@@ -141,6 +144,27 @@ namespace MapGenerator
                 {
                     FileStream fileStream = new FileStream(filePath, FileMode.Open);
                     detailsLayer1Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
+                    Console.WriteLine("Loaded: {0} ({1} bytes)", filePath, fileStream.Length);
+                    fileStream.Close();
+                }
+                catch (FileNotFoundException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format(
+                        "Error loading texture file at: {0}\nEither replace this file and reload the program, or select a new texture in the 'Details' section.", e.FileName));
+                }
+            }
+        }
+
+        // setDetailLayer2Textures
+        public void setDetailsLayer2Textures(string[] filePaths)
+        {
+            detailsLayer2Textures.Clear();
+            foreach (string filePath in filePaths)
+            {
+                try
+                {
+                    FileStream fileStream = new FileStream(filePath, FileMode.Open);
+                    detailsLayer2Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
                     Console.WriteLine("Loaded: {0} ({1} bytes)", filePath, fileStream.Length);
                     fileStream.Close();
                 }
@@ -246,15 +270,14 @@ namespace MapGenerator
             spriteBatch.End();
 
             //////////////////////////////////////////
-            // Draw detail effect
+            // Draw detail layer 1 effect
             //////////////////////////////////////////
             if (options.detailsLayer1)
             {
                 GraphicsDevice.SetRenderTarget(detailAlpha);
                 GraphicsDevice.Clear(Color.Transparent);
                 detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
-                detailEffect.Parameters["layer1"].SetValue(options.detailsLayer1);
-                detailEffect.Parameters["layer1Range"].SetValue(options.detailsLayer1Range);
+                detailEffect.Parameters["layerRange"].SetValue(options.detailsLayer1Range);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 spriteBatch.End();
@@ -274,7 +297,7 @@ namespace MapGenerator
                     for (float j = 0; j < options.height; j += yIncrement)
                     {
                         textureColor = data[(int)i + (int)j * options.width];
-                        float alpha = (float)textureColor.R / 255f;
+                        float alpha = (float)textureColor.A / 255f;
                         float chance = (float)random.NextDouble();
 
                         Texture2D texture = detailsLayer1Textures[random.Next(detailsLayer1Textures.Count)];
@@ -375,6 +398,64 @@ namespace MapGenerator
                         }
                     }
                 }
+                spriteBatch.End();
+            }
+
+            //////////////////////////////////////////
+            // Draw detail layer 2 effect
+            //////////////////////////////////////////
+            if (options.detailsLayer2)
+            {
+                GraphicsDevice.SetRenderTarget(detailAlpha);
+                GraphicsDevice.Clear(Color.Transparent);
+                detailEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+                detailEffect.Parameters["layerRange"].SetValue(options.detailsLayer2Range);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, detailEffect);
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Get pixel information from render target and use it to draw sprites
+                Color[] data = new Color[options.width * options.height];
+                GraphicsDevice.SetRenderTarget(null);
+                detailAlpha.GetData<Color>(data);
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                Color textureColor;
+                float xIncrement = (options.width / (32 / options.detailsLayer2Scale));
+                float yIncrement = (options.height / (32 / options.detailsLayer2Scale));
+                for (float i = 0; i < options.width; i += xIncrement)
+                {
+                    for (float j = 0; j < options.height; j += yIncrement)
+                    {
+                        textureColor = data[(int)i + (int)j * options.width];
+                        float alpha = (float)textureColor.A / 255f;
+                        float chance = (float)random.NextDouble();
+
+                        Texture2D texture = detailsLayer2Textures[random.Next(detailsLayer2Textures.Count)];
+                        Vector2 jitter = new Vector2(
+                            ((float)random.NextDouble() * 2 - 1) * xIncrement * options.detailsLayer2Scale,
+                            ((float)random.NextDouble() * 2 - 1) * yIncrement * options.detailsLayer2Scale);
+                        float angle = chance * 6.28f;
+                        spriteBatch.Draw(texture, new Vector2(i, j) + jitter, texture.Bounds, Color.White, angle, new Vector2(texture.Width, texture.Height) / 2, options.detailsLayer2Scale, SpriteEffects.None, 0);
+                    }
+                }
+                spriteBatch.End();
+
+                // Draw baseDetail using mask effect
+                GraphicsDevice.SetRenderTarget(baseDetail);
+                spriteBatch.Begin();
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.End();
+                GraphicsDevice.Textures[1] = detailAlpha;
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, maskEffect);
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Store as baseNoise
+                GraphicsDevice.SetRenderTarget(baseNoise);
+                spriteBatch.Begin();
+                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
                 spriteBatch.End();
             }
 

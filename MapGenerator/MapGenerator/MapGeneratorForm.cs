@@ -47,6 +47,9 @@ namespace MapGenerator
         public bool detailsLayer1;
         public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
         public float detailsLayer1Scale;
+        public bool detailsLayer2;
+        public Microsoft.Xna.Framework.Vector2 detailsLayer2Range;
+        public float detailsLayer2Scale;
 
         public float waterLevel;
     };
@@ -148,6 +151,9 @@ namespace MapGenerator
             options.detailsLayer1 = detailsLayer1Checkbox.Checked;
             options.detailsLayer1Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer1RangeMin.Value, (float)detailsLayer1RangeMax.Value);
             options.detailsLayer1Scale = (float)detailsLayer1Scale.Value;
+            options.detailsLayer2 = detailsLayer2Checkbox.Checked;
+            options.detailsLayer2Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer2RangeMin.Value, (float)detailsLayer2RangeMax.Value);
+            options.detailsLayer2Scale = (float)detailsLayer2Scale.Value;
 
             return options;
         }
@@ -233,6 +239,7 @@ namespace MapGenerator
                 MapGeneratorOptions options = getOptions();
                 options.flora1 = false;
                 options.detailsLayer1 = false;
+                options.detailsLayer2 = false;
                 main.generateMap(options);
                 redrawMap = true;
             }
@@ -287,7 +294,7 @@ namespace MapGenerator
         private void selectDetail1Textures_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Title = "Select detail texture";
+            fileDialog.Title = "Select detail layer 2 textures";
             fileDialog.Filter = "PNG|*.png";
             fileDialog.Multiselect = true;
             fileDialog.InitialDirectory = string.Format("{0}textures\\details\\", AppDomain.CurrentDomain.BaseDirectory);
@@ -297,6 +304,23 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.setDetailsLayer1Textures(fileDialog.FileNames);
+                }
+            }));
+        }
+
+        private void selectDetail2Textures_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select detail layer 2 textures";
+            fileDialog.Filter = "PNG|*.png";
+            fileDialog.Multiselect = true;
+            fileDialog.InitialDirectory = string.Format("{0}textures\\details\\", AppDomain.CurrentDomain.BaseDirectory);
+
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.setDetailsLayer2Textures(fileDialog.FileNames);
                 }
             }));
         }
