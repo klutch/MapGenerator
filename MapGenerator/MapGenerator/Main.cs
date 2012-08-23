@@ -354,19 +354,22 @@ namespace MapGenerator
             //////////////////////////////////////////
             // Draw water effect to render target
             //////////////////////////////////////////
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(Color.Transparent);
-            waterEffect.Parameters["waterLevel"].SetValue(options.waterLevel);
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, waterEffect);
-            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            spriteBatch.End();
+            if (options.water)
+            {
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+                waterEffect.Parameters["waterLevel"].SetValue(options.waterLevel);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, waterEffect);
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.End();
 
-            // Store base water texture
-            GraphicsDevice.SetRenderTarget(baseWater);
-            GraphicsDevice.Clear(Color.Transparent);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            spriteBatch.End();
+                // Store base water texture
+                GraphicsDevice.SetRenderTarget(baseWater);
+                GraphicsDevice.Clear(Color.Transparent);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+            }
 
             ////////////////////////////////
             // Draw flora effect
@@ -560,7 +563,8 @@ namespace MapGenerator
             //    spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
             if (options.flora1)
                 spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
-            spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
+            if (options.water)
+                spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
 
             // Reset render target

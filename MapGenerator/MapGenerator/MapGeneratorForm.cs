@@ -54,6 +54,7 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector2 detailsLayer3Range;
         public float detailsLayer3Scale;
 
+        public bool water;
         public float waterLevel;
     };
 
@@ -141,6 +142,7 @@ namespace MapGenerator
             options.fbm3Opacity = (float)fbm3Opacity.Value;
 
             // Water
+            options.water = waterCheckbox.Checked;
             options.waterLevel = (float)waterLevel.Value;
 
             // Flora
