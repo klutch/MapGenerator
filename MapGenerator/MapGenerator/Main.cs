@@ -36,7 +36,9 @@ namespace MapGenerator
         private RenderTarget2D baseWater;
         private RenderTarget2D baseFlora;
         private RenderTarget2D floraAlpha;
-        private RenderTarget2D baseDetail;
+        private RenderTarget2D detailsLayer1;
+        private RenderTarget2D detailsLayer2;
+        private RenderTarget2D detailsLayer3;
         private RenderTarget2D detailAlpha;
         private Texture2D randomTexture;
         private Texture2D worleyTexture;
@@ -253,9 +255,11 @@ namespace MapGenerator
                 baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
-                baseDetail = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 detailAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 floraAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                detailsLayer1 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                detailsLayer2 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                detailsLayer3 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
             
             //////////////////////////////////////
@@ -335,7 +339,7 @@ namespace MapGenerator
                 spriteBatch.End();
 
                 // Draw baseDetail using mask effect
-                GraphicsDevice.SetRenderTarget(baseDetail);
+                GraphicsDevice.SetRenderTarget(detailsLayer1);
                 spriteBatch.Begin();
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 spriteBatch.End();
@@ -344,10 +348,10 @@ namespace MapGenerator
                 spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
 
-                // Store as baseNoise
+                // Store first detail layer onto baseNoise
                 GraphicsDevice.SetRenderTarget(baseNoise);
                 spriteBatch.Begin();
-                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
+                spriteBatch.Draw(detailsLayer1, detailsLayer1.Bounds, Color.White);
                 spriteBatch.End();
             }
 
@@ -469,20 +473,12 @@ namespace MapGenerator
                 }
                 spriteBatch.End();
 
-                // Draw baseDetail using mask effect
-                GraphicsDevice.SetRenderTarget(baseDetail);
-                spriteBatch.Begin();
-                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-                spriteBatch.End();
+                // Draw detail using mask effect
+                GraphicsDevice.SetRenderTarget(detailsLayer2);
+                GraphicsDevice.Clear(Color.Transparent);
                 GraphicsDevice.Textures[1] = detailAlpha;
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, maskEffect);
                 spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-                spriteBatch.End();
-
-                // Store as baseNoise
-                GraphicsDevice.SetRenderTarget(baseNoise);
-                spriteBatch.Begin();
-                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
                 spriteBatch.End();
             }
 
@@ -528,19 +524,11 @@ namespace MapGenerator
                 spriteBatch.End();
 
                 // Draw baseDetail using mask effect
-                GraphicsDevice.SetRenderTarget(baseDetail);
-                spriteBatch.Begin();
-                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-                spriteBatch.End();
+                GraphicsDevice.SetRenderTarget(detailsLayer3);
+                GraphicsDevice.Clear(Color.Transparent);
                 GraphicsDevice.Textures[1] = detailAlpha;
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, maskEffect);
                 spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-                spriteBatch.End();
-
-                // Store as baseNoise
-                GraphicsDevice.SetRenderTarget(baseNoise);
-                spriteBatch.Begin();
-                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
                 spriteBatch.End();
             }
 
@@ -563,6 +551,10 @@ namespace MapGenerator
             //    spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
             if (options.flora1)
                 spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
+            if (options.detailsLayer2)
+                spriteBatch.Draw(detailsLayer2, detailsLayer2.Bounds, Color.White);
+            if (options.detailsLayer3)
+                spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
             if (options.water)
                 spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
