@@ -78,7 +78,7 @@ namespace MapGenerator
             detailsLayer2Textures = new List<Texture2D>();
             setDetailsLayer2Textures(new string[] { string.Format("{0}textures\\details\\sand_holes.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer3Textures = new List<Texture2D>();
-            setDetailsLayer3Textures(new string[] { string.Format("{0}textures\\details\\pebbles.png", AppDomain.CurrentDomain.BaseDirectory) });
+            setDetailsLayer3Textures(new string[] { string.Format("{0}textures\\details\\jagged.png", AppDomain.CurrentDomain.BaseDirectory) });
 
             // Initialize view position
             view = new Vector2(surface.Width, surface.Height) / 2;
