@@ -50,6 +50,9 @@ namespace MapGenerator
         public bool detailsLayer2;
         public Microsoft.Xna.Framework.Vector2 detailsLayer2Range;
         public float detailsLayer2Scale;
+        public bool detailsLayer3;
+        public Microsoft.Xna.Framework.Vector2 detailsLayer3Range;
+        public float detailsLayer3Scale;
 
         public float waterLevel;
     };
@@ -154,6 +157,9 @@ namespace MapGenerator
             options.detailsLayer2 = detailsLayer2Checkbox.Checked;
             options.detailsLayer2Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer2RangeMin.Value, (float)detailsLayer2RangeMax.Value);
             options.detailsLayer2Scale = (float)detailsLayer2Scale.Value;
+            options.detailsLayer3 = detailsLayer3Checkbox.Checked;
+            options.detailsLayer3Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer3RangeMin.Value, (float)detailsLayer3RangeMax.Value);
+            options.detailsLayer3Scale = (float)detailsLayer3Scale.Value;
 
             return options;
         }
@@ -177,6 +183,7 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.setFlora1Textures(fileDialog.FileNames);
+                    main.generateMap(getOptions());
                 }
             }));
         }
@@ -240,6 +247,7 @@ namespace MapGenerator
                 options.flora1 = false;
                 options.detailsLayer1 = false;
                 options.detailsLayer2 = false;
+                options.detailsLayer3 = false;
                 main.generateMap(options);
                 redrawMap = true;
             }
@@ -304,6 +312,7 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.setDetailsLayer1Textures(fileDialog.FileNames);
+                    main.generateMap(getOptions());
                 }
             }));
         }
@@ -321,6 +330,25 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.setDetailsLayer2Textures(fileDialog.FileNames);
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void selectDetail3Textures_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select detail layer 3 textures";
+            fileDialog.Filter = "PNG|*.png";
+            fileDialog.Multiselect = true;
+            fileDialog.InitialDirectory = string.Format("{0}textures\\details\\", AppDomain.CurrentDomain.BaseDirectory);
+
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.setDetailsLayer3Textures(fileDialog.FileNames);
+                    main.generateMap(getOptions());
                 }
             }));
         }

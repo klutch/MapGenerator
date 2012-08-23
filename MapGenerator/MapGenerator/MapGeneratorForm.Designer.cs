@@ -116,6 +116,13 @@ namespace MapGenerator
             this.detailsLayer2RangeMax = new System.Windows.Forms.NumericUpDown();
             this.detailsLayer2RangeLabel = new System.Windows.Forms.Label();
             this.detailsLayer2Checkbox = new System.Windows.Forms.CheckBox();
+            this.detailsLayer3Scale = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer3ScaleLabel = new System.Windows.Forms.Label();
+            this.selectDetail3Textures = new System.Windows.Forms.Button();
+            this.detailsLayer3RangeMin = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer3RangeMax = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer3RangeLabel = new System.Windows.Forms.Label();
+            this.detailsLayer3Checkbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -158,6 +165,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer3Scale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer3RangeMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer3RangeMax)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -1216,6 +1226,13 @@ namespace MapGenerator
             // 
             // detailsTab
             // 
+            this.detailsTab.Controls.Add(this.detailsLayer3Scale);
+            this.detailsTab.Controls.Add(this.detailsLayer3ScaleLabel);
+            this.detailsTab.Controls.Add(this.selectDetail3Textures);
+            this.detailsTab.Controls.Add(this.detailsLayer3RangeMin);
+            this.detailsTab.Controls.Add(this.detailsLayer3RangeMax);
+            this.detailsTab.Controls.Add(this.detailsLayer3RangeLabel);
+            this.detailsTab.Controls.Add(this.detailsLayer3Checkbox);
             this.detailsTab.Controls.Add(this.detailsLayer2Scale);
             this.detailsTab.Controls.Add(this.detailsLayer2ScaleLabel);
             this.detailsTab.Controls.Add(this.selectDetail2Textures);
@@ -1259,6 +1276,7 @@ namespace MapGenerator
             0,
             0,
             0});
+            this.detailsLayer1Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // detailsLayer1ScaleLabel
             // 
@@ -1301,6 +1319,7 @@ namespace MapGenerator
             this.detailsLayer1RangeMin.Name = "detailsLayer1RangeMin";
             this.detailsLayer1RangeMin.Size = new System.Drawing.Size(101, 20);
             this.detailsLayer1RangeMin.TabIndex = 60;
+            this.detailsLayer1RangeMin.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // detailsLayer1RangeMax
             // 
@@ -1329,6 +1348,7 @@ namespace MapGenerator
             0,
             0,
             65536});
+            this.detailsLayer1RangeMax.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // detailsLayer1RangeLabel
             // 
@@ -1350,6 +1370,7 @@ namespace MapGenerator
             this.detailsLayer1Checkbox.TabIndex = 0;
             this.detailsLayer1Checkbox.Text = "Details Layer 1";
             this.detailsLayer1Checkbox.UseVisualStyleBackColor = true;
+            this.detailsLayer1Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // saveLayersButton
             // 
@@ -1395,6 +1416,7 @@ namespace MapGenerator
             0,
             0,
             0});
+            this.detailsLayer2Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // detailsLayer2ScaleLabel
             // 
@@ -1437,6 +1459,7 @@ namespace MapGenerator
             this.detailsLayer2RangeMin.Name = "detailsLayer2RangeMin";
             this.detailsLayer2RangeMin.Size = new System.Drawing.Size(101, 20);
             this.detailsLayer2RangeMin.TabIndex = 70;
+            this.detailsLayer2RangeMin.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // detailsLayer2RangeMax
             // 
@@ -1465,6 +1488,7 @@ namespace MapGenerator
             0,
             0,
             0});
+            this.detailsLayer2RangeMax.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // detailsLayer2RangeLabel
             // 
@@ -1486,6 +1510,123 @@ namespace MapGenerator
             this.detailsLayer2Checkbox.TabIndex = 67;
             this.detailsLayer2Checkbox.Text = "Details Layer 2";
             this.detailsLayer2Checkbox.UseVisualStyleBackColor = true;
+            this.detailsLayer2Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // detailsLayer3Scale
+            // 
+            this.detailsLayer3Scale.DecimalPlaces = 4;
+            this.detailsLayer3Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer3Scale.Location = new System.Drawing.Point(8, 364);
+            this.detailsLayer3Scale.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.detailsLayer3Scale.Name = "detailsLayer3Scale";
+            this.detailsLayer3Scale.Size = new System.Drawing.Size(101, 20);
+            this.detailsLayer3Scale.TabIndex = 80;
+            this.detailsLayer3Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.detailsLayer3Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // detailsLayer3ScaleLabel
+            // 
+            this.detailsLayer3ScaleLabel.AutoSize = true;
+            this.detailsLayer3ScaleLabel.Location = new System.Drawing.Point(5, 347);
+            this.detailsLayer3ScaleLabel.Name = "detailsLayer3ScaleLabel";
+            this.detailsLayer3ScaleLabel.Size = new System.Drawing.Size(73, 13);
+            this.detailsLayer3ScaleLabel.TabIndex = 79;
+            this.detailsLayer3ScaleLabel.Text = "Texture Scale";
+            // 
+            // selectDetail3Textures
+            // 
+            this.selectDetail3Textures.Location = new System.Drawing.Point(121, 279);
+            this.selectDetail3Textures.Name = "selectDetail3Textures";
+            this.selectDetail3Textures.Size = new System.Drawing.Size(100, 23);
+            this.selectDetail3Textures.TabIndex = 78;
+            this.selectDetail3Textures.Text = "Select Textures";
+            this.selectDetail3Textures.UseVisualStyleBackColor = true;
+            this.selectDetail3Textures.Click += new System.EventHandler(this.selectDetail3Textures_Click);
+            // 
+            // detailsLayer3RangeMin
+            // 
+            this.detailsLayer3RangeMin.DecimalPlaces = 4;
+            this.detailsLayer3RangeMin.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer3RangeMin.Location = new System.Drawing.Point(8, 315);
+            this.detailsLayer3RangeMin.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.detailsLayer3RangeMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.detailsLayer3RangeMin.Name = "detailsLayer3RangeMin";
+            this.detailsLayer3RangeMin.Size = new System.Drawing.Size(101, 20);
+            this.detailsLayer3RangeMin.TabIndex = 77;
+            this.detailsLayer3RangeMin.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // detailsLayer3RangeMax
+            // 
+            this.detailsLayer3RangeMax.DecimalPlaces = 4;
+            this.detailsLayer3RangeMax.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer3RangeMax.Location = new System.Drawing.Point(121, 315);
+            this.detailsLayer3RangeMax.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.detailsLayer3RangeMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.detailsLayer3RangeMax.Name = "detailsLayer3RangeMax";
+            this.detailsLayer3RangeMax.Size = new System.Drawing.Size(100, 20);
+            this.detailsLayer3RangeMax.TabIndex = 76;
+            this.detailsLayer3RangeMax.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.detailsLayer3RangeMax.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // detailsLayer3RangeLabel
+            // 
+            this.detailsLayer3RangeLabel.AutoSize = true;
+            this.detailsLayer3RangeLabel.Location = new System.Drawing.Point(5, 299);
+            this.detailsLayer3RangeLabel.Name = "detailsLayer3RangeLabel";
+            this.detailsLayer3RangeLabel.Size = new System.Drawing.Size(39, 13);
+            this.detailsLayer3RangeLabel.TabIndex = 75;
+            this.detailsLayer3RangeLabel.Text = "Range";
+            // 
+            // detailsLayer3Checkbox
+            // 
+            this.detailsLayer3Checkbox.AutoSize = true;
+            this.detailsLayer3Checkbox.Location = new System.Drawing.Point(8, 279);
+            this.detailsLayer3Checkbox.Name = "detailsLayer3Checkbox";
+            this.detailsLayer3Checkbox.Size = new System.Drawing.Size(96, 17);
+            this.detailsLayer3Checkbox.TabIndex = 74;
+            this.detailsLayer3Checkbox.Text = "Details Layer 3";
+            this.detailsLayer3Checkbox.UseVisualStyleBackColor = true;
+            this.detailsLayer3Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // MapGeneratorForm
             // 
@@ -1553,6 +1694,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer2RangeMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer3Scale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer3RangeMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer3RangeMax)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1640,5 +1784,12 @@ namespace MapGenerator
         private NumericUpDown detailsLayer2RangeMax;
         private Label detailsLayer2RangeLabel;
         private CheckBox detailsLayer2Checkbox;
+        private NumericUpDown detailsLayer3Scale;
+        private Label detailsLayer3ScaleLabel;
+        private Button selectDetail3Textures;
+        private NumericUpDown detailsLayer3RangeMin;
+        private NumericUpDown detailsLayer3RangeMax;
+        private Label detailsLayer3RangeLabel;
+        private CheckBox detailsLayer3Checkbox;
     }
 }
