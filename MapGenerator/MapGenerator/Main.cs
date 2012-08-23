@@ -289,10 +289,18 @@ namespace MapGenerator
 
                 // Draw baseDetail using mask effect
                 GraphicsDevice.SetRenderTarget(baseDetail);
-                GraphicsDevice.Clear(Color.Transparent);
+                spriteBatch.Begin();
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                spriteBatch.End();
                 GraphicsDevice.Textures[1] = detailAlpha;
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, maskEffect);
                 spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Store as baseNoise
+                GraphicsDevice.SetRenderTarget(baseNoise);
+                spriteBatch.Begin();
+                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
                 spriteBatch.End();
             }
 
@@ -385,8 +393,8 @@ namespace MapGenerator
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            if (options.detailsLayer1)
-                spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
+            //if (options.detailsLayer1)
+            //    spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
             if (options.flora1)
                 spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
             spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
