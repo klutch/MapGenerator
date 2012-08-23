@@ -4,8 +4,12 @@ float waterLevel;
 float4 PSWater(float2 texCoords:TEXCOORD0) : COLOR0
 {
     float4 base = tex2D(baseSampler, texCoords);
-	float total = (base.r + base.g + base.b) / 3;
-	return total > waterLevel ? float4(0, 0, 0, 0) : float4(0, 0, 0.5, 1);
+	float total = base.rgb;
+	float4 result = total > waterLevel ? float4(0, 0, 0, 0) : float4(0, 0, 0.1, 1);
+	result += total > (waterLevel - 0.01) ? float4(0, 0, 0, 0) : float4(0, 0, 0.1, 0.3);
+	result += total > (waterLevel - 0.02) ? float4(0, 0, 0, 0) : float4(0, 0, 0.1, 0.2);
+	result += total > (waterLevel - 0.03) ? float4(0, 0, 0, 0) : float4(0.05, 0.1, 0.3, 0.1);
+	return result;
 }
 
 technique Water
