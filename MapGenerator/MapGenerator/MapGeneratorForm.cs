@@ -46,7 +46,6 @@ namespace MapGenerator
 
         public bool detailsLayer1;
         public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
-        public float detailsLayer1Frequency;
         public float detailsLayer1Scale;
 
         public float waterLevel;
@@ -148,7 +147,6 @@ namespace MapGenerator
             // Details
             options.detailsLayer1 = detailsLayer1Checkbox.Checked;
             options.detailsLayer1Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer1RangeMin.Value, (float)detailsLayer1RangeMax.Value);
-            options.detailsLayer1Frequency = (float)detailsLayer1Frequency.Value;
             options.detailsLayer1Scale = (float)detailsLayer1Scale.Value;
 
             return options;

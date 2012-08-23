@@ -100,6 +100,8 @@ namespace MapGenerator
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
             this.detailsTab = new System.Windows.Forms.TabPage();
+            this.detailsLayer1Scale = new System.Windows.Forms.NumericUpDown();
+            this.detailsLayer1ScaleLabel = new System.Windows.Forms.Label();
             this.selectDetail1Textures = new System.Windows.Forms.Button();
             this.detailsLayer1RangeMin = new System.Windows.Forms.NumericUpDown();
             this.detailsLayer1RangeMax = new System.Windows.Forms.NumericUpDown();
@@ -107,10 +109,6 @@ namespace MapGenerator
             this.detailsLayer1Checkbox = new System.Windows.Forms.CheckBox();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
-            this.detailsLayer1Scale = new System.Windows.Forms.NumericUpDown();
-            this.detailsLayer1ScaleLabel = new System.Windows.Forms.Label();
-            this.detailsLayer1Frequency = new System.Windows.Forms.NumericUpDown();
-            this.detailsLayer1FrequencyLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -147,10 +145,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
             this.detailsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Scale)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Frequency)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -215,9 +212,10 @@ namespace MapGenerator
             this.mainOptionsControl.Controls.Add(this.noiseTab);
             this.mainOptionsControl.Controls.Add(this.waterTab);
             this.mainOptionsControl.Controls.Add(this.floraTab);
-            this.mainOptionsControl.Controls.Add(this.renderTab);
             this.mainOptionsControl.Controls.Add(this.detailsTab);
+            this.mainOptionsControl.Controls.Add(this.renderTab);
             this.mainOptionsControl.Location = new System.Drawing.Point(0, 0);
+            this.mainOptionsControl.Multiline = true;
             this.mainOptionsControl.Name = "mainOptionsControl";
             this.mainOptionsControl.SelectedIndex = 0;
             this.mainOptionsControl.Size = new System.Drawing.Size(258, 517);
@@ -262,10 +260,10 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.scaleLabel);
             this.noiseTab.Controls.Add(this.randomSeedLabel);
             this.noiseTab.Controls.Add(this.randomTextureDimensionsLabel);
-            this.noiseTab.Location = new System.Drawing.Point(4, 25);
+            this.noiseTab.Location = new System.Drawing.Point(4, 49);
             this.noiseTab.Name = "noiseTab";
             this.noiseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.noiseTab.Size = new System.Drawing.Size(250, 488);
+            this.noiseTab.Size = new System.Drawing.Size(250, 464);
             this.noiseTab.TabIndex = 1;
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
@@ -1001,9 +999,9 @@ namespace MapGenerator
             this.floraTab.Controls.Add(this.flora1FrequencyLabel);
             this.floraTab.Controls.Add(this.flora1RangeLabel);
             this.floraTab.Controls.Add(this.flora1Checkbox);
-            this.floraTab.Location = new System.Drawing.Point(4, 25);
+            this.floraTab.Location = new System.Drawing.Point(4, 49);
             this.floraTab.Name = "floraTab";
-            this.floraTab.Size = new System.Drawing.Size(250, 488);
+            this.floraTab.Size = new System.Drawing.Size(250, 464);
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
@@ -1164,10 +1162,10 @@ namespace MapGenerator
             this.renderTab.Controls.Add(this.renderWidth);
             this.renderTab.Controls.Add(this.widthLabel);
             this.renderTab.Controls.Add(this.heightLabel);
-            this.renderTab.Location = new System.Drawing.Point(4, 25);
+            this.renderTab.Location = new System.Drawing.Point(4, 49);
             this.renderTab.Name = "renderTab";
             this.renderTab.Padding = new System.Windows.Forms.Padding(3);
-            this.renderTab.Size = new System.Drawing.Size(250, 488);
+            this.renderTab.Size = new System.Drawing.Size(250, 464);
             this.renderTab.TabIndex = 0;
             this.renderTab.Text = "Render";
             this.renderTab.UseVisualStyleBackColor = true;
@@ -1210,23 +1208,53 @@ namespace MapGenerator
             // 
             this.detailsTab.Controls.Add(this.detailsLayer1Scale);
             this.detailsTab.Controls.Add(this.detailsLayer1ScaleLabel);
-            this.detailsTab.Controls.Add(this.detailsLayer1Frequency);
-            this.detailsTab.Controls.Add(this.detailsLayer1FrequencyLabel);
             this.detailsTab.Controls.Add(this.selectDetail1Textures);
             this.detailsTab.Controls.Add(this.detailsLayer1RangeMin);
             this.detailsTab.Controls.Add(this.detailsLayer1RangeMax);
             this.detailsTab.Controls.Add(this.detailsLayer1RangeLabel);
             this.detailsTab.Controls.Add(this.detailsLayer1Checkbox);
-            this.detailsTab.Location = new System.Drawing.Point(4, 25);
+            this.detailsTab.Location = new System.Drawing.Point(4, 49);
             this.detailsTab.Name = "detailsTab";
-            this.detailsTab.Size = new System.Drawing.Size(250, 488);
+            this.detailsTab.Size = new System.Drawing.Size(250, 464);
             this.detailsTab.TabIndex = 4;
             this.detailsTab.Text = "Details";
             this.detailsTab.UseVisualStyleBackColor = true;
             // 
+            // detailsLayer1Scale
+            // 
+            this.detailsLayer1Scale.DecimalPlaces = 4;
+            this.detailsLayer1Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.detailsLayer1Scale.Location = new System.Drawing.Point(8, 97);
+            this.detailsLayer1Scale.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.detailsLayer1Scale.Name = "detailsLayer1Scale";
+            this.detailsLayer1Scale.Size = new System.Drawing.Size(101, 20);
+            this.detailsLayer1Scale.TabIndex = 66;
+            this.detailsLayer1Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // detailsLayer1ScaleLabel
+            // 
+            this.detailsLayer1ScaleLabel.AutoSize = true;
+            this.detailsLayer1ScaleLabel.Location = new System.Drawing.Point(5, 80);
+            this.detailsLayer1ScaleLabel.Name = "detailsLayer1ScaleLabel";
+            this.detailsLayer1ScaleLabel.Size = new System.Drawing.Size(73, 13);
+            this.detailsLayer1ScaleLabel.TabIndex = 65;
+            this.detailsLayer1ScaleLabel.Text = "Texture Scale";
+            // 
             // selectDetail1Textures
             // 
-            this.selectDetail1Textures.Location = new System.Drawing.Point(122, 13);
+            this.selectDetail1Textures.Location = new System.Drawing.Point(121, 12);
             this.selectDetail1Textures.Name = "selectDetail1Textures";
             this.selectDetail1Textures.Size = new System.Drawing.Size(100, 23);
             this.selectDetail1Textures.TabIndex = 61;
@@ -1242,7 +1270,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.detailsLayer1RangeMin.Location = new System.Drawing.Point(9, 49);
+            this.detailsLayer1RangeMin.Location = new System.Drawing.Point(8, 48);
             this.detailsLayer1RangeMin.Maximum = new decimal(new int[] {
             2,
             0,
@@ -1265,7 +1293,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.detailsLayer1RangeMax.Location = new System.Drawing.Point(122, 49);
+            this.detailsLayer1RangeMax.Location = new System.Drawing.Point(121, 48);
             this.detailsLayer1RangeMax.Maximum = new decimal(new int[] {
             2,
             0,
@@ -1288,7 +1316,7 @@ namespace MapGenerator
             // detailsLayer1RangeLabel
             // 
             this.detailsLayer1RangeLabel.AutoSize = true;
-            this.detailsLayer1RangeLabel.Location = new System.Drawing.Point(6, 33);
+            this.detailsLayer1RangeLabel.Location = new System.Drawing.Point(5, 32);
             this.detailsLayer1RangeLabel.Name = "detailsLayer1RangeLabel";
             this.detailsLayer1RangeLabel.Size = new System.Drawing.Size(39, 13);
             this.detailsLayer1RangeLabel.TabIndex = 1;
@@ -1299,7 +1327,7 @@ namespace MapGenerator
             this.detailsLayer1Checkbox.AutoSize = true;
             this.detailsLayer1Checkbox.Checked = true;
             this.detailsLayer1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.detailsLayer1Checkbox.Location = new System.Drawing.Point(9, 13);
+            this.detailsLayer1Checkbox.Location = new System.Drawing.Point(8, 12);
             this.detailsLayer1Checkbox.Name = "detailsLayer1Checkbox";
             this.detailsLayer1Checkbox.Size = new System.Drawing.Size(96, 17);
             this.detailsLayer1Checkbox.TabIndex = 0;
@@ -1327,65 +1355,6 @@ namespace MapGenerator
             this.saveComposite.Text = "Save Composite";
             this.saveComposite.UseVisualStyleBackColor = true;
             this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
-            // 
-            // detailsLayer1Scale
-            // 
-            this.detailsLayer1Scale.DecimalPlaces = 4;
-            this.detailsLayer1Scale.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.detailsLayer1Scale.Location = new System.Drawing.Point(122, 98);
-            this.detailsLayer1Scale.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.detailsLayer1Scale.Name = "detailsLayer1Scale";
-            this.detailsLayer1Scale.Size = new System.Drawing.Size(97, 20);
-            this.detailsLayer1Scale.TabIndex = 66;
-            this.detailsLayer1Scale.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // detailsLayer1ScaleLabel
-            // 
-            this.detailsLayer1ScaleLabel.AutoSize = true;
-            this.detailsLayer1ScaleLabel.Location = new System.Drawing.Point(119, 81);
-            this.detailsLayer1ScaleLabel.Name = "detailsLayer1ScaleLabel";
-            this.detailsLayer1ScaleLabel.Size = new System.Drawing.Size(73, 13);
-            this.detailsLayer1ScaleLabel.TabIndex = 65;
-            this.detailsLayer1ScaleLabel.Text = "Texture Scale";
-            // 
-            // detailsLayer1Frequency
-            // 
-            this.detailsLayer1Frequency.DecimalPlaces = 4;
-            this.detailsLayer1Frequency.Location = new System.Drawing.Point(6, 98);
-            this.detailsLayer1Frequency.Maximum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.detailsLayer1Frequency.Name = "detailsLayer1Frequency";
-            this.detailsLayer1Frequency.Size = new System.Drawing.Size(101, 20);
-            this.detailsLayer1Frequency.TabIndex = 64;
-            this.detailsLayer1Frequency.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // detailsLayer1FrequencyLabel
-            // 
-            this.detailsLayer1FrequencyLabel.AutoSize = true;
-            this.detailsLayer1FrequencyLabel.Location = new System.Drawing.Point(3, 81);
-            this.detailsLayer1FrequencyLabel.Name = "detailsLayer1FrequencyLabel";
-            this.detailsLayer1FrequencyLabel.Size = new System.Drawing.Size(57, 13);
-            this.detailsLayer1FrequencyLabel.TabIndex = 63;
-            this.detailsLayer1FrequencyLabel.Text = "Frequency";
             // 
             // MapGeneratorForm
             // 
@@ -1447,10 +1416,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).EndInit();
             this.detailsTab.ResumeLayout(false);
             this.detailsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Scale)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1Frequency)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1531,7 +1499,5 @@ namespace MapGenerator
         private Button selectDetail1Textures;
         private NumericUpDown detailsLayer1Scale;
         private Label detailsLayer1ScaleLabel;
-        private NumericUpDown detailsLayer1Frequency;
-        private Label detailsLayer1FrequencyLabel;
     }
 }
