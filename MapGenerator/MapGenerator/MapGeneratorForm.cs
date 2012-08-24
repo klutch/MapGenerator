@@ -392,6 +392,7 @@ namespace MapGenerator
         private void waterColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = waterColor;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -411,6 +412,7 @@ namespace MapGenerator
         private void flora1ColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = flora1Color;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -430,6 +432,7 @@ namespace MapGenerator
         private void noiseLowColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = noiseLowColor;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -449,6 +452,7 @@ namespace MapGenerator
         private void noiseHighColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = noiseHighColor;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
