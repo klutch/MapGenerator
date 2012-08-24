@@ -33,6 +33,7 @@ namespace MapGenerator
         private Effect detailEffect;
         private Effect maskEffect;
         private Effect createNormalEffect;
+        private Effect normalMapEffect;
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
         private RenderTarget2D floraLayer1;
@@ -118,6 +119,7 @@ namespace MapGenerator
             detailEffect = Content.Load<Effect>("detailEffect");
             maskEffect = Content.Load<Effect>("maskEffect");
             createNormalEffect = Content.Load<Effect>("createNormalEffect");
+            normalMapEffect = Content.Load<Effect>("normalMapEffect");
         }
 
         // UnloadContent
@@ -649,10 +651,11 @@ namespace MapGenerator
             // Draw all textures
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
-
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            GraphicsDevice.Textures[1] = normalMap;
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, normalMapEffect);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            /*
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             if (options.flora1)
                 spriteBatch.Draw(floraLayer1, floraLayer1.Bounds, Color.White);
             if (options.flora2)
@@ -663,10 +666,14 @@ namespace MapGenerator
                 spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
             if (options.water)
                 spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
-            */
-
+            spriteBatch.End();
+            /*
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
             spriteBatch.Draw(normalMap, normalMap.Bounds, Color.White);
             spriteBatch.End();
+            */
 
             // Reset render target
             GraphicsDevice.SetRenderTarget(null);
