@@ -76,6 +76,7 @@ namespace MapGenerator
             InitializeComponent();
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
             Resize += new EventHandler(MapGeneratorForm_Resize);
+            flora1ColorPicture.BackColor = flora1Color;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)

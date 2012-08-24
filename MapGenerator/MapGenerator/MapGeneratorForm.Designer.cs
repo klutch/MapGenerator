@@ -173,10 +173,6 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).BeginInit();
             this.SuspendLayout();
-            //
-            // Default colors
-            //
-            this.flora1ColorPicture.BackColor = flora1Color;
             // 
             // surface
             // 
