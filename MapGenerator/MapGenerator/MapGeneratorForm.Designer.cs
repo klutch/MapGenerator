@@ -1076,7 +1076,7 @@ namespace MapGenerator
             this.flora1ShowColor.AutoSize = true;
             this.flora1ShowColor.Checked = true;
             this.flora1ShowColor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.flora1ShowColor.Location = new System.Drawing.Point(9, 155);
+            this.flora1ShowColor.Location = new System.Drawing.Point(9, 150);
             this.flora1ShowColor.Name = "flora1ShowColor";
             this.flora1ShowColor.Size = new System.Drawing.Size(15, 14);
             this.flora1ShowColor.TabIndex = 66;
@@ -1086,7 +1086,7 @@ namespace MapGenerator
             // flora1ColorLabel
             // 
             this.flora1ColorLabel.AutoSize = true;
-            this.flora1ColorLabel.Location = new System.Drawing.Point(5, 134);
+            this.flora1ColorLabel.Location = new System.Drawing.Point(5, 129);
             this.flora1ColorLabel.Name = "flora1ColorLabel";
             this.flora1ColorLabel.Size = new System.Drawing.Size(31, 13);
             this.flora1ColorLabel.TabIndex = 65;
@@ -1094,7 +1094,7 @@ namespace MapGenerator
             // 
             // flora1ColorPicture
             // 
-            this.flora1ColorPicture.Location = new System.Drawing.Point(29, 150);
+            this.flora1ColorPicture.Location = new System.Drawing.Point(29, 145);
             this.flora1ColorPicture.Name = "flora1ColorPicture";
             this.flora1ColorPicture.Size = new System.Drawing.Size(80, 23);
             this.flora1ColorPicture.TabIndex = 64;
