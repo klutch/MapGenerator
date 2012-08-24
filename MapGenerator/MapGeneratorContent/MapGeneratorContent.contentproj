@@ -75,6 +75,11 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </Compile>
+    <Compile Include="createNormalEffect.fx">
+      <Name>createNormalEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
     <None Include="helper.fx">
       <Name>helper</Name>
       <Importer>EffectImporter</Importer>

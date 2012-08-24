@@ -32,6 +32,7 @@ namespace MapGenerator
         private Effect floraEffect;
         private Effect detailEffect;
         private Effect maskEffect;
+        private Effect createNormalEffect;
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
         private RenderTarget2D floraLayer1;
@@ -41,6 +42,7 @@ namespace MapGenerator
         private RenderTarget2D detailsLayer2;
         private RenderTarget2D detailsLayer3;
         private RenderTarget2D detailAlpha;
+        private RenderTarget2D normalMap;
         private Texture2D randomTexture;
         private Texture2D worleyTexture;
         private Color[] randomTextureData;
@@ -115,6 +117,7 @@ namespace MapGenerator
             floraEffect = Content.Load<Effect>("floraEffect");
             detailEffect = Content.Load<Effect>("detailEffect");
             maskEffect = Content.Load<Effect>("maskEffect");
+            createNormalEffect = Content.Load<Effect>("createNormalEffect");
         }
 
         // UnloadContent
@@ -286,6 +289,7 @@ namespace MapGenerator
                 detailsLayer1 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 detailsLayer2 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 detailsLayer3 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                normalMap = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
             
             //////////////////////////////////////
@@ -382,6 +386,16 @@ namespace MapGenerator
                 spriteBatch.Draw(detailsLayer1, detailsLayer1.Bounds, Color.White);
                 spriteBatch.End();
             }
+
+            //////////////////////////////////////////
+            // Draw normal map
+            //////////////////////////////////////////
+            GraphicsDevice.SetRenderTarget(normalMap);
+            GraphicsDevice.Clear(Color.Black);
+            createNormalEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, createNormalEffect);
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.End();
 
             //////////////////////////////////////////
             // Draw water effect to render target
@@ -638,8 +652,7 @@ namespace MapGenerator
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            //if (options.detailsLayer1)
-            //    spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
+            /*
             if (options.flora1)
                 spriteBatch.Draw(floraLayer1, floraLayer1.Bounds, Color.White);
             if (options.flora2)
@@ -650,6 +663,9 @@ namespace MapGenerator
                 spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
             if (options.water)
                 spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
+            */
+
+            spriteBatch.Draw(normalMap, normalMap.Bounds, Color.White);
             spriteBatch.End();
 
             // Reset render target
