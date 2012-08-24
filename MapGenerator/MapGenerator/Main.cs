@@ -287,6 +287,8 @@ namespace MapGenerator
             baseEffect.Parameters["fbm1Opacity"].SetValue(options.fbm1Opacity);
             baseEffect.Parameters["fbm2Opacity"].SetValue(options.fbm2Opacity);
             baseEffect.Parameters["fbm3Opacity"].SetValue(options.fbm3Opacity);
+            baseEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
+            baseEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();

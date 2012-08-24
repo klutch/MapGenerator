@@ -28,6 +28,8 @@ float2 fbm3Offset;
 float fbm1Opacity;
 float fbm2Opacity;
 float fbm3Opacity;
+float4 noiseLowColor;
+float4 noiseHighColor;
 
 float4x4 matrixTransform;
 
@@ -74,7 +76,9 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 
 	n *= brightness;
 
-	return float4(n, n, n, 1);
+	return lerp(noiseLowColor, noiseHighColor, n);
+
+	//return float4(n, n, n, 1);
 }
 
 technique Main

@@ -25,6 +25,8 @@ namespace MapGenerator
         public float noiseGain;
         public float noiseLacunarity;
         public float noiseBrightness;
+        public Microsoft.Xna.Framework.Vector4 noiseLowColor;
+        public Microsoft.Xna.Framework.Vector4 noiseHighColor;
 
         public bool fbm1;
         public bool fbm2;
@@ -72,6 +74,8 @@ namespace MapGenerator
         private bool redrawMap;
         private Color flora1Color = Color.LimeGreen;
         private Color waterColor = Color.DarkBlue;
+        private Color noiseLowColor = Color.Black;
+        private Color noiseHighColor = Color.White;
 
         public MapGeneratorForm()
         {
@@ -81,6 +85,8 @@ namespace MapGenerator
             Resize += new EventHandler(MapGeneratorForm_Resize);
             flora1ColorPicture.BackColor = flora1Color;
             waterColorPicture.BackColor = waterColor;
+            noiseLowColorPicture.BackColor = noiseLowColor;
+            noiseHighColorPicture.BackColor = noiseHighColor;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
@@ -130,6 +136,16 @@ namespace MapGenerator
             options.noiseGain = (float)noiseGain.Value;
             options.noiseLacunarity = (float)noiseLacunarity.Value;
             options.noiseBrightness = (float)noiseBrightness.Value;
+            options.noiseLowColor = new Microsoft.Xna.Framework.Vector4(
+                (float)noiseLowColor.R / 255f,
+                (float)noiseLowColor.G / 255f,
+                (float)noiseLowColor.B / 255f,
+                (float)noiseLowColor.A / 255f);
+            options.noiseHighColor = new Microsoft.Xna.Framework.Vector4(
+                (float)noiseHighColor.R / 255f,
+                (float)noiseHighColor.G / 255f,
+                (float)noiseHighColor.B / 255f,
+                (float)noiseHighColor.A / 255f);
 
             // Fractional brownian motion
             options.fbm1 = fbm1Checkbox.Checked;
@@ -404,6 +420,44 @@ namespace MapGenerator
 
                     // Draw color on UI
                     flora1ColorPicture.BackColor = flora1Color;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void noiseLowColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    noiseLowColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    noiseLowColorPicture.BackColor = noiseLowColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void noiseHighColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    noiseHighColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    noiseHighColorPicture.BackColor = noiseHighColor;
 
                     // Draw map
                     main.generateMap(getOptions());
