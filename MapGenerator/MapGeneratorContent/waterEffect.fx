@@ -14,7 +14,8 @@ float4 PSWater(float2 texCoords:TEXCOORD0) : COLOR0
 	if (total <= waterLevel)
 	{
 		result.a += (waterLevel - total) * 8;
-		result.a += 0.1;
+		result.a += 0.4;
+		result.rgb -= result.a / 2;
 	}
 
 	return result;
