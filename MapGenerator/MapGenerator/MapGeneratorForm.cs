@@ -371,26 +371,7 @@ namespace MapGenerator
             }));
         }
 
-        private void selectFloraColor_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDialog = new ColorDialog();
-            Invoke((Action)(() =>
-            {
-                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    // Set color
-                    flora1Color = colorDialog.Color;
-
-                    // Draw color on UI
-                    flora1ColorPicture.BackColor = flora1Color;
-
-                    // Draw map
-                    main.generateMap(getOptions());
-                }
-            }));
-        }
-
-        private void selectWaterColor_Click(object sender, EventArgs e)
+        private void waterColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
             Invoke((Action)(() =>
@@ -402,6 +383,25 @@ namespace MapGenerator
 
                     // Draw color on UI
                     waterColorPicture.BackColor = waterColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void flora1ColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    flora1Color = colorDialog.Color;
+
+                    // Draw color on UI
+                    flora1ColorPicture.BackColor = flora1Color;
 
                     // Draw map
                     main.generateMap(getOptions());

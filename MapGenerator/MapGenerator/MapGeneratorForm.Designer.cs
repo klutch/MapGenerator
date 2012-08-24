@@ -89,7 +89,6 @@ namespace MapGenerator
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
             this.flora1ColorPicture = new System.Windows.Forms.PictureBox();
-            this.selectFloraLowColor = new System.Windows.Forms.Button();
             this.flora1Scale = new System.Windows.Forms.NumericUpDown();
             this.flora1ScaleLabel = new System.Windows.Forms.Label();
             this.flora1SelectTexture = new System.Windows.Forms.Button();
@@ -127,7 +126,8 @@ namespace MapGenerator
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
             this.waterColorPicture = new System.Windows.Forms.PictureBox();
-            this.selectWaterColor = new System.Windows.Forms.Button();
+            this.waterColorLabel = new System.Windows.Forms.Label();
+            this.flora1ColorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -973,8 +973,8 @@ namespace MapGenerator
             // 
             // waterTab
             // 
+            this.waterTab.Controls.Add(this.waterColorLabel);
             this.waterTab.Controls.Add(this.waterColorPicture);
-            this.waterTab.Controls.Add(this.selectWaterColor);
             this.waterTab.Controls.Add(this.waterCheckbox);
             this.waterTab.Controls.Add(this.waterLevel);
             this.waterTab.Controls.Add(this.waterLevelLabel);
@@ -1033,8 +1033,8 @@ namespace MapGenerator
             // 
             // floraTab
             // 
+            this.floraTab.Controls.Add(this.flora1ColorLabel);
             this.floraTab.Controls.Add(this.flora1ColorPicture);
-            this.floraTab.Controls.Add(this.selectFloraLowColor);
             this.floraTab.Controls.Add(this.flora1Scale);
             this.floraTab.Controls.Add(this.flora1ScaleLabel);
             this.floraTab.Controls.Add(this.flora1SelectTexture);
@@ -1053,21 +1053,12 @@ namespace MapGenerator
             // 
             // flora1ColorPicture
             // 
-            this.flora1ColorPicture.Location = new System.Drawing.Point(121, 133);
+            this.flora1ColorPicture.Location = new System.Drawing.Point(8, 150);
             this.flora1ColorPicture.Name = "flora1ColorPicture";
             this.flora1ColorPicture.Size = new System.Drawing.Size(100, 23);
             this.flora1ColorPicture.TabIndex = 64;
             this.flora1ColorPicture.TabStop = false;
-            // 
-            // selectFloraLowColor
-            // 
-            this.selectFloraLowColor.Location = new System.Drawing.Point(8, 133);
-            this.selectFloraLowColor.Name = "selectFloraLowColor";
-            this.selectFloraLowColor.Size = new System.Drawing.Size(100, 23);
-            this.selectFloraLowColor.TabIndex = 63;
-            this.selectFloraLowColor.Text = "Select Color";
-            this.selectFloraLowColor.UseVisualStyleBackColor = true;
-            this.selectFloraLowColor.Click += new System.EventHandler(this.selectFloraColor_Click);
+            this.flora1ColorPicture.Click += new System.EventHandler(this.flora1ColorPicture_Click);
             // 
             // flora1Scale
             // 
@@ -1673,21 +1664,30 @@ namespace MapGenerator
             // 
             // waterColorPicture
             // 
-            this.waterColorPicture.Location = new System.Drawing.Point(121, 84);
+            this.waterColorPicture.Location = new System.Drawing.Point(8, 102);
             this.waterColorPicture.Name = "waterColorPicture";
             this.waterColorPicture.Size = new System.Drawing.Size(100, 23);
             this.waterColorPicture.TabIndex = 66;
             this.waterColorPicture.TabStop = false;
+            this.waterColorPicture.Click += new System.EventHandler(this.waterColorPicture_Click);
             // 
-            // selectWaterColor
+            // waterColorLabel
             // 
-            this.selectWaterColor.Location = new System.Drawing.Point(8, 84);
-            this.selectWaterColor.Name = "selectWaterColor";
-            this.selectWaterColor.Size = new System.Drawing.Size(100, 23);
-            this.selectWaterColor.TabIndex = 65;
-            this.selectWaterColor.Text = "Select Color";
-            this.selectWaterColor.UseVisualStyleBackColor = true;
-            this.selectWaterColor.Click += new System.EventHandler(this.selectWaterColor_Click);
+            this.waterColorLabel.AutoSize = true;
+            this.waterColorLabel.Location = new System.Drawing.Point(5, 86);
+            this.waterColorLabel.Name = "waterColorLabel";
+            this.waterColorLabel.Size = new System.Drawing.Size(31, 13);
+            this.waterColorLabel.TabIndex = 67;
+            this.waterColorLabel.Text = "Color";
+            // 
+            // flora1ColorLabel
+            // 
+            this.flora1ColorLabel.AutoSize = true;
+            this.flora1ColorLabel.Location = new System.Drawing.Point(5, 134);
+            this.flora1ColorLabel.Name = "flora1ColorLabel";
+            this.flora1ColorLabel.Size = new System.Drawing.Size(31, 13);
+            this.flora1ColorLabel.TabIndex = 65;
+            this.flora1ColorLabel.Text = "Color";
             // 
             // MapGeneratorForm
             // 
@@ -1855,9 +1855,9 @@ namespace MapGenerator
         private Label detailsLayer3RangeLabel;
         private CheckBox detailsLayer3Checkbox;
         private CheckBox waterCheckbox;
-        private Button selectFloraLowColor;
         private PictureBox flora1ColorPicture;
         private PictureBox waterColorPicture;
-        private Button selectWaterColor;
+        private Label waterColorLabel;
+        private Label flora1ColorLabel;
     }
 }
