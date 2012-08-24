@@ -1,8 +1,8 @@
 sampler baseSampler : register(s0);
 sampler normalSampler : register(s1);
 float3 lightDirection = float3(0.25, 0.25, 0.5);
-float3 lightColor = float3(0.25, 0.25, 0.25);
-float3 ambientColor = float3(1, 1, 1);
+float3 lightColor = float3(0.4, 0.4, 0.4);
+float3 ambientColor = float3(0.8, 0.8, 0.8);
 
 float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
