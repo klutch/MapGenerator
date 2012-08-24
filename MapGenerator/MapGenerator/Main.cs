@@ -365,7 +365,8 @@ namespace MapGenerator
                 GraphicsDevice.SetRenderTarget(renderTarget);
                 GraphicsDevice.Clear(Color.Transparent);
                 waterEffect.Parameters["waterLevel"].SetValue(options.waterLevel);
-                waterEffect.Parameters["color"].SetValue(options.waterColor);
+                waterEffect.Parameters["shallowColor"].SetValue(options.waterShallowColor);
+                waterEffect.Parameters["deepColor"].SetValue(options.waterDeepColor);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, waterEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 spriteBatch.End();

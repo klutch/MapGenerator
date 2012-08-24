@@ -88,8 +88,10 @@ namespace MapGenerator
             this.frequencyLabel = new System.Windows.Forms.Label();
             this.scaleLabel = new System.Windows.Forms.Label();
             this.waterTab = new System.Windows.Forms.TabPage();
-            this.waterColorLabel = new System.Windows.Forms.Label();
-            this.waterColorPicture = new System.Windows.Forms.PictureBox();
+            this.waterDeepColorLabel = new System.Windows.Forms.Label();
+            this.waterDeepColorPicture = new System.Windows.Forms.PictureBox();
+            this.waterShallowColorLabel = new System.Windows.Forms.Label();
+            this.waterShallowColorPicture = new System.Windows.Forms.PictureBox();
             this.waterCheckbox = new System.Windows.Forms.CheckBox();
             this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
@@ -164,7 +166,8 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).BeginInit();
             this.waterTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.waterColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waterDeepColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waterShallowColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
             this.floraTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flora1PlantColorPicture)).BeginInit();
@@ -1024,8 +1027,10 @@ namespace MapGenerator
             // 
             // waterTab
             // 
-            this.waterTab.Controls.Add(this.waterColorLabel);
-            this.waterTab.Controls.Add(this.waterColorPicture);
+            this.waterTab.Controls.Add(this.waterDeepColorLabel);
+            this.waterTab.Controls.Add(this.waterDeepColorPicture);
+            this.waterTab.Controls.Add(this.waterShallowColorLabel);
+            this.waterTab.Controls.Add(this.waterShallowColorPicture);
             this.waterTab.Controls.Add(this.waterCheckbox);
             this.waterTab.Controls.Add(this.waterLevel);
             this.waterTab.Controls.Add(this.waterLevelLabel);
@@ -1036,23 +1041,41 @@ namespace MapGenerator
             this.waterTab.Text = "Water";
             this.waterTab.UseVisualStyleBackColor = true;
             // 
-            // waterColorLabel
+            // waterDeepColorLabel
             // 
-            this.waterColorLabel.AutoSize = true;
-            this.waterColorLabel.Location = new System.Drawing.Point(5, 86);
-            this.waterColorLabel.Name = "waterColorLabel";
-            this.waterColorLabel.Size = new System.Drawing.Size(31, 13);
-            this.waterColorLabel.TabIndex = 67;
-            this.waterColorLabel.Text = "Color";
+            this.waterDeepColorLabel.AutoSize = true;
+            this.waterDeepColorLabel.Location = new System.Drawing.Point(121, 86);
+            this.waterDeepColorLabel.Name = "waterDeepColorLabel";
+            this.waterDeepColorLabel.Size = new System.Drawing.Size(60, 13);
+            this.waterDeepColorLabel.TabIndex = 69;
+            this.waterDeepColorLabel.Text = "Deep Color";
             // 
-            // waterColorPicture
+            // waterDeepColorPicture
             // 
-            this.waterColorPicture.Location = new System.Drawing.Point(8, 102);
-            this.waterColorPicture.Name = "waterColorPicture";
-            this.waterColorPicture.Size = new System.Drawing.Size(100, 23);
-            this.waterColorPicture.TabIndex = 66;
-            this.waterColorPicture.TabStop = false;
-            this.waterColorPicture.Click += new System.EventHandler(this.waterColorPicture_Click);
+            this.waterDeepColorPicture.Location = new System.Drawing.Point(124, 102);
+            this.waterDeepColorPicture.Name = "waterDeepColorPicture";
+            this.waterDeepColorPicture.Size = new System.Drawing.Size(100, 23);
+            this.waterDeepColorPicture.TabIndex = 68;
+            this.waterDeepColorPicture.TabStop = false;
+            this.waterDeepColorPicture.Click += new System.EventHandler(this.waterDeepColorPicture_Click);
+            // 
+            // waterShallowColorLabel
+            // 
+            this.waterShallowColorLabel.AutoSize = true;
+            this.waterShallowColorLabel.Location = new System.Drawing.Point(5, 86);
+            this.waterShallowColorLabel.Name = "waterShallowColorLabel";
+            this.waterShallowColorLabel.Size = new System.Drawing.Size(71, 13);
+            this.waterShallowColorLabel.TabIndex = 67;
+            this.waterShallowColorLabel.Text = "Shallow Color";
+            // 
+            // waterShallowColorPicture
+            // 
+            this.waterShallowColorPicture.Location = new System.Drawing.Point(8, 102);
+            this.waterShallowColorPicture.Name = "waterShallowColorPicture";
+            this.waterShallowColorPicture.Size = new System.Drawing.Size(100, 23);
+            this.waterShallowColorPicture.TabIndex = 66;
+            this.waterShallowColorPicture.TabStop = false;
+            this.waterShallowColorPicture.Click += new System.EventHandler(this.waterShallowColorPicture_Click);
             // 
             // waterCheckbox
             // 
@@ -1835,7 +1858,8 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).EndInit();
             this.waterTab.ResumeLayout(false);
             this.waterTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.waterColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waterDeepColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waterShallowColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
             this.floraTab.ResumeLayout(false);
             this.floraTab.PerformLayout();
@@ -1956,8 +1980,8 @@ namespace MapGenerator
         private CheckBox detailsLayer3Checkbox;
         private CheckBox waterCheckbox;
         private PictureBox flora1GroundColorPicture;
-        private PictureBox waterColorPicture;
-        private Label waterColorLabel;
+        private PictureBox waterShallowColorPicture;
+        private Label waterShallowColorLabel;
         private Label flora1GroundColorLabel;
         private CheckBox flora1ShowGroundColor;
         private Label noiseHighColorLabel;
@@ -1967,5 +1991,7 @@ namespace MapGenerator
         private CheckBox flora1ShowPlantColor;
         private Label flora1PlantColorLabel;
         private PictureBox flora1PlantColorPicture;
+        private Label waterDeepColorLabel;
+        private PictureBox waterDeepColorPicture;
     }
 }
