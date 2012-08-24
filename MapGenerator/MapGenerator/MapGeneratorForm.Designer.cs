@@ -96,6 +96,21 @@ namespace MapGenerator
             this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
+            this.flora2ShowPlantColor = new System.Windows.Forms.CheckBox();
+            this.flora2PlantColorLabel = new System.Windows.Forms.Label();
+            this.flora2PlantColorPicture = new System.Windows.Forms.PictureBox();
+            this.flora2ShowGroundColor = new System.Windows.Forms.CheckBox();
+            this.flora2GroundColorLabel = new System.Windows.Forms.Label();
+            this.flora2GroundColorPicture = new System.Windows.Forms.PictureBox();
+            this.flora2Scale = new System.Windows.Forms.NumericUpDown();
+            this.flora2ScaleLabel = new System.Windows.Forms.Label();
+            this.flora2SelectTexture = new System.Windows.Forms.Button();
+            this.flora2Frequency = new System.Windows.Forms.NumericUpDown();
+            this.flora2RangeX = new System.Windows.Forms.NumericUpDown();
+            this.flora2RangeY = new System.Windows.Forms.NumericUpDown();
+            this.flora2FrequencyLabel = new System.Windows.Forms.Label();
+            this.flora2RangeLabel = new System.Windows.Forms.Label();
+            this.flora2Checkbox = new System.Windows.Forms.CheckBox();
             this.flora1ShowPlantColor = new System.Windows.Forms.CheckBox();
             this.flora1PlantColorLabel = new System.Windows.Forms.Label();
             this.flora1PlantColorPicture = new System.Windows.Forms.PictureBox();
@@ -170,6 +185,12 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.waterShallowColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
             this.floraTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2PlantColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2GroundColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2Scale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2Frequency)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2RangeX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2RangeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1PlantColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1GroundColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).BeginInit();
@@ -1125,6 +1146,21 @@ namespace MapGenerator
             // 
             // floraTab
             // 
+            this.floraTab.Controls.Add(this.flora2ShowPlantColor);
+            this.floraTab.Controls.Add(this.flora2PlantColorLabel);
+            this.floraTab.Controls.Add(this.flora2PlantColorPicture);
+            this.floraTab.Controls.Add(this.flora2ShowGroundColor);
+            this.floraTab.Controls.Add(this.flora2GroundColorLabel);
+            this.floraTab.Controls.Add(this.flora2GroundColorPicture);
+            this.floraTab.Controls.Add(this.flora2Scale);
+            this.floraTab.Controls.Add(this.flora2ScaleLabel);
+            this.floraTab.Controls.Add(this.flora2SelectTexture);
+            this.floraTab.Controls.Add(this.flora2Frequency);
+            this.floraTab.Controls.Add(this.flora2RangeX);
+            this.floraTab.Controls.Add(this.flora2RangeY);
+            this.floraTab.Controls.Add(this.flora2FrequencyLabel);
+            this.floraTab.Controls.Add(this.flora2RangeLabel);
+            this.floraTab.Controls.Add(this.flora2Checkbox);
             this.floraTab.Controls.Add(this.flora1ShowPlantColor);
             this.floraTab.Controls.Add(this.flora1PlantColorLabel);
             this.floraTab.Controls.Add(this.flora1PlantColorPicture);
@@ -1146,6 +1182,220 @@ namespace MapGenerator
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
+            // 
+            // flora2ShowPlantColor
+            // 
+            this.flora2ShowPlantColor.AutoSize = true;
+            this.flora2ShowPlantColor.Checked = true;
+            this.flora2ShowPlantColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.flora2ShowPlantColor.Location = new System.Drawing.Point(122, 337);
+            this.flora2ShowPlantColor.Name = "flora2ShowPlantColor";
+            this.flora2ShowPlantColor.Size = new System.Drawing.Size(15, 14);
+            this.flora2ShowPlantColor.TabIndex = 84;
+            this.flora2ShowPlantColor.UseVisualStyleBackColor = true;
+            this.flora2ShowPlantColor.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora2PlantColorLabel
+            // 
+            this.flora2PlantColorLabel.AutoSize = true;
+            this.flora2PlantColorLabel.Location = new System.Drawing.Point(118, 316);
+            this.flora2PlantColorLabel.Name = "flora2PlantColorLabel";
+            this.flora2PlantColorLabel.Size = new System.Drawing.Size(58, 13);
+            this.flora2PlantColorLabel.TabIndex = 83;
+            this.flora2PlantColorLabel.Text = "Plant Color";
+            // 
+            // flora2PlantColorPicture
+            // 
+            this.flora2PlantColorPicture.Location = new System.Drawing.Point(142, 332);
+            this.flora2PlantColorPicture.Name = "flora2PlantColorPicture";
+            this.flora2PlantColorPicture.Size = new System.Drawing.Size(62, 23);
+            this.flora2PlantColorPicture.TabIndex = 82;
+            this.flora2PlantColorPicture.TabStop = false;
+            this.flora2PlantColorPicture.Click += new System.EventHandler(this.flora2PlantColorPicture_Click);
+            // 
+            // flora2ShowGroundColor
+            // 
+            this.flora2ShowGroundColor.AutoSize = true;
+            this.flora2ShowGroundColor.Checked = true;
+            this.flora2ShowGroundColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.flora2ShowGroundColor.Location = new System.Drawing.Point(9, 337);
+            this.flora2ShowGroundColor.Name = "flora2ShowGroundColor";
+            this.flora2ShowGroundColor.Size = new System.Drawing.Size(15, 14);
+            this.flora2ShowGroundColor.TabIndex = 81;
+            this.flora2ShowGroundColor.UseVisualStyleBackColor = true;
+            this.flora2ShowGroundColor.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora2GroundColorLabel
+            // 
+            this.flora2GroundColorLabel.AutoSize = true;
+            this.flora2GroundColorLabel.Location = new System.Drawing.Point(5, 316);
+            this.flora2GroundColorLabel.Name = "flora2GroundColorLabel";
+            this.flora2GroundColorLabel.Size = new System.Drawing.Size(69, 13);
+            this.flora2GroundColorLabel.TabIndex = 80;
+            this.flora2GroundColorLabel.Text = "Ground Color";
+            // 
+            // flora2GroundColorPicture
+            // 
+            this.flora2GroundColorPicture.Location = new System.Drawing.Point(29, 332);
+            this.flora2GroundColorPicture.Name = "flora2GroundColorPicture";
+            this.flora2GroundColorPicture.Size = new System.Drawing.Size(65, 23);
+            this.flora2GroundColorPicture.TabIndex = 79;
+            this.flora2GroundColorPicture.TabStop = false;
+            this.flora2GroundColorPicture.Click += new System.EventHandler(this.flora2GroundColorPicture_Click);
+            // 
+            // flora2Scale
+            // 
+            this.flora2Scale.DecimalPlaces = 4;
+            this.flora2Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora2Scale.Location = new System.Drawing.Point(124, 284);
+            this.flora2Scale.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.flora2Scale.Name = "flora2Scale";
+            this.flora2Scale.Size = new System.Drawing.Size(97, 20);
+            this.flora2Scale.TabIndex = 78;
+            this.flora2Scale.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+            this.flora2Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora2ScaleLabel
+            // 
+            this.flora2ScaleLabel.AutoSize = true;
+            this.flora2ScaleLabel.Location = new System.Drawing.Point(121, 267);
+            this.flora2ScaleLabel.Name = "flora2ScaleLabel";
+            this.flora2ScaleLabel.Size = new System.Drawing.Size(73, 13);
+            this.flora2ScaleLabel.TabIndex = 77;
+            this.flora2ScaleLabel.Text = "Texture Scale";
+            // 
+            // flora2SelectTexture
+            // 
+            this.flora2SelectTexture.Location = new System.Drawing.Point(121, 199);
+            this.flora2SelectTexture.Name = "flora2SelectTexture";
+            this.flora2SelectTexture.Size = new System.Drawing.Size(100, 23);
+            this.flora2SelectTexture.TabIndex = 76;
+            this.flora2SelectTexture.Text = "Select Textures";
+            this.flora2SelectTexture.UseVisualStyleBackColor = true;
+            this.flora2SelectTexture.Click += new System.EventHandler(this.flora2SelectTexture_Click);
+            // 
+            // flora2Frequency
+            // 
+            this.flora2Frequency.DecimalPlaces = 4;
+            this.flora2Frequency.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora2Frequency.Location = new System.Drawing.Point(8, 284);
+            this.flora2Frequency.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.flora2Frequency.Name = "flora2Frequency";
+            this.flora2Frequency.Size = new System.Drawing.Size(101, 20);
+            this.flora2Frequency.TabIndex = 75;
+            this.flora2Frequency.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            196608});
+            this.flora2Frequency.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora2RangeX
+            // 
+            this.flora2RangeX.DecimalPlaces = 4;
+            this.flora2RangeX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora2RangeX.Location = new System.Drawing.Point(8, 235);
+            this.flora2RangeX.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.flora2RangeX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.flora2RangeX.Name = "flora2RangeX";
+            this.flora2RangeX.Size = new System.Drawing.Size(101, 20);
+            this.flora2RangeX.TabIndex = 74;
+            this.flora2RangeX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.flora2RangeX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora2RangeY
+            // 
+            this.flora2RangeY.DecimalPlaces = 4;
+            this.flora2RangeY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.flora2RangeY.Location = new System.Drawing.Point(121, 235);
+            this.flora2RangeY.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.flora2RangeY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.flora2RangeY.Name = "flora2RangeY";
+            this.flora2RangeY.Size = new System.Drawing.Size(100, 20);
+            this.flora2RangeY.TabIndex = 73;
+            this.flora2RangeY.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            65536});
+            this.flora2RangeY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora2FrequencyLabel
+            // 
+            this.flora2FrequencyLabel.AutoSize = true;
+            this.flora2FrequencyLabel.Location = new System.Drawing.Point(5, 267);
+            this.flora2FrequencyLabel.Name = "flora2FrequencyLabel";
+            this.flora2FrequencyLabel.Size = new System.Drawing.Size(57, 13);
+            this.flora2FrequencyLabel.TabIndex = 72;
+            this.flora2FrequencyLabel.Text = "Frequency";
+            // 
+            // flora2RangeLabel
+            // 
+            this.flora2RangeLabel.AutoSize = true;
+            this.flora2RangeLabel.Location = new System.Drawing.Point(5, 219);
+            this.flora2RangeLabel.Name = "flora2RangeLabel";
+            this.flora2RangeLabel.Size = new System.Drawing.Size(39, 13);
+            this.flora2RangeLabel.TabIndex = 71;
+            this.flora2RangeLabel.Text = "Range";
+            // 
+            // flora2Checkbox
+            // 
+            this.flora2Checkbox.AutoSize = true;
+            this.flora2Checkbox.Location = new System.Drawing.Point(8, 199);
+            this.flora2Checkbox.Name = "flora2Checkbox";
+            this.flora2Checkbox.Size = new System.Drawing.Size(97, 17);
+            this.flora2Checkbox.TabIndex = 70;
+            this.flora2Checkbox.Text = "Enable Layer 2";
+            this.flora2Checkbox.UseVisualStyleBackColor = true;
+            this.flora2Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // flora1ShowPlantColor
             // 
@@ -1863,6 +2113,12 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
             this.floraTab.ResumeLayout(false);
             this.floraTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2PlantColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2GroundColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2Scale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2Frequency)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2RangeX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora2RangeY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1PlantColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1GroundColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).EndInit();
@@ -1993,5 +2249,20 @@ namespace MapGenerator
         private PictureBox flora1PlantColorPicture;
         private Label waterDeepColorLabel;
         private PictureBox waterDeepColorPicture;
+        private CheckBox flora2ShowPlantColor;
+        private Label flora2PlantColorLabel;
+        private PictureBox flora2PlantColorPicture;
+        private CheckBox flora2ShowGroundColor;
+        private Label flora2GroundColorLabel;
+        private PictureBox flora2GroundColorPicture;
+        private NumericUpDown flora2Scale;
+        private Label flora2ScaleLabel;
+        private Button flora2SelectTexture;
+        private NumericUpDown flora2Frequency;
+        private NumericUpDown flora2RangeX;
+        private NumericUpDown flora2RangeY;
+        private Label flora2FrequencyLabel;
+        private Label flora2RangeLabel;
+        private CheckBox flora2Checkbox;
     }
 }

@@ -34,7 +34,8 @@ namespace MapGenerator
         private Effect maskEffect;
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
-        private RenderTarget2D baseFlora;
+        private RenderTarget2D floraLayer1;
+        private RenderTarget2D floraLayer2;
         private RenderTarget2D floraAlpha;
         private RenderTarget2D detailsLayer1;
         private RenderTarget2D detailsLayer2;
@@ -45,6 +46,7 @@ namespace MapGenerator
         private Color[] randomTextureData;
         private int lastCreatedSeed;
         private List<Texture2D> flora1Textures;
+        private List<Texture2D> flora2Textures;
         private List<Texture2D> detailsLayer1Textures;
         private List<Texture2D> detailsLayer2Textures;
         private List<Texture2D> detailsLayer3Textures;
@@ -75,6 +77,8 @@ namespace MapGenerator
             // Load default textures
             flora1Textures = new List<Texture2D>();
             setFlora1Textures(new string[] { string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory) });
+            flora2Textures = new List<Texture2D>();
+            setFlora2Textures(new string[] { string.Format("{0}textures\\flora\\brush_1.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer1Textures = new List<Texture2D>();
             setDetailsLayer1Textures(new string[] { string.Format("{0}textures\\details\\cracks.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer2Textures = new List<Texture2D>();
@@ -128,6 +132,27 @@ namespace MapGenerator
                 {
                     FileStream fileStream = new FileStream(filePath, FileMode.Open);
                     flora1Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
+                    Console.WriteLine("Loaded: {0} ({1} bytes)", filePath, fileStream.Length);
+                    fileStream.Close();
+                }
+                catch (FileNotFoundException e)
+                {
+                    System.Windows.Forms.MessageBox.Show(string.Format(
+                        "Error loading texture file at: {0}\nEither replace this file and reload the program, or select a new texture in the 'Flora' section.", e.FileName));
+                }
+            }
+        }
+
+        // setFlora1Textures
+        public void setFlora2Textures(string[] filePaths)
+        {
+            flora2Textures.Clear();
+            foreach (string filePath in filePaths)
+            {
+                try
+                {
+                    FileStream fileStream = new FileStream(filePath, FileMode.Open);
+                    flora2Textures.Add(Texture2D.FromStream(GraphicsDevice, fileStream));
                     Console.WriteLine("Loaded: {0} ({1} bytes)", filePath, fileStream.Length);
                     fileStream.Close();
                 }
@@ -253,7 +278,8 @@ namespace MapGenerator
                 // Initialize render target
                 renderTarget = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseNoise = new RenderTarget2D(GraphicsDevice, options.width, options.height);
-                baseFlora = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                floraLayer1 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                floraLayer2 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 baseWater = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 detailAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 floraAlpha = new RenderTarget2D(GraphicsDevice, options.width, options.height);
@@ -380,15 +406,14 @@ namespace MapGenerator
             }
 
             ////////////////////////////////
-            // Draw flora effect
+            // Draw flora layer 1 effect
             ////////////////////////////////
             if (options.flora1)
             {
                 GraphicsDevice.SetRenderTarget(floraAlpha);
                 GraphicsDevice.Clear(Color.Transparent);
                 floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
-                floraEffect.Parameters["flora1"].SetValue(options.flora1);
-                floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
+                floraEffect.Parameters["floraRange"].SetValue(options.flora1Range);
                 floraEffect.Parameters["color"].SetValue(options.flora1GroundColor);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
@@ -399,7 +424,7 @@ namespace MapGenerator
                 Color[] data = new Color[options.width * options.height];
                 GraphicsDevice.SetRenderTarget(null);
                 floraAlpha.GetData<Color>(data);
-                GraphicsDevice.SetRenderTarget(baseFlora);
+                GraphicsDevice.SetRenderTarget(floraLayer1);
                 GraphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
                 if (options.flora1ShowGroundColor)    // only show color if checked
@@ -433,6 +458,65 @@ namespace MapGenerator
 
                             // Draw
                             spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);
+                        }
+                    }
+                }
+                spriteBatch.End();
+            }
+
+            ////////////////////////////////
+            // Draw flora layer 2 effect
+            ////////////////////////////////
+            if (options.flora2)
+            {
+                GraphicsDevice.SetRenderTarget(floraAlpha);
+                GraphicsDevice.Clear(Color.Transparent);
+                floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+                floraEffect.Parameters["floraRange"].SetValue(options.flora2Range);
+                floraEffect.Parameters["color"].SetValue(options.flora2GroundColor);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                //spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Get pixel information from render target and use it to draw flora sprites
+                Color[] data = new Color[options.width * options.height];
+                GraphicsDevice.SetRenderTarget(null);
+                floraAlpha.GetData<Color>(data);
+                GraphicsDevice.SetRenderTarget(floraLayer2);
+                GraphicsDevice.Clear(Color.Transparent);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                if (options.flora2ShowGroundColor)    // only show color if checked
+                    spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
+                Color textureColor;
+                for (int i = 0; i < options.width; i++)
+                {
+                    for (int j = 0; j < options.height; j++)
+                    {
+                        // Get pixel data created by the flora effect
+                        Color pixel = data[i + j * options.width];
+                        float alpha = (float)pixel.A / 255f;
+
+                        // Get a pseudo-random number
+                        float chance = (float)random.NextDouble();
+                        //Console.WriteLine(chance);
+
+                        // Compare random number to the flora frequency and its distance away from the middle of its range (alpha)
+                        if (chance <= options.flora2Frequency * alpha)
+                        {
+                            // Get a texture
+                            int textureIndex = random.Next(flora2Textures.Count);
+                            Texture2D texture = flora2Textures[textureIndex];
+
+                            // Drawing properties
+                            float angle = (float)random.NextDouble() * 6.28f;
+                            float colorValue = (float)pixel.G / 75;
+                            colorValue *= 1 - chance;
+                            Vector4 plantColor = options.flora2ShowPlantColor ? options.flora2PlantColor : new Vector4(1, 1, 1, 1);
+                            textureColor = new Color(colorValue * plantColor.X, colorValue * plantColor.Y, colorValue * plantColor.Z, 1);
+
+                            // Draw
+                            spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora2Scale, SpriteEffects.None, 0);
                         }
                     }
                 }
@@ -557,7 +641,9 @@ namespace MapGenerator
             //if (options.detailsLayer1)
             //    spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
             if (options.flora1)
-                spriteBatch.Draw(baseFlora, baseFlora.Bounds, Color.White);
+                spriteBatch.Draw(floraLayer1, floraLayer1.Bounds, Color.White);
+            if (options.flora2)
+                spriteBatch.Draw(floraLayer2, floraLayer2.Bounds, Color.White);
             if (options.detailsLayer2)
                 spriteBatch.Draw(detailsLayer2, detailsLayer2.Bounds, Color.White);
             if (options.detailsLayer3)
@@ -581,15 +667,24 @@ namespace MapGenerator
         public void saveLayers(string fileBase)
         {
             string path = fileBase;
-            FileStream fileStream = new FileStream(string.Format("{0}-baseNoise.png", path), FileMode.OpenOrCreate);
+
+            // Base noise
+            FileStream fileStream = new FileStream(string.Format("{0}-base.png", path), FileMode.OpenOrCreate);
             baseNoise.SaveAsPng(fileStream, baseNoise.Width, baseNoise.Height);
             fileStream.Close();
 
-            fileStream = new FileStream(string.Format("{0}-baseFlora.png", path), FileMode.OpenOrCreate);
-            baseFlora.SaveAsPng(fileStream, baseFlora.Width, baseFlora.Height);
+            // Flora layer 1
+            fileStream = new FileStream(string.Format("{0}-floraLayer1.png", path), FileMode.OpenOrCreate);
+            floraLayer1.SaveAsPng(fileStream, floraLayer1.Width, floraLayer1.Height);
             fileStream.Close();
 
-            fileStream = new FileStream(string.Format("{0}-baseWater.png", path), FileMode.OpenOrCreate);
+            // Flora layer 2
+            fileStream = new FileStream(string.Format("{0}-floraLayer2.png", path), FileMode.OpenOrCreate);
+            floraLayer2.SaveAsPng(fileStream, floraLayer2.Width, floraLayer2.Height);
+            fileStream.Close();
+
+            // Water
+            fileStream = new FileStream(string.Format("{0}-water.png", path), FileMode.OpenOrCreate);
             baseWater.SaveAsPng(fileStream, baseWater.Width, baseWater.Height);
             fileStream.Close();
         }

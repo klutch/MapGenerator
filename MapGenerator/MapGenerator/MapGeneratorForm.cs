@@ -50,6 +50,15 @@ namespace MapGenerator
         public bool flora1ShowGroundColor;
         public bool flora1ShowPlantColor;
 
+        public bool flora2;
+        public Microsoft.Xna.Framework.Vector2 flora2Range;
+        public float flora2Frequency;
+        public float flora2Scale;
+        public Microsoft.Xna.Framework.Vector4 flora2GroundColor;
+        public Microsoft.Xna.Framework.Vector4 flora2PlantColor;
+        public bool flora2ShowGroundColor;
+        public bool flora2ShowPlantColor;
+
         public bool detailsLayer1;
         public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
         public float detailsLayer1Scale;
@@ -77,6 +86,8 @@ namespace MapGenerator
         private bool redrawMap;
         private Color flora1GroundColor = Color.LimeGreen;
         private Color flora1PlantColor = Color.White;
+        private Color flora2GroundColor = Color.Blue;
+        private Color flora2PlantColor = Color.LightBlue;
         private Color waterShallowColor = Color.Blue;
         private Color waterDeepColor = Color.DarkBlue;
         private Color noiseLowColor = Color.Black;
@@ -90,6 +101,8 @@ namespace MapGenerator
             Resize += new EventHandler(MapGeneratorForm_Resize);
             flora1GroundColorPicture.BackColor = flora1GroundColor;
             flora1PlantColorPicture.BackColor = flora1PlantColor;
+            flora2GroundColorPicture.BackColor = flora2GroundColor;
+            flora2PlantColorPicture.BackColor = flora2PlantColor;
             waterShallowColorPicture.BackColor = waterShallowColor;
             waterDeepColorPicture.BackColor = waterDeepColor;
             noiseLowColorPicture.BackColor = noiseLowColor;
@@ -185,7 +198,7 @@ namespace MapGenerator
                 (float)waterDeepColor.B / 255,
                 (float)waterDeepColor.A / 255);
 
-            // Flora
+            // Flora layer 1
             options.flora1 = flora1Checkbox.Checked;
             options.flora1Range.X = (float)flora1RangeX.Value;
             options.flora1Range.Y = (float)flora1RangeY.Value;
@@ -203,6 +216,25 @@ namespace MapGenerator
                 (float)flora1PlantColor.G / 255,
                 (float)flora1PlantColor.B / 255,
                 (float)flora1PlantColor.A / 255);
+
+            // Flora layer 2
+            options.flora2 = flora2Checkbox.Checked;
+            options.flora2Range.X = (float)flora2RangeX.Value;
+            options.flora2Range.Y = (float)flora2RangeY.Value;
+            options.flora2Frequency = (float)flora2Frequency.Value;
+            options.flora2Scale = (float)flora2Scale.Value;
+            options.flora2ShowGroundColor = flora2ShowGroundColor.Checked;
+            options.flora2ShowPlantColor = flora2ShowPlantColor.Checked;
+            options.flora2GroundColor = new Microsoft.Xna.Framework.Vector4(
+                (float)flora2GroundColor.R / 255,
+                (float)flora2GroundColor.G / 255,
+                (float)flora2GroundColor.B / 255,
+                (float)flora2GroundColor.A / 255);
+            options.flora2PlantColor = new Microsoft.Xna.Framework.Vector4(
+                (float)flora2PlantColor.R / 255,
+                (float)flora2PlantColor.G / 255,
+                (float)flora2PlantColor.B / 255,
+                (float)flora2PlantColor.A / 255);
 
             // Details
             options.detailsLayer1 = detailsLayer1Checkbox.Checked;
@@ -227,10 +259,10 @@ namespace MapGenerator
         private void flora1SelectTexture_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Title = "Select a plant texture";
+            fileDialog.Title = "Select flora textures";
             fileDialog.Filter = "PNG|*.png";
             fileDialog.Multiselect = true;
-            fileDialog.InitialDirectory = string.Format("{0}textures\\", AppDomain.CurrentDomain.BaseDirectory);
+            fileDialog.InitialDirectory = string.Format("{0}textures\\flora\\", AppDomain.CurrentDomain.BaseDirectory);
 
             Invoke((Action)(() =>
             {
@@ -240,6 +272,24 @@ namespace MapGenerator
                     main.generateMap(getOptions());
                 }
             }));
+        }
+
+        private void flora2SelectTexture_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select flora textures";
+            fileDialog.Filter = "PNG|*.png";
+            fileDialog.Multiselect = true;
+            fileDialog.InitialDirectory = string.Format("{0}textures\\flora\\", AppDomain.CurrentDomain.BaseDirectory);
+
+            Invoke((Action)(() =>
+                {
+                    if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        main.setFlora2Textures(fileDialog.FileNames);
+                        main.generateMap(getOptions());
+                    }
+                }));
         }
 
         private void saveLayersButton_Click(object sender, EventArgs e)
@@ -299,6 +349,7 @@ namespace MapGenerator
 
                 MapGeneratorOptions options = getOptions();
                 options.flora1 = false;
+                options.flora2 = false;
                 options.detailsLayer1 = false;
                 options.detailsLayer2 = false;
                 options.detailsLayer3 = false;
@@ -520,6 +571,46 @@ namespace MapGenerator
 
                     // Draw color on UI
                     waterDeepColorPicture.BackColor = waterDeepColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void flora2GroundColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = flora2GroundColor;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    flora2GroundColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    flora2GroundColorPicture.BackColor = flora2GroundColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void flora2PlantColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = flora2PlantColor;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    flora2PlantColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    flora2PlantColorPicture.BackColor = flora2PlantColor;
 
                     // Draw map
                     main.generateMap(getOptions());

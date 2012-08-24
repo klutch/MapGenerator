@@ -3,8 +3,7 @@
 
 sampler baseSampler : register(s0);
 float2 renderTargetSize;
-bool flora1;
-float2 flora1Range;
+float2 floraRange;
 float4x4 matrixTransform;
 float4 color;
 
@@ -21,11 +20,11 @@ float4 PSFlora(float2 texCoords:TEXCOORD0) : COLOR0
 	float4 result = 0;
 	float total = base.rgb * base.a;
 
-	// Flora layer 1
-	if (flora1 && total >= flora1Range.x && total <= flora1Range.y)
+	// Flora layer
+	if (total >= floraRange.x && total <= floraRange.y)
 	{
-		float mean = (flora1Range.x + flora1Range.y) / 2;
-		float max = absolute(flora1Range.x - mean);
+		float mean = (floraRange.x + floraRange.y) / 2;
+		float max = absolute(floraRange.x - mean);
 		float alpha = max >= 0.00001 ? 1 - (absolute(total - mean) / max) : 0;
 
 		result.rgb = total * color;
