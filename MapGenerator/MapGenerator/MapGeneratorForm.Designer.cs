@@ -88,6 +88,7 @@ namespace MapGenerator
             this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
+            this.flora1ColorPicture = new System.Windows.Forms.PictureBox();
             this.selectFloraLowColor = new System.Windows.Forms.Button();
             this.flora1Scale = new System.Windows.Forms.NumericUpDown();
             this.flora1ScaleLabel = new System.Windows.Forms.Label();
@@ -125,7 +126,8 @@ namespace MapGenerator
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
-            this.flora1ColorPicture = new System.Windows.Forms.PictureBox();
+            this.waterColorPicture = new System.Windows.Forms.PictureBox();
+            this.selectWaterColor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -154,6 +156,7 @@ namespace MapGenerator
             this.waterTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
             this.floraTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).BeginInit();
@@ -171,7 +174,7 @@ namespace MapGenerator
             this.renderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waterColorPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -970,6 +973,8 @@ namespace MapGenerator
             // 
             // waterTab
             // 
+            this.waterTab.Controls.Add(this.waterColorPicture);
+            this.waterTab.Controls.Add(this.selectWaterColor);
             this.waterTab.Controls.Add(this.waterCheckbox);
             this.waterTab.Controls.Add(this.waterLevel);
             this.waterTab.Controls.Add(this.waterLevelLabel);
@@ -1045,6 +1050,14 @@ namespace MapGenerator
             this.floraTab.TabIndex = 3;
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
+            // 
+            // flora1ColorPicture
+            // 
+            this.flora1ColorPicture.Location = new System.Drawing.Point(121, 133);
+            this.flora1ColorPicture.Name = "flora1ColorPicture";
+            this.flora1ColorPicture.Size = new System.Drawing.Size(100, 23);
+            this.flora1ColorPicture.TabIndex = 64;
+            this.flora1ColorPicture.TabStop = false;
             // 
             // selectFloraLowColor
             // 
@@ -1658,13 +1671,23 @@ namespace MapGenerator
             this.saveComposite.UseVisualStyleBackColor = true;
             this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
             // 
-            // flora1ColorPicture
+            // waterColorPicture
             // 
-            this.flora1ColorPicture.Location = new System.Drawing.Point(121, 133);
-            this.flora1ColorPicture.Name = "flora1ColorPicture";
-            this.flora1ColorPicture.Size = new System.Drawing.Size(100, 23);
-            this.flora1ColorPicture.TabIndex = 64;
-            this.flora1ColorPicture.TabStop = false;
+            this.waterColorPicture.Location = new System.Drawing.Point(121, 84);
+            this.waterColorPicture.Name = "waterColorPicture";
+            this.waterColorPicture.Size = new System.Drawing.Size(100, 23);
+            this.waterColorPicture.TabIndex = 66;
+            this.waterColorPicture.TabStop = false;
+            // 
+            // selectWaterColor
+            // 
+            this.selectWaterColor.Location = new System.Drawing.Point(8, 84);
+            this.selectWaterColor.Name = "selectWaterColor";
+            this.selectWaterColor.Size = new System.Drawing.Size(100, 23);
+            this.selectWaterColor.TabIndex = 65;
+            this.selectWaterColor.Text = "Select Color";
+            this.selectWaterColor.UseVisualStyleBackColor = true;
+            this.selectWaterColor.Click += new System.EventHandler(this.selectWaterColor_Click);
             // 
             // MapGeneratorForm
             // 
@@ -1716,6 +1739,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
             this.floraTab.ResumeLayout(false);
             this.floraTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).EndInit();
@@ -1735,7 +1759,7 @@ namespace MapGenerator
             this.renderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.waterColorPicture)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1833,5 +1857,7 @@ namespace MapGenerator
         private CheckBox waterCheckbox;
         private Button selectFloraLowColor;
         private PictureBox flora1ColorPicture;
+        private PictureBox waterColorPicture;
+        private Button selectWaterColor;
     }
 }

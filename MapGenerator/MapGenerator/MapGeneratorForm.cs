@@ -57,6 +57,7 @@ namespace MapGenerator
 
         public bool water;
         public float waterLevel;
+        public Microsoft.Xna.Framework.Vector4 waterColor;
     };
 
     public partial class MapGeneratorForm : Form
@@ -69,6 +70,7 @@ namespace MapGenerator
         private bool blockGenerateMap;
         private bool redrawMap;
         private Color flora1Color = Color.LimeGreen;
+        private Color waterColor = Color.DarkBlue;
 
         public MapGeneratorForm()
         {
@@ -77,6 +79,7 @@ namespace MapGenerator
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
             Resize += new EventHandler(MapGeneratorForm_Resize);
             flora1ColorPicture.BackColor = flora1Color;
+            waterColorPicture.BackColor = waterColor;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
@@ -147,6 +150,11 @@ namespace MapGenerator
             // Water
             options.water = waterCheckbox.Checked;
             options.waterLevel = (float)waterLevel.Value;
+            options.waterColor = new Microsoft.Xna.Framework.Vector4(
+                (float)waterColor.R / 255,
+                (float)waterColor.G / 255,
+                (float)waterColor.B / 255,
+                (float)waterColor.A / 255);
 
             // Flora
             options.flora1 = flora1Checkbox.Checked;
@@ -375,6 +383,25 @@ namespace MapGenerator
 
                     // Draw color on UI
                     flora1ColorPicture.BackColor = flora1Color;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void selectWaterColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    waterColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    waterColorPicture.BackColor = waterColor;
 
                     // Draw map
                     main.generateMap(getOptions());
