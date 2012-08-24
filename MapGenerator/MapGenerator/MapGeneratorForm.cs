@@ -43,6 +43,7 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector2 flora1Range;
         public float flora1Frequency;
         public float flora1Scale;
+        public Microsoft.Xna.Framework.Vector4 flora1Color;
 
         public bool detailsLayer1;
         public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
@@ -67,6 +68,7 @@ namespace MapGenerator
         private MapGeneratorOptions options;
         private bool blockGenerateMap;
         private bool redrawMap;
+        private Color flora1Color = Color.LimeGreen;
 
         public MapGeneratorForm()
         {
@@ -151,6 +153,11 @@ namespace MapGenerator
             options.flora1Range.Y = (float)flora1RangeY.Value;
             options.flora1Frequency = (float)flora1Frequency.Value;
             options.flora1Scale = (float)flora1Scale.Value;
+            options.flora1Color = new Microsoft.Xna.Framework.Vector4(
+                (float)flora1Color.R / 255,
+                (float)flora1Color.G / 255,
+                (float)flora1Color.B / 255,
+                (float)flora1Color.A / 255);
 
             // Details
             options.detailsLayer1 = detailsLayer1Checkbox.Checked;
@@ -350,6 +357,25 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.setDetailsLayer3Textures(fileDialog.FileNames);
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void selectFloraColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    flora1Color = colorDialog.Color;
+
+                    // Draw color on UI
+                    flora1ColorPicture.BackColor = flora1Color;
+
+                    // Draw map
                     main.generateMap(getOptions());
                 }
             }));

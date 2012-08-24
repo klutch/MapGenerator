@@ -6,6 +6,7 @@ float2 renderTargetSize;
 bool flora1;
 float2 flora1Range;
 float4x4 matrixTransform;
+float4 color;
 
 // Vertex shader
 void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout float4 position:SV_Position) 
@@ -14,7 +15,7 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 }
 
 // Pixel shader
-float4 PSBaseFlora(float2 texCoords:TEXCOORD0) : COLOR0
+float4 PSFlora(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	float4 base = tex2D(baseSampler, texCoords);
 	float4 result = 0;
@@ -27,7 +28,8 @@ float4 PSBaseFlora(float2 texCoords:TEXCOORD0) : COLOR0
 		float max = absolute(flora1Range.x - mean);
 		float alpha = max >= 0.00001 ? 1 - (absolute(total - mean) / max) : 0;
 
-		result.ga = float2(total, alpha);
+		result.rgb = total * color;
+		result.a = alpha;
 	}
 
 	return result;
@@ -38,6 +40,6 @@ technique Main
     pass Base
     {
 		VertexShader = compile vs_3_0 VSBase();
-        PixelShader = compile ps_3_0 PSBaseFlora();
+        PixelShader = compile ps_3_0 PSFlora();
     }
 }
