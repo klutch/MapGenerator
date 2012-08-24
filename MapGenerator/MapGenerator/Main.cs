@@ -399,7 +399,8 @@ namespace MapGenerator
                 GraphicsDevice.SetRenderTarget(baseFlora);
                 GraphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
+                if (options.flora1ShowColor)    // only show color if checked
+                    spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
                 Color textureColor;
                 for (int i = 0; i < options.width; i++)
                 {

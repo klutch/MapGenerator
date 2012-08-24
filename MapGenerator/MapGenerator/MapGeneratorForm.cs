@@ -44,6 +44,7 @@ namespace MapGenerator
         public float flora1Frequency;
         public float flora1Scale;
         public Microsoft.Xna.Framework.Vector4 flora1Color;
+        public bool flora1ShowColor;
 
         public bool detailsLayer1;
         public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
@@ -162,6 +163,7 @@ namespace MapGenerator
             options.flora1Range.Y = (float)flora1RangeY.Value;
             options.flora1Frequency = (float)flora1Frequency.Value;
             options.flora1Scale = (float)flora1Scale.Value;
+            options.flora1ShowColor = flora1ShowColor.Checked;
             options.flora1Color = new Microsoft.Xna.Framework.Vector4(
                 (float)flora1Color.R / 255,
                 (float)flora1Color.G / 255,

@@ -128,6 +128,7 @@ namespace MapGenerator
             this.waterColorPicture = new System.Windows.Forms.PictureBox();
             this.waterColorLabel = new System.Windows.Forms.Label();
             this.flora1ColorLabel = new System.Windows.Forms.Label();
+            this.flora1ShowColor = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -1033,6 +1034,7 @@ namespace MapGenerator
             // 
             // floraTab
             // 
+            this.floraTab.Controls.Add(this.flora1ShowColor);
             this.floraTab.Controls.Add(this.flora1ColorLabel);
             this.floraTab.Controls.Add(this.flora1ColorPicture);
             this.floraTab.Controls.Add(this.flora1Scale);
@@ -1053,9 +1055,9 @@ namespace MapGenerator
             // 
             // flora1ColorPicture
             // 
-            this.flora1ColorPicture.Location = new System.Drawing.Point(8, 150);
+            this.flora1ColorPicture.Location = new System.Drawing.Point(29, 150);
             this.flora1ColorPicture.Name = "flora1ColorPicture";
-            this.flora1ColorPicture.Size = new System.Drawing.Size(100, 23);
+            this.flora1ColorPicture.Size = new System.Drawing.Size(66, 23);
             this.flora1ColorPicture.TabIndex = 64;
             this.flora1ColorPicture.TabStop = false;
             this.flora1ColorPicture.Click += new System.EventHandler(this.flora1ColorPicture_Click);
@@ -1689,6 +1691,18 @@ namespace MapGenerator
             this.flora1ColorLabel.TabIndex = 65;
             this.flora1ColorLabel.Text = "Color";
             // 
+            // flora1ShowColor
+            // 
+            this.flora1ShowColor.AutoSize = true;
+            this.flora1ShowColor.Checked = true;
+            this.flora1ShowColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.flora1ShowColor.Location = new System.Drawing.Point(9, 155);
+            this.flora1ShowColor.Name = "flora1ShowColor";
+            this.flora1ShowColor.Size = new System.Drawing.Size(15, 14);
+            this.flora1ShowColor.TabIndex = 66;
+            this.flora1ShowColor.UseVisualStyleBackColor = true;
+            this.flora1ShowColor.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1859,5 +1873,6 @@ namespace MapGenerator
         private PictureBox waterColorPicture;
         private Label waterColorLabel;
         private Label flora1ColorLabel;
+        private CheckBox flora1ShowColor;
     }
 }
