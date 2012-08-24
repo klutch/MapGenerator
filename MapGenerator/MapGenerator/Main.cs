@@ -388,7 +388,7 @@ namespace MapGenerator
                 floraEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
                 floraEffect.Parameters["flora1"].SetValue(options.flora1);
                 floraEffect.Parameters["flora1Range"].SetValue(options.flora1Range);
-                floraEffect.Parameters["color"].SetValue(options.flora1Color);
+                floraEffect.Parameters["color"].SetValue(options.flora1GroundColor);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, floraEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 //spriteBatch.Draw(baseDetail, baseDetail.Bounds, Color.White);
@@ -401,7 +401,7 @@ namespace MapGenerator
                 GraphicsDevice.SetRenderTarget(baseFlora);
                 GraphicsDevice.Clear(Color.Transparent);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-                if (options.flora1ShowColor)    // only show color if checked
+                if (options.flora1ShowGroundColor)    // only show color if checked
                     spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
                 Color textureColor;
                 for (int i = 0; i < options.width; i++)
@@ -427,7 +427,8 @@ namespace MapGenerator
                             float angle = (float)random.NextDouble() * 6.28f;
                             float colorValue = (float)pixel.G / 75;
                             colorValue *= 1 - chance;
-                            textureColor = new Color(colorValue, colorValue, colorValue, 1);
+                            Vector4 plantColor = options.flora1ShowPlantColor ? options.flora1PlantColor : new Vector4(1, 1, 1, 1);
+                            textureColor = new Color(colorValue * plantColor.X, colorValue * plantColor.Y, colorValue * plantColor.Z, 1);
 
                             // Draw
                             spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);

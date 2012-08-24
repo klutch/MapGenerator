@@ -43,6 +43,10 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel = new System.Windows.Forms.Label();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.noiseHighColorLabel = new System.Windows.Forms.Label();
+            this.noiseHighColorPicture = new System.Windows.Forms.PictureBox();
+            this.noiseLowColorLabel = new System.Windows.Forms.Label();
+            this.noiseLowColorPicture = new System.Windows.Forms.PictureBox();
             this.noiseBrightness = new System.Windows.Forms.NumericUpDown();
             this.noiseLacunarity = new System.Windows.Forms.NumericUpDown();
             this.noiseGain = new System.Windows.Forms.NumericUpDown();
@@ -90,9 +94,12 @@ namespace MapGenerator
             this.waterLevel = new System.Windows.Forms.NumericUpDown();
             this.waterLevelLabel = new System.Windows.Forms.Label();
             this.floraTab = new System.Windows.Forms.TabPage();
-            this.flora1ShowColor = new System.Windows.Forms.CheckBox();
-            this.flora1ColorLabel = new System.Windows.Forms.Label();
-            this.flora1ColorPicture = new System.Windows.Forms.PictureBox();
+            this.flora1ShowPlantColor = new System.Windows.Forms.CheckBox();
+            this.flora1PlantColorLabel = new System.Windows.Forms.Label();
+            this.flora1PlantColorPicture = new System.Windows.Forms.PictureBox();
+            this.flora1ShowGroundColor = new System.Windows.Forms.CheckBox();
+            this.flora1GroundColorLabel = new System.Windows.Forms.Label();
+            this.flora1GroundColorPicture = new System.Windows.Forms.PictureBox();
             this.flora1Scale = new System.Windows.Forms.NumericUpDown();
             this.flora1ScaleLabel = new System.Windows.Forms.Label();
             this.flora1SelectTexture = new System.Windows.Forms.Button();
@@ -129,13 +136,11 @@ namespace MapGenerator
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
-            this.noiseLowColorPicture = new System.Windows.Forms.PictureBox();
-            this.noiseLowColorLabel = new System.Windows.Forms.Label();
-            this.noiseHighColorLabel = new System.Windows.Forms.Label();
-            this.noiseHighColorPicture = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseGain)).BeginInit();
@@ -162,7 +167,8 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.waterColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).BeginInit();
             this.floraTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1PlantColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1GroundColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).BeginInit();
@@ -180,8 +186,6 @@ namespace MapGenerator
             this.renderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -305,6 +309,42 @@ namespace MapGenerator
             this.noiseTab.TabIndex = 1;
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
+            // 
+            // noiseHighColorLabel
+            // 
+            this.noiseHighColorLabel.AutoSize = true;
+            this.noiseHighColorLabel.Location = new System.Drawing.Point(118, 258);
+            this.noiseHighColorLabel.Name = "noiseHighColorLabel";
+            this.noiseHighColorLabel.Size = new System.Drawing.Size(56, 13);
+            this.noiseHighColorLabel.TabIndex = 68;
+            this.noiseHighColorLabel.Text = "High Color";
+            // 
+            // noiseHighColorPicture
+            // 
+            this.noiseHighColorPicture.Location = new System.Drawing.Point(123, 274);
+            this.noiseHighColorPicture.Name = "noiseHighColorPicture";
+            this.noiseHighColorPicture.Size = new System.Drawing.Size(98, 26);
+            this.noiseHighColorPicture.TabIndex = 67;
+            this.noiseHighColorPicture.TabStop = false;
+            this.noiseHighColorPicture.Click += new System.EventHandler(this.noiseHighColorPicture_Click);
+            // 
+            // noiseLowColorLabel
+            // 
+            this.noiseLowColorLabel.AutoSize = true;
+            this.noiseLowColorLabel.Location = new System.Drawing.Point(6, 258);
+            this.noiseLowColorLabel.Name = "noiseLowColorLabel";
+            this.noiseLowColorLabel.Size = new System.Drawing.Size(54, 13);
+            this.noiseLowColorLabel.TabIndex = 66;
+            this.noiseLowColorLabel.Text = "Low Color";
+            // 
+            // noiseLowColorPicture
+            // 
+            this.noiseLowColorPicture.Location = new System.Drawing.Point(11, 274);
+            this.noiseLowColorPicture.Name = "noiseLowColorPicture";
+            this.noiseLowColorPicture.Size = new System.Drawing.Size(98, 26);
+            this.noiseLowColorPicture.TabIndex = 65;
+            this.noiseLowColorPicture.TabStop = false;
+            this.noiseLowColorPicture.Click += new System.EventHandler(this.noiseLowColorPicture_Click);
             // 
             // noiseBrightness
             // 
@@ -1062,9 +1102,12 @@ namespace MapGenerator
             // 
             // floraTab
             // 
-            this.floraTab.Controls.Add(this.flora1ShowColor);
-            this.floraTab.Controls.Add(this.flora1ColorLabel);
-            this.floraTab.Controls.Add(this.flora1ColorPicture);
+            this.floraTab.Controls.Add(this.flora1ShowPlantColor);
+            this.floraTab.Controls.Add(this.flora1PlantColorLabel);
+            this.floraTab.Controls.Add(this.flora1PlantColorPicture);
+            this.floraTab.Controls.Add(this.flora1ShowGroundColor);
+            this.floraTab.Controls.Add(this.flora1GroundColorLabel);
+            this.floraTab.Controls.Add(this.flora1GroundColorPicture);
             this.floraTab.Controls.Add(this.flora1Scale);
             this.floraTab.Controls.Add(this.flora1ScaleLabel);
             this.floraTab.Controls.Add(this.flora1SelectTexture);
@@ -1081,35 +1124,65 @@ namespace MapGenerator
             this.floraTab.Text = "Flora";
             this.floraTab.UseVisualStyleBackColor = true;
             // 
-            // flora1ShowColor
+            // flora1ShowPlantColor
             // 
-            this.flora1ShowColor.AutoSize = true;
-            this.flora1ShowColor.Checked = true;
-            this.flora1ShowColor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.flora1ShowColor.Location = new System.Drawing.Point(9, 150);
-            this.flora1ShowColor.Name = "flora1ShowColor";
-            this.flora1ShowColor.Size = new System.Drawing.Size(15, 14);
-            this.flora1ShowColor.TabIndex = 66;
-            this.flora1ShowColor.UseVisualStyleBackColor = true;
-            this.flora1ShowColor.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            this.flora1ShowPlantColor.AutoSize = true;
+            this.flora1ShowPlantColor.Checked = true;
+            this.flora1ShowPlantColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.flora1ShowPlantColor.Location = new System.Drawing.Point(122, 150);
+            this.flora1ShowPlantColor.Name = "flora1ShowPlantColor";
+            this.flora1ShowPlantColor.Size = new System.Drawing.Size(15, 14);
+            this.flora1ShowPlantColor.TabIndex = 69;
+            this.flora1ShowPlantColor.UseVisualStyleBackColor = true;
+            this.flora1ShowPlantColor.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // flora1ColorLabel
+            // flora1PlantColorLabel
             // 
-            this.flora1ColorLabel.AutoSize = true;
-            this.flora1ColorLabel.Location = new System.Drawing.Point(5, 129);
-            this.flora1ColorLabel.Name = "flora1ColorLabel";
-            this.flora1ColorLabel.Size = new System.Drawing.Size(31, 13);
-            this.flora1ColorLabel.TabIndex = 65;
-            this.flora1ColorLabel.Text = "Color";
+            this.flora1PlantColorLabel.AutoSize = true;
+            this.flora1PlantColorLabel.Location = new System.Drawing.Point(118, 129);
+            this.flora1PlantColorLabel.Name = "flora1PlantColorLabel";
+            this.flora1PlantColorLabel.Size = new System.Drawing.Size(58, 13);
+            this.flora1PlantColorLabel.TabIndex = 68;
+            this.flora1PlantColorLabel.Text = "Plant Color";
             // 
-            // flora1ColorPicture
+            // flora1PlantColorPicture
             // 
-            this.flora1ColorPicture.Location = new System.Drawing.Point(29, 145);
-            this.flora1ColorPicture.Name = "flora1ColorPicture";
-            this.flora1ColorPicture.Size = new System.Drawing.Size(80, 23);
-            this.flora1ColorPicture.TabIndex = 64;
-            this.flora1ColorPicture.TabStop = false;
-            this.flora1ColorPicture.Click += new System.EventHandler(this.flora1ColorPicture_Click);
+            this.flora1PlantColorPicture.Location = new System.Drawing.Point(142, 145);
+            this.flora1PlantColorPicture.Name = "flora1PlantColorPicture";
+            this.flora1PlantColorPicture.Size = new System.Drawing.Size(62, 23);
+            this.flora1PlantColorPicture.TabIndex = 67;
+            this.flora1PlantColorPicture.TabStop = false;
+            this.flora1PlantColorPicture.Click += new System.EventHandler(this.flora1PlantColorPicture_Click);
+            // 
+            // flora1ShowGroundColor
+            // 
+            this.flora1ShowGroundColor.AutoSize = true;
+            this.flora1ShowGroundColor.Checked = true;
+            this.flora1ShowGroundColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.flora1ShowGroundColor.Location = new System.Drawing.Point(9, 150);
+            this.flora1ShowGroundColor.Name = "flora1ShowGroundColor";
+            this.flora1ShowGroundColor.Size = new System.Drawing.Size(15, 14);
+            this.flora1ShowGroundColor.TabIndex = 66;
+            this.flora1ShowGroundColor.UseVisualStyleBackColor = true;
+            this.flora1ShowGroundColor.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // flora1GroundColorLabel
+            // 
+            this.flora1GroundColorLabel.AutoSize = true;
+            this.flora1GroundColorLabel.Location = new System.Drawing.Point(5, 129);
+            this.flora1GroundColorLabel.Name = "flora1GroundColorLabel";
+            this.flora1GroundColorLabel.Size = new System.Drawing.Size(69, 13);
+            this.flora1GroundColorLabel.TabIndex = 65;
+            this.flora1GroundColorLabel.Text = "Ground Color";
+            // 
+            // flora1GroundColorPicture
+            // 
+            this.flora1GroundColorPicture.Location = new System.Drawing.Point(29, 145);
+            this.flora1GroundColorPicture.Name = "flora1GroundColorPicture";
+            this.flora1GroundColorPicture.Size = new System.Drawing.Size(65, 23);
+            this.flora1GroundColorPicture.TabIndex = 64;
+            this.flora1GroundColorPicture.TabStop = false;
+            this.flora1GroundColorPicture.Click += new System.EventHandler(this.flora1GroundColorPicture_Click);
             // 
             // flora1Scale
             // 
@@ -1713,42 +1786,6 @@ namespace MapGenerator
             this.saveComposite.UseVisualStyleBackColor = true;
             this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
             // 
-            // noiseLowColorPicture
-            // 
-            this.noiseLowColorPicture.Location = new System.Drawing.Point(11, 274);
-            this.noiseLowColorPicture.Name = "noiseLowColorPicture";
-            this.noiseLowColorPicture.Size = new System.Drawing.Size(98, 26);
-            this.noiseLowColorPicture.TabIndex = 65;
-            this.noiseLowColorPicture.TabStop = false;
-            this.noiseLowColorPicture.Click += new System.EventHandler(this.noiseLowColorPicture_Click);
-            // 
-            // noiseLowColorLabel
-            // 
-            this.noiseLowColorLabel.AutoSize = true;
-            this.noiseLowColorLabel.Location = new System.Drawing.Point(6, 258);
-            this.noiseLowColorLabel.Name = "noiseLowColorLabel";
-            this.noiseLowColorLabel.Size = new System.Drawing.Size(54, 13);
-            this.noiseLowColorLabel.TabIndex = 66;
-            this.noiseLowColorLabel.Text = "Low Color";
-            // 
-            // noiseHighColorLabel
-            // 
-            this.noiseHighColorLabel.AutoSize = true;
-            this.noiseHighColorLabel.Location = new System.Drawing.Point(118, 258);
-            this.noiseHighColorLabel.Name = "noiseHighColorLabel";
-            this.noiseHighColorLabel.Size = new System.Drawing.Size(56, 13);
-            this.noiseHighColorLabel.TabIndex = 68;
-            this.noiseHighColorLabel.Text = "High Color";
-            // 
-            // noiseHighColorPicture
-            // 
-            this.noiseHighColorPicture.Location = new System.Drawing.Point(123, 274);
-            this.noiseHighColorPicture.Name = "noiseHighColorPicture";
-            this.noiseHighColorPicture.Size = new System.Drawing.Size(98, 26);
-            this.noiseHighColorPicture.TabIndex = 67;
-            this.noiseHighColorPicture.TabStop = false;
-            this.noiseHighColorPicture.Click += new System.EventHandler(this.noiseHighColorPicture_Click);
-            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1769,6 +1806,8 @@ namespace MapGenerator
             this.mainOptionsControl.ResumeLayout(false);
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseGain)).EndInit();
@@ -1800,7 +1839,8 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.waterLevel)).EndInit();
             this.floraTab.ResumeLayout(false);
             this.floraTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flora1ColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1PlantColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flora1GroundColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1Frequency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.flora1RangeX)).EndInit();
@@ -1820,8 +1860,6 @@ namespace MapGenerator
             this.renderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1917,14 +1955,17 @@ namespace MapGenerator
         private Label detailsLayer3RangeLabel;
         private CheckBox detailsLayer3Checkbox;
         private CheckBox waterCheckbox;
-        private PictureBox flora1ColorPicture;
+        private PictureBox flora1GroundColorPicture;
         private PictureBox waterColorPicture;
         private Label waterColorLabel;
-        private Label flora1ColorLabel;
-        private CheckBox flora1ShowColor;
+        private Label flora1GroundColorLabel;
+        private CheckBox flora1ShowGroundColor;
         private Label noiseHighColorLabel;
         private PictureBox noiseHighColorPicture;
         private Label noiseLowColorLabel;
         private PictureBox noiseLowColorPicture;
+        private CheckBox flora1ShowPlantColor;
+        private Label flora1PlantColorLabel;
+        private PictureBox flora1PlantColorPicture;
     }
 }

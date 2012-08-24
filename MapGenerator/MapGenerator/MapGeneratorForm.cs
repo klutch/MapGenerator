@@ -45,8 +45,10 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector2 flora1Range;
         public float flora1Frequency;
         public float flora1Scale;
-        public Microsoft.Xna.Framework.Vector4 flora1Color;
-        public bool flora1ShowColor;
+        public Microsoft.Xna.Framework.Vector4 flora1GroundColor;
+        public Microsoft.Xna.Framework.Vector4 flora1PlantColor;
+        public bool flora1ShowGroundColor;
+        public bool flora1ShowPlantColor;
 
         public bool detailsLayer1;
         public Microsoft.Xna.Framework.Vector2 detailsLayer1Range;
@@ -72,7 +74,8 @@ namespace MapGenerator
         private MapGeneratorOptions options;
         private bool blockGenerateMap;
         private bool redrawMap;
-        private Color flora1Color = Color.LimeGreen;
+        private Color flora1GroundColor = Color.LimeGreen;
+        private Color flora1PlantColor = Color.White;
         private Color waterColor = Color.DarkBlue;
         private Color noiseLowColor = Color.Black;
         private Color noiseHighColor = Color.White;
@@ -83,7 +86,8 @@ namespace MapGenerator
             InitializeComponent();
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
             Resize += new EventHandler(MapGeneratorForm_Resize);
-            flora1ColorPicture.BackColor = flora1Color;
+            flora1GroundColorPicture.BackColor = flora1GroundColor;
+            flora1PlantColorPicture.BackColor = flora1PlantColor;
             waterColorPicture.BackColor = waterColor;
             noiseLowColorPicture.BackColor = noiseLowColor;
             noiseHighColorPicture.BackColor = noiseHighColor;
@@ -179,12 +183,18 @@ namespace MapGenerator
             options.flora1Range.Y = (float)flora1RangeY.Value;
             options.flora1Frequency = (float)flora1Frequency.Value;
             options.flora1Scale = (float)flora1Scale.Value;
-            options.flora1ShowColor = flora1ShowColor.Checked;
-            options.flora1Color = new Microsoft.Xna.Framework.Vector4(
-                (float)flora1Color.R / 255,
-                (float)flora1Color.G / 255,
-                (float)flora1Color.B / 255,
-                (float)flora1Color.A / 255);
+            options.flora1ShowGroundColor = flora1ShowGroundColor.Checked;
+            options.flora1ShowPlantColor = flora1ShowPlantColor.Checked;
+            options.flora1GroundColor = new Microsoft.Xna.Framework.Vector4(
+                (float)flora1GroundColor.R / 255,
+                (float)flora1GroundColor.G / 255,
+                (float)flora1GroundColor.B / 255,
+                (float)flora1GroundColor.A / 255);
+            options.flora1PlantColor = new Microsoft.Xna.Framework.Vector4(
+                (float)flora1PlantColor.R / 255,
+                (float)flora1PlantColor.G / 255,
+                (float)flora1PlantColor.B / 255,
+                (float)flora1PlantColor.A / 255);
 
             // Details
             options.detailsLayer1 = detailsLayer1Checkbox.Checked;
@@ -409,19 +419,19 @@ namespace MapGenerator
             }));
         }
 
-        private void flora1ColorPicture_Click(object sender, EventArgs e)
+        private void flora1GroundColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = flora1Color;
+            colorDialog.Color = flora1GroundColor;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     // Set color
-                    flora1Color = colorDialog.Color;
+                    flora1GroundColor = colorDialog.Color;
 
                     // Draw color on UI
-                    flora1ColorPicture.BackColor = flora1Color;
+                    flora1GroundColorPicture.BackColor = flora1GroundColor;
 
                     // Draw map
                     main.generateMap(getOptions());
@@ -462,6 +472,26 @@ namespace MapGenerator
 
                     // Draw color on UI
                     noiseHighColorPicture.BackColor = noiseHighColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void flora1PlantColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = flora1PlantColor;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    flora1PlantColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    flora1PlantColorPicture.BackColor = flora1PlantColor;
 
                     // Draw map
                     main.generateMap(getOptions());
