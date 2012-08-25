@@ -664,12 +664,14 @@ namespace MapGenerator
                 spriteBatch.Draw(detailsLayer2, detailsLayer2.Bounds, Color.White);
             if (options.detailsLayer3)
                 spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
+            spriteBatch.End();
             if (options.water)
-            spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            {
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
                 spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
-            spriteBatch.End();
-            
+                spriteBatch.End();
+            }
+
             /*
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
