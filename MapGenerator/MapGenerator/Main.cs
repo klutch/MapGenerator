@@ -394,6 +394,7 @@ namespace MapGenerator
             //////////////////////////////////////////
             GraphicsDevice.SetRenderTarget(normalMap);
             GraphicsDevice.Clear(Color.Black);
+            createNormalEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
             createNormalEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, createNormalEffect);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
