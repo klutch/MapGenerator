@@ -647,7 +647,8 @@ namespace MapGenerator
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
             */
-
+            
+            
             // Draw all textures
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
@@ -658,15 +659,16 @@ namespace MapGenerator
                 spriteBatch.Draw(floraLayer1, floraLayer1.Bounds, Color.White);
             if (options.flora2)
                 spriteBatch.Draw(floraLayer2, floraLayer2.Bounds, Color.White);
-            spriteBatch.End();
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             if (options.detailsLayer2)
                 spriteBatch.Draw(detailsLayer2, detailsLayer2.Bounds, Color.White);
             if (options.detailsLayer3)
                 spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
             if (options.water)
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
                 spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
             spriteBatch.End();
+            
             /*
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);

@@ -1861,8 +1861,6 @@ namespace MapGenerator
             // detailsLayer2Checkbox
             // 
             this.detailsLayer2Checkbox.AutoSize = true;
-            this.detailsLayer2Checkbox.Checked = true;
-            this.detailsLayer2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.detailsLayer2Checkbox.Location = new System.Drawing.Point(8, 145);
             this.detailsLayer2Checkbox.Name = "detailsLayer2Checkbox";
             this.detailsLayer2Checkbox.Size = new System.Drawing.Size(96, 17);
