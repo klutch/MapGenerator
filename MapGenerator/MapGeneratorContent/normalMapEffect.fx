@@ -1,6 +1,7 @@
 sampler baseSampler : register(s0);
 sampler normalSampler : register(s1);
-float3 lightDirection = float3(0.2, 0.2, 1);
+float3 lightDirection;
+float3 lightColor;
 
 float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
@@ -11,7 +12,7 @@ float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
     // Compute lighting.
     float lightAmount = max(dot(normal, normalize(lightDirection)), 0);
     
-    return tex * lightAmount;
+    return tex * float4(lightAmount, lightAmount, lightAmount, 1) * float4(lightColor, 1);
 }
 
 technique Main

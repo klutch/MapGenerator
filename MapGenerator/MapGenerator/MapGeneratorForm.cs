@@ -73,6 +73,10 @@ namespace MapGenerator
         public float waterLevel;
         public Microsoft.Xna.Framework.Vector4 waterShallowColor;
         public Microsoft.Xna.Framework.Vector4 waterDeepColor;
+
+        public bool normals;
+        public Microsoft.Xna.Framework.Vector3 lightColor;
+        public Microsoft.Xna.Framework.Vector3 lightDirection;
     };
 
     public partial class MapGeneratorForm : Form
@@ -92,6 +96,7 @@ namespace MapGenerator
         private Color waterDeepColor = Color.DarkBlue;
         private Color noiseLowColor = Color.Black;
         private Color noiseHighColor = Color.White;
+        private Color lightColor = Color.White;
 
         public MapGeneratorForm()
         {
@@ -107,6 +112,7 @@ namespace MapGenerator
             waterDeepColorPicture.BackColor = waterDeepColor;
             noiseLowColorPicture.BackColor = noiseLowColor;
             noiseHighColorPicture.BackColor = noiseHighColor;
+            lightColorPicture.BackColor = lightColor;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
@@ -247,6 +253,17 @@ namespace MapGenerator
             options.detailsLayer3Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer3RangeMin.Value, (float)detailsLayer3RangeMax.Value);
             options.detailsLayer3Scale = (float)detailsLayer3Scale.Value;
 
+            // Lighting
+            options.normals = normalCheckbox.Checked;
+            options.lightColor = new Microsoft.Xna.Framework.Vector3(
+                (float)lightColor.R / 255,
+                (float)lightColor.G / 255,
+                (float)lightColor.B / 255);
+            options.lightDirection = new Microsoft.Xna.Framework.Vector3(
+                (float)lightPositionX.Value,
+                (float)lightPositionY.Value,
+                (float)lightPositionZ.Value);
+
             return options;
         }
 
@@ -353,6 +370,7 @@ namespace MapGenerator
                 options.detailsLayer1 = false;
                 options.detailsLayer2 = false;
                 options.detailsLayer3 = false;
+                options.normals = false;
                 main.generateMap(options);
                 redrawMap = true;
             }
@@ -611,6 +629,26 @@ namespace MapGenerator
 
                     // Draw color on UI
                     flora2PlantColorPicture.BackColor = flora2PlantColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void lightColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = lightColor;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    lightColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    lightColorPicture.BackColor = lightColor;
 
                     // Draw map
                     main.generateMap(getOptions());
