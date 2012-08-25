@@ -298,6 +298,7 @@ namespace MapGenerator
             // Draw noise effect to render target
             ///////////////////////////////////////
             GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Textures[1] = worleyTexture;
             GraphicsDevice.Clear(Color.Black);
             baseEffect.Parameters["position"].SetValue(options.position);
             baseEffect.Parameters["scale"].SetValue(options.scale);
@@ -321,6 +322,7 @@ namespace MapGenerator
             baseEffect.Parameters["fbm3Opacity"].SetValue(options.fbm3Opacity);
             baseEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
             baseEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
+            baseEffect.Parameters["useWorley"].SetValue(options.worley);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();

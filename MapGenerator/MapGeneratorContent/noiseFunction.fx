@@ -1,24 +1,3 @@
-// Worley table
-float2 worleyTable[] =
-{
-	float2(0.09422, 0.10386),
-	float2(0.37504, 0.03784),
-	float2(0.64836, 0.03351),
-	float2(0.88309, 0.03393),
-	float2(0.18921, 0.28619),
-	float2(0.42112, 0.3259),
-	float2(0.63519, 0.43585),
-	float2(0.83907, 0.27749),
-	float2(0.0987, 0.66394),
-	float2(0.41705, 0.64828),
-	float2(0.71544, 0.55101),
-	float2(0.90036, 0.64619),
-	float2(0.20759, 0.84708),
-	float2(0.37159, 0.92968),
-	float2(0.70334, 0.83989),
-	float2(0.96814, 0.78153)
-};
-
 // Noise
 float noise(sampler noiseSampler, float2 position, float frequency, float gain, float lacunarity)
 {

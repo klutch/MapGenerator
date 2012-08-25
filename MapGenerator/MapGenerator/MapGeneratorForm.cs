@@ -28,6 +28,7 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector4 noiseLowColor;
         public Microsoft.Xna.Framework.Vector4 noiseHighColor;
 
+        public bool worley;
         public bool fbm1;
         public bool fbm2;
         public bool fbm3;
@@ -156,6 +157,7 @@ namespace MapGenerator
             options.position.Y = (float)noisePositionY.Value;
 
             // Noise texture
+            options.worley = worleyCheckbox.Checked;
             options.noiseTextureWidth = (int)noiseTextureWidth.Value;
             options.noiseTextureHeight = (int)noiseTextureHeight.Value;
             options.noiseFrequency = (float)noiseFrequency.Value;

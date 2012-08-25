@@ -6,6 +6,12 @@ sampler baseSampler : register(s0) = sampler_state
 	AddressV = Wrap;
 };
 
+sampler worleySampler : register(s1) = sampler_state
+{
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
 float2 randomTextureSize;
 float2 renderTargetSize;
 
@@ -15,6 +21,7 @@ float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
 float brightness;
+bool useWorley;
 
 bool fbm1;
 bool fbm2;
@@ -48,14 +55,16 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		texCoords * (renderTargetSize / randomTextureSize) / scale;
 
 	// Calculate noise
-	float n = noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity);
+	float n = useWorley ?
+		worley(worleySampler, p) :
+		noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity);
 	
 	if (fbm1)
 	{
 		float2 coords = fbm1NoiseOnly ?
 			noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity) : 
 			p + n * fbm1Offset;
-		n *= lerp(n, noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm1Opacity);
+		n *= lerp(n, useWorley ? worley(worleySampler, coords) : noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm1Opacity);
 	}
 
 	if (fbm2)
@@ -63,7 +72,7 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		float2 coords = fbm2NoiseOnly ? 
 			noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity) :
 			p + n * fbm2Offset;
-		n *= lerp(n, noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm2Opacity);
+		n *= lerp(n, useWorley ? worley(worleySampler, coords) : noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm2Opacity);
 	}
 
 	if (fbm3)
@@ -71,7 +80,7 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		float2 coords = fbm3NoiseOnly ?
 		noise(baseSampler, p, noiseFrequency, noiseGain, noiseLacunarity) :
 		p + n * fbm3Offset;
-		n *= lerp(n, noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm3Opacity);
+		n *= lerp(n, useWorley ? worley(worleySampler, coords) : noise(baseSampler, coords, noiseFrequency, noiseGain, noiseLacunarity), fbm3Opacity);
 	}
 
 	n *= brightness;
