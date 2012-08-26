@@ -1,22 +1,37 @@
 sampler baseSampler : register(s0);
 sampler normalSampler : register(s1);
-float3 lightDirection;
-float3 lightColor;
-float3 lightAmbientColor;
+bool light1;
+float3 light1Direction;
+float3 light1Color;
+float3 light1AmbientColor;
+bool light2;
+float3 light2Direction;
+float3 light2Color;
+float3 light2AmbientColor;
 
 float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
     // Look up the texture and normalmap values.
     float4 tex = tex2D(baseSampler, texCoords);
     float3 normal = (tex2D(normalSampler, texCoords) * 2 - 1);
-    
-    // Compute lighting.
-    float lightAmount = max(dot(normal, normalize(lightDirection)), 0);
+	float lightAmount = 0;
+    float3 totalLight = 0;
 
-	float4 color = tex;
-	color.rgb = color.rgb * float3(lightAmount, lightAmount, lightAmount) * lightColor + lightAmbientColor;
+    // Compute lighting.
+	if (light1)
+	{
+		lightAmount = max(dot(normal, normalize(light1Direction)), 0);
+		totalLight += float3(lightAmount, lightAmount, lightAmount) * light1Color + light1AmbientColor;
+	}
+	if (light2)
+	{
+		lightAmount = max(dot(normal, normalize(light2Direction)), 0);
+		totalLight += float3(lightAmount, lightAmount, lightAmount) * light2Color + light2AmbientColor;
+	}
+
+	tex.rgb *= totalLight;
     
-    return color;
+    return tex;
 }
 
 technique Main

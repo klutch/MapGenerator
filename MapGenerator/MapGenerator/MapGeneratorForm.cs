@@ -75,10 +75,14 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector4 waterShallowColor;
         public Microsoft.Xna.Framework.Vector4 waterDeepColor;
 
-        public bool normals;
-        public Microsoft.Xna.Framework.Vector3 lightColor;
-        public Microsoft.Xna.Framework.Vector3 lightDirection;
-        public Microsoft.Xna.Framework.Vector3 lightAmbientColor;
+        public bool light1;
+        public Microsoft.Xna.Framework.Vector3 light1Color;
+        public Microsoft.Xna.Framework.Vector3 light1Direction;
+        public Microsoft.Xna.Framework.Vector3 light1AmbientColor;
+        public bool light2;
+        public Microsoft.Xna.Framework.Vector3 light2Color;
+        public Microsoft.Xna.Framework.Vector3 light2Direction;
+        public Microsoft.Xna.Framework.Vector3 light2AmbientColor;
     };
 
     public partial class MapGeneratorForm : Form
@@ -98,8 +102,10 @@ namespace MapGenerator
         private Color waterDeepColor = Color.DarkBlue;
         private Color noiseLowColor = Color.Black;
         private Color noiseHighColor = Color.White;
-        private Color lightColor = Color.White;
-        private Color lightAmbientColor = Color.Black;
+        private Color light1Color = Color.White;
+        private Color light1AmbientColor = Color.Black;
+        private Color light2Color = Color.Yellow;
+        private Color light2AmbientColor = Color.Black;
 
         public MapGeneratorForm()
         {
@@ -115,8 +121,10 @@ namespace MapGenerator
             waterDeepColorPicture.BackColor = waterDeepColor;
             noiseLowColorPicture.BackColor = noiseLowColor;
             noiseHighColorPicture.BackColor = noiseHighColor;
-            lightColorPicture.BackColor = lightColor;
-            lightAmbientColorPicture.BackColor = lightAmbientColor;
+            light1ColorPicture.BackColor = light1Color;
+            light1AmbientColorPicture.BackColor = light1AmbientColor;
+            light2ColorPicture.BackColor = light2Color;
+            light2AmbientColorPicture.BackColor = light2AmbientColor;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
@@ -259,19 +267,33 @@ namespace MapGenerator
             options.detailsLayer3Scale = (float)detailsLayer3Scale.Value;
 
             // Lighting
-            options.normals = normalCheckbox.Checked;
-            options.lightColor = new Microsoft.Xna.Framework.Vector3(
-                (float)lightColor.R / 255,
-                (float)lightColor.G / 255,
-                (float)lightColor.B / 255);
-            options.lightAmbientColor = new Microsoft.Xna.Framework.Vector3(
-                (float)lightAmbientColor.R / 255,
-                (float)lightAmbientColor.G / 255,
-                (float)lightAmbientColor.B / 255);
-            options.lightDirection = new Microsoft.Xna.Framework.Vector3(
-                (float)lightPositionX.Value,
-                (float)lightPositionY.Value,
-                (float)lightPositionZ.Value);
+            options.light1 = light1Checkbox.Checked;
+            options.light1Color = new Microsoft.Xna.Framework.Vector3(
+                (float)light1Color.R / 255,
+                (float)light1Color.G / 255,
+                (float)light1Color.B / 255);
+            options.light1AmbientColor = new Microsoft.Xna.Framework.Vector3(
+                (float)light1AmbientColor.R / 255,
+                (float)light1AmbientColor.G / 255,
+                (float)light1AmbientColor.B / 255);
+            options.light1Direction = new Microsoft.Xna.Framework.Vector3(
+                (float)light1PositionX.Value,
+                (float)light1PositionY.Value,
+                (float)light1PositionZ.Value);
+
+            options.light2 = light2Checkbox.Checked;
+            options.light2Color = new Microsoft.Xna.Framework.Vector3(
+                (float)light2Color.R / 255,
+                (float)light2Color.G / 255,
+                (float)light2Color.B / 255);
+            options.light2AmbientColor = new Microsoft.Xna.Framework.Vector3(
+                (float)light2AmbientColor.R / 255,
+                (float)light2AmbientColor.G / 255,
+                (float)light2AmbientColor.B / 255);
+            options.light2Direction = new Microsoft.Xna.Framework.Vector3(
+                (float)light2PositionX.Value,
+                (float)light2PositionY.Value,
+                (float)light2PositionZ.Value);
 
             return options;
         }
@@ -379,7 +401,8 @@ namespace MapGenerator
                 options.detailsLayer1 = false;
                 options.detailsLayer2 = false;
                 options.detailsLayer3 = false;
-                options.normals = false;
+                options.light1 = false;
+                options.light2 = false;
                 main.generateMap(options);
                 redrawMap = true;
             }
@@ -648,16 +671,16 @@ namespace MapGenerator
         private void lightColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = lightColor;
+            colorDialog.Color = light1Color;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     // Set color
-                    lightColor = colorDialog.Color;
+                    light1Color = colorDialog.Color;
 
                     // Draw color on UI
-                    lightColorPicture.BackColor = lightColor;
+                    light1ColorPicture.BackColor = light1Color;
 
                     // Draw map
                     main.generateMap(getOptions());
@@ -668,16 +691,56 @@ namespace MapGenerator
         private void lightAmbientColorPicture_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = lightAmbientColor;
+            colorDialog.Color = light1AmbientColor;
             Invoke((Action)(() =>
             {
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     // Set color
-                    lightAmbientColor = colorDialog.Color;
+                    light1AmbientColor = colorDialog.Color;
 
                     // Draw color on UI
-                    lightAmbientColorPicture.BackColor = lightAmbientColor;
+                    light1AmbientColorPicture.BackColor = light1AmbientColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void light2ColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = light2Color;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    light2Color = colorDialog.Color;
+
+                    // Draw color on UI
+                    light2ColorPicture.BackColor = light2Color;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void light2AmbientColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = light2AmbientColor;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    light2AmbientColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    light2AmbientColorPicture.BackColor = light2AmbientColor;
 
                     // Draw map
                     main.generateMap(getOptions());

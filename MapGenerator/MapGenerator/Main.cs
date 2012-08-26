@@ -657,12 +657,17 @@ namespace MapGenerator
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
             
-            if (options.normals)
+            if (options.light1 || options.light2)
             {
                 GraphicsDevice.Textures[1] = normalMap;
-                normalMapEffect.Parameters["lightColor"].SetValue(options.lightColor);
-                normalMapEffect.Parameters["lightDirection"].SetValue(options.lightDirection);
-                normalMapEffect.Parameters["lightAmbientColor"].SetValue(options.lightAmbientColor);
+                normalMapEffect.Parameters["light1"].SetValue(options.light1);
+                normalMapEffect.Parameters["light1Color"].SetValue(options.light1Color);
+                normalMapEffect.Parameters["light1Direction"].SetValue(options.light1Direction);
+                normalMapEffect.Parameters["light1AmbientColor"].SetValue(options.light1AmbientColor);
+                normalMapEffect.Parameters["light2"].SetValue(options.light2);
+                normalMapEffect.Parameters["light2Color"].SetValue(options.light2Color);
+                normalMapEffect.Parameters["light2Direction"].SetValue(options.light2Direction);
+                normalMapEffect.Parameters["light2AmbientColor"].SetValue(options.light2AmbientColor);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, normalMapEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 if (options.flora1)
@@ -678,7 +683,7 @@ namespace MapGenerator
 
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
 
-            if (!options.normals)
+            if (!options.light1 && !options.light2)
             {
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 if (options.flora1)

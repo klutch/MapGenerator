@@ -150,18 +150,30 @@ namespace MapGenerator
             this.detailsLayer1RangeLabel = new System.Windows.Forms.Label();
             this.detailsLayer1Checkbox = new System.Windows.Forms.CheckBox();
             this.lightingTab = new System.Windows.Forms.TabPage();
-            this.lightAmbientColorLabel = new System.Windows.Forms.Label();
-            this.lightAmbientColorPicture = new System.Windows.Forms.PictureBox();
-            this.lightPositionZ = new System.Windows.Forms.NumericUpDown();
-            this.lightPositionZLabel = new System.Windows.Forms.Label();
-            this.lightPositionY = new System.Windows.Forms.NumericUpDown();
-            this.lightPositionYLabel = new System.Windows.Forms.Label();
-            this.lightPositionX = new System.Windows.Forms.NumericUpDown();
-            this.lightPositionXLabel = new System.Windows.Forms.Label();
-            this.lightPosition = new System.Windows.Forms.Label();
-            this.lightColorLabel = new System.Windows.Forms.Label();
-            this.lightColorPicture = new System.Windows.Forms.PictureBox();
-            this.normalCheckbox = new System.Windows.Forms.CheckBox();
+            this.light2Checkbox = new System.Windows.Forms.CheckBox();
+            this.light2AmbientColorLabel = new System.Windows.Forms.Label();
+            this.light2AmbientColorPicture = new System.Windows.Forms.PictureBox();
+            this.light2PositionZ = new System.Windows.Forms.NumericUpDown();
+            this.light2PositionZLabel = new System.Windows.Forms.Label();
+            this.light2PositionY = new System.Windows.Forms.NumericUpDown();
+            this.light2PositionYLabel = new System.Windows.Forms.Label();
+            this.light2PositionX = new System.Windows.Forms.NumericUpDown();
+            this.light2PositionXLabel = new System.Windows.Forms.Label();
+            this.light2PositionLabel = new System.Windows.Forms.Label();
+            this.light2ColorLabel = new System.Windows.Forms.Label();
+            this.light2ColorPicture = new System.Windows.Forms.PictureBox();
+            this.light1AmbientColorLabel = new System.Windows.Forms.Label();
+            this.light1AmbientColorPicture = new System.Windows.Forms.PictureBox();
+            this.light1PositionZ = new System.Windows.Forms.NumericUpDown();
+            this.light1PositionZLabel = new System.Windows.Forms.Label();
+            this.light1PositionY = new System.Windows.Forms.NumericUpDown();
+            this.light1PositionYLabel = new System.Windows.Forms.Label();
+            this.light1PositionX = new System.Windows.Forms.NumericUpDown();
+            this.light1PositionXLabel = new System.Windows.Forms.Label();
+            this.light1Position = new System.Windows.Forms.Label();
+            this.light1ColorLabel = new System.Windows.Forms.Label();
+            this.light1ColorPicture = new System.Windows.Forms.PictureBox();
+            this.light1Checkbox = new System.Windows.Forms.CheckBox();
             this.renderTab = new System.Windows.Forms.TabPage();
             this.renderHeight = new System.Windows.Forms.NumericUpDown();
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
@@ -222,11 +234,16 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).BeginInit();
             this.lightingTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lightAmbientColorPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightPositionZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightPositionY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightPositionX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2AmbientColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2PositionZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2PositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2PositionX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2ColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1AmbientColorPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1PositionZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1PositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1PositionX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1ColorPicture)).BeginInit();
             this.renderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
@@ -2022,18 +2039,30 @@ namespace MapGenerator
             // 
             // lightingTab
             // 
-            this.lightingTab.Controls.Add(this.lightAmbientColorLabel);
-            this.lightingTab.Controls.Add(this.lightAmbientColorPicture);
-            this.lightingTab.Controls.Add(this.lightPositionZ);
-            this.lightingTab.Controls.Add(this.lightPositionZLabel);
-            this.lightingTab.Controls.Add(this.lightPositionY);
-            this.lightingTab.Controls.Add(this.lightPositionYLabel);
-            this.lightingTab.Controls.Add(this.lightPositionX);
-            this.lightingTab.Controls.Add(this.lightPositionXLabel);
-            this.lightingTab.Controls.Add(this.lightPosition);
-            this.lightingTab.Controls.Add(this.lightColorLabel);
-            this.lightingTab.Controls.Add(this.lightColorPicture);
-            this.lightingTab.Controls.Add(this.normalCheckbox);
+            this.lightingTab.Controls.Add(this.light2Checkbox);
+            this.lightingTab.Controls.Add(this.light2AmbientColorLabel);
+            this.lightingTab.Controls.Add(this.light2AmbientColorPicture);
+            this.lightingTab.Controls.Add(this.light2PositionZ);
+            this.lightingTab.Controls.Add(this.light2PositionZLabel);
+            this.lightingTab.Controls.Add(this.light2PositionY);
+            this.lightingTab.Controls.Add(this.light2PositionYLabel);
+            this.lightingTab.Controls.Add(this.light2PositionX);
+            this.lightingTab.Controls.Add(this.light2PositionXLabel);
+            this.lightingTab.Controls.Add(this.light2PositionLabel);
+            this.lightingTab.Controls.Add(this.light2ColorLabel);
+            this.lightingTab.Controls.Add(this.light2ColorPicture);
+            this.lightingTab.Controls.Add(this.light1AmbientColorLabel);
+            this.lightingTab.Controls.Add(this.light1AmbientColorPicture);
+            this.lightingTab.Controls.Add(this.light1PositionZ);
+            this.lightingTab.Controls.Add(this.light1PositionZLabel);
+            this.lightingTab.Controls.Add(this.light1PositionY);
+            this.lightingTab.Controls.Add(this.light1PositionYLabel);
+            this.lightingTab.Controls.Add(this.light1PositionX);
+            this.lightingTab.Controls.Add(this.light1PositionXLabel);
+            this.lightingTab.Controls.Add(this.light1Position);
+            this.lightingTab.Controls.Add(this.light1ColorLabel);
+            this.lightingTab.Controls.Add(this.light1ColorPicture);
+            this.lightingTab.Controls.Add(this.light1Checkbox);
             this.lightingTab.Location = new System.Drawing.Point(4, 49);
             this.lightingTab.Name = "lightingTab";
             this.lightingTab.Size = new System.Drawing.Size(250, 464);
@@ -2041,162 +2070,319 @@ namespace MapGenerator
             this.lightingTab.Text = "Lighting";
             this.lightingTab.UseVisualStyleBackColor = true;
             // 
-            // lightAmbientColorLabel
+            // light2Checkbox
             // 
-            this.lightAmbientColorLabel.AutoSize = true;
-            this.lightAmbientColorLabel.Location = new System.Drawing.Point(5, 93);
-            this.lightAmbientColorLabel.Name = "lightAmbientColorLabel";
-            this.lightAmbientColorLabel.Size = new System.Drawing.Size(72, 13);
-            this.lightAmbientColorLabel.TabIndex = 65;
-            this.lightAmbientColorLabel.Text = "Ambient Color";
+            this.light2Checkbox.AutoSize = true;
+            this.light2Checkbox.Checked = true;
+            this.light2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.light2Checkbox.Location = new System.Drawing.Point(8, 162);
+            this.light2Checkbox.Name = "light2Checkbox";
+            this.light2Checkbox.Size = new System.Drawing.Size(94, 17);
+            this.light2Checkbox.TabIndex = 77;
+            this.light2Checkbox.Text = "Enable Light 2";
+            this.light2Checkbox.UseVisualStyleBackColor = true;
+            this.light2Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // lightAmbientColorPicture
+            // light2AmbientColorLabel
             // 
-            this.lightAmbientColorPicture.Location = new System.Drawing.Point(9, 112);
-            this.lightAmbientColorPicture.Name = "lightAmbientColorPicture";
-            this.lightAmbientColorPicture.Size = new System.Drawing.Size(64, 20);
-            this.lightAmbientColorPicture.TabIndex = 64;
-            this.lightAmbientColorPicture.TabStop = false;
-            this.lightAmbientColorPicture.Click += new System.EventHandler(this.lightAmbientColorPicture_Click);
+            this.light2AmbientColorLabel.AutoSize = true;
+            this.light2AmbientColorLabel.Location = new System.Drawing.Point(5, 243);
+            this.light2AmbientColorLabel.Name = "light2AmbientColorLabel";
+            this.light2AmbientColorLabel.Size = new System.Drawing.Size(72, 13);
+            this.light2AmbientColorLabel.TabIndex = 76;
+            this.light2AmbientColorLabel.Text = "Ambient Color";
             // 
-            // lightPositionZ
+            // light2AmbientColorPicture
             // 
-            this.lightPositionZ.DecimalPlaces = 4;
-            this.lightPositionZ.Increment = new decimal(new int[] {
+            this.light2AmbientColorPicture.Location = new System.Drawing.Point(9, 262);
+            this.light2AmbientColorPicture.Name = "light2AmbientColorPicture";
+            this.light2AmbientColorPicture.Size = new System.Drawing.Size(64, 20);
+            this.light2AmbientColorPicture.TabIndex = 75;
+            this.light2AmbientColorPicture.TabStop = false;
+            this.light2AmbientColorPicture.Click += new System.EventHandler(this.light2AmbientColorPicture_Click);
+            // 
+            // light2PositionZ
+            // 
+            this.light2PositionZ.DecimalPlaces = 4;
+            this.light2PositionZ.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.lightPositionZ.Location = new System.Drawing.Point(121, 112);
-            this.lightPositionZ.Minimum = new decimal(new int[] {
+            this.light2PositionZ.Location = new System.Drawing.Point(121, 262);
+            this.light2PositionZ.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.lightPositionZ.Name = "lightPositionZ";
-            this.lightPositionZ.Size = new System.Drawing.Size(100, 20);
-            this.lightPositionZ.TabIndex = 63;
-            this.lightPositionZ.Value = new decimal(new int[] {
+            this.light2PositionZ.Name = "light2PositionZ";
+            this.light2PositionZ.Size = new System.Drawing.Size(100, 20);
+            this.light2PositionZ.TabIndex = 74;
+            this.light2PositionZ.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.lightPositionZ.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            this.light2PositionZ.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // lightPositionZLabel
+            // light2PositionZLabel
             // 
-            this.lightPositionZLabel.AutoSize = true;
-            this.lightPositionZLabel.Location = new System.Drawing.Point(101, 114);
-            this.lightPositionZLabel.Name = "lightPositionZLabel";
-            this.lightPositionZLabel.Size = new System.Drawing.Size(14, 13);
-            this.lightPositionZLabel.TabIndex = 62;
-            this.lightPositionZLabel.Text = "Z";
+            this.light2PositionZLabel.AutoSize = true;
+            this.light2PositionZLabel.Location = new System.Drawing.Point(101, 264);
+            this.light2PositionZLabel.Name = "light2PositionZLabel";
+            this.light2PositionZLabel.Size = new System.Drawing.Size(14, 13);
+            this.light2PositionZLabel.TabIndex = 73;
+            this.light2PositionZLabel.Text = "Z";
             // 
-            // lightPositionY
+            // light2PositionY
             // 
-            this.lightPositionY.DecimalPlaces = 4;
-            this.lightPositionY.Increment = new decimal(new int[] {
+            this.light2PositionY.DecimalPlaces = 4;
+            this.light2PositionY.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.lightPositionY.Location = new System.Drawing.Point(121, 86);
-            this.lightPositionY.Minimum = new decimal(new int[] {
+            this.light2PositionY.Location = new System.Drawing.Point(121, 236);
+            this.light2PositionY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.lightPositionY.Name = "lightPositionY";
-            this.lightPositionY.Size = new System.Drawing.Size(100, 20);
-            this.lightPositionY.TabIndex = 61;
-            this.lightPositionY.Value = new decimal(new int[] {
+            this.light2PositionY.Name = "light2PositionY";
+            this.light2PositionY.Size = new System.Drawing.Size(100, 20);
+            this.light2PositionY.TabIndex = 72;
+            this.light2PositionY.Value = new decimal(new int[] {
             25,
             0,
             0,
-            131072});
-            this.lightPositionY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            -2147352576});
+            this.light2PositionY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // lightPositionYLabel
+            // light2PositionYLabel
             // 
-            this.lightPositionYLabel.AutoSize = true;
-            this.lightPositionYLabel.Location = new System.Drawing.Point(101, 88);
-            this.lightPositionYLabel.Name = "lightPositionYLabel";
-            this.lightPositionYLabel.Size = new System.Drawing.Size(14, 13);
-            this.lightPositionYLabel.TabIndex = 60;
-            this.lightPositionYLabel.Text = "Y";
+            this.light2PositionYLabel.AutoSize = true;
+            this.light2PositionYLabel.Location = new System.Drawing.Point(101, 238);
+            this.light2PositionYLabel.Name = "light2PositionYLabel";
+            this.light2PositionYLabel.Size = new System.Drawing.Size(14, 13);
+            this.light2PositionYLabel.TabIndex = 71;
+            this.light2PositionYLabel.Text = "Y";
             // 
-            // lightPositionX
+            // light2PositionX
             // 
-            this.lightPositionX.DecimalPlaces = 4;
-            this.lightPositionX.Increment = new decimal(new int[] {
+            this.light2PositionX.DecimalPlaces = 4;
+            this.light2PositionX.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.lightPositionX.Location = new System.Drawing.Point(121, 60);
-            this.lightPositionX.Minimum = new decimal(new int[] {
+            this.light2PositionX.Location = new System.Drawing.Point(121, 210);
+            this.light2PositionX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.lightPositionX.Name = "lightPositionX";
-            this.lightPositionX.Size = new System.Drawing.Size(100, 20);
-            this.lightPositionX.TabIndex = 59;
-            this.lightPositionX.Value = new decimal(new int[] {
+            this.light2PositionX.Name = "light2PositionX";
+            this.light2PositionX.Size = new System.Drawing.Size(100, 20);
+            this.light2PositionX.TabIndex = 70;
+            this.light2PositionX.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            -2147352576});
+            this.light2PositionX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // light2PositionXLabel
+            // 
+            this.light2PositionXLabel.AutoSize = true;
+            this.light2PositionXLabel.Location = new System.Drawing.Point(101, 212);
+            this.light2PositionXLabel.Name = "light2PositionXLabel";
+            this.light2PositionXLabel.Size = new System.Drawing.Size(14, 13);
+            this.light2PositionXLabel.TabIndex = 69;
+            this.light2PositionXLabel.Text = "X";
+            // 
+            // light2PositionLabel
+            // 
+            this.light2PositionLabel.AutoSize = true;
+            this.light2PositionLabel.Location = new System.Drawing.Point(90, 191);
+            this.light2PositionLabel.Name = "light2PositionLabel";
+            this.light2PositionLabel.Size = new System.Drawing.Size(70, 13);
+            this.light2PositionLabel.TabIndex = 68;
+            this.light2PositionLabel.Text = "Light Position";
+            // 
+            // light2ColorLabel
+            // 
+            this.light2ColorLabel.AutoSize = true;
+            this.light2ColorLabel.Location = new System.Drawing.Point(5, 191);
+            this.light2ColorLabel.Name = "light2ColorLabel";
+            this.light2ColorLabel.Size = new System.Drawing.Size(57, 13);
+            this.light2ColorLabel.TabIndex = 67;
+            this.light2ColorLabel.Text = "Light Color";
+            // 
+            // light2ColorPicture
+            // 
+            this.light2ColorPicture.Location = new System.Drawing.Point(9, 210);
+            this.light2ColorPicture.Name = "light2ColorPicture";
+            this.light2ColorPicture.Size = new System.Drawing.Size(64, 20);
+            this.light2ColorPicture.TabIndex = 66;
+            this.light2ColorPicture.TabStop = false;
+            this.light2ColorPicture.Click += new System.EventHandler(this.light2ColorPicture_Click);
+            // 
+            // light1AmbientColorLabel
+            // 
+            this.light1AmbientColorLabel.AutoSize = true;
+            this.light1AmbientColorLabel.Location = new System.Drawing.Point(5, 93);
+            this.light1AmbientColorLabel.Name = "light1AmbientColorLabel";
+            this.light1AmbientColorLabel.Size = new System.Drawing.Size(72, 13);
+            this.light1AmbientColorLabel.TabIndex = 65;
+            this.light1AmbientColorLabel.Text = "Ambient Color";
+            // 
+            // light1AmbientColorPicture
+            // 
+            this.light1AmbientColorPicture.Location = new System.Drawing.Point(9, 112);
+            this.light1AmbientColorPicture.Name = "light1AmbientColorPicture";
+            this.light1AmbientColorPicture.Size = new System.Drawing.Size(64, 20);
+            this.light1AmbientColorPicture.TabIndex = 64;
+            this.light1AmbientColorPicture.TabStop = false;
+            this.light1AmbientColorPicture.Click += new System.EventHandler(this.lightAmbientColorPicture_Click);
+            // 
+            // light1PositionZ
+            // 
+            this.light1PositionZ.DecimalPlaces = 4;
+            this.light1PositionZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.light1PositionZ.Location = new System.Drawing.Point(121, 112);
+            this.light1PositionZ.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.light1PositionZ.Name = "light1PositionZ";
+            this.light1PositionZ.Size = new System.Drawing.Size(100, 20);
+            this.light1PositionZ.TabIndex = 63;
+            this.light1PositionZ.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.light1PositionZ.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // light1PositionZLabel
+            // 
+            this.light1PositionZLabel.AutoSize = true;
+            this.light1PositionZLabel.Location = new System.Drawing.Point(101, 114);
+            this.light1PositionZLabel.Name = "light1PositionZLabel";
+            this.light1PositionZLabel.Size = new System.Drawing.Size(14, 13);
+            this.light1PositionZLabel.TabIndex = 62;
+            this.light1PositionZLabel.Text = "Z";
+            // 
+            // light1PositionY
+            // 
+            this.light1PositionY.DecimalPlaces = 4;
+            this.light1PositionY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.light1PositionY.Location = new System.Drawing.Point(121, 86);
+            this.light1PositionY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.light1PositionY.Name = "light1PositionY";
+            this.light1PositionY.Size = new System.Drawing.Size(100, 20);
+            this.light1PositionY.TabIndex = 61;
+            this.light1PositionY.Value = new decimal(new int[] {
             25,
             0,
             0,
             131072});
-            this.lightPositionX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            this.light1PositionY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // lightPositionXLabel
+            // light1PositionYLabel
             // 
-            this.lightPositionXLabel.AutoSize = true;
-            this.lightPositionXLabel.Location = new System.Drawing.Point(101, 62);
-            this.lightPositionXLabel.Name = "lightPositionXLabel";
-            this.lightPositionXLabel.Size = new System.Drawing.Size(14, 13);
-            this.lightPositionXLabel.TabIndex = 4;
-            this.lightPositionXLabel.Text = "X";
+            this.light1PositionYLabel.AutoSize = true;
+            this.light1PositionYLabel.Location = new System.Drawing.Point(101, 88);
+            this.light1PositionYLabel.Name = "light1PositionYLabel";
+            this.light1PositionYLabel.Size = new System.Drawing.Size(14, 13);
+            this.light1PositionYLabel.TabIndex = 60;
+            this.light1PositionYLabel.Text = "Y";
             // 
-            // lightPosition
+            // light1PositionX
             // 
-            this.lightPosition.AutoSize = true;
-            this.lightPosition.Location = new System.Drawing.Point(90, 41);
-            this.lightPosition.Name = "lightPosition";
-            this.lightPosition.Size = new System.Drawing.Size(70, 13);
-            this.lightPosition.TabIndex = 3;
-            this.lightPosition.Text = "Light Position";
+            this.light1PositionX.DecimalPlaces = 4;
+            this.light1PositionX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.light1PositionX.Location = new System.Drawing.Point(121, 60);
+            this.light1PositionX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.light1PositionX.Name = "light1PositionX";
+            this.light1PositionX.Size = new System.Drawing.Size(100, 20);
+            this.light1PositionX.TabIndex = 59;
+            this.light1PositionX.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.light1PositionX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // lightColorLabel
+            // light1PositionXLabel
             // 
-            this.lightColorLabel.AutoSize = true;
-            this.lightColorLabel.Location = new System.Drawing.Point(5, 41);
-            this.lightColorLabel.Name = "lightColorLabel";
-            this.lightColorLabel.Size = new System.Drawing.Size(57, 13);
-            this.lightColorLabel.TabIndex = 2;
-            this.lightColorLabel.Text = "Light Color";
+            this.light1PositionXLabel.AutoSize = true;
+            this.light1PositionXLabel.Location = new System.Drawing.Point(101, 62);
+            this.light1PositionXLabel.Name = "light1PositionXLabel";
+            this.light1PositionXLabel.Size = new System.Drawing.Size(14, 13);
+            this.light1PositionXLabel.TabIndex = 4;
+            this.light1PositionXLabel.Text = "X";
             // 
-            // lightColorPicture
+            // light1Position
             // 
-            this.lightColorPicture.Location = new System.Drawing.Point(9, 60);
-            this.lightColorPicture.Name = "lightColorPicture";
-            this.lightColorPicture.Size = new System.Drawing.Size(64, 20);
-            this.lightColorPicture.TabIndex = 1;
-            this.lightColorPicture.TabStop = false;
-            this.lightColorPicture.Click += new System.EventHandler(this.lightColorPicture_Click);
+            this.light1Position.AutoSize = true;
+            this.light1Position.Location = new System.Drawing.Point(90, 41);
+            this.light1Position.Name = "light1Position";
+            this.light1Position.Size = new System.Drawing.Size(70, 13);
+            this.light1Position.TabIndex = 3;
+            this.light1Position.Text = "Light Position";
             // 
-            // normalCheckbox
+            // light1ColorLabel
             // 
-            this.normalCheckbox.AutoSize = true;
-            this.normalCheckbox.Checked = true;
-            this.normalCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.normalCheckbox.Location = new System.Drawing.Point(8, 12);
-            this.normalCheckbox.Name = "normalCheckbox";
-            this.normalCheckbox.Size = new System.Drawing.Size(64, 17);
-            this.normalCheckbox.TabIndex = 0;
-            this.normalCheckbox.Text = "Normals";
-            this.normalCheckbox.UseVisualStyleBackColor = true;
-            this.normalCheckbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            this.light1ColorLabel.AutoSize = true;
+            this.light1ColorLabel.Location = new System.Drawing.Point(5, 41);
+            this.light1ColorLabel.Name = "light1ColorLabel";
+            this.light1ColorLabel.Size = new System.Drawing.Size(57, 13);
+            this.light1ColorLabel.TabIndex = 2;
+            this.light1ColorLabel.Text = "Light Color";
+            // 
+            // light1ColorPicture
+            // 
+            this.light1ColorPicture.Location = new System.Drawing.Point(9, 60);
+            this.light1ColorPicture.Name = "light1ColorPicture";
+            this.light1ColorPicture.Size = new System.Drawing.Size(64, 20);
+            this.light1ColorPicture.TabIndex = 1;
+            this.light1ColorPicture.TabStop = false;
+            this.light1ColorPicture.Click += new System.EventHandler(this.lightColorPicture_Click);
+            // 
+            // light1Checkbox
+            // 
+            this.light1Checkbox.AutoSize = true;
+            this.light1Checkbox.Checked = true;
+            this.light1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.light1Checkbox.Location = new System.Drawing.Point(8, 12);
+            this.light1Checkbox.Name = "light1Checkbox";
+            this.light1Checkbox.Size = new System.Drawing.Size(94, 17);
+            this.light1Checkbox.TabIndex = 0;
+            this.light1Checkbox.Text = "Enable Light 1";
+            this.light1Checkbox.UseVisualStyleBackColor = true;
+            this.light1Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // renderTab
             // 
@@ -2347,11 +2533,16 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).EndInit();
             this.lightingTab.ResumeLayout(false);
             this.lightingTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lightAmbientColorPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightPositionZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightPositionY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightPositionX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lightColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2AmbientColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2PositionZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2PositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2PositionX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light2ColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1AmbientColorPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1PositionZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1PositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1PositionX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1ColorPicture)).EndInit();
             this.renderTab.ResumeLayout(false);
             this.renderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
@@ -2481,18 +2672,30 @@ namespace MapGenerator
         private Label flora2RangeLabel;
         private CheckBox flora2Checkbox;
         private TabPage lightingTab;
-        private Label lightColorLabel;
-        private PictureBox lightColorPicture;
-        private CheckBox normalCheckbox;
-        private NumericUpDown lightPositionZ;
-        private Label lightPositionZLabel;
-        private NumericUpDown lightPositionY;
-        private Label lightPositionYLabel;
-        private NumericUpDown lightPositionX;
-        private Label lightPositionXLabel;
-        private Label lightPosition;
+        private Label light1ColorLabel;
+        private PictureBox light1ColorPicture;
+        private CheckBox light1Checkbox;
+        private NumericUpDown light1PositionZ;
+        private Label light1PositionZLabel;
+        private NumericUpDown light1PositionY;
+        private Label light1PositionYLabel;
+        private NumericUpDown light1PositionX;
+        private Label light1PositionXLabel;
+        private Label light1Position;
         private CheckBox worleyCheckbox;
-        private Label lightAmbientColorLabel;
-        private PictureBox lightAmbientColorPicture;
+        private Label light1AmbientColorLabel;
+        private PictureBox light1AmbientColorPicture;
+        private Label light2AmbientColorLabel;
+        private PictureBox light2AmbientColorPicture;
+        private NumericUpDown light2PositionZ;
+        private Label light2PositionZLabel;
+        private NumericUpDown light2PositionY;
+        private Label light2PositionYLabel;
+        private NumericUpDown light2PositionX;
+        private Label light2PositionXLabel;
+        private Label light2PositionLabel;
+        private Label light2ColorLabel;
+        private PictureBox light2ColorPicture;
+        private CheckBox light2Checkbox;
     }
 }
