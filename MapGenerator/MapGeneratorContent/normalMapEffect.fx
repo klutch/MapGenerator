@@ -4,10 +4,12 @@ bool light1;
 float3 light1Direction;
 float3 light1Color;
 float3 light1AmbientColor;
+float light1Intensity;
 bool light2;
 float3 light2Direction;
 float3 light2Color;
 float3 light2AmbientColor;
+float light2Intensity;
 
 float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 {
@@ -21,12 +23,12 @@ float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 	if (light1)
 	{
 		lightAmount = max(dot(normal, normalize(light1Direction)), 0);
-		totalLight += float3(lightAmount, lightAmount, lightAmount) * light1Color + light1AmbientColor;
+		totalLight += float3(lightAmount, lightAmount, lightAmount) * light1Color * light1Intensity + light1AmbientColor;
 	}
 	if (light2)
 	{
 		lightAmount = max(dot(normal, normalize(light2Direction)), 0);
-		totalLight += float3(lightAmount, lightAmount, lightAmount) * light2Color + light2AmbientColor;
+		totalLight += float3(lightAmount, lightAmount, lightAmount) * light2Color * light2Intensity + light2AmbientColor;
 	}
 
 	tex.rgb *= totalLight;

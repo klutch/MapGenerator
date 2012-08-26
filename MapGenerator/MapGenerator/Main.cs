@@ -664,10 +664,12 @@ namespace MapGenerator
                 normalMapEffect.Parameters["light1Color"].SetValue(options.light1Color);
                 normalMapEffect.Parameters["light1Direction"].SetValue(options.light1Direction);
                 normalMapEffect.Parameters["light1AmbientColor"].SetValue(options.light1AmbientColor);
+                normalMapEffect.Parameters["light1Intensity"].SetValue(options.light1Intensity);
                 normalMapEffect.Parameters["light2"].SetValue(options.light2);
                 normalMapEffect.Parameters["light2Color"].SetValue(options.light2Color);
                 normalMapEffect.Parameters["light2Direction"].SetValue(options.light2Direction);
                 normalMapEffect.Parameters["light2AmbientColor"].SetValue(options.light2AmbientColor);
+                normalMapEffect.Parameters["light2Intensity"].SetValue(options.light2Intensity);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, normalMapEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 if (options.flora1)

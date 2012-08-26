@@ -150,6 +150,10 @@ namespace MapGenerator
             this.detailsLayer1RangeLabel = new System.Windows.Forms.Label();
             this.detailsLayer1Checkbox = new System.Windows.Forms.CheckBox();
             this.lightingTab = new System.Windows.Forms.TabPage();
+            this.light2Intensity = new System.Windows.Forms.NumericUpDown();
+            this.light2IntensityLabel = new System.Windows.Forms.Label();
+            this.light1Intensity = new System.Windows.Forms.NumericUpDown();
+            this.light1IntensityLabel = new System.Windows.Forms.Label();
             this.light2Checkbox = new System.Windows.Forms.CheckBox();
             this.light2AmbientColorLabel = new System.Windows.Forms.Label();
             this.light2AmbientColorPicture = new System.Windows.Forms.PictureBox();
@@ -234,6 +238,8 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).BeginInit();
             this.lightingTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.light2Intensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1Intensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2AmbientColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2PositionZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2PositionY)).BeginInit();
@@ -2039,6 +2045,10 @@ namespace MapGenerator
             // 
             // lightingTab
             // 
+            this.lightingTab.Controls.Add(this.light2Intensity);
+            this.lightingTab.Controls.Add(this.light2IntensityLabel);
+            this.lightingTab.Controls.Add(this.light1Intensity);
+            this.lightingTab.Controls.Add(this.light1IntensityLabel);
             this.lightingTab.Controls.Add(this.light2Checkbox);
             this.lightingTab.Controls.Add(this.light2AmbientColorLabel);
             this.lightingTab.Controls.Add(this.light2AmbientColorPicture);
@@ -2070,12 +2080,68 @@ namespace MapGenerator
             this.lightingTab.Text = "Lighting";
             this.lightingTab.UseVisualStyleBackColor = true;
             // 
+            // light2Intensity
+            // 
+            this.light2Intensity.DecimalPlaces = 4;
+            this.light2Intensity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.light2Intensity.Location = new System.Drawing.Point(10, 362);
+            this.light2Intensity.Name = "light2Intensity";
+            this.light2Intensity.Size = new System.Drawing.Size(100, 20);
+            this.light2Intensity.TabIndex = 81;
+            this.light2Intensity.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.light2Intensity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // light2IntensityLabel
+            // 
+            this.light2IntensityLabel.AutoSize = true;
+            this.light2IntensityLabel.Location = new System.Drawing.Point(6, 346);
+            this.light2IntensityLabel.Name = "light2IntensityLabel";
+            this.light2IntensityLabel.Size = new System.Drawing.Size(46, 13);
+            this.light2IntensityLabel.TabIndex = 80;
+            this.light2IntensityLabel.Text = "Intensity";
+            // 
+            // light1Intensity
+            // 
+            this.light1Intensity.DecimalPlaces = 4;
+            this.light1Intensity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.light1Intensity.Location = new System.Drawing.Point(9, 161);
+            this.light1Intensity.Name = "light1Intensity";
+            this.light1Intensity.Size = new System.Drawing.Size(100, 20);
+            this.light1Intensity.TabIndex = 79;
+            this.light1Intensity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.light1Intensity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // light1IntensityLabel
+            // 
+            this.light1IntensityLabel.AutoSize = true;
+            this.light1IntensityLabel.Location = new System.Drawing.Point(5, 145);
+            this.light1IntensityLabel.Name = "light1IntensityLabel";
+            this.light1IntensityLabel.Size = new System.Drawing.Size(46, 13);
+            this.light1IntensityLabel.TabIndex = 78;
+            this.light1IntensityLabel.Text = "Intensity";
+            // 
             // light2Checkbox
             // 
             this.light2Checkbox.AutoSize = true;
             this.light2Checkbox.Checked = true;
             this.light2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.light2Checkbox.Location = new System.Drawing.Point(8, 162);
+            this.light2Checkbox.Location = new System.Drawing.Point(8, 214);
             this.light2Checkbox.Name = "light2Checkbox";
             this.light2Checkbox.Size = new System.Drawing.Size(94, 17);
             this.light2Checkbox.TabIndex = 77;
@@ -2086,7 +2152,7 @@ namespace MapGenerator
             // light2AmbientColorLabel
             // 
             this.light2AmbientColorLabel.AutoSize = true;
-            this.light2AmbientColorLabel.Location = new System.Drawing.Point(5, 243);
+            this.light2AmbientColorLabel.Location = new System.Drawing.Point(5, 295);
             this.light2AmbientColorLabel.Name = "light2AmbientColorLabel";
             this.light2AmbientColorLabel.Size = new System.Drawing.Size(72, 13);
             this.light2AmbientColorLabel.TabIndex = 76;
@@ -2094,7 +2160,7 @@ namespace MapGenerator
             // 
             // light2AmbientColorPicture
             // 
-            this.light2AmbientColorPicture.Location = new System.Drawing.Point(9, 262);
+            this.light2AmbientColorPicture.Location = new System.Drawing.Point(9, 314);
             this.light2AmbientColorPicture.Name = "light2AmbientColorPicture";
             this.light2AmbientColorPicture.Size = new System.Drawing.Size(64, 20);
             this.light2AmbientColorPicture.TabIndex = 75;
@@ -2109,7 +2175,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light2PositionZ.Location = new System.Drawing.Point(121, 262);
+            this.light2PositionZ.Location = new System.Drawing.Point(121, 314);
             this.light2PositionZ.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2128,7 +2194,7 @@ namespace MapGenerator
             // light2PositionZLabel
             // 
             this.light2PositionZLabel.AutoSize = true;
-            this.light2PositionZLabel.Location = new System.Drawing.Point(101, 264);
+            this.light2PositionZLabel.Location = new System.Drawing.Point(101, 316);
             this.light2PositionZLabel.Name = "light2PositionZLabel";
             this.light2PositionZLabel.Size = new System.Drawing.Size(14, 13);
             this.light2PositionZLabel.TabIndex = 73;
@@ -2142,7 +2208,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light2PositionY.Location = new System.Drawing.Point(121, 236);
+            this.light2PositionY.Location = new System.Drawing.Point(121, 288);
             this.light2PositionY.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2152,16 +2218,16 @@ namespace MapGenerator
             this.light2PositionY.Size = new System.Drawing.Size(100, 20);
             this.light2PositionY.TabIndex = 72;
             this.light2PositionY.Value = new decimal(new int[] {
-            25,
+            5,
             0,
             0,
-            -2147352576});
+            -2147418112});
             this.light2PositionY.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // light2PositionYLabel
             // 
             this.light2PositionYLabel.AutoSize = true;
-            this.light2PositionYLabel.Location = new System.Drawing.Point(101, 238);
+            this.light2PositionYLabel.Location = new System.Drawing.Point(101, 290);
             this.light2PositionYLabel.Name = "light2PositionYLabel";
             this.light2PositionYLabel.Size = new System.Drawing.Size(14, 13);
             this.light2PositionYLabel.TabIndex = 71;
@@ -2175,7 +2241,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light2PositionX.Location = new System.Drawing.Point(121, 210);
+            this.light2PositionX.Location = new System.Drawing.Point(121, 262);
             this.light2PositionX.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2185,16 +2251,16 @@ namespace MapGenerator
             this.light2PositionX.Size = new System.Drawing.Size(100, 20);
             this.light2PositionX.TabIndex = 70;
             this.light2PositionX.Value = new decimal(new int[] {
-            25,
+            5,
             0,
             0,
-            -2147352576});
+            -2147418112});
             this.light2PositionX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // light2PositionXLabel
             // 
             this.light2PositionXLabel.AutoSize = true;
-            this.light2PositionXLabel.Location = new System.Drawing.Point(101, 212);
+            this.light2PositionXLabel.Location = new System.Drawing.Point(101, 264);
             this.light2PositionXLabel.Name = "light2PositionXLabel";
             this.light2PositionXLabel.Size = new System.Drawing.Size(14, 13);
             this.light2PositionXLabel.TabIndex = 69;
@@ -2203,7 +2269,7 @@ namespace MapGenerator
             // light2PositionLabel
             // 
             this.light2PositionLabel.AutoSize = true;
-            this.light2PositionLabel.Location = new System.Drawing.Point(90, 191);
+            this.light2PositionLabel.Location = new System.Drawing.Point(90, 243);
             this.light2PositionLabel.Name = "light2PositionLabel";
             this.light2PositionLabel.Size = new System.Drawing.Size(70, 13);
             this.light2PositionLabel.TabIndex = 68;
@@ -2212,7 +2278,7 @@ namespace MapGenerator
             // light2ColorLabel
             // 
             this.light2ColorLabel.AutoSize = true;
-            this.light2ColorLabel.Location = new System.Drawing.Point(5, 191);
+            this.light2ColorLabel.Location = new System.Drawing.Point(5, 243);
             this.light2ColorLabel.Name = "light2ColorLabel";
             this.light2ColorLabel.Size = new System.Drawing.Size(57, 13);
             this.light2ColorLabel.TabIndex = 67;
@@ -2220,7 +2286,7 @@ namespace MapGenerator
             // 
             // light2ColorPicture
             // 
-            this.light2ColorPicture.Location = new System.Drawing.Point(9, 210);
+            this.light2ColorPicture.Location = new System.Drawing.Point(9, 262);
             this.light2ColorPicture.Name = "light2ColorPicture";
             this.light2ColorPicture.Size = new System.Drawing.Size(64, 20);
             this.light2ColorPicture.TabIndex = 66;
@@ -2533,6 +2599,8 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).EndInit();
             this.lightingTab.ResumeLayout(false);
             this.lightingTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.light2Intensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.light1Intensity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2AmbientColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2PositionZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2PositionY)).EndInit();
@@ -2697,5 +2765,9 @@ namespace MapGenerator
         private Label light2ColorLabel;
         private PictureBox light2ColorPicture;
         private CheckBox light2Checkbox;
+        private NumericUpDown light2Intensity;
+        private Label light2IntensityLabel;
+        private NumericUpDown light1Intensity;
+        private Label light1IntensityLabel;
     }
 }

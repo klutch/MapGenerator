@@ -79,10 +79,12 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector3 light1Color;
         public Microsoft.Xna.Framework.Vector3 light1Direction;
         public Microsoft.Xna.Framework.Vector3 light1AmbientColor;
+        public float light1Intensity;
         public bool light2;
         public Microsoft.Xna.Framework.Vector3 light2Color;
         public Microsoft.Xna.Framework.Vector3 light2Direction;
         public Microsoft.Xna.Framework.Vector3 light2AmbientColor;
+        public float light2Intensity;
     };
 
     public partial class MapGeneratorForm : Form
@@ -104,7 +106,7 @@ namespace MapGenerator
         private Color noiseHighColor = Color.White;
         private Color light1Color = Color.White;
         private Color light1AmbientColor = Color.Black;
-        private Color light2Color = Color.Yellow;
+        private Color light2Color = Color.DarkOrange;
         private Color light2AmbientColor = Color.Black;
 
         public MapGeneratorForm()
@@ -113,6 +115,7 @@ namespace MapGenerator
             InitializeComponent();
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
             Resize += new EventHandler(MapGeneratorForm_Resize);
+
             flora1GroundColorPicture.BackColor = flora1GroundColor;
             flora1PlantColorPicture.BackColor = flora1PlantColor;
             flora2GroundColorPicture.BackColor = flora2GroundColor;
@@ -280,6 +283,7 @@ namespace MapGenerator
                 (float)light1PositionX.Value,
                 (float)light1PositionY.Value,
                 (float)light1PositionZ.Value);
+            options.light1Intensity = (float)light1Intensity.Value;
 
             options.light2 = light2Checkbox.Checked;
             options.light2Color = new Microsoft.Xna.Framework.Vector3(
@@ -294,6 +298,7 @@ namespace MapGenerator
                 (float)light2PositionX.Value,
                 (float)light2PositionY.Value,
                 (float)light2PositionZ.Value);
+            options.light2Intensity = (float)light2Intensity.Value;
 
             return options;
         }
