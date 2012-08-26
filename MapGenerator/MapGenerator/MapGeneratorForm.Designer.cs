@@ -43,6 +43,7 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel = new System.Windows.Forms.Label();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.worleyCheckbox = new System.Windows.Forms.CheckBox();
             this.noiseHighColorLabel = new System.Windows.Forms.Label();
             this.noiseHighColorPicture = new System.Windows.Forms.PictureBox();
             this.noiseLowColorLabel = new System.Windows.Forms.Label();
@@ -149,6 +150,8 @@ namespace MapGenerator
             this.detailsLayer1RangeLabel = new System.Windows.Forms.Label();
             this.detailsLayer1Checkbox = new System.Windows.Forms.CheckBox();
             this.lightingTab = new System.Windows.Forms.TabPage();
+            this.lightAmbientColorLabel = new System.Windows.Forms.Label();
+            this.lightAmbientColorPicture = new System.Windows.Forms.PictureBox();
             this.lightPositionZ = new System.Windows.Forms.NumericUpDown();
             this.lightPositionZLabel = new System.Windows.Forms.Label();
             this.lightPositionY = new System.Windows.Forms.NumericUpDown();
@@ -164,7 +167,6 @@ namespace MapGenerator
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
-            this.worleyCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -220,6 +222,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).BeginInit();
             this.lightingTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lightAmbientColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lightPositionZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lightPositionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lightPositionX)).BeginInit();
@@ -352,6 +355,17 @@ namespace MapGenerator
             this.noiseTab.TabIndex = 1;
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
+            // 
+            // worleyCheckbox
+            // 
+            this.worleyCheckbox.AutoSize = true;
+            this.worleyCheckbox.Location = new System.Drawing.Point(9, 307);
+            this.worleyCheckbox.Name = "worleyCheckbox";
+            this.worleyCheckbox.Size = new System.Drawing.Size(95, 17);
+            this.worleyCheckbox.TabIndex = 69;
+            this.worleyCheckbox.Text = "Use Cell Noise";
+            this.worleyCheckbox.UseVisualStyleBackColor = true;
+            this.worleyCheckbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // noiseHighColorLabel
             // 
@@ -2008,6 +2022,8 @@ namespace MapGenerator
             // 
             // lightingTab
             // 
+            this.lightingTab.Controls.Add(this.lightAmbientColorLabel);
+            this.lightingTab.Controls.Add(this.lightAmbientColorPicture);
             this.lightingTab.Controls.Add(this.lightPositionZ);
             this.lightingTab.Controls.Add(this.lightPositionZLabel);
             this.lightingTab.Controls.Add(this.lightPositionY);
@@ -2024,6 +2040,24 @@ namespace MapGenerator
             this.lightingTab.TabIndex = 5;
             this.lightingTab.Text = "Lighting";
             this.lightingTab.UseVisualStyleBackColor = true;
+            // 
+            // lightAmbientColorLabel
+            // 
+            this.lightAmbientColorLabel.AutoSize = true;
+            this.lightAmbientColorLabel.Location = new System.Drawing.Point(5, 93);
+            this.lightAmbientColorLabel.Name = "lightAmbientColorLabel";
+            this.lightAmbientColorLabel.Size = new System.Drawing.Size(72, 13);
+            this.lightAmbientColorLabel.TabIndex = 65;
+            this.lightAmbientColorLabel.Text = "Ambient Color";
+            // 
+            // lightAmbientColorPicture
+            // 
+            this.lightAmbientColorPicture.Location = new System.Drawing.Point(9, 112);
+            this.lightAmbientColorPicture.Name = "lightAmbientColorPicture";
+            this.lightAmbientColorPicture.Size = new System.Drawing.Size(64, 20);
+            this.lightAmbientColorPicture.TabIndex = 64;
+            this.lightAmbientColorPicture.TabStop = false;
+            this.lightAmbientColorPicture.Click += new System.EventHandler(this.lightAmbientColorPicture_Click);
             // 
             // lightPositionZ
             // 
@@ -2144,9 +2178,9 @@ namespace MapGenerator
             // 
             // lightColorPicture
             // 
-            this.lightColorPicture.Location = new System.Drawing.Point(9, 57);
+            this.lightColorPicture.Location = new System.Drawing.Point(9, 60);
             this.lightColorPicture.Name = "lightColorPicture";
-            this.lightColorPicture.Size = new System.Drawing.Size(64, 28);
+            this.lightColorPicture.Size = new System.Drawing.Size(64, 20);
             this.lightColorPicture.TabIndex = 1;
             this.lightColorPicture.TabStop = false;
             this.lightColorPicture.Click += new System.EventHandler(this.lightColorPicture_Click);
@@ -2234,17 +2268,6 @@ namespace MapGenerator
             this.saveComposite.UseVisualStyleBackColor = true;
             this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
             // 
-            // worleyCheckbox
-            // 
-            this.worleyCheckbox.AutoSize = true;
-            this.worleyCheckbox.Location = new System.Drawing.Point(9, 307);
-            this.worleyCheckbox.Name = "worleyCheckbox";
-            this.worleyCheckbox.Size = new System.Drawing.Size(95, 17);
-            this.worleyCheckbox.TabIndex = 69;
-            this.worleyCheckbox.Text = "Use Cell Noise";
-            this.worleyCheckbox.UseVisualStyleBackColor = true;
-            this.worleyCheckbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2324,6 +2347,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).EndInit();
             this.lightingTab.ResumeLayout(false);
             this.lightingTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lightAmbientColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lightPositionZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lightPositionY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lightPositionX)).EndInit();
@@ -2468,5 +2492,7 @@ namespace MapGenerator
         private Label lightPositionXLabel;
         private Label lightPosition;
         private CheckBox worleyCheckbox;
+        private Label lightAmbientColorLabel;
+        private PictureBox lightAmbientColorPicture;
     }
 }

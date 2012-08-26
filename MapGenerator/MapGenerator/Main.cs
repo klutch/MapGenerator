@@ -662,6 +662,7 @@ namespace MapGenerator
                 GraphicsDevice.Textures[1] = normalMap;
                 normalMapEffect.Parameters["lightColor"].SetValue(options.lightColor);
                 normalMapEffect.Parameters["lightDirection"].SetValue(options.lightDirection);
+                normalMapEffect.Parameters["lightAmbientColor"].SetValue(options.lightAmbientColor);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, normalMapEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 if (options.flora1)

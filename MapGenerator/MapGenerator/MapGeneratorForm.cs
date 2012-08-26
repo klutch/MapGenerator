@@ -78,6 +78,7 @@ namespace MapGenerator
         public bool normals;
         public Microsoft.Xna.Framework.Vector3 lightColor;
         public Microsoft.Xna.Framework.Vector3 lightDirection;
+        public Microsoft.Xna.Framework.Vector3 lightAmbientColor;
     };
 
     public partial class MapGeneratorForm : Form
@@ -98,6 +99,7 @@ namespace MapGenerator
         private Color noiseLowColor = Color.Black;
         private Color noiseHighColor = Color.White;
         private Color lightColor = Color.White;
+        private Color lightAmbientColor = Color.Black;
 
         public MapGeneratorForm()
         {
@@ -114,6 +116,7 @@ namespace MapGenerator
             noiseLowColorPicture.BackColor = noiseLowColor;
             noiseHighColorPicture.BackColor = noiseHighColor;
             lightColorPicture.BackColor = lightColor;
+            lightAmbientColorPicture.BackColor = lightAmbientColor;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
@@ -261,6 +264,10 @@ namespace MapGenerator
                 (float)lightColor.R / 255,
                 (float)lightColor.G / 255,
                 (float)lightColor.B / 255);
+            options.lightAmbientColor = new Microsoft.Xna.Framework.Vector3(
+                (float)lightAmbientColor.R / 255,
+                (float)lightAmbientColor.G / 255,
+                (float)lightAmbientColor.B / 255);
             options.lightDirection = new Microsoft.Xna.Framework.Vector3(
                 (float)lightPositionX.Value,
                 (float)lightPositionY.Value,
@@ -651,6 +658,26 @@ namespace MapGenerator
 
                     // Draw color on UI
                     lightColorPicture.BackColor = lightColor;
+
+                    // Draw map
+                    main.generateMap(getOptions());
+                }
+            }));
+        }
+
+        private void lightAmbientColorPicture_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = lightAmbientColor;
+            Invoke((Action)(() =>
+            {
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    // Set color
+                    lightAmbientColor = colorDialog.Color;
+
+                    // Draw color on UI
+                    lightAmbientColorPicture.BackColor = lightAmbientColor;
 
                     // Draw map
                     main.generateMap(getOptions());
