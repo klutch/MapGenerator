@@ -531,7 +531,9 @@ namespace MapGenerator
         private void saveMapFile(string filePath)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(MapGeneratorOptions));
-            FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+            FileStream fileStream = new FileStream(filePath, FileMode.CreateNew);
             serializer.Serialize(fileStream, getOptions());
             fileStream.Close();
             fileStream.Dispose();
