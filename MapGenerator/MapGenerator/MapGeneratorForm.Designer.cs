@@ -35,6 +35,7 @@ namespace MapGenerator
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.surface = new System.Windows.Forms.PictureBox();
             this.randomSeedLabel = new System.Windows.Forms.Label();
             this.generateButton = new System.Windows.Forms.Button();
@@ -183,6 +184,14 @@ namespace MapGenerator
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
+            this.fileSaveLayers = new System.Windows.Forms.MenuItem();
+            this.fileSaveComposite = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.fileExit = new System.Windows.Forms.MenuItem();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.renderGenerateMap = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -2520,6 +2529,58 @@ namespace MapGenerator
             this.saveComposite.UseVisualStyleBackColor = true;
             this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
             // 
+            // fileSaveLayers
+            // 
+            this.fileSaveLayers.Index = 0;
+            this.fileSaveLayers.Text = "Save Layers";
+            this.fileSaveLayers.Click += new System.EventHandler(this.saveLayersButton_Click);
+            // 
+            // fileSaveComposite
+            // 
+            this.fileSaveComposite.Index = 1;
+            this.fileSaveComposite.Text = "Save Composite";
+            this.fileSaveComposite.Click += new System.EventHandler(this.saveComposite_Click);
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 2;
+            this.menuItem4.Text = "Save Map";
+            // 
+            // fileExit
+            // 
+            this.fileExit.Index = 3;
+            this.fileExit.Text = "Exit";
+            this.fileExit.Click += new System.EventHandler(this.fileExit_Click);
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.fileSaveLayers,
+            this.fileSaveComposite,
+            this.menuItem4,
+            this.fileExit});
+            this.menuItem1.Text = "File";
+            // 
+            // renderGenerateMap
+            // 
+            this.renderGenerateMap.Index = 0;
+            this.renderGenerateMap.Text = "Generate Map";
+            this.renderGenerateMap.Click += new System.EventHandler(this.renderGenerateMap_Click);
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 1;
+            this.menuItem6.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.renderGenerateMap});
+            this.menuItem6.Text = "Render";
+            // 
+            // mainMenu1
+            // 
+            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem6});
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2531,6 +2592,7 @@ namespace MapGenerator
             this.Controls.Add(this.generateButton);
             this.Controls.Add(this.surface);
             this.KeyPreview = true;
+            this.Menu = this.mainMenu1;
             this.Name = "MapGeneratorForm";
             this.Text = "Map Generator";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MapGeneratorForm_KeyDown);
@@ -2769,5 +2831,13 @@ namespace MapGenerator
         private Label light2IntensityLabel;
         private NumericUpDown light1Intensity;
         private Label light1IntensityLabel;
+        private MenuItem fileSaveLayers;
+        private MenuItem fileSaveComposite;
+        private MenuItem menuItem4;
+        private MenuItem fileExit;
+        private MenuItem menuItem1;
+        private MenuItem renderGenerateMap;
+        private MenuItem menuItem6;
+        private MainMenu mainMenu1;
     }
 }

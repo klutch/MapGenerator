@@ -137,7 +137,7 @@ namespace MapGenerator
             surface.Height = Height;
 
             // Resize main options control
-            mainOptionsControl.Height = Height - 83;
+            mainOptionsControl.Height = Height - 103;
 
             // Resize graphics device
             Main.graphics.PreferredBackBufferWidth = surface.Width;
@@ -751,6 +751,16 @@ namespace MapGenerator
                     main.generateMap(getOptions());
                 }
             }));
+        }
+
+        private void fileExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void renderGenerateMap_Click(object sender, EventArgs e)
+        {
+            main.generateMap(getOptions());
         }
     }
 }
