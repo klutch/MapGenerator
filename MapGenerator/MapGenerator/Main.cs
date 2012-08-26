@@ -471,10 +471,10 @@ namespace MapGenerator
 
                             // Drawing properties
                             float angle = (float)random.NextDouble() * 6.28f;
-                            float colorValue = (float)pixel.G / 75;
-                            colorValue *= 1 - chance;
-                            Vector4 plantColor = options.flora1ShowPlantColor ? options.flora1PlantColor : new Vector4(1, 1, 1, 1);
-                            textureColor = new Color(colorValue * plantColor.X, colorValue * plantColor.Y, colorValue * plantColor.Z, 1);
+
+                            // Value at pixel
+                            float value = (float)pixel.A / 255f;
+                            textureColor = new Color(options.flora1PlantColor.X * value, options.flora1PlantColor.Y * value, options.flora1PlantColor.Z * value, 1);
 
                             // Draw
                             spriteBatch.Draw(texture, new Vector2(i, j), texture.Bounds, textureColor, angle, new Vector2(texture.Width, texture.Height) / 2, alpha * options.flora1Scale, SpriteEffects.None, 0);
