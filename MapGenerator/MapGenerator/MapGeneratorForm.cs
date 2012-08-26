@@ -10,6 +10,7 @@ using System.IO;
 
 namespace MapGenerator
 {
+    [XmlRoot("MapGeneratorOptionsRoot")]
     public struct MapGeneratorOptions
     {
         public int width;
@@ -85,6 +86,26 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector3 light2Direction;
         public Microsoft.Xna.Framework.Vector3 light2AmbientColor;
         public float light2Intensity;
+
+        [XmlArray("flora1TextureFilePaths")]
+        [XmlArrayItem("filePath", typeof(string))]
+        public List<string> flora1TexturePaths;
+
+        [XmlArray("flora2TextureFilePaths")]
+        [XmlArrayItem("filePath", typeof(string))]
+        public List<string> flora2TexturePaths;
+
+        [XmlArray("detailsLayer1TexturePaths")]
+        [XmlArrayItem("filePath", typeof(string))]
+        public List<string> detailsLayer1TexturePaths;
+
+        [XmlArray("detailsLayer2TexturePaths")]
+        [XmlArrayItem("filePath", typeof(string))]
+        public List<string> detailsLayer2TexturePaths;
+
+        [XmlArray("detailsLayer3TexturePaths")]
+        [XmlArrayItem("filePath", typeof(string))]
+        public List<string> detailsLayer3TexturePaths;
     };
 
     public partial class MapGeneratorForm : Form
@@ -92,7 +113,6 @@ namespace MapGenerator
         public Main main;
         private Point lastDragPosition;
         private bool ctrl;
-        //private Microsoft.Xna.Framework.Vector2 effectPosition;
         private MapGeneratorOptions options;
         private bool blockGenerateMap;
         private bool ignoreSurfaceClick;
@@ -118,6 +138,18 @@ namespace MapGenerator
             Resize += new EventHandler(MapGeneratorForm_Resize);
 
             setColorBoxes();
+
+            options.flora1TexturePaths = new List<string>();
+            options.flora1TexturePaths.Add(string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.flora2TexturePaths = new List<string>();
+            options.flora2TexturePaths.Add(string.Format("{0}textures\\flora\\brush_1.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer1TexturePaths = new List<string>();
+            options.detailsLayer1TexturePaths.Add(string.Format("{0}textures\\details\\cracks.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer2TexturePaths = new List<string>();
+            options.detailsLayer2TexturePaths.Add(string.Format("{0}textures\\details\\jagged.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer2TexturePaths.Add(string.Format("{0}textures\\details\\jagged_dark.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer3TexturePaths = new List<string>();
+            options.detailsLayer3TexturePaths.Add(string.Format("{0}textures\\details\\sand_holes.png", AppDomain.CurrentDomain.BaseDirectory));
         }
 
         private void setColorBoxes()
@@ -306,6 +338,13 @@ namespace MapGenerator
                 (float)light2PositionY.Value,
                 (float)light2PositionZ.Value);
             options.light2Intensity = (float)light2Intensity.Value;
+            /*
+            Console.WriteLine("flora1TextureFilePaths: {0}", options.flora1TexturePaths);
+            Console.WriteLine("flora2TextureFilePaths: {0}", options.flora2TexturePaths);
+            Console.WriteLine("detailsLayer1TextureFilePaths: {0}", options.detailsLayer1TexturePaths);
+            Console.WriteLine("detailsLayer2TextureFilePaths: {0}", options.detailsLayer2TexturePaths);
+            Console.WriteLine("detailsLayer3TextureFilePaths: {0}", options.detailsLayer3TexturePaths);
+            */
 
             return options;
         }
@@ -463,6 +502,13 @@ namespace MapGenerator
             light2PositionZ.Value = (decimal)options.light2Direction.Z;
             light2Intensity.Value = (decimal)options.light2Intensity;
 
+            // Load texture files
+            main.setFlora1Textures(options.flora1TexturePaths);
+            main.setFlora2Textures(options.flora2TexturePaths);
+            main.setDetailsLayer1Textures(options.detailsLayer1TexturePaths);
+            main.setDetailsLayer2Textures(options.detailsLayer2TexturePaths);
+            main.setDetailsLayer3Textures(options.detailsLayer3TexturePaths);
+
             // Update color boxes
             setColorBoxes();
 
@@ -513,7 +559,7 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setFlora1Textures(fileDialog.FileNames);
+                    main.setFlora1Textures(new List<string>(fileDialog.FileNames));
                     main.generateMap(getOptions());
                 }
             }));
@@ -531,7 +577,7 @@ namespace MapGenerator
                 {
                     if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        main.setFlora2Textures(fileDialog.FileNames);
+                        main.setFlora2Textures(new List<string>(fileDialog.FileNames));
                         main.generateMap(getOptions());
                     }
                 }));
@@ -660,7 +706,7 @@ namespace MapGenerator
         private void selectDetail1Textures_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Title = "Select detail layer 2 textures";
+            fileDialog.Title = "Select detail layer 1 textures";
             fileDialog.Filter = "PNG|*.png";
             fileDialog.Multiselect = true;
             fileDialog.InitialDirectory = string.Format("{0}textures\\details\\", AppDomain.CurrentDomain.BaseDirectory);
@@ -669,7 +715,7 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setDetailsLayer1Textures(fileDialog.FileNames);
+                    main.setDetailsLayer1Textures(new List<string>(fileDialog.FileNames));
                     main.generateMap(getOptions());
                 }
             }));
@@ -687,7 +733,7 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setDetailsLayer2Textures(fileDialog.FileNames);
+                    main.setDetailsLayer2Textures(new List<string>(fileDialog.FileNames));
                     main.generateMap(getOptions());
                 }
             }));
@@ -705,7 +751,7 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setDetailsLayer3Textures(fileDialog.FileNames);
+                    main.setDetailsLayer3Textures(new List<string>(fileDialog.FileNames));
                     main.generateMap(getOptions());
                 }
             }));

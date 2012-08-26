@@ -78,16 +78,17 @@ namespace MapGenerator
             graphics.ApplyChanges();
 
             // Load default textures
+            MapGeneratorOptions options = mapGeneratorForm.getOptions();
             flora1Textures = new List<Texture2D>();
-            setFlora1Textures(new string[] { string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory) });
             flora2Textures = new List<Texture2D>();
-            setFlora2Textures(new string[] { string.Format("{0}textures\\flora\\brush_1.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer1Textures = new List<Texture2D>();
-            setDetailsLayer1Textures(new string[] { string.Format("{0}textures\\details\\cracks.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer2Textures = new List<Texture2D>();
-            setDetailsLayer2Textures(new string[] { string.Format("{0}textures\\details\\sand_holes.png", AppDomain.CurrentDomain.BaseDirectory) });
             detailsLayer3Textures = new List<Texture2D>();
-            setDetailsLayer3Textures(new string[] { string.Format("{0}textures\\details\\jagged.png", AppDomain.CurrentDomain.BaseDirectory) });
+            setFlora1Textures(options.flora1TexturePaths);
+            setFlora2Textures(options.flora2TexturePaths);
+            setDetailsLayer1Textures(options.detailsLayer1TexturePaths);
+            setDetailsLayer2Textures(options.detailsLayer2TexturePaths);
+            setDetailsLayer3Textures(options.detailsLayer3TexturePaths);
 
             // Initialize view position
             view = new Vector2(surface.Width, surface.Height) / 2;
@@ -128,7 +129,7 @@ namespace MapGenerator
         }
 
         // setFlora1Textures
-        public void setFlora1Textures(string[] filePaths)
+        public void setFlora1Textures(List<string> filePaths)
         {
             flora1Textures.Clear();
             foreach (string filePath in filePaths)
@@ -149,7 +150,7 @@ namespace MapGenerator
         }
 
         // setFlora1Textures
-        public void setFlora2Textures(string[] filePaths)
+        public void setFlora2Textures(List<string> filePaths)
         {
             flora2Textures.Clear();
             foreach (string filePath in filePaths)
@@ -170,7 +171,7 @@ namespace MapGenerator
         }
 
         // setDetailLayer1Textures
-        public void setDetailsLayer1Textures(string[] filePaths)
+        public void setDetailsLayer1Textures(List<string> filePaths)
         {
             detailsLayer1Textures.Clear();
             foreach (string filePath in filePaths)
@@ -191,7 +192,7 @@ namespace MapGenerator
         }
 
         // setDetailLayer2Textures
-        public void setDetailsLayer2Textures(string[] filePaths)
+        public void setDetailsLayer2Textures(List<string> filePaths)
         {
             detailsLayer2Textures.Clear();
             foreach (string filePath in filePaths)
@@ -212,7 +213,7 @@ namespace MapGenerator
         }
 
         // setDetailLayer3Textures
-        public void setDetailsLayer3Textures(string[] filePaths)
+        public void setDetailsLayer3Textures(List<string> filePaths)
         {
             detailsLayer3Textures.Clear();
             foreach (string filePath in filePaths)
