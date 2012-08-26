@@ -22,16 +22,16 @@ float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 	float3 normal = float3(0.5, 0.5, 1) * 2 - 1;
 
 	// First sampling
-	float x01 = (tex2D(baseSampler, texCoords + float2(4 / renderTargetSize.x, 0)).rgb * 2 - 1) / 4;
-	float x10 = (tex2D(baseSampler, texCoords + float2(0, 4 / renderTargetSize.y)).rgb * 2 - 1) / 4;
-	float x21 = (tex2D(baseSampler, texCoords + float2(-4 / renderTargetSize.x, 0)).rgb * 2 - 1) / 4;
-	float x12 = (tex2D(baseSampler, texCoords + float2(0, -4 / renderTargetSize.y)).rgb * 2 - 1) / 4;
+	float x01 = (tex2D(baseSampler, texCoords + float2(4 / renderTargetSize.x, 0)).rgb * 2 - 1);
+	float x10 = (tex2D(baseSampler, texCoords + float2(0, 4 / renderTargetSize.y)).rgb * 2 - 1);
+	float x21 = (tex2D(baseSampler, texCoords + float2(-4 / renderTargetSize.x, 0)).rgb * 2 - 1);
+	float x12 = (tex2D(baseSampler, texCoords + float2(0, -4 / renderTargetSize.y)).rgb * 2 - 1);
 
 	// Second sampling
-	x01 += (tex2D(baseSampler, texCoords + float2(8 / renderTargetSize.x, 0)).rgb * 2 - 1) / 4;
-	x10 += (tex2D(baseSampler, texCoords + float2(0, 8 / renderTargetSize.y)).rgb * 2 - 1) / 4;
-	x21 += (tex2D(baseSampler, texCoords + float2(-8 / renderTargetSize.x, 0)).rgb * 2 - 1) / 4;
-	x12 += (tex2D(baseSampler, texCoords + float2(0, -8 / renderTargetSize.y)).rgb * 2 - 1) / 4;
+	x01 += (tex2D(baseSampler, texCoords + float2(8 / renderTargetSize.x, 0)).rgb * 2 - 1) / 2;
+	x10 += (tex2D(baseSampler, texCoords + float2(0, 8 / renderTargetSize.y)).rgb * 2 - 1) / 2;
+	x21 += (tex2D(baseSampler, texCoords + float2(-8 / renderTargetSize.x, 0)).rgb * 2 - 1) / 2;
+	x12 += (tex2D(baseSampler, texCoords + float2(0, -8 / renderTargetSize.y)).rgb * 2 - 1) / 2;
 
 	// Third sampling
 	x01 += (tex2D(baseSampler, texCoords + float2(16 / renderTargetSize.x, 0)).rgb * 2 - 1) / 4;

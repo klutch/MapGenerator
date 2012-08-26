@@ -675,24 +675,27 @@ namespace MapGenerator
                 spriteBatch.End();
             }
 
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+
+            if (!options.normals)
+            {
+                spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+                if (options.flora1)
+                    spriteBatch.Draw(floraLayer1, floraLayer1.Bounds, Color.White);
+                if (options.flora2)
+                    spriteBatch.Draw(floraLayer2, floraLayer2.Bounds, Color.White);
+                if (options.detailsLayer2)
+                    spriteBatch.Draw(detailsLayer2, detailsLayer2.Bounds, Color.White);
+                if (options.detailsLayer3)
+                    spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
+            }
+
             if (options.water)
             {
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                if (!options.normals)
-                {
-                    spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-                    if (options.flora1)
-                        spriteBatch.Draw(floraLayer1, floraLayer1.Bounds, Color.White);
-                    if (options.flora2)
-                        spriteBatch.Draw(floraLayer2, floraLayer2.Bounds, Color.White);
-                    if (options.detailsLayer2)
-                        spriteBatch.Draw(detailsLayer2, detailsLayer2.Bounds, Color.White);
-                    if (options.detailsLayer3)
-                        spriteBatch.Draw(detailsLayer3, detailsLayer3.Bounds, Color.White);
-                }
                 spriteBatch.Draw(baseWater, baseWater.Bounds, Color.White);
-                spriteBatch.End();
             }
+
+            spriteBatch.End();
 
             /*
             GraphicsDevice.SetRenderTarget(renderTarget);
