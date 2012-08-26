@@ -140,16 +140,16 @@ namespace MapGenerator
             setColorBoxes();
 
             options.flora1TexturePaths = new List<string>();
-            options.flora1TexturePaths.Add(string.Format("{0}textures\\flora\\tree_1.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.flora1TexturePaths.Add("textures\\flora\\tree_1.png");
             options.flora2TexturePaths = new List<string>();
-            options.flora2TexturePaths.Add(string.Format("{0}textures\\flora\\brush_1.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.flora2TexturePaths.Add("textures\\flora\\brush_1.png");
             options.detailsLayer1TexturePaths = new List<string>();
-            options.detailsLayer1TexturePaths.Add(string.Format("{0}textures\\details\\cracks.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer1TexturePaths.Add("textures\\details\\cracks.png");
             options.detailsLayer2TexturePaths = new List<string>();
-            options.detailsLayer2TexturePaths.Add(string.Format("{0}textures\\details\\jagged.png", AppDomain.CurrentDomain.BaseDirectory));
-            options.detailsLayer2TexturePaths.Add(string.Format("{0}textures\\details\\jagged_dark.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer2TexturePaths.Add("textures\\details\\jagged.png");
+            options.detailsLayer2TexturePaths.Add("textures\\details\\jagged_dark.png");
             options.detailsLayer3TexturePaths = new List<string>();
-            options.detailsLayer3TexturePaths.Add(string.Format("{0}textures\\details\\sand_holes.png", AppDomain.CurrentDomain.BaseDirectory));
+            options.detailsLayer3TexturePaths.Add("textures\\details\\sand_holes.png");
         }
 
         private void setColorBoxes()
@@ -166,6 +166,14 @@ namespace MapGenerator
             light1AmbientColorPicture.BackColor = light1AmbientColor;
             light2ColorPicture.BackColor = light2Color;
             light2AmbientColorPicture.BackColor = light2AmbientColor;
+        }
+
+        private List<string> convertFileNamesToRelative(string[] filePaths)
+        {
+            List<string> relativePaths = new List<string>();
+            foreach (string filePath in filePaths)
+                relativePaths.Add(filePath.Replace(AppDomain.CurrentDomain.BaseDirectory, ""));
+            return relativePaths;
         }
 
         void MapGeneratorForm_Resize(object sender, EventArgs e)
@@ -458,13 +466,13 @@ namespace MapGenerator
             detailsLayer1RangeMin.Value = (decimal)options.detailsLayer1Range.X;
             detailsLayer1RangeMax.Value = (decimal)options.detailsLayer1Range.Y;
             detailsLayer1Scale.Value = (decimal)options.detailsLayer1Scale;
+
             detailsLayer2Checkbox.Checked = options.detailsLayer2;
-            options.detailsLayer2Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer2RangeMin.Value, (float)detailsLayer2RangeMax.Value);
             detailsLayer2RangeMin.Value = (decimal)options.detailsLayer2Range.X;
             detailsLayer2RangeMax.Value = (decimal)options.detailsLayer2Range.Y;
             detailsLayer2Scale.Value = (decimal)options.detailsLayer2Scale;
+
             detailsLayer3Checkbox.Checked = options.detailsLayer3;
-            options.detailsLayer3Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer3RangeMin.Value, (float)detailsLayer3RangeMax.Value);
             detailsLayer3RangeMin.Value = (decimal)options.detailsLayer3Range.X;
             detailsLayer3RangeMax.Value = (decimal)options.detailsLayer3Range.Y;
             detailsLayer3Scale.Value = (decimal)options.detailsLayer3Scale;
@@ -559,7 +567,9 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setFlora1Textures(new List<string>(fileDialog.FileNames));
+                    List<string> relativePaths = convertFileNamesToRelative(fileDialog.FileNames);
+                    options.flora1TexturePaths = relativePaths;
+                    main.setFlora1Textures(relativePaths);
                     main.generateMap(getOptions());
                 }
             }));
@@ -577,7 +587,9 @@ namespace MapGenerator
                 {
                     if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        main.setFlora2Textures(new List<string>(fileDialog.FileNames));
+                        List<string> relativePaths = convertFileNamesToRelative(fileDialog.FileNames);
+                        options.flora2TexturePaths = relativePaths;
+                        main.setFlora2Textures(relativePaths);
                         main.generateMap(getOptions());
                     }
                 }));
@@ -715,7 +727,9 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setDetailsLayer1Textures(new List<string>(fileDialog.FileNames));
+                    List<string> relativePaths = convertFileNamesToRelative(fileDialog.FileNames);
+                    options.detailsLayer1TexturePaths = relativePaths;
+                    main.setDetailsLayer1Textures(relativePaths);
                     main.generateMap(getOptions());
                 }
             }));
@@ -733,7 +747,9 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setDetailsLayer2Textures(new List<string>(fileDialog.FileNames));
+                    List<string> relativePaths = convertFileNamesToRelative(fileDialog.FileNames);
+                    options.detailsLayer2TexturePaths = relativePaths;
+                    main.setDetailsLayer2Textures(relativePaths);
                     main.generateMap(getOptions());
                 }
             }));
@@ -751,7 +767,9 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.setDetailsLayer3Textures(new List<string>(fileDialog.FileNames));
+                    List<string> relativePaths = convertFileNamesToRelative(fileDialog.FileNames);
+                    options.detailsLayer3TexturePaths = relativePaths;
+                    main.setDetailsLayer3Textures(relativePaths);
                     main.generateMap(getOptions());
                 }
             }));
