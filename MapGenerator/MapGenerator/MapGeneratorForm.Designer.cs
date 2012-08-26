@@ -186,9 +186,10 @@ namespace MapGenerator
             this.saveComposite = new System.Windows.Forms.Button();
             this.fileSaveLayers = new System.Windows.Forms.MenuItem();
             this.fileSaveComposite = new System.Windows.Forms.MenuItem();
-            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.fileSaveMap = new System.Windows.Forms.MenuItem();
             this.fileExit = new System.Windows.Forms.MenuItem();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.fileLoadMap = new System.Windows.Forms.MenuItem();
             this.renderGenerateMap = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
@@ -2531,24 +2532,25 @@ namespace MapGenerator
             // 
             // fileSaveLayers
             // 
-            this.fileSaveLayers.Index = 0;
+            this.fileSaveLayers.Index = 2;
             this.fileSaveLayers.Text = "Save Layers";
             this.fileSaveLayers.Click += new System.EventHandler(this.saveLayersButton_Click);
             // 
             // fileSaveComposite
             // 
-            this.fileSaveComposite.Index = 1;
+            this.fileSaveComposite.Index = 3;
             this.fileSaveComposite.Text = "Save Composite";
             this.fileSaveComposite.Click += new System.EventHandler(this.saveComposite_Click);
             // 
-            // menuItem4
+            // fileSaveMap
             // 
-            this.menuItem4.Index = 2;
-            this.menuItem4.Text = "Save Map";
+            this.fileSaveMap.Index = 1;
+            this.fileSaveMap.Text = "Save Map";
+            this.fileSaveMap.Click += new System.EventHandler(this.fileSaveMap_Click);
             // 
             // fileExit
             // 
-            this.fileExit.Index = 3;
+            this.fileExit.Index = 4;
             this.fileExit.Text = "Exit";
             this.fileExit.Click += new System.EventHandler(this.fileExit_Click);
             // 
@@ -2556,11 +2558,18 @@ namespace MapGenerator
             // 
             this.menuItem1.Index = 0;
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.fileLoadMap,
+            this.fileSaveMap,
             this.fileSaveLayers,
             this.fileSaveComposite,
-            this.menuItem4,
             this.fileExit});
             this.menuItem1.Text = "File";
+            // 
+            // fileLoadMap
+            // 
+            this.fileLoadMap.Index = 0;
+            this.fileLoadMap.Text = "Load Map";
+            this.fileLoadMap.Click += new System.EventHandler(this.fileLoadMap_Click);
             // 
             // renderGenerateMap
             // 
@@ -2833,11 +2842,12 @@ namespace MapGenerator
         private Label light1IntensityLabel;
         private MenuItem fileSaveLayers;
         private MenuItem fileSaveComposite;
-        private MenuItem menuItem4;
+        private MenuItem fileSaveMap;
         private MenuItem fileExit;
         private MenuItem menuItem1;
         private MenuItem renderGenerateMap;
         private MenuItem menuItem6;
         private MainMenu mainMenu1;
+        private MenuItem fileLoadMap;
     }
 }

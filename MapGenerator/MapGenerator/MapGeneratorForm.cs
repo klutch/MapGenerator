@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.Xml.Serialization;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -92,9 +92,10 @@ namespace MapGenerator
         public Main main;
         private Point lastDragPosition;
         private bool ctrl;
-        private Microsoft.Xna.Framework.Vector2 effectPosition;
+        //private Microsoft.Xna.Framework.Vector2 effectPosition;
         private MapGeneratorOptions options;
         private bool blockGenerateMap;
+        private bool ignoreSurfaceClick;
         private bool redrawMap;
         private Color flora1GroundColor = Color.LimeGreen;
         private Color flora1PlantColor = Color.White;
@@ -116,6 +117,11 @@ namespace MapGenerator
             FormClosed += new FormClosedEventHandler(MapGeneratorForm_FormClosed);
             Resize += new EventHandler(MapGeneratorForm_Resize);
 
+            setColorBoxes();
+        }
+
+        private void setColorBoxes()
+        {
             flora1GroundColorPicture.BackColor = flora1GroundColor;
             flora1PlantColorPicture.BackColor = flora1PlantColor;
             flora2GroundColorPicture.BackColor = flora2GroundColor;
@@ -160,6 +166,7 @@ namespace MapGenerator
             main.generateMap(getOptions());
         }
 
+        // getOptions
         public MapGeneratorOptions getOptions()
         {
             // General
@@ -303,6 +310,191 @@ namespace MapGenerator
             return options;
         }
 
+        // setOptions
+        private void setOptions(MapGeneratorOptions options)
+        {
+            // Block map generation on value changes
+            blockGenerateMap = true;
+
+            this.options = options;
+
+            // General
+            renderWidth.Value = options.width;
+            renderHeight.Value = options.height;
+            noiseSeed.Value = options.seed;
+            noiseScale.Value = (decimal)options.scale;
+            noisePositionX.Value = (decimal)options.position.X;
+            noisePositionY.Value = (decimal)options.position.Y;
+
+            // Noise texture
+            worleyCheckbox.Checked = options.worley;
+            noiseTextureWidth.Value = options.noiseTextureWidth;
+            noiseTextureHeight.Value = options.noiseTextureHeight;
+            noiseFrequency.Value = (decimal)options.noiseFrequency;
+            noiseGain.Value = (decimal)options.noiseGain;
+            noiseLacunarity.Value = (decimal)options.noiseLacunarity;
+            noiseBrightness.Value = (decimal)options.noiseBrightness;
+            noiseLowColor = Color.FromArgb(
+                (int)(options.noiseLowColor.W * 255),
+                (int)(options.noiseLowColor.X * 255),
+                (int)(options.noiseLowColor.Y * 255),
+                (int)(options.noiseLowColor.Z * 255));
+            noiseHighColor = Color.FromArgb(
+                (int)(options.noiseHighColor.W * 255),
+                (int)(options.noiseHighColor.X * 255),
+                (int)(options.noiseHighColor.Y * 255),
+                (int)(options.noiseHighColor.Z * 255));
+
+            // Fractional brownian motion
+            fbm1Checkbox.Checked = options.fbm1;
+            fbm2Checkbox.Checked = options.fbm2;
+            fbm3Checkbox.Checked = options.fbm3;
+            fbm1NoiseOnly.Checked = options.fbm1NoiseOnly;
+            fbm2NoiseOnly.Checked = options.fbm2NoiseOnly;
+            fbm3NoiseOnly.Checked = options.fbm3NoiseOnly;
+            fbm1OffsetX.Value = (decimal)options.fbm1Offset.X;
+            fbm1OffsetY.Value = (decimal)options.fbm1Offset.Y;
+            fbm2OffsetX.Value = (decimal)options.fbm2Offset.X;
+            fbm2OffsetY.Value = (decimal)options.fbm2Offset.Y;
+            fbm3OffsetX.Value = (decimal)options.fbm3Offset.X;
+            fbm3OffsetY.Value = (decimal)options.fbm3Offset.Y;
+            fbm1Opacity.Value = (decimal)options.fbm1Opacity;
+            fbm2Opacity.Value = (decimal)options.fbm2Opacity;
+            fbm3Opacity.Value = (decimal)options.fbm3Opacity;
+
+            // Water
+            waterCheckbox.Checked = options.water;
+            waterLevel.Value = (decimal)options.waterLevel;
+            waterShallowColor = Color.FromArgb(
+                (int)(options.waterShallowColor.W * 255),
+                (int)(options.waterShallowColor.X * 255),
+                (int)(options.waterShallowColor.Y * 255),
+                (int)(options.waterShallowColor.Z * 255));
+            waterDeepColor = Color.FromArgb(
+                (int)(options.waterDeepColor.W * 255),
+                (int)(options.waterDeepColor.X * 255),
+                (int)(options.waterDeepColor.Y * 255),
+                (int)(options.waterDeepColor.Z * 255));
+
+            // Flora layer 1
+            flora1Checkbox.Checked = options.flora1;
+            flora1RangeX.Value = (decimal)options.flora1Range.X;
+            flora1RangeY.Value = (decimal)options.flora1Range.Y;
+            flora1Frequency.Value = (decimal)options.flora1Frequency;
+            flora1Scale.Value = (decimal)options.flora1Scale;
+            flora1ShowGroundColor.Checked = options.flora1ShowGroundColor;
+            flora1ShowPlantColor.Checked = options.flora1ShowPlantColor;
+            flora1GroundColor = Color.FromArgb(
+                (int)(options.flora1GroundColor.W * 255),
+                (int)(options.flora1GroundColor.X * 255),
+                (int)(options.flora1GroundColor.Y * 255),
+                (int)(options.flora1GroundColor.Z * 255));
+            flora1PlantColor = Color.FromArgb(
+                (int)(options.flora1PlantColor.W * 255),
+                (int)(options.flora1PlantColor.X * 255),
+                (int)(options.flora1PlantColor.Y * 255),
+                (int)(options.flora1PlantColor.Z * 255));
+
+            // Flora layer 2
+            flora2Checkbox.Checked = options.flora2;
+            flora2RangeX.Value = (decimal)options.flora2Range.X;
+            flora2RangeY.Value = (decimal)options.flora2Range.Y;
+            flora2Frequency.Value = (decimal)options.flora2Frequency;
+            flora2Scale.Value = (decimal)options.flora2Scale;
+            flora2ShowGroundColor.Checked = options.flora2ShowGroundColor;
+            flora2ShowPlantColor.Checked = options.flora2ShowPlantColor;
+            flora2GroundColor = Color.FromArgb(
+                (int)(options.flora2GroundColor.W * 255),
+                (int)(options.flora2GroundColor.X * 255),
+                (int)(options.flora2GroundColor.Y * 255),
+                (int)(options.flora2GroundColor.Z * 255));
+            flora2PlantColor = Color.FromArgb(
+                (int)(options.flora2PlantColor.W * 255),
+                (int)(options.flora2PlantColor.X * 255),
+                (int)(options.flora2PlantColor.Y * 255),
+                (int)(options.flora2PlantColor.Z * 255));
+
+            // Details
+            detailsLayer1Checkbox.Checked = options.detailsLayer1;
+            detailsLayer1RangeMin.Value = (decimal)options.detailsLayer1Range.X;
+            detailsLayer1RangeMax.Value = (decimal)options.detailsLayer1Range.Y;
+            detailsLayer1Scale.Value = (decimal)options.detailsLayer1Scale;
+            detailsLayer2Checkbox.Checked = options.detailsLayer2;
+            options.detailsLayer2Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer2RangeMin.Value, (float)detailsLayer2RangeMax.Value);
+            detailsLayer2RangeMin.Value = (decimal)options.detailsLayer2Range.X;
+            detailsLayer2RangeMax.Value = (decimal)options.detailsLayer2Range.Y;
+            detailsLayer2Scale.Value = (decimal)options.detailsLayer2Scale;
+            detailsLayer3Checkbox.Checked = options.detailsLayer3;
+            options.detailsLayer3Range = new Microsoft.Xna.Framework.Vector2((float)detailsLayer3RangeMin.Value, (float)detailsLayer3RangeMax.Value);
+            detailsLayer3RangeMin.Value = (decimal)options.detailsLayer3Range.X;
+            detailsLayer3RangeMax.Value = (decimal)options.detailsLayer3Range.Y;
+            detailsLayer3Scale.Value = (decimal)options.detailsLayer3Scale;
+
+            // Lighting
+            light1Checkbox.Checked = options.light1;
+            light1Color = Color.FromArgb(
+                255,
+                (int)(options.light1Color.X * 255),
+                (int)(options.light1Color.Y * 255),
+                (int)(options.light1Color.Z * 255));
+            light1AmbientColor = Color.FromArgb(
+                255,
+                (int)(options.light1AmbientColor.X * 255),
+                (int)(options.light1AmbientColor.Y * 255),
+                (int)(options.light1AmbientColor.Z * 255));
+            light1PositionX.Value = (decimal)options.light1Direction.X;
+            light1PositionY.Value = (decimal)options.light1Direction.Y;
+            light1PositionZ.Value = (decimal)options.light1Direction.Z;
+            light1Intensity.Value = (decimal)options.light1Intensity;
+
+            light2Checkbox.Checked = options.light2;
+            light2Color = Color.FromArgb(
+                255,
+                (int)(options.light2Color.X * 255),
+                (int)(options.light2Color.Y * 255),
+                (int)(options.light2Color.Z * 255));
+            light2AmbientColor = Color.FromArgb(
+                255,
+                (int)(options.light2AmbientColor.X * 255),
+                (int)(options.light2AmbientColor.Y * 255),
+                (int)(options.light2AmbientColor.Z * 255));
+            light2PositionX.Value = (decimal)options.light2Direction.X;
+            light2PositionY.Value = (decimal)options.light2Direction.Y;
+            light2PositionZ.Value = (decimal)options.light2Direction.Z;
+            light2Intensity.Value = (decimal)options.light2Intensity;
+
+            // Update color boxes
+            setColorBoxes();
+
+            // Unblock map generation
+            blockGenerateMap = false;
+
+            // Generate map
+            main.generateMap(getOptions());
+        }
+
+        // saveMapFile
+        private void saveMapFile(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(MapGeneratorOptions));
+            FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            serializer.Serialize(fileStream, getOptions());
+            fileStream.Close();
+            fileStream.Dispose();
+        }
+
+        // loadMapFile
+        private void loadMapFile(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(MapGeneratorOptions));
+            FileStream fileStream = new FileStream(filePath, FileMode.Open);
+            MapGeneratorOptions loadedOptions = (MapGeneratorOptions)serializer.Deserialize(fileStream);
+            fileStream.Close();
+            fileStream.Dispose();
+            setOptions(loadedOptions);
+        }
+
+        // mapOptionsChanged
         private void mapOptionsChanged(object sender, EventArgs e)
         {
             if (!blockGenerateMap)
@@ -391,35 +583,41 @@ namespace MapGenerator
             surface.Focus();
 
             // Handle mouse input
-            if (e.Button == MouseButtons.Left && !ctrl)
+            if (ignoreSurfaceClick)
+                ignoreSurfaceClick = false;
+            else
             {
-                effectPosition += new Microsoft.Xna.Framework.Vector2(e.X - lastDragPosition.X, e.Y - lastDragPosition.Y);
+                if (e.Button == MouseButtons.Left && !ctrl)
+                {
+                    this.options.position.X += e.X - lastDragPosition.X;
+                    this.options.position.Y += e.Y - lastDragPosition.Y;
 
-                blockGenerateMap = true;
-                noisePositionX.Value = (decimal)effectPosition.X;
-                noisePositionY.Value = (decimal)effectPosition.Y;
-                blockGenerateMap = false;
+                    blockGenerateMap = true;
+                    noisePositionX.Value = (decimal)this.options.position.X;
+                    noisePositionY.Value = (decimal)this.options.position.Y;
+                    blockGenerateMap = false;
 
-                MapGeneratorOptions options = getOptions();
-                options.flora1 = false;
-                options.flora2 = false;
-                options.detailsLayer1 = false;
-                options.detailsLayer2 = false;
-                options.detailsLayer3 = false;
-                options.light1 = false;
-                options.light2 = false;
-                main.generateMap(options);
-                redrawMap = true;
-            }
-            else if (e.Button == MouseButtons.Left && ctrl)
-            {
-                main.view.X += e.X - lastDragPosition.X;
-                main.view.Y += e.Y - lastDragPosition.Y;
-            }
-            else if (redrawMap)
-            {
-                redrawMap = false;
-                main.generateMap(getOptions());
+                    MapGeneratorOptions options = getOptions();
+                    options.flora1 = false;
+                    options.flora2 = false;
+                    options.detailsLayer1 = false;
+                    options.detailsLayer2 = false;
+                    options.detailsLayer3 = false;
+                    options.light1 = false;
+                    options.light2 = false;
+                    main.generateMap(options);
+                    redrawMap = true;
+                }
+                else if (e.Button == MouseButtons.Left && ctrl)
+                {
+                    main.view.X += e.X - lastDragPosition.X;
+                    main.view.Y += e.Y - lastDragPosition.Y;
+                }
+                else if (redrawMap)
+                {
+                    redrawMap = false;
+                    main.generateMap(getOptions());
+                }
             }
 
             lastDragPosition.X = e.X;
@@ -761,6 +959,46 @@ namespace MapGenerator
         private void renderGenerateMap_Click(object sender, EventArgs e)
         {
             main.generateMap(getOptions());
+        }
+
+        private void fileSaveMap_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            string baseDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
+            // Create output directory if needed
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            if (!directory.Exists)
+                directory.Create();
+            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.Title = "Save Map";
+            fileDialog.Filter = "MapGeneratorFile (*.mgf)|*.mgf";
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    saveMapFile(fileDialog.FileName);
+                }
+            }));
+        }
+
+        private void fileLoadMap_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            string baseDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            if (!directory.Exists)
+                directory.Create();
+            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.Title = "Load Map";
+            fileDialog.Filter = "MapGeneratorFile (*.mgf)|*.mgf";
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    loadMapFile(fileDialog.FileName);
+                    ignoreSurfaceClick = true;
+                }
+            }));
         }
     }
 }
