@@ -16,8 +16,7 @@ float4 PSBaseNoise(float2 p:TEXCOORD0) : COLOR0
 	p = (noiseOffset / renderSize) - 
 		p * (renderSize / noiseSize) / noiseScale;
 
-	float n = perlin(p) / 2;
-	n += perlin(p * 2);
+	float n = perlin(p);
 	
 	return float4(n, n, n, 1);
 }

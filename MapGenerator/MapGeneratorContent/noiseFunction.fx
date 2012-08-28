@@ -52,6 +52,7 @@ float perlin(float2 p)
 	float nxy = nx0 * (1 - weight(v)) + nx1 * weight(v);
 
 	return (nxy + 1) / 2;
+	//return nxy;
 }
 
 ///////////////////////////////////////////
@@ -70,14 +71,8 @@ float4 getWorleyCell(int x, int y, float jitter)
 	return tex2D(worleySampler, float2(u, v)) * jitter;
 }
 
-float2 worley(float2 position, float jitter = 2.0)
+float2 worley(float2 p, float jitter = 2.0)
 {
-	// Transform position
-	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
-
-	// Shrink position
-	p *= 128;
-
 	int xi = int(floor(p.x));
 	int yi = int(floor(p.y));
 
