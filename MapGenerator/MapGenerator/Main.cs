@@ -247,10 +247,7 @@ namespace MapGenerator
                 for (int i = 0; i < options.noiseTextureWidth; i++)
                 {
                     for (int j = 0; j < options.noiseTextureHeight; j++)
-                    {
-                        float randomNumber = (float)random.NextDouble();
-                        randomTextureData[i + j * options.noiseTextureWidth] = new Color(randomNumber, randomNumber, randomNumber);
-                    }
+                        randomTextureData[i + j * options.noiseTextureWidth] = new Color((float)random.Next(3) / 2, (float)random.Next(3) / 2, (float)random.Next(3) / 2);
                 }
                 randomTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
                 randomTexture.SetData<Color>(randomTextureData);
@@ -294,7 +291,26 @@ namespace MapGenerator
                 detailsLayer3 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 normalMap = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
+
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Textures[1] = worleyTexture;
+            GraphicsDevice.Clear(Color.Black);
+            baseEffect.Parameters["noiseOffset"].SetValue(options.position);
+            baseEffect.Parameters["noiseScale"].SetValue(options.scale);
+            baseEffect.Parameters["renderSize"].SetValue(new Vector2(options.width, options.height));
+            baseEffect.Parameters["noiseSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
+            spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Store base noise texture
+            GraphicsDevice.SetRenderTarget(baseNoise);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+
             
+            /*
             //////////////////////////////////////
             // Draw noise effect to render target
             ///////////////////////////////////////
@@ -643,14 +659,12 @@ namespace MapGenerator
                 spriteBatch.End();
             }
 
-            /*
             // Store base flora texture
-            GraphicsDevice.SetRenderTarget(baseFlora);
-            GraphicsDevice.Clear(Color.Transparent);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            spriteBatch.End();
-            */
+            //GraphicsDevice.SetRenderTarget(baseFlora);
+            //GraphicsDevice.Clear(Color.Transparent);
+            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+            //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            //spriteBatch.End();
             
             ////////////////////////////////
             // Draw all textures
@@ -706,13 +720,19 @@ namespace MapGenerator
 
             spriteBatch.End();
 
-            /*
+            
+            //GraphicsDevice.SetRenderTarget(renderTarget);
+            //GraphicsDevice.Clear(Color.Black);
+            //spriteBatch.Begin();
+            //spriteBatch.Draw(normalMap, normalMap.Bounds, Color.White);
+            //spriteBatch.End();
+            */
+
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            spriteBatch.Draw(normalMap, normalMap.Bounds, Color.White);
+            spriteBatch.Draw(baseNoise, normalMap.Bounds, Color.White);
             spriteBatch.End();
-            */
 
             // Reset render target
             GraphicsDevice.SetRenderTarget(null);
