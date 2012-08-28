@@ -253,17 +253,14 @@ namespace MapGenerator
                 randomTexture.SetData<Color>(randomTextureData);
 
                 // Initialize worley texture
-                worleyTexture = new Texture2D(GraphicsDevice, 16, 1);
-                Color[] worleyData = new Color[16];
-                for (int i = 0; i < 16; i++)
+                Color[] data = new Color[options.noiseTextureWidth * options.noiseTextureHeight];
+                for (int i = 0; i < options.noiseTextureWidth; i++)
                 {
-                    float x = ((i % 4 + 0.5f) / 4f);
-                    x += (float)(random.NextDouble() * 2 - 1) / 3;
-                    float y = (float)(Math.Floor(i / 4f) + 0.5f) / 4f;
-                    y += (float)(random.NextDouble() * 2 - 1) / 3;
-                    worleyData[i] = new Color(x, y, 1, 1);
+                    for (int j = 0; j < options.noiseTextureHeight; j++)
+                        data[i + j * options.noiseTextureWidth] = new Color((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
                 }
-                worleyTexture.SetData<Color>(worleyData);
+                worleyTexture = new Texture2D(GraphicsDevice, options.noiseTextureWidth, options.noiseTextureHeight);
+                worleyTexture.SetData<Color>(data);
 
                 // Store this seed
                 lastCreatedSeed = options.seed;

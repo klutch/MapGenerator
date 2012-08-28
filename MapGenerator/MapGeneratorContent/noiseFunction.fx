@@ -1,16 +1,25 @@
-// weight: f(x) = 6x^5 - 15x^4 + 10x^3
+////////////////////////////////////////////////////
+// Perlin noise
+////////////////////////////////////////////////////
+float2 noiseSize;
+float2 noiseOffset;
+float noiseScale;
+float2 renderSize;
+sampler noiseSampler : register(s0) = sampler_state
+{
+	AddressU = Wrap;
+	AddressV = Wrap;
+	MinFilter = Point;
+	MagFilter = Point;
+	MipFilter = Point;
+};
+
 float weight(float x)
 {
 	return 6 * pow(x, 5) - 15 * pow(x, 4) + 10 * pow(x, 3);
 }
 
-// noise2D
-float2 noiseSize;
-float2 noiseOffset;
-float noiseScale;
-float2 renderSize;
-
-float noise2D(sampler noiseSampler, float2 position)
+float perlin(float2 position)
 {
 	// Transform position
 	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
@@ -48,46 +57,56 @@ float noise2D(sampler noiseSampler, float2 position)
 	return (nxy + 1) / 2;
 }
 
+///////////////////////////////////////////
 // Worley noise
-float lengthSq(float2 p)
+///////////////////////////////////////////
+sampler worleySampler : register(s1);
+
+float4 getWorleyCell(int x, int y)
 {
-	return p.x * p.x + p.y * p.y;
+	float u = (x + y * 32) / 256.0;
+	float v = (x * 3) / 256.0;
+	return tex2D(worleySampler, float2(u, v));
 }
-float worley(sampler worleySampler, float2 position)
+
+float2 worley(float2 position)
 {
-	float shortestDistance = 1;
-	for (int i = 0; i < 18; i++)
+	// Transform position
+	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
+
+	// Shrink position
+	p *= 64;
+
+	int xi = int(floor(p.x));
+	int yi = int(floor(p.y));
+
+	float xf = p.x - float(xi);
+	float yf = p.y - float(yi);
+
+	float distance1 = 9999999;
+	float distance2 = 9999999;
+
+	float2 cell;
+
+	for (int y = -1; y <= 1; y++)
 	{
-		float2 source = tex2D(worleySampler, float2((i * 1.0) / 18.0, 0)).rg;
-		float2 worleyPoint1 = source + floor(position);
-		float2 worleyPoint2 = source + floor(position) + float2(0, -1);		// Top
-		float2 worleyPoint3 = source + floor(position) + float2(1, -1);		// NE
-		float2 worleyPoint4 = source + floor(position) + float2(1, 0);		// E
-		float2 worleyPoint5 = source + floor(position) + float2(1, 1);		// SE
-		float2 worleyPoint6 = source + floor(position) + float2(0, 1);		// S
-		float2 worleyPoint7 = source + floor(position) + float2(-1, 1);		// SW
-		float2 worleyPoint8 = source + floor(position) + float2(-1, 0);		// W
-		float2 worleyPoint9 = source + floor(position) + float2(-1, -1);	// NW
-
-		float distance1 = lengthSq(worleyPoint1 - position);
-		float distance2 = lengthSq(worleyPoint2 - position);
-		float distance3 = lengthSq(worleyPoint3 - position);
-		float distance4 = lengthSq(worleyPoint4 - position);
-		float distance5 = lengthSq(worleyPoint5 - position);
-		float distance6 = lengthSq(worleyPoint6 - position);
-		float distance7 = lengthSq(worleyPoint7 - position);
-		float distance8 = lengthSq(worleyPoint8 - position);
-		float distance9 = lengthSq(worleyPoint9 - position);
-
-		shortestDistance = min(shortestDistance, distance1);
-		shortestDistance = min(shortestDistance, distance2);
-		shortestDistance = min(shortestDistance, distance3);
-		shortestDistance = min(shortestDistance, distance4);
-		shortestDistance = min(shortestDistance, distance5);
-		shortestDistance = min(shortestDistance, distance6);
-		shortestDistance = min(shortestDistance, distance7);
-		shortestDistance = min(shortestDistance, distance8);
-		shortestDistance = min(shortestDistance, distance9);
+		for (int x = -1; x <= 1; x++)
+		{
+			cell = getWorleyCell(xi + x, yi + y).rg;
+			cell.x += (float(x) - xf);
+			cell.y += (float(y) - yf);
+			float distance = dot(cell, cell);
+			if (distance < distance1)
+			{
+				distance2 = distance1;
+				distance1 = distance;
+			}
+			else if (distance < distance2)
+			{
+				distance2 = distance;
+			}
+		}
 	}
-	return 1 - shortestDistance * 8;
+
+	return float2(distance1, distance2);
 }
