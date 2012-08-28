@@ -19,14 +19,8 @@ float weight(float x)
 	return 6 * pow(x, 5) - 15 * pow(x, 4) + 10 * pow(x, 3);
 }
 
-float perlin(float2 position)
+float perlin(float2 p)
 {
-	// Transform position
-	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
-
-	// Shrink position
-	p *= 32;
-
 	// Scale texture coordinates from [0, 1] to [0, textureSize]
 	float2 realPosition = p * noiseSize;
 

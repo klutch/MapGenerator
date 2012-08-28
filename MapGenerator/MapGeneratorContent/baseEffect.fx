@@ -9,9 +9,15 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 }
 
 // Pixel shader
-float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
+float4 PSBaseNoise(float2 p:TEXCOORD0) : COLOR0
 {
-	float n = worley(texCoords).x;
+	// Manipulate texture coordinates to account for render target size,
+	// noise scale, noise texture size, and offset
+	p = (noiseOffset / renderSize) - 
+		p * (renderSize / noiseSize) / noiseScale;
+
+	float n = perlin(p) / 2;
+	n += perlin(p * 2);
 	
 	return float4(n, n, n, 1);
 }
