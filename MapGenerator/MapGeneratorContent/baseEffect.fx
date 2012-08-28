@@ -11,9 +11,9 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 // Pixel shader
 float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
-	float2 n = worley(texCoords);
-	float w = n.y;
-	return float4(w, w, w, 1);
+	float n = worley(texCoords).x;
+	
+	return float4(n, n, n, 1);
 }
 
 technique Main

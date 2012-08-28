@@ -24,6 +24,9 @@ float perlin(float2 position)
 	// Transform position
 	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
 
+	// Shrink position
+	p *= 32;
+
 	// Scale texture coordinates from [0, 1] to [0, textureSize]
 	float2 realPosition = p * noiseSize;
 
@@ -79,7 +82,7 @@ float2 worley(float2 position, float jitter = 2.0)
 	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
 
 	// Shrink position
-	p *= 64;
+	p *= 128;
 
 	int xi = int(floor(p.x));
 	int yi = int(floor(p.y));
