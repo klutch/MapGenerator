@@ -12,7 +12,8 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	float2 n = worley(texCoords);
-	return float4(n.x, n.x, n.x, 1);
+	float w = n.y;
+	return float4(w, w, w, 1);
 }
 
 technique Main

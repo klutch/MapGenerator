@@ -60,16 +60,20 @@ float perlin(float2 position)
 ///////////////////////////////////////////
 // Worley noise
 ///////////////////////////////////////////
-sampler worleySampler : register(s1);
-
-float4 getWorleyCell(int x, int y)
+sampler worleySampler : register(s1) = sampler_state
 {
-	float u = (x + y * 32) / 256.0;
-	float v = (x * 3) / 256.0;
-	return tex2D(worleySampler, float2(u, v));
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+float4 getWorleyCell(int x, int y, float jitter)
+{
+	float u = (x + y * 9) / noiseSize.x;
+	float v = (x * 3) / noiseSize.y;
+	return tex2D(worleySampler, float2(u, v)) * jitter;
 }
 
-float2 worley(float2 position)
+float2 worley(float2 position, float jitter = 2.0)
 {
 	// Transform position
 	float2 p = (position * float2(1, renderSize.y / renderSize.x) - noiseOffset / renderSize) / noiseScale;
@@ -88,11 +92,11 @@ float2 worley(float2 position)
 
 	float2 cell;
 
-	for (int y = -1; y <= 1; y++)
+	for (int y = -2; y <= 2; y++)
 	{
-		for (int x = -1; x <= 1; x++)
+		for (int x = -2; x <= 2; x++)
 		{
-			cell = getWorleyCell(xi + x, yi + y).rg;
+			cell = getWorleyCell(xi + x, yi + y, jitter).rg;
 			cell.x += (float(x) - xf);
 			cell.y += (float(y) - yf);
 			float distance = dot(cell, cell);
@@ -108,5 +112,5 @@ float2 worley(float2 position)
 		}
 	}
 
-	return float2(distance1, distance2);
+	return float2(sqrt(distance1), sqrt(distance2));
 }
