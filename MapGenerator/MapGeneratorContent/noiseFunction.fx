@@ -56,6 +56,24 @@ float perlin(float2 p)
 }
 
 ///////////////////////////////////////////
+// Fractional Brownian Motion
+///////////////////////////////////////////
+float fbm(float2 p, float frequency, float gain, float lacunarity)
+{
+	float total = 0;
+	float amplitude = gain;
+
+	for (int i = 0; i < 8; i++)
+	{
+		total += perlin(p * frequency) * amplitude;
+		frequency *= lacunarity;
+		amplitude *= gain;
+	}
+
+	return total;
+}
+
+///////////////////////////////////////////
 // Worley noise
 ///////////////////////////////////////////
 sampler worleySampler : register(s1) = sampler_state
