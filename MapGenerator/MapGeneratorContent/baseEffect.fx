@@ -41,7 +41,7 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 	float n = useWorley ?
 		worley(p) :
 		fbm(p, noiseFrequency, noiseGain, noiseLacunarity);
-	
+
 	if (fbm1)
 	{
 		float2 coords = fbm1NoiseOnly ?

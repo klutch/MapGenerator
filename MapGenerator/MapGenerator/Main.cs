@@ -289,6 +289,9 @@ namespace MapGenerator
                 normalMap = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
 
+            //////////////////////////////////////
+            // Draw noise effect to render target
+            ///////////////////////////////////////
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Textures[1] = worleyTexture;
             GraphicsDevice.Clear(Color.Black);
@@ -296,47 +299,6 @@ namespace MapGenerator
             baseEffect.Parameters["noiseScale"].SetValue(options.scale);
             baseEffect.Parameters["renderSize"].SetValue(new Vector2(options.width, options.height));
             baseEffect.Parameters["noiseSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
-            baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
-            baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
-            baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
-            baseEffect.Parameters["brightness"].SetValue(options.noiseBrightness);
-            baseEffect.Parameters["fbm1"].SetValue(options.fbm1);
-            baseEffect.Parameters["fbm2"].SetValue(options.fbm2);
-            baseEffect.Parameters["fbm3"].SetValue(options.fbm3);
-            baseEffect.Parameters["fbm1NoiseOnly"].SetValue(options.fbm1NoiseOnly);
-            baseEffect.Parameters["fbm2NoiseOnly"].SetValue(options.fbm2NoiseOnly);
-            baseEffect.Parameters["fbm3NoiseOnly"].SetValue(options.fbm3NoiseOnly);
-            baseEffect.Parameters["fbm1Offset"].SetValue(options.fbm1Offset);
-            baseEffect.Parameters["fbm2Offset"].SetValue(options.fbm2Offset);
-            baseEffect.Parameters["fbm3Offset"].SetValue(options.fbm3Offset);
-            baseEffect.Parameters["fbm1Opacity"].SetValue(options.fbm1Opacity);
-            baseEffect.Parameters["fbm2Opacity"].SetValue(options.fbm2Opacity);
-            baseEffect.Parameters["fbm3Opacity"].SetValue(options.fbm3Opacity);
-            baseEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
-            baseEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
-            baseEffect.Parameters["useWorley"].SetValue(options.worley);
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
-            spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
-            spriteBatch.End();
-
-            // Store base noise texture
-            GraphicsDevice.SetRenderTarget(baseNoise);
-            spriteBatch.Begin();
-            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            spriteBatch.End();
-
-            
-            /*
-            //////////////////////////////////////
-            // Draw noise effect to render target
-            ///////////////////////////////////////
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Textures[1] = worleyTexture;
-            GraphicsDevice.Clear(Color.Black);
-            baseEffect.Parameters["position"].SetValue(options.position);
-            baseEffect.Parameters["scale"].SetValue(options.scale);
-            baseEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
-            baseEffect.Parameters["randomTextureSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
             baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
@@ -674,13 +636,6 @@ namespace MapGenerator
                 spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
             }
-
-            // Store base flora texture
-            //GraphicsDevice.SetRenderTarget(baseFlora);
-            //GraphicsDevice.Clear(Color.Transparent);
-            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-            //spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            //spriteBatch.End();
             
             ////////////////////////////////
             // Draw all textures
@@ -742,13 +697,6 @@ namespace MapGenerator
             //spriteBatch.Begin();
             //spriteBatch.Draw(normalMap, normalMap.Bounds, Color.White);
             //spriteBatch.End();
-            */
-
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin();
-            spriteBatch.Draw(baseNoise, normalMap.Bounds, Color.White);
-            spriteBatch.End();
 
             // Reset render target
             GraphicsDevice.SetRenderTarget(null);
