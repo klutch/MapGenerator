@@ -480,6 +480,7 @@ namespace MapGenerator
             detailsLayer3Scale.Value = (decimal)options.detailsLayer3Scale;
 
             // Lighting
+            normalStrength.Value = (decimal)options.normalStrength;
             light1Checkbox.Checked = options.light1;
             light1Color = Color.FromArgb(
                 255,
