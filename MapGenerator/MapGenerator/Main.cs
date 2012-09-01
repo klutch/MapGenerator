@@ -730,6 +730,11 @@ namespace MapGenerator
             floraLayer2.SaveAsPng(fileStream, floraLayer2.Width, floraLayer2.Height);
             fileStream.Close();
 
+            // Normal map
+            fileStream = new FileStream(string.Format("{0}-normals.png", path), FileMode.OpenOrCreate);
+            normalMap.SaveAsPng(fileStream, normalMap.Width, normalMap.Height);
+            fileStream.Close();
+
             // Water
             fileStream = new FileStream(string.Format("{0}-water.png", path), FileMode.OpenOrCreate);
             baseWater.SaveAsPng(fileStream, baseWater.Width, baseWater.Height);
