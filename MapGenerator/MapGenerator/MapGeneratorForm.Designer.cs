@@ -151,6 +151,8 @@ namespace MapGenerator
             this.detailsLayer1RangeLabel = new System.Windows.Forms.Label();
             this.detailsLayer1Checkbox = new System.Windows.Forms.CheckBox();
             this.lightingTab = new System.Windows.Forms.TabPage();
+            this.normalStrength = new System.Windows.Forms.NumericUpDown();
+            this.normalStrengthLabel = new System.Windows.Forms.Label();
             this.light2Intensity = new System.Windows.Forms.NumericUpDown();
             this.light2IntensityLabel = new System.Windows.Forms.Label();
             this.light1Intensity = new System.Windows.Forms.NumericUpDown();
@@ -193,8 +195,6 @@ namespace MapGenerator
             this.renderGenerateMap = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.normalStrengthLabel = new System.Windows.Forms.Label();
-            this.normalStrength = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -250,6 +250,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).BeginInit();
             this.lightingTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.normalStrength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2Intensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.light1Intensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2AmbientColorPicture)).BeginInit();
@@ -265,7 +266,6 @@ namespace MapGenerator
             this.renderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normalStrength)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -2095,6 +2095,27 @@ namespace MapGenerator
             this.lightingTab.Text = "Lighting";
             this.lightingTab.UseVisualStyleBackColor = true;
             // 
+            // normalStrength
+            // 
+            this.normalStrength.Location = new System.Drawing.Point(8, 26);
+            this.normalStrength.Name = "normalStrength";
+            this.normalStrength.Size = new System.Drawing.Size(101, 20);
+            this.normalStrength.TabIndex = 83;
+            this.normalStrength.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // normalStrengthLabel
+            // 
+            this.normalStrengthLabel.AutoSize = true;
+            this.normalStrengthLabel.Location = new System.Drawing.Point(5, 9);
+            this.normalStrengthLabel.Name = "normalStrengthLabel";
+            this.normalStrengthLabel.Size = new System.Drawing.Size(83, 13);
+            this.normalStrengthLabel.TabIndex = 82;
+            this.normalStrengthLabel.Text = "Normal Strength";
+            // 
             // light2Intensity
             // 
             this.light2Intensity.DecimalPlaces = 4;
@@ -2595,27 +2616,6 @@ namespace MapGenerator
             this.menuItem1,
             this.menuItem6});
             // 
-            // normalStrengthLabel
-            // 
-            this.normalStrengthLabel.AutoSize = true;
-            this.normalStrengthLabel.Location = new System.Drawing.Point(5, 9);
-            this.normalStrengthLabel.Name = "normalStrengthLabel";
-            this.normalStrengthLabel.Size = new System.Drawing.Size(83, 13);
-            this.normalStrengthLabel.TabIndex = 82;
-            this.normalStrengthLabel.Text = "Normal Strength";
-            // 
-            // normalStrength
-            // 
-            this.normalStrength.Location = new System.Drawing.Point(8, 26);
-            this.normalStrength.Name = "normalStrength";
-            this.normalStrength.Size = new System.Drawing.Size(101, 20);
-            this.normalStrength.TabIndex = 83;
-            this.normalStrength.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2696,6 +2696,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.detailsLayer1RangeMax)).EndInit();
             this.lightingTab.ResumeLayout(false);
             this.lightingTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.normalStrength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2Intensity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.light1Intensity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.light2AmbientColorPicture)).EndInit();
@@ -2712,7 +2713,6 @@ namespace MapGenerator
             this.renderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normalStrength)).EndInit();
             this.ResumeLayout(false);
 
         }
