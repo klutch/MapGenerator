@@ -76,6 +76,7 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector4 waterShallowColor;
         public Microsoft.Xna.Framework.Vector4 waterDeepColor;
 
+        public float normalStrength;
         public bool light1;
         public Microsoft.Xna.Framework.Vector3 light1Color;
         public Microsoft.Xna.Framework.Vector3 light1Direction;
@@ -317,6 +318,7 @@ namespace MapGenerator
             options.detailsLayer3Scale = (float)detailsLayer3Scale.Value;
 
             // Lighting
+            options.normalStrength = (float)normalStrength.Value;
             options.light1 = light1Checkbox.Checked;
             options.light1Color = new Microsoft.Xna.Framework.Vector3(
                 (float)light1Color.R / 255,

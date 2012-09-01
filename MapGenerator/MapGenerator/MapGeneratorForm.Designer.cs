@@ -193,6 +193,8 @@ namespace MapGenerator
             this.renderGenerateMap = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.normalStrengthLabel = new System.Windows.Forms.Label();
+            this.normalStrength = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -263,6 +265,7 @@ namespace MapGenerator
             this.renderTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normalStrength)).BeginInit();
             this.SuspendLayout();
             // 
             // surface
@@ -2055,6 +2058,8 @@ namespace MapGenerator
             // 
             // lightingTab
             // 
+            this.lightingTab.Controls.Add(this.normalStrength);
+            this.lightingTab.Controls.Add(this.normalStrengthLabel);
             this.lightingTab.Controls.Add(this.light2Intensity);
             this.lightingTab.Controls.Add(this.light2IntensityLabel);
             this.lightingTab.Controls.Add(this.light1Intensity);
@@ -2098,7 +2103,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.light2Intensity.Location = new System.Drawing.Point(10, 362);
+            this.light2Intensity.Location = new System.Drawing.Point(10, 426);
             this.light2Intensity.Name = "light2Intensity";
             this.light2Intensity.Size = new System.Drawing.Size(100, 20);
             this.light2Intensity.TabIndex = 81;
@@ -2112,7 +2117,7 @@ namespace MapGenerator
             // light2IntensityLabel
             // 
             this.light2IntensityLabel.AutoSize = true;
-            this.light2IntensityLabel.Location = new System.Drawing.Point(6, 346);
+            this.light2IntensityLabel.Location = new System.Drawing.Point(6, 410);
             this.light2IntensityLabel.Name = "light2IntensityLabel";
             this.light2IntensityLabel.Size = new System.Drawing.Size(46, 13);
             this.light2IntensityLabel.TabIndex = 80;
@@ -2126,7 +2131,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.light1Intensity.Location = new System.Drawing.Point(9, 161);
+            this.light1Intensity.Location = new System.Drawing.Point(9, 225);
             this.light1Intensity.Name = "light1Intensity";
             this.light1Intensity.Size = new System.Drawing.Size(100, 20);
             this.light1Intensity.TabIndex = 79;
@@ -2140,7 +2145,7 @@ namespace MapGenerator
             // light1IntensityLabel
             // 
             this.light1IntensityLabel.AutoSize = true;
-            this.light1IntensityLabel.Location = new System.Drawing.Point(5, 145);
+            this.light1IntensityLabel.Location = new System.Drawing.Point(5, 209);
             this.light1IntensityLabel.Name = "light1IntensityLabel";
             this.light1IntensityLabel.Size = new System.Drawing.Size(46, 13);
             this.light1IntensityLabel.TabIndex = 78;
@@ -2151,7 +2156,7 @@ namespace MapGenerator
             this.light2Checkbox.AutoSize = true;
             this.light2Checkbox.Checked = true;
             this.light2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.light2Checkbox.Location = new System.Drawing.Point(8, 214);
+            this.light2Checkbox.Location = new System.Drawing.Point(8, 278);
             this.light2Checkbox.Name = "light2Checkbox";
             this.light2Checkbox.Size = new System.Drawing.Size(94, 17);
             this.light2Checkbox.TabIndex = 77;
@@ -2162,7 +2167,7 @@ namespace MapGenerator
             // light2AmbientColorLabel
             // 
             this.light2AmbientColorLabel.AutoSize = true;
-            this.light2AmbientColorLabel.Location = new System.Drawing.Point(5, 295);
+            this.light2AmbientColorLabel.Location = new System.Drawing.Point(5, 359);
             this.light2AmbientColorLabel.Name = "light2AmbientColorLabel";
             this.light2AmbientColorLabel.Size = new System.Drawing.Size(72, 13);
             this.light2AmbientColorLabel.TabIndex = 76;
@@ -2170,7 +2175,7 @@ namespace MapGenerator
             // 
             // light2AmbientColorPicture
             // 
-            this.light2AmbientColorPicture.Location = new System.Drawing.Point(9, 314);
+            this.light2AmbientColorPicture.Location = new System.Drawing.Point(9, 378);
             this.light2AmbientColorPicture.Name = "light2AmbientColorPicture";
             this.light2AmbientColorPicture.Size = new System.Drawing.Size(64, 20);
             this.light2AmbientColorPicture.TabIndex = 75;
@@ -2185,7 +2190,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light2PositionZ.Location = new System.Drawing.Point(121, 314);
+            this.light2PositionZ.Location = new System.Drawing.Point(121, 378);
             this.light2PositionZ.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2204,7 +2209,7 @@ namespace MapGenerator
             // light2PositionZLabel
             // 
             this.light2PositionZLabel.AutoSize = true;
-            this.light2PositionZLabel.Location = new System.Drawing.Point(101, 316);
+            this.light2PositionZLabel.Location = new System.Drawing.Point(101, 380);
             this.light2PositionZLabel.Name = "light2PositionZLabel";
             this.light2PositionZLabel.Size = new System.Drawing.Size(14, 13);
             this.light2PositionZLabel.TabIndex = 73;
@@ -2218,7 +2223,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light2PositionY.Location = new System.Drawing.Point(121, 288);
+            this.light2PositionY.Location = new System.Drawing.Point(121, 352);
             this.light2PositionY.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2237,7 +2242,7 @@ namespace MapGenerator
             // light2PositionYLabel
             // 
             this.light2PositionYLabel.AutoSize = true;
-            this.light2PositionYLabel.Location = new System.Drawing.Point(101, 290);
+            this.light2PositionYLabel.Location = new System.Drawing.Point(101, 354);
             this.light2PositionYLabel.Name = "light2PositionYLabel";
             this.light2PositionYLabel.Size = new System.Drawing.Size(14, 13);
             this.light2PositionYLabel.TabIndex = 71;
@@ -2251,7 +2256,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light2PositionX.Location = new System.Drawing.Point(121, 262);
+            this.light2PositionX.Location = new System.Drawing.Point(121, 326);
             this.light2PositionX.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2270,7 +2275,7 @@ namespace MapGenerator
             // light2PositionXLabel
             // 
             this.light2PositionXLabel.AutoSize = true;
-            this.light2PositionXLabel.Location = new System.Drawing.Point(101, 264);
+            this.light2PositionXLabel.Location = new System.Drawing.Point(101, 328);
             this.light2PositionXLabel.Name = "light2PositionXLabel";
             this.light2PositionXLabel.Size = new System.Drawing.Size(14, 13);
             this.light2PositionXLabel.TabIndex = 69;
@@ -2279,7 +2284,7 @@ namespace MapGenerator
             // light2PositionLabel
             // 
             this.light2PositionLabel.AutoSize = true;
-            this.light2PositionLabel.Location = new System.Drawing.Point(90, 243);
+            this.light2PositionLabel.Location = new System.Drawing.Point(90, 307);
             this.light2PositionLabel.Name = "light2PositionLabel";
             this.light2PositionLabel.Size = new System.Drawing.Size(70, 13);
             this.light2PositionLabel.TabIndex = 68;
@@ -2288,7 +2293,7 @@ namespace MapGenerator
             // light2ColorLabel
             // 
             this.light2ColorLabel.AutoSize = true;
-            this.light2ColorLabel.Location = new System.Drawing.Point(5, 243);
+            this.light2ColorLabel.Location = new System.Drawing.Point(5, 307);
             this.light2ColorLabel.Name = "light2ColorLabel";
             this.light2ColorLabel.Size = new System.Drawing.Size(57, 13);
             this.light2ColorLabel.TabIndex = 67;
@@ -2296,7 +2301,7 @@ namespace MapGenerator
             // 
             // light2ColorPicture
             // 
-            this.light2ColorPicture.Location = new System.Drawing.Point(9, 262);
+            this.light2ColorPicture.Location = new System.Drawing.Point(9, 326);
             this.light2ColorPicture.Name = "light2ColorPicture";
             this.light2ColorPicture.Size = new System.Drawing.Size(64, 20);
             this.light2ColorPicture.TabIndex = 66;
@@ -2306,7 +2311,7 @@ namespace MapGenerator
             // light1AmbientColorLabel
             // 
             this.light1AmbientColorLabel.AutoSize = true;
-            this.light1AmbientColorLabel.Location = new System.Drawing.Point(5, 93);
+            this.light1AmbientColorLabel.Location = new System.Drawing.Point(5, 157);
             this.light1AmbientColorLabel.Name = "light1AmbientColorLabel";
             this.light1AmbientColorLabel.Size = new System.Drawing.Size(72, 13);
             this.light1AmbientColorLabel.TabIndex = 65;
@@ -2314,7 +2319,7 @@ namespace MapGenerator
             // 
             // light1AmbientColorPicture
             // 
-            this.light1AmbientColorPicture.Location = new System.Drawing.Point(9, 112);
+            this.light1AmbientColorPicture.Location = new System.Drawing.Point(9, 176);
             this.light1AmbientColorPicture.Name = "light1AmbientColorPicture";
             this.light1AmbientColorPicture.Size = new System.Drawing.Size(64, 20);
             this.light1AmbientColorPicture.TabIndex = 64;
@@ -2329,7 +2334,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light1PositionZ.Location = new System.Drawing.Point(121, 112);
+            this.light1PositionZ.Location = new System.Drawing.Point(121, 176);
             this.light1PositionZ.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2348,7 +2353,7 @@ namespace MapGenerator
             // light1PositionZLabel
             // 
             this.light1PositionZLabel.AutoSize = true;
-            this.light1PositionZLabel.Location = new System.Drawing.Point(101, 114);
+            this.light1PositionZLabel.Location = new System.Drawing.Point(101, 178);
             this.light1PositionZLabel.Name = "light1PositionZLabel";
             this.light1PositionZLabel.Size = new System.Drawing.Size(14, 13);
             this.light1PositionZLabel.TabIndex = 62;
@@ -2362,7 +2367,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light1PositionY.Location = new System.Drawing.Point(121, 86);
+            this.light1PositionY.Location = new System.Drawing.Point(121, 150);
             this.light1PositionY.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2381,7 +2386,7 @@ namespace MapGenerator
             // light1PositionYLabel
             // 
             this.light1PositionYLabel.AutoSize = true;
-            this.light1PositionYLabel.Location = new System.Drawing.Point(101, 88);
+            this.light1PositionYLabel.Location = new System.Drawing.Point(101, 152);
             this.light1PositionYLabel.Name = "light1PositionYLabel";
             this.light1PositionYLabel.Size = new System.Drawing.Size(14, 13);
             this.light1PositionYLabel.TabIndex = 60;
@@ -2395,7 +2400,7 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.light1PositionX.Location = new System.Drawing.Point(121, 60);
+            this.light1PositionX.Location = new System.Drawing.Point(121, 124);
             this.light1PositionX.Minimum = new decimal(new int[] {
             100,
             0,
@@ -2414,7 +2419,7 @@ namespace MapGenerator
             // light1PositionXLabel
             // 
             this.light1PositionXLabel.AutoSize = true;
-            this.light1PositionXLabel.Location = new System.Drawing.Point(101, 62);
+            this.light1PositionXLabel.Location = new System.Drawing.Point(101, 126);
             this.light1PositionXLabel.Name = "light1PositionXLabel";
             this.light1PositionXLabel.Size = new System.Drawing.Size(14, 13);
             this.light1PositionXLabel.TabIndex = 4;
@@ -2423,7 +2428,7 @@ namespace MapGenerator
             // light1Position
             // 
             this.light1Position.AutoSize = true;
-            this.light1Position.Location = new System.Drawing.Point(90, 41);
+            this.light1Position.Location = new System.Drawing.Point(90, 105);
             this.light1Position.Name = "light1Position";
             this.light1Position.Size = new System.Drawing.Size(70, 13);
             this.light1Position.TabIndex = 3;
@@ -2432,7 +2437,7 @@ namespace MapGenerator
             // light1ColorLabel
             // 
             this.light1ColorLabel.AutoSize = true;
-            this.light1ColorLabel.Location = new System.Drawing.Point(5, 41);
+            this.light1ColorLabel.Location = new System.Drawing.Point(5, 105);
             this.light1ColorLabel.Name = "light1ColorLabel";
             this.light1ColorLabel.Size = new System.Drawing.Size(57, 13);
             this.light1ColorLabel.TabIndex = 2;
@@ -2440,7 +2445,7 @@ namespace MapGenerator
             // 
             // light1ColorPicture
             // 
-            this.light1ColorPicture.Location = new System.Drawing.Point(9, 60);
+            this.light1ColorPicture.Location = new System.Drawing.Point(9, 124);
             this.light1ColorPicture.Name = "light1ColorPicture";
             this.light1ColorPicture.Size = new System.Drawing.Size(64, 20);
             this.light1ColorPicture.TabIndex = 1;
@@ -2452,7 +2457,7 @@ namespace MapGenerator
             this.light1Checkbox.AutoSize = true;
             this.light1Checkbox.Checked = true;
             this.light1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.light1Checkbox.Location = new System.Drawing.Point(8, 12);
+            this.light1Checkbox.Location = new System.Drawing.Point(8, 76);
             this.light1Checkbox.Name = "light1Checkbox";
             this.light1Checkbox.Size = new System.Drawing.Size(94, 17);
             this.light1Checkbox.TabIndex = 0;
@@ -2590,6 +2595,27 @@ namespace MapGenerator
             this.menuItem1,
             this.menuItem6});
             // 
+            // normalStrengthLabel
+            // 
+            this.normalStrengthLabel.AutoSize = true;
+            this.normalStrengthLabel.Location = new System.Drawing.Point(5, 9);
+            this.normalStrengthLabel.Name = "normalStrengthLabel";
+            this.normalStrengthLabel.Size = new System.Drawing.Size(83, 13);
+            this.normalStrengthLabel.TabIndex = 82;
+            this.normalStrengthLabel.Text = "Normal Strength";
+            // 
+            // normalStrength
+            // 
+            this.normalStrength.Location = new System.Drawing.Point(8, 26);
+            this.normalStrength.Name = "normalStrength";
+            this.normalStrength.Size = new System.Drawing.Size(101, 20);
+            this.normalStrength.TabIndex = 83;
+            this.normalStrength.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
             // MapGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2686,6 +2712,7 @@ namespace MapGenerator
             this.renderTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.renderHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normalStrength)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2849,5 +2876,7 @@ namespace MapGenerator
         private MenuItem menuItem6;
         private MainMenu mainMenu1;
         private MenuItem fileLoadMap;
+        private NumericUpDown normalStrength;
+        private Label normalStrengthLabel;
     }
 }

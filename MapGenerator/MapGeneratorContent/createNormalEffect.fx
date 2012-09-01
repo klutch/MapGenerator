@@ -1,5 +1,6 @@
 sampler baseSampler : register(s0);
 float2 renderTargetSize;
+float normalStrength;
 
 float4x4 matrixTransform;
 
@@ -47,8 +48,8 @@ float4 PixelShaderFunction(float2 texCoords:TEXCOORD0) : COLOR0
 
 	float u = (x01 - base) - (x21 - base);
 	float v = (x10 - base) - (x12 - base);
-	normal.r += u;
-	normal.g += v;
+	normal.r += u * normalStrength;
+	normal.g += v * normalStrength;
 	normal.rgb = (normal.rgb + 1) / 2;
 	
 	return float4(normal, 1);

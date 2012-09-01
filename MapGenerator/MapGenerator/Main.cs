@@ -393,6 +393,7 @@ namespace MapGenerator
             GraphicsDevice.Clear(Color.Black);
             createNormalEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
             createNormalEffect.Parameters["renderTargetSize"].SetValue(new Vector2(options.width, options.height));
+            createNormalEffect.Parameters["normalStrength"].SetValue(options.normalStrength);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, createNormalEffect);
             spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
             spriteBatch.End();

@@ -12,12 +12,10 @@ namespace MapGenerator
         static void Main(string[] args)
         {
             MapGeneratorForm form = new MapGeneratorForm();
+            Main game = new MapGenerator.Main(form);
+            form.main = game;
             form.Show();
-            using (Main game = new Main(form))
-            {
-                form.main = game;
-                game.Run();
-            }
+            game.Run();
         }
     }
 #endif
