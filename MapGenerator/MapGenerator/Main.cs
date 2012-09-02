@@ -721,18 +721,33 @@ namespace MapGenerator
             fileStream.Close();
 
             // Flora layer 1
-            fileStream = new FileStream(string.Format("{0}-floraLayer1.png", path), FileMode.OpenOrCreate);
+            fileStream = new FileStream(string.Format("{0}-flora-1.png", path), FileMode.OpenOrCreate);
             floraLayer1.SaveAsPng(fileStream, floraLayer1.Width, floraLayer1.Height);
             fileStream.Close();
 
             // Flora layer 2
-            fileStream = new FileStream(string.Format("{0}-floraLayer2.png", path), FileMode.OpenOrCreate);
+            fileStream = new FileStream(string.Format("{0}-flora-2.png", path), FileMode.OpenOrCreate);
             floraLayer2.SaveAsPng(fileStream, floraLayer2.Width, floraLayer2.Height);
             fileStream.Close();
 
             // Normal map
             fileStream = new FileStream(string.Format("{0}-normals.png", path), FileMode.OpenOrCreate);
             normalMap.SaveAsPng(fileStream, normalMap.Width, normalMap.Height);
+            fileStream.Close();
+
+            // Detail layer 1
+            fileStream = new FileStream(string.Format("{0}-details-1.png", path), FileMode.OpenOrCreate);
+            detailsLayer1.SaveAsPng(fileStream, detailsLayer1.Width, detailsLayer1.Height);
+            fileStream.Close();
+
+            // Detail layer 2
+            fileStream = new FileStream(string.Format("{0}-details-2.png", path), FileMode.OpenOrCreate);
+            detailsLayer2.SaveAsPng(fileStream, detailsLayer2.Width, detailsLayer2.Height);
+            fileStream.Close();
+
+            // Detail layer 3
+            fileStream = new FileStream(string.Format("{0}-details-3.png", path), FileMode.OpenOrCreate);
+            detailsLayer3.SaveAsPng(fileStream, detailsLayer3.Width, detailsLayer3.Height);
             fileStream.Close();
 
             // Water
@@ -746,7 +761,7 @@ namespace MapGenerator
         {
             string path = fileBase;
             FileStream fileStream = new FileStream(fileBase, FileMode.OpenOrCreate);
-            renderTarget.SaveAsJpeg(fileStream, renderTarget.Width, renderTarget.Height);
+            renderTarget.SaveAsPng(fileStream, renderTarget.Width, renderTarget.Height);
             fileStream.Close();
         }
 
