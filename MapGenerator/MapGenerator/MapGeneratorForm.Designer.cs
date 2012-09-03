@@ -186,12 +186,17 @@ namespace MapGenerator
             this.renderWidth = new System.Windows.Forms.NumericUpDown();
             this.saveLayersButton = new System.Windows.Forms.Button();
             this.saveComposite = new System.Windows.Forms.Button();
-            this.fileSaveLayers = new System.Windows.Forms.MenuItem();
-            this.fileSaveComposite = new System.Windows.Forms.MenuItem();
-            this.fileSaveMap = new System.Windows.Forms.MenuItem();
             this.fileExit = new System.Windows.Forms.MenuItem();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.fileLoadMap = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.menuItem8 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem10 = new System.Windows.Forms.MenuItem();
+            this.menuItem11 = new System.Windows.Forms.MenuItem();
             this.renderGenerateMap = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
@@ -272,7 +277,7 @@ namespace MapGenerator
             // 
             this.surface.Location = new System.Drawing.Point(258, 0);
             this.surface.Name = "surface";
-            this.surface.Size = new System.Drawing.Size(668, 561);
+            this.surface.Size = new System.Drawing.Size(667, 561);
             this.surface.TabIndex = 0;
             this.surface.TabStop = false;
             this.surface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.surface_MouseMove);
@@ -2554,29 +2559,10 @@ namespace MapGenerator
             this.saveComposite.TabIndex = 13;
             this.saveComposite.Text = "Save Composite";
             this.saveComposite.UseVisualStyleBackColor = true;
-            this.saveComposite.Click += new System.EventHandler(this.saveComposite_Click);
-            // 
-            // fileSaveLayers
-            // 
-            this.fileSaveLayers.Index = 2;
-            this.fileSaveLayers.Text = "Save Layers";
-            this.fileSaveLayers.Click += new System.EventHandler(this.saveLayersButton_Click);
-            // 
-            // fileSaveComposite
-            // 
-            this.fileSaveComposite.Index = 3;
-            this.fileSaveComposite.Text = "Save Composite";
-            this.fileSaveComposite.Click += new System.EventHandler(this.saveComposite_Click);
-            // 
-            // fileSaveMap
-            // 
-            this.fileSaveMap.Index = 1;
-            this.fileSaveMap.Text = "Save Map";
-            this.fileSaveMap.Click += new System.EventHandler(this.fileSaveMap_Click);
             // 
             // fileExit
             // 
-            this.fileExit.Index = 4;
+            this.fileExit.Index = 3;
             this.fileExit.Text = "Exit";
             this.fileExit.Click += new System.EventHandler(this.fileExit_Click);
             // 
@@ -2584,18 +2570,69 @@ namespace MapGenerator
             // 
             this.menuItem1.Index = 0;
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.fileLoadMap,
-            this.fileSaveMap,
-            this.fileSaveLayers,
-            this.fileSaveComposite,
+            this.menuItem2,
+            this.menuItem3,
+            this.menuItem11,
             this.fileExit});
             this.menuItem1.Text = "File";
             // 
-            // fileLoadMap
+            // menuItem2
             // 
-            this.fileLoadMap.Index = 0;
-            this.fileLoadMap.Text = "Load Map";
-            this.fileLoadMap.Click += new System.EventHandler(this.fileLoadMap_Click);
+            this.menuItem2.Index = 0;
+            this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem4,
+            this.menuItem9,
+            this.menuItem5,
+            this.menuItem7,
+            this.menuItem8});
+            this.menuItem2.Text = "Save";
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 0;
+            this.menuItem4.Text = "Map";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
+            // menuItem9
+            // 
+            this.menuItem9.Index = 1;
+            this.menuItem9.Text = "-";
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 2;
+            this.menuItem5.Text = "Layers";
+            this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
+            // 
+            // menuItem7
+            // 
+            this.menuItem7.Index = 3;
+            this.menuItem7.Text = "Composite";
+            this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
+            // 
+            // menuItem8
+            // 
+            this.menuItem8.Index = 4;
+            this.menuItem8.Text = "Batch";
+            this.menuItem8.Click += new System.EventHandler(this.menuItem8_Click);
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 1;
+            this.menuItem3.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem10});
+            this.menuItem3.Text = "Load";
+            // 
+            // menuItem10
+            // 
+            this.menuItem10.Index = 0;
+            this.menuItem10.Text = "Map";
+            this.menuItem10.Click += new System.EventHandler(this.menuItem10_Click);
+            // 
+            // menuItem11
+            // 
+            this.menuItem11.Index = 2;
+            this.menuItem11.Text = "-";
             // 
             // renderGenerateMap
             // 
@@ -2867,16 +2904,21 @@ namespace MapGenerator
         private Label light2IntensityLabel;
         private NumericUpDown light1Intensity;
         private Label light1IntensityLabel;
-        private MenuItem fileSaveLayers;
-        private MenuItem fileSaveComposite;
-        private MenuItem fileSaveMap;
         private MenuItem fileExit;
         private MenuItem menuItem1;
         private MenuItem renderGenerateMap;
         private MenuItem menuItem6;
         private MainMenu mainMenu1;
-        private MenuItem fileLoadMap;
         private NumericUpDown normalStrength;
         private Label normalStrengthLabel;
+        private MenuItem menuItem2;
+        private MenuItem menuItem3;
+        private MenuItem menuItem4;
+        private MenuItem menuItem5;
+        private MenuItem menuItem7;
+        private MenuItem menuItem9;
+        private MenuItem menuItem8;
+        private MenuItem menuItem10;
+        private MenuItem menuItem11;
     }
 }

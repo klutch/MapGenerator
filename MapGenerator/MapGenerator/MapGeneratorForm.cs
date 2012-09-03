@@ -602,42 +602,7 @@ namespace MapGenerator
 
         private void saveLayersButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
-            // Create output directory if needed
-            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
-            if (!directory.Exists)
-                directory.Create();
-            fileDialog.InitialDirectory = baseDirectory;
-            fileDialog.Title = "Save Layers";
-
-            Invoke((Action)(() =>
-                {
-                    if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        main.saveLayers(fileDialog.FileName);
-                    }
-                }));
-        }
-
-        private void saveComposite_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
-            // Create output directory if needed
-            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
-            if (!directory.Exists)
-                directory.Create();
-            fileDialog.InitialDirectory = baseDirectory;
-            fileDialog.Title = "Save Composite";
-            fileDialog.Filter = "PNG Files (*.png)|*.png";
-            Invoke((Action)(() =>
-            {
-                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    main.saveComposite(fileDialog.FileName);
-                }
-            }));
+            
         }
 
         private void surface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -1030,8 +995,11 @@ namespace MapGenerator
             main.generateMap(getOptions());
         }
 
-        private void fileSaveMap_Click(object sender, EventArgs e)
+        private void menuItem4_Click(object sender, EventArgs e)
         {
+            ////////////////////////////////////////////////
+            // Save map
+            ////////////////////////////////////////////////
             SaveFileDialog fileDialog = new SaveFileDialog();
             string baseDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
             // Create output directory if needed
@@ -1050,8 +1018,57 @@ namespace MapGenerator
             }));
         }
 
-        private void fileLoadMap_Click(object sender, EventArgs e)
+        private void menuItem5_Click(object sender, EventArgs e)
         {
+            ////////////////////////////////////////////////
+            // Save layers
+            ////////////////////////////////////////////////
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
+            // Create output directory if needed
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            if (!directory.Exists)
+                directory.Create();
+            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.Title = "Save Layers";
+
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.saveLayers(fileDialog.FileName);
+                }
+            }));
+        }
+
+        private void menuItem7_Click(object sender, EventArgs e)
+        {
+            ////////////////////////////////////////////////
+            // Save composite
+            ////////////////////////////////////////////////
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
+            // Create output directory if needed
+            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            if (!directory.Exists)
+                directory.Create();
+            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.Title = "Save Composite";
+            fileDialog.Filter = "PNG Files (*.png)|*.png";
+            Invoke((Action)(() =>
+            {
+                if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    main.saveComposite(fileDialog.FileName);
+                }
+            }));
+        }
+
+        private void menuItem10_Click(object sender, EventArgs e)
+        {
+            ////////////////////////////////////////////////
+            // Load map
+            ////////////////////////////////////////////////
             OpenFileDialog fileDialog = new OpenFileDialog();
             string baseDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
             DirectoryInfo directory = new DirectoryInfo(baseDirectory);
@@ -1068,6 +1085,14 @@ namespace MapGenerator
                     ignoreSurfaceClick = true;
                 }
             }));
+        }
+
+        private void menuItem8_Click(object sender, EventArgs e)
+        {
+            ////////////////////////////////////////////////
+            // Batch save
+            ////////////////////////////////////////////////
+
         }
     }
 }
