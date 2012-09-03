@@ -110,6 +110,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BatchSaveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BatchSaveForm.Designer.cs">
+      <DependentUpon>BatchSaveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapGeneratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BatchSaveForm.resx">
+      <DependentUpon>BatchSaveForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MapGeneratorForm.resx">
       <DependentUpon>MapGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>

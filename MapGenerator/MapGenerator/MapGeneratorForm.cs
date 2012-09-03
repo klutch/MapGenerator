@@ -130,6 +130,8 @@ namespace MapGenerator
         private Color light1AmbientColor = Color.Black;
         private Color light2Color = Color.DarkOrange;
         private Color light2AmbientColor = Color.Black;
+        public static string outputDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
+        public static string mapDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
 
         public MapGeneratorForm()
         {
@@ -600,11 +602,6 @@ namespace MapGenerator
                 }));
         }
 
-        private void saveLayersButton_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void surface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             // Steal focus
@@ -1001,12 +998,11 @@ namespace MapGenerator
             // Save map
             ////////////////////////////////////////////////
             SaveFileDialog fileDialog = new SaveFileDialog();
-            string baseDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
             // Create output directory if needed
-            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            DirectoryInfo directory = new DirectoryInfo(mapDirectory);
             if (!directory.Exists)
                 directory.Create();
-            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.InitialDirectory = mapDirectory;
             fileDialog.Title = "Save Map";
             fileDialog.Filter = "MapGeneratorFile (*.mgf)|*.mgf";
             Invoke((Action)(() =>
@@ -1024,12 +1020,11 @@ namespace MapGenerator
             // Save layers
             ////////////////////////////////////////////////
             SaveFileDialog fileDialog = new SaveFileDialog();
-            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
             // Create output directory if needed
-            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            DirectoryInfo directory = new DirectoryInfo(outputDirectory);
             if (!directory.Exists)
                 directory.Create();
-            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.InitialDirectory = outputDirectory;
             fileDialog.Title = "Save Layers";
 
             Invoke((Action)(() =>
@@ -1047,12 +1042,11 @@ namespace MapGenerator
             // Save composite
             ////////////////////////////////////////////////
             SaveFileDialog fileDialog = new SaveFileDialog();
-            string baseDirectory = string.Format("{0}output\\", AppDomain.CurrentDomain.BaseDirectory);
             // Create output directory if needed
-            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            DirectoryInfo directory = new DirectoryInfo(outputDirectory);
             if (!directory.Exists)
                 directory.Create();
-            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.InitialDirectory = outputDirectory;
             fileDialog.Title = "Save Composite";
             fileDialog.Filter = "PNG Files (*.png)|*.png";
             Invoke((Action)(() =>
@@ -1070,11 +1064,10 @@ namespace MapGenerator
             // Load map
             ////////////////////////////////////////////////
             OpenFileDialog fileDialog = new OpenFileDialog();
-            string baseDirectory = string.Format("{0}maps\\", AppDomain.CurrentDomain.BaseDirectory);
-            DirectoryInfo directory = new DirectoryInfo(baseDirectory);
+            DirectoryInfo directory = new DirectoryInfo(mapDirectory);
             if (!directory.Exists)
                 directory.Create();
-            fileDialog.InitialDirectory = baseDirectory;
+            fileDialog.InitialDirectory = mapDirectory;
             fileDialog.Title = "Load Map";
             fileDialog.Filter = "MapGeneratorFile (*.mgf)|*.mgf";
             Invoke((Action)(() =>
@@ -1092,7 +1085,8 @@ namespace MapGenerator
             ////////////////////////////////////////////////
             // Batch save
             ////////////////////////////////////////////////
-
+            BatchSaveForm batchSaveForm = new BatchSaveForm(this);
+            batchSaveForm.ShowDialog();
         }
     }
 }
