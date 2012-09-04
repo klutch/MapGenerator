@@ -5,20 +5,25 @@ float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
 float brightness;
-bool useWorley;
 
 bool fbm1;
 bool fbm2;
 bool fbm3;
-bool fbm1NoiseOnly;
-bool fbm2NoiseOnly;
-bool fbm3NoiseOnly;
 float2 fbm1Offset;
 float2 fbm2Offset;
 float2 fbm3Offset;
-float fbm1Opacity;
-float fbm2Opacity;
-float fbm3Opacity;
+bool fbm1Perlin;
+bool fbm2Perlin;
+bool fbm3Perlin;
+bool fbm1Cell;
+bool fbm2Cell;
+bool fbm3Cell;
+bool fbm1InvCell;
+bool fbm2InvCell;
+bool fbm3InvCell;
+float fbm1Scale;
+float fbm2Scale;
+float fbm3Scale;
 float4 noiseLowColor;
 float4 noiseHighColor;
 
@@ -40,32 +45,51 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 		(offset / renderSize) - (texCoords * aspect) / noiseScale;
 
 	// Calculate noise
-	float n = useWorley ?
-		worley(p) :
-		fbm(p, noiseFrequency, noiseGain, noiseLacunarity);
-
+	float n = fbmPerlin(p, noiseFrequency, noiseGain, noiseLacunarity);
+	
 	if (fbm1)
 	{
-		float2 coords = fbm1NoiseOnly ?
-			fbm(p, noiseFrequency, noiseGain, noiseLacunarity) : 
-			p + n * fbm1Offset;
-		n *= lerp(n, useWorley ? worley(coords) : fbm(coords, noiseFrequency, noiseGain, noiseLacunarity), fbm1Opacity);
+		float n1 = 0;
+		float n1Scale = max(0.00001, fbm1Scale);
+		float2 coords = (p + n * fbm1Offset) / n1Scale;
+		if (fbm1Perlin)
+			n1 = fbmPerlin(coords, noiseFrequency, noiseGain, noiseLacunarity);
+		else if (fbm1Cell)
+			n1 = fbmWorley(coords, noiseFrequency, noiseGain, noiseLacunarity);
+		else
+			n1 = 1 - fbmWorley(coords, noiseFrequency, noiseGain, noiseLacunarity);
+
+		n *= n1;
 	}
 
 	if (fbm2)
 	{
-		float2 coords = fbm2NoiseOnly ? 
-			fbm(p, noiseFrequency, noiseGain, noiseLacunarity) :
-			p + n * fbm2Offset;
-		n *= lerp(n, useWorley ? worley(coords) : fbm(coords, noiseFrequency, noiseGain, noiseLacunarity), fbm2Opacity);
+		float n2 = 0;
+		float n2Scale = max(0.00001, fbm2Scale);
+		float2 coords = (p + n * fbm2Offset) / n2Scale;
+		if (fbm2Perlin)
+			n2 = fbmPerlin(coords, noiseFrequency, noiseGain, noiseLacunarity);
+		else if (fbm2Cell)
+			n2 = fbmWorley(coords, noiseFrequency, noiseGain, noiseLacunarity);
+		else
+			n2 = 1 - fbmWorley(coords, noiseFrequency, noiseGain, noiseLacunarity);
+
+		n *= n2;
 	}
 
 	if (fbm3)
 	{
-		float2 coords = fbm3NoiseOnly ?
-			fbm(p, noiseFrequency, noiseGain, noiseLacunarity) :
-			p + n * fbm3Offset;
-		n *= lerp(n, useWorley ? worley(coords) : fbm(coords, noiseFrequency, noiseGain, noiseLacunarity), fbm3Opacity);
+		float n3 = 0;
+		float n3Scale = max(0.00001, fbm3Scale);
+		float2 coords = (p + n * fbm3Offset) / n3Scale;
+		if (fbm3Perlin)
+			n3 = fbmPerlin(coords, noiseFrequency, noiseGain, noiseLacunarity);
+		else if (fbm3Cell)
+			n3 = fbmWorley(coords, noiseFrequency, noiseGain, noiseLacunarity);
+		else
+			n3 = 1 - fbmWorley(coords, noiseFrequency, noiseGain, noiseLacunarity);
+
+		n *= n3;
 	}
 
 	n *= brightness;

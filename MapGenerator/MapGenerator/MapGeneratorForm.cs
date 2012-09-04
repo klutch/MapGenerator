@@ -29,19 +29,24 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector4 noiseLowColor;
         public Microsoft.Xna.Framework.Vector4 noiseHighColor;
 
-        public bool worley;
         public bool fbm1;
         public bool fbm2;
         public bool fbm3;
-        public bool fbm1NoiseOnly;
-        public bool fbm2NoiseOnly;
-        public bool fbm3NoiseOnly;
         public Microsoft.Xna.Framework.Vector2 fbm1Offset;
         public Microsoft.Xna.Framework.Vector2 fbm2Offset;
         public Microsoft.Xna.Framework.Vector2 fbm3Offset;
-        public float fbm1Opacity;
-        public float fbm2Opacity;
-        public float fbm3Opacity;
+        public bool fbm1Perlin;
+        public bool fbm2Perlin;
+        public bool fbm3Perlin;
+        public bool fbm1Cell;
+        public bool fbm2Cell;
+        public bool fbm3Cell;
+        public bool fbm1InvCell;
+        public bool fbm2InvCell;
+        public bool fbm3InvCell;
+        public float fbm1Scale;
+        public float fbm2Scale;
+        public float fbm3Scale;
 
         public bool flora1;
         public Microsoft.Xna.Framework.Vector2 flora1Range;
@@ -153,6 +158,12 @@ namespace MapGenerator
             options.detailsLayer2TexturePaths.Add("textures\\details\\jagged_dark.png");
             options.detailsLayer3TexturePaths = new List<string>();
             options.detailsLayer3TexturePaths.Add("textures\\details\\sand_holes.png");
+
+            blockGenerateMap = true;
+            fbm1Basis.SelectedIndex = 0;
+            fbm2Basis.SelectedIndex = 0;
+            fbm3Basis.SelectedIndex = 0;
+            blockGenerateMap = false;
         }
 
         private void setColorBoxes()
@@ -221,7 +232,6 @@ namespace MapGenerator
             options.position.Y = (float)noisePositionY.Value;
 
             // Noise texture
-            options.worley = worleyCheckbox.Checked;
             options.noiseTextureWidth = (int)noiseTextureWidth.Value;
             options.noiseTextureHeight = (int)noiseTextureHeight.Value;
             options.noiseFrequency = (float)noiseFrequency.Value;
@@ -243,18 +253,24 @@ namespace MapGenerator
             options.fbm1 = fbm1Checkbox.Checked;
             options.fbm2 = fbm2Checkbox.Checked;
             options.fbm3 = fbm3Checkbox.Checked;
-            options.fbm1NoiseOnly = fbm1NoiseOnly.Checked;
-            options.fbm2NoiseOnly = fbm2NoiseOnly.Checked;
-            options.fbm3NoiseOnly = fbm3NoiseOnly.Checked;
             options.fbm1Offset = new Microsoft.Xna.Framework.Vector2(
                 (float)fbm1OffsetX.Value, (float)fbm1OffsetY.Value);
             options.fbm2Offset = new Microsoft.Xna.Framework.Vector2(
                 (float)fbm2OffsetX.Value, (float)fbm2OffsetY.Value);
             options.fbm3Offset = new Microsoft.Xna.Framework.Vector2(
                 (float)fbm3OffsetX.Value, (float)fbm3OffsetY.Value);
-            options.fbm1Opacity = (float)fbm1Opacity.Value;
-            options.fbm2Opacity = (float)fbm2Opacity.Value;
-            options.fbm3Opacity = (float)fbm3Opacity.Value;
+            options.fbm1Perlin = fbm1Basis.SelectedIndex == 0;
+            options.fbm2Perlin = fbm2Basis.SelectedIndex == 0;
+            options.fbm3Perlin = fbm3Basis.SelectedIndex == 0;
+            options.fbm1Cell = fbm1Basis.SelectedIndex == 1;
+            options.fbm2Cell = fbm2Basis.SelectedIndex == 1;
+            options.fbm3Cell = fbm3Basis.SelectedIndex == 1;
+            options.fbm1InvCell = fbm1Basis.SelectedIndex == 2;
+            options.fbm2InvCell = fbm2Basis.SelectedIndex == 2;
+            options.fbm3InvCell = fbm3Basis.SelectedIndex == 2;
+            options.fbm1Scale = (float)fbm1Scale.Value;
+            options.fbm2Scale = (float)fbm2Scale.Value;
+            options.fbm3Scale = (float)fbm3Scale.Value;
 
             // Water
             options.water = waterCheckbox.Checked;
@@ -378,7 +394,6 @@ namespace MapGenerator
             noisePositionY.Value = (decimal)options.position.Y;
 
             // Noise texture
-            worleyCheckbox.Checked = options.worley;
             noiseTextureWidth.Value = options.noiseTextureWidth;
             noiseTextureHeight.Value = options.noiseTextureHeight;
             noiseFrequency.Value = (decimal)options.noiseFrequency;
@@ -400,18 +415,33 @@ namespace MapGenerator
             fbm1Checkbox.Checked = options.fbm1;
             fbm2Checkbox.Checked = options.fbm2;
             fbm3Checkbox.Checked = options.fbm3;
-            fbm1NoiseOnly.Checked = options.fbm1NoiseOnly;
-            fbm2NoiseOnly.Checked = options.fbm2NoiseOnly;
-            fbm3NoiseOnly.Checked = options.fbm3NoiseOnly;
             fbm1OffsetX.Value = (decimal)options.fbm1Offset.X;
             fbm1OffsetY.Value = (decimal)options.fbm1Offset.Y;
             fbm2OffsetX.Value = (decimal)options.fbm2Offset.X;
             fbm2OffsetY.Value = (decimal)options.fbm2Offset.Y;
             fbm3OffsetX.Value = (decimal)options.fbm3Offset.X;
             fbm3OffsetY.Value = (decimal)options.fbm3Offset.Y;
-            fbm1Opacity.Value = (decimal)options.fbm1Opacity;
-            fbm2Opacity.Value = (decimal)options.fbm2Opacity;
-            fbm3Opacity.Value = (decimal)options.fbm3Opacity;
+            if (options.fbm1Perlin)
+                fbm1Basis.SelectedIndex = 0;
+            else if (options.fbm1Cell)
+                fbm1Basis.SelectedIndex = 1;
+            else if (options.fbm1InvCell)
+                fbm1Basis.SelectedIndex = 2;
+            if (options.fbm2Perlin)
+                fbm2Basis.SelectedIndex = 0;
+            else if (options.fbm2Cell)
+                fbm2Basis.SelectedIndex = 1;
+            else if (options.fbm2InvCell)
+                fbm2Basis.SelectedIndex = 2;
+            if (options.fbm3Perlin)
+                fbm3Basis.SelectedIndex = 0;
+            else if (options.fbm3Cell)
+                fbm3Basis.SelectedIndex = 1;
+            else if (options.fbm3InvCell)
+                fbm3Basis.SelectedIndex = 2;
+            fbm1Scale.Value = (decimal)options.fbm1Scale;
+            fbm2Scale.Value = (decimal)options.fbm2Scale;
+            fbm3Scale.Value = (decimal)options.fbm3Scale;
 
             // Water
             waterCheckbox.Checked = options.water;

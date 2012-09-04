@@ -44,7 +44,15 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel = new System.Windows.Forms.Label();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.noiseTab = new System.Windows.Forms.TabPage();
-            this.worleyCheckbox = new System.Windows.Forms.CheckBox();
+            this.fbm3ScaleLabel = new System.Windows.Forms.Label();
+            this.fbm3Scale = new System.Windows.Forms.NumericUpDown();
+            this.fbm2ScaleLabel = new System.Windows.Forms.Label();
+            this.fbm2Scale = new System.Windows.Forms.NumericUpDown();
+            this.fbm1ScaleLabel = new System.Windows.Forms.Label();
+            this.fbm1Scale = new System.Windows.Forms.NumericUpDown();
+            this.fbm3Basis = new System.Windows.Forms.ComboBox();
+            this.fbm2Basis = new System.Windows.Forms.ComboBox();
+            this.fbm1Basis = new System.Windows.Forms.ComboBox();
             this.noiseHighColorLabel = new System.Windows.Forms.Label();
             this.noiseHighColorPicture = new System.Windows.Forms.PictureBox();
             this.noiseLowColorLabel = new System.Windows.Forms.Label();
@@ -59,29 +67,17 @@ namespace MapGenerator
             this.noisePositionX = new System.Windows.Forms.NumericUpDown();
             this.noiseSeed = new System.Windows.Forms.NumericUpDown();
             this.noiseScale = new System.Windows.Forms.NumericUpDown();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.fbm3PositionAndNoise = new System.Windows.Forms.RadioButton();
-            this.fbm3NoiseOnly = new System.Windows.Forms.RadioButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.fbm2PositionAndNoise = new System.Windows.Forms.RadioButton();
-            this.fbm2NoiseOnly = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.fbm1PositionAndNoise = new System.Windows.Forms.RadioButton();
-            this.fbm1NoiseOnly = new System.Windows.Forms.RadioButton();
             this.fbm3OffsetLabel = new System.Windows.Forms.Label();
             this.fbm3OffsetY = new System.Windows.Forms.NumericUpDown();
             this.fbm3OffsetX = new System.Windows.Forms.NumericUpDown();
-            this.fbm3Opacity = new System.Windows.Forms.NumericUpDown();
             this.fbm3Checkbox = new System.Windows.Forms.CheckBox();
             this.fbm2OffsetLabel = new System.Windows.Forms.Label();
             this.fbm2OffsetY = new System.Windows.Forms.NumericUpDown();
             this.fbm2OffsetX = new System.Windows.Forms.NumericUpDown();
-            this.fbm2Opacity = new System.Windows.Forms.NumericUpDown();
             this.fbm2Checkbox = new System.Windows.Forms.CheckBox();
             this.fbm1OffsetLabel = new System.Windows.Forms.Label();
             this.fbm1OffsetY = new System.Windows.Forms.NumericUpDown();
             this.fbm1OffsetX = new System.Windows.Forms.NumericUpDown();
-            this.fbm1Opacity = new System.Windows.Forms.NumericUpDown();
             this.positionLabel = new System.Windows.Forms.Label();
             this.fbm1Checkbox = new System.Windows.Forms.CheckBox();
             this.brightnessLabel = new System.Windows.Forms.Label();
@@ -201,6 +197,9 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3Scale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2Scale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).BeginInit();
@@ -213,18 +212,12 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.noisePositionX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseScale)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbm3Opacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbm2Opacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).BeginInit();
             this.waterTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterDeepColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.waterShallowColorPicture)).BeginInit();
@@ -346,7 +339,15 @@ namespace MapGenerator
             // noiseTab
             // 
             this.noiseTab.AutoScroll = true;
-            this.noiseTab.Controls.Add(this.worleyCheckbox);
+            this.noiseTab.Controls.Add(this.fbm3ScaleLabel);
+            this.noiseTab.Controls.Add(this.fbm3Scale);
+            this.noiseTab.Controls.Add(this.fbm2ScaleLabel);
+            this.noiseTab.Controls.Add(this.fbm2Scale);
+            this.noiseTab.Controls.Add(this.fbm1ScaleLabel);
+            this.noiseTab.Controls.Add(this.fbm1Scale);
+            this.noiseTab.Controls.Add(this.fbm3Basis);
+            this.noiseTab.Controls.Add(this.fbm2Basis);
+            this.noiseTab.Controls.Add(this.fbm1Basis);
             this.noiseTab.Controls.Add(this.noiseHighColorLabel);
             this.noiseTab.Controls.Add(this.noiseHighColorPicture);
             this.noiseTab.Controls.Add(this.noiseLowColorLabel);
@@ -361,23 +362,17 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.noisePositionX);
             this.noiseTab.Controls.Add(this.noiseSeed);
             this.noiseTab.Controls.Add(this.noiseScale);
-            this.noiseTab.Controls.Add(this.panel3);
-            this.noiseTab.Controls.Add(this.panel2);
-            this.noiseTab.Controls.Add(this.panel1);
             this.noiseTab.Controls.Add(this.fbm3OffsetLabel);
             this.noiseTab.Controls.Add(this.fbm3OffsetY);
             this.noiseTab.Controls.Add(this.fbm3OffsetX);
-            this.noiseTab.Controls.Add(this.fbm3Opacity);
             this.noiseTab.Controls.Add(this.fbm3Checkbox);
             this.noiseTab.Controls.Add(this.fbm2OffsetLabel);
             this.noiseTab.Controls.Add(this.fbm2OffsetY);
             this.noiseTab.Controls.Add(this.fbm2OffsetX);
-            this.noiseTab.Controls.Add(this.fbm2Opacity);
             this.noiseTab.Controls.Add(this.fbm2Checkbox);
             this.noiseTab.Controls.Add(this.fbm1OffsetLabel);
             this.noiseTab.Controls.Add(this.fbm1OffsetY);
             this.noiseTab.Controls.Add(this.fbm1OffsetX);
-            this.noiseTab.Controls.Add(this.fbm1Opacity);
             this.noiseTab.Controls.Add(this.positionLabel);
             this.noiseTab.Controls.Add(this.fbm1Checkbox);
             this.noiseTab.Controls.Add(this.brightnessLabel);
@@ -395,16 +390,164 @@ namespace MapGenerator
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
             // 
-            // worleyCheckbox
+            // fbm3ScaleLabel
             // 
-            this.worleyCheckbox.AutoSize = true;
-            this.worleyCheckbox.Location = new System.Drawing.Point(9, 307);
-            this.worleyCheckbox.Name = "worleyCheckbox";
-            this.worleyCheckbox.Size = new System.Drawing.Size(95, 17);
-            this.worleyCheckbox.TabIndex = 69;
-            this.worleyCheckbox.Text = "Use Cell Noise";
-            this.worleyCheckbox.UseVisualStyleBackColor = true;
-            this.worleyCheckbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
+            this.fbm3ScaleLabel.AutoSize = true;
+            this.fbm3ScaleLabel.Location = new System.Drawing.Point(34, 633);
+            this.fbm3ScaleLabel.Name = "fbm3ScaleLabel";
+            this.fbm3ScaleLabel.Size = new System.Drawing.Size(34, 13);
+            this.fbm3ScaleLabel.TabIndex = 78;
+            this.fbm3ScaleLabel.Text = "Scale";
+            // 
+            // fbm3Scale
+            // 
+            this.fbm3Scale.DecimalPlaces = 4;
+            this.fbm3Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.fbm3Scale.Location = new System.Drawing.Point(75, 631);
+            this.fbm3Scale.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.fbm3Scale.Minimum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            -2147483648});
+            this.fbm3Scale.Name = "fbm3Scale";
+            this.fbm3Scale.Size = new System.Drawing.Size(66, 20);
+            this.fbm3Scale.TabIndex = 77;
+            this.fbm3Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm3Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm2ScaleLabel
+            // 
+            this.fbm2ScaleLabel.AutoSize = true;
+            this.fbm2ScaleLabel.Location = new System.Drawing.Point(34, 517);
+            this.fbm2ScaleLabel.Name = "fbm2ScaleLabel";
+            this.fbm2ScaleLabel.Size = new System.Drawing.Size(34, 13);
+            this.fbm2ScaleLabel.TabIndex = 76;
+            this.fbm2ScaleLabel.Text = "Scale";
+            // 
+            // fbm2Scale
+            // 
+            this.fbm2Scale.DecimalPlaces = 4;
+            this.fbm2Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.fbm2Scale.Location = new System.Drawing.Point(75, 515);
+            this.fbm2Scale.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.fbm2Scale.Minimum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            -2147483648});
+            this.fbm2Scale.Name = "fbm2Scale";
+            this.fbm2Scale.Size = new System.Drawing.Size(66, 20);
+            this.fbm2Scale.TabIndex = 75;
+            this.fbm2Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm2Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm1ScaleLabel
+            // 
+            this.fbm1ScaleLabel.AutoSize = true;
+            this.fbm1ScaleLabel.Location = new System.Drawing.Point(34, 401);
+            this.fbm1ScaleLabel.Name = "fbm1ScaleLabel";
+            this.fbm1ScaleLabel.Size = new System.Drawing.Size(34, 13);
+            this.fbm1ScaleLabel.TabIndex = 74;
+            this.fbm1ScaleLabel.Text = "Scale";
+            // 
+            // fbm1Scale
+            // 
+            this.fbm1Scale.DecimalPlaces = 4;
+            this.fbm1Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.fbm1Scale.Location = new System.Drawing.Point(75, 399);
+            this.fbm1Scale.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.fbm1Scale.Minimum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            -2147483648});
+            this.fbm1Scale.Name = "fbm1Scale";
+            this.fbm1Scale.Size = new System.Drawing.Size(66, 20);
+            this.fbm1Scale.TabIndex = 73;
+            this.fbm1Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm1Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm3Basis
+            // 
+            this.fbm3Basis.DisplayMember = "Perlin";
+            this.fbm3Basis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fbm3Basis.FormattingEnabled = true;
+            this.fbm3Basis.Items.AddRange(new object[] {
+            "Perlin",
+            "Cell",
+            "Inverse Cell"});
+            this.fbm3Basis.Location = new System.Drawing.Point(75, 565);
+            this.fbm3Basis.Name = "fbm3Basis";
+            this.fbm3Basis.Size = new System.Drawing.Size(146, 21);
+            this.fbm3Basis.TabIndex = 72;
+            this.fbm3Basis.SelectedIndexChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm2Basis
+            // 
+            this.fbm2Basis.DisplayMember = "Perlin";
+            this.fbm2Basis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fbm2Basis.FormattingEnabled = true;
+            this.fbm2Basis.Items.AddRange(new object[] {
+            "Perlin",
+            "Cell",
+            "Inverse Cell"});
+            this.fbm2Basis.Location = new System.Drawing.Point(75, 449);
+            this.fbm2Basis.Name = "fbm2Basis";
+            this.fbm2Basis.Size = new System.Drawing.Size(146, 21);
+            this.fbm2Basis.TabIndex = 71;
+            this.fbm2Basis.SelectedIndexChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm1Basis
+            // 
+            this.fbm1Basis.DisplayMember = "Perlin";
+            this.fbm1Basis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fbm1Basis.FormattingEnabled = true;
+            this.fbm1Basis.Items.AddRange(new object[] {
+            "Perlin",
+            "Cell",
+            "Inverse Cell"});
+            this.fbm1Basis.Location = new System.Drawing.Point(75, 335);
+            this.fbm1Basis.Name = "fbm1Basis";
+            this.fbm1Basis.Size = new System.Drawing.Size(146, 21);
+            this.fbm1Basis.TabIndex = 70;
+            this.fbm1Basis.SelectedIndexChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // noiseHighColorLabel
             // 
@@ -450,9 +593,9 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.noiseBrightness.Location = new System.Drawing.Point(119, 225);
+            this.noiseBrightness.Location = new System.Drawing.Point(121, 225);
             this.noiseBrightness.Name = "noiseBrightness";
-            this.noiseBrightness.Size = new System.Drawing.Size(102, 20);
+            this.noiseBrightness.Size = new System.Drawing.Size(100, 20);
             this.noiseBrightness.TabIndex = 64;
             this.noiseBrightness.Value = new decimal(new int[] {
             13,
@@ -498,7 +641,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.noiseGain.Location = new System.Drawing.Point(119, 176);
+            this.noiseGain.Location = new System.Drawing.Point(121, 176);
             this.noiseGain.Maximum = new decimal(new int[] {
             512,
             0,
@@ -510,7 +653,7 @@ namespace MapGenerator
             0,
             -2147483648});
             this.noiseGain.Name = "noiseGain";
-            this.noiseGain.Size = new System.Drawing.Size(102, 20);
+            this.noiseGain.Size = new System.Drawing.Size(100, 20);
             this.noiseGain.TabIndex = 62;
             this.noiseGain.Value = new decimal(new int[] {
             6,
@@ -669,109 +812,10 @@ namespace MapGenerator
             0});
             this.noiseScale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.fbm3PositionAndNoise);
-            this.panel3.Controls.Add(this.fbm3NoiseOnly);
-            this.panel3.Location = new System.Drawing.Point(9, 585);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(100, 47);
-            this.panel3.TabIndex = 54;
-            // 
-            // fbm3PositionAndNoise
-            // 
-            this.fbm3PositionAndNoise.AutoSize = true;
-            this.fbm3PositionAndNoise.Location = new System.Drawing.Point(0, 0);
-            this.fbm3PositionAndNoise.Name = "fbm3PositionAndNoise";
-            this.fbm3PositionAndNoise.Size = new System.Drawing.Size(101, 17);
-            this.fbm3PositionAndNoise.TabIndex = 34;
-            this.fbm3PositionAndNoise.Text = "Position + Noise";
-            this.fbm3PositionAndNoise.UseVisualStyleBackColor = true;
-            this.fbm3PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
-            // fbm3NoiseOnly
-            // 
-            this.fbm3NoiseOnly.AutoSize = true;
-            this.fbm3NoiseOnly.Checked = true;
-            this.fbm3NoiseOnly.Location = new System.Drawing.Point(0, 23);
-            this.fbm3NoiseOnly.Name = "fbm3NoiseOnly";
-            this.fbm3NoiseOnly.Size = new System.Drawing.Size(76, 17);
-            this.fbm3NoiseOnly.TabIndex = 33;
-            this.fbm3NoiseOnly.TabStop = true;
-            this.fbm3NoiseOnly.Text = "Noise Only";
-            this.fbm3NoiseOnly.UseVisualStyleBackColor = true;
-            this.fbm3NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.fbm2PositionAndNoise);
-            this.panel2.Controls.Add(this.fbm2NoiseOnly);
-            this.panel2.Location = new System.Drawing.Point(9, 490);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(100, 47);
-            this.panel2.TabIndex = 53;
-            // 
-            // fbm2PositionAndNoise
-            // 
-            this.fbm2PositionAndNoise.AutoSize = true;
-            this.fbm2PositionAndNoise.Checked = true;
-            this.fbm2PositionAndNoise.Location = new System.Drawing.Point(0, 0);
-            this.fbm2PositionAndNoise.Name = "fbm2PositionAndNoise";
-            this.fbm2PositionAndNoise.Size = new System.Drawing.Size(101, 17);
-            this.fbm2PositionAndNoise.TabIndex = 34;
-            this.fbm2PositionAndNoise.TabStop = true;
-            this.fbm2PositionAndNoise.Text = "Position + Noise";
-            this.fbm2PositionAndNoise.UseVisualStyleBackColor = true;
-            this.fbm2PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
-            // fbm2NoiseOnly
-            // 
-            this.fbm2NoiseOnly.AutoSize = true;
-            this.fbm2NoiseOnly.Location = new System.Drawing.Point(0, 23);
-            this.fbm2NoiseOnly.Name = "fbm2NoiseOnly";
-            this.fbm2NoiseOnly.Size = new System.Drawing.Size(76, 17);
-            this.fbm2NoiseOnly.TabIndex = 33;
-            this.fbm2NoiseOnly.Text = "Noise Only";
-            this.fbm2NoiseOnly.UseVisualStyleBackColor = true;
-            this.fbm2NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.fbm1PositionAndNoise);
-            this.panel1.Controls.Add(this.fbm1NoiseOnly);
-            this.panel1.Location = new System.Drawing.Point(9, 392);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 47);
-            this.panel1.TabIndex = 52;
-            // 
-            // fbm1PositionAndNoise
-            // 
-            this.fbm1PositionAndNoise.AutoSize = true;
-            this.fbm1PositionAndNoise.Checked = true;
-            this.fbm1PositionAndNoise.Location = new System.Drawing.Point(0, 0);
-            this.fbm1PositionAndNoise.Name = "fbm1PositionAndNoise";
-            this.fbm1PositionAndNoise.Size = new System.Drawing.Size(101, 17);
-            this.fbm1PositionAndNoise.TabIndex = 34;
-            this.fbm1PositionAndNoise.TabStop = true;
-            this.fbm1PositionAndNoise.Text = "Position + Noise";
-            this.fbm1PositionAndNoise.UseVisualStyleBackColor = true;
-            this.fbm1PositionAndNoise.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
-            // fbm1NoiseOnly
-            // 
-            this.fbm1NoiseOnly.AutoSize = true;
-            this.fbm1NoiseOnly.Location = new System.Drawing.Point(0, 23);
-            this.fbm1NoiseOnly.Name = "fbm1NoiseOnly";
-            this.fbm1NoiseOnly.Size = new System.Drawing.Size(76, 17);
-            this.fbm1NoiseOnly.TabIndex = 33;
-            this.fbm1NoiseOnly.Text = "Noise Only";
-            this.fbm1NoiseOnly.UseVisualStyleBackColor = true;
-            this.fbm1NoiseOnly.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
             // fbm3OffsetLabel
             // 
             this.fbm3OffsetLabel.AutoSize = true;
-            this.fbm3OffsetLabel.Location = new System.Drawing.Point(116, 592);
+            this.fbm3OffsetLabel.Location = new System.Drawing.Point(34, 598);
             this.fbm3OffsetLabel.Name = "fbm3OffsetLabel";
             this.fbm3OffsetLabel.Size = new System.Drawing.Size(35, 13);
             this.fbm3OffsetLabel.TabIndex = 51;
@@ -779,20 +823,20 @@ namespace MapGenerator
             // 
             // fbm3OffsetY
             // 
-            this.fbm3OffsetY.DecimalPlaces = 3;
+            this.fbm3OffsetY.DecimalPlaces = 4;
             this.fbm3OffsetY.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.fbm3OffsetY.Location = new System.Drawing.Point(171, 608);
+            this.fbm3OffsetY.Location = new System.Drawing.Point(155, 596);
             this.fbm3OffsetY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm3OffsetY.Name = "fbm3OffsetY";
-            this.fbm3OffsetY.Size = new System.Drawing.Size(50, 20);
+            this.fbm3OffsetY.Size = new System.Drawing.Size(66, 20);
             this.fbm3OffsetY.TabIndex = 50;
             this.fbm3OffsetY.Value = new decimal(new int[] {
             125,
@@ -803,20 +847,20 @@ namespace MapGenerator
             // 
             // fbm3OffsetX
             // 
-            this.fbm3OffsetX.DecimalPlaces = 3;
+            this.fbm3OffsetX.DecimalPlaces = 4;
             this.fbm3OffsetX.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.fbm3OffsetX.Location = new System.Drawing.Point(121, 608);
+            this.fbm3OffsetX.Location = new System.Drawing.Point(75, 596);
             this.fbm3OffsetX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm3OffsetX.Name = "fbm3OffsetX";
-            this.fbm3OffsetX.Size = new System.Drawing.Size(50, 20);
+            this.fbm3OffsetX.Size = new System.Drawing.Size(66, 20);
             this.fbm3OffsetX.TabIndex = 49;
             this.fbm3OffsetX.Value = new decimal(new int[] {
             125,
@@ -825,52 +869,23 @@ namespace MapGenerator
             196608});
             this.fbm3OffsetX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // fbm3Opacity
-            // 
-            this.fbm3Opacity.DecimalPlaces = 4;
-            this.fbm3Opacity.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.fbm3Opacity.Location = new System.Drawing.Point(121, 561);
-            this.fbm3Opacity.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.fbm3Opacity.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            -2147483648});
-            this.fbm3Opacity.Name = "fbm3Opacity";
-            this.fbm3Opacity.Size = new System.Drawing.Size(100, 20);
-            this.fbm3Opacity.TabIndex = 46;
-            this.fbm3Opacity.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.fbm3Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
             // fbm3Checkbox
             // 
             this.fbm3Checkbox.AutoSize = true;
             this.fbm3Checkbox.Checked = true;
             this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 562);
+            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 567);
             this.fbm3Checkbox.Name = "fbm3Checkbox";
-            this.fbm3Checkbox.Size = new System.Drawing.Size(110, 17);
+            this.fbm3Checkbox.Size = new System.Drawing.Size(61, 17);
             this.fbm3Checkbox.TabIndex = 45;
-            this.fbm3Checkbox.Text = "Fractional Layer 3";
+            this.fbm3Checkbox.Text = "Layer 3";
             this.fbm3Checkbox.UseVisualStyleBackColor = true;
             this.fbm3Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm2OffsetLabel
             // 
             this.fbm2OffsetLabel.AutoSize = true;
-            this.fbm2OffsetLabel.Location = new System.Drawing.Point(116, 497);
+            this.fbm2OffsetLabel.Location = new System.Drawing.Point(34, 482);
             this.fbm2OffsetLabel.Name = "fbm2OffsetLabel";
             this.fbm2OffsetLabel.Size = new System.Drawing.Size(35, 13);
             this.fbm2OffsetLabel.TabIndex = 44;
@@ -878,20 +893,20 @@ namespace MapGenerator
             // 
             // fbm2OffsetY
             // 
-            this.fbm2OffsetY.DecimalPlaces = 3;
+            this.fbm2OffsetY.DecimalPlaces = 4;
             this.fbm2OffsetY.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.fbm2OffsetY.Location = new System.Drawing.Point(171, 513);
+            this.fbm2OffsetY.Location = new System.Drawing.Point(155, 480);
             this.fbm2OffsetY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm2OffsetY.Name = "fbm2OffsetY";
-            this.fbm2OffsetY.Size = new System.Drawing.Size(50, 20);
+            this.fbm2OffsetY.Size = new System.Drawing.Size(66, 20);
             this.fbm2OffsetY.TabIndex = 43;
             this.fbm2OffsetY.Value = new decimal(new int[] {
             25,
@@ -902,20 +917,20 @@ namespace MapGenerator
             // 
             // fbm2OffsetX
             // 
-            this.fbm2OffsetX.DecimalPlaces = 3;
+            this.fbm2OffsetX.DecimalPlaces = 4;
             this.fbm2OffsetX.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.fbm2OffsetX.Location = new System.Drawing.Point(121, 513);
+            this.fbm2OffsetX.Location = new System.Drawing.Point(75, 480);
             this.fbm2OffsetX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm2OffsetX.Name = "fbm2OffsetX";
-            this.fbm2OffsetX.Size = new System.Drawing.Size(50, 20);
+            this.fbm2OffsetX.Size = new System.Drawing.Size(66, 20);
             this.fbm2OffsetX.TabIndex = 42;
             this.fbm2OffsetX.Value = new decimal(new int[] {
             25,
@@ -924,52 +939,23 @@ namespace MapGenerator
             131072});
             this.fbm2OffsetX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // fbm2Opacity
-            // 
-            this.fbm2Opacity.DecimalPlaces = 4;
-            this.fbm2Opacity.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.fbm2Opacity.Location = new System.Drawing.Point(121, 466);
-            this.fbm2Opacity.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.fbm2Opacity.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            -2147483648});
-            this.fbm2Opacity.Name = "fbm2Opacity";
-            this.fbm2Opacity.Size = new System.Drawing.Size(100, 20);
-            this.fbm2Opacity.TabIndex = 39;
-            this.fbm2Opacity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.fbm2Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
             // fbm2Checkbox
             // 
             this.fbm2Checkbox.AutoSize = true;
             this.fbm2Checkbox.Checked = true;
             this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 467);
+            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 451);
             this.fbm2Checkbox.Name = "fbm2Checkbox";
-            this.fbm2Checkbox.Size = new System.Drawing.Size(110, 17);
+            this.fbm2Checkbox.Size = new System.Drawing.Size(61, 17);
             this.fbm2Checkbox.TabIndex = 38;
-            this.fbm2Checkbox.Text = "Fractional Layer 2";
+            this.fbm2Checkbox.Text = "Layer 2";
             this.fbm2Checkbox.UseVisualStyleBackColor = true;
             this.fbm2Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // fbm1OffsetLabel
             // 
             this.fbm1OffsetLabel.AutoSize = true;
-            this.fbm1OffsetLabel.Location = new System.Drawing.Point(116, 399);
+            this.fbm1OffsetLabel.Location = new System.Drawing.Point(34, 366);
             this.fbm1OffsetLabel.Name = "fbm1OffsetLabel";
             this.fbm1OffsetLabel.Size = new System.Drawing.Size(35, 13);
             this.fbm1OffsetLabel.TabIndex = 37;
@@ -977,20 +963,20 @@ namespace MapGenerator
             // 
             // fbm1OffsetY
             // 
-            this.fbm1OffsetY.DecimalPlaces = 3;
+            this.fbm1OffsetY.DecimalPlaces = 4;
             this.fbm1OffsetY.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.fbm1OffsetY.Location = new System.Drawing.Point(171, 415);
+            this.fbm1OffsetY.Location = new System.Drawing.Point(155, 364);
             this.fbm1OffsetY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm1OffsetY.Name = "fbm1OffsetY";
-            this.fbm1OffsetY.Size = new System.Drawing.Size(50, 20);
+            this.fbm1OffsetY.Size = new System.Drawing.Size(66, 20);
             this.fbm1OffsetY.TabIndex = 36;
             this.fbm1OffsetY.Value = new decimal(new int[] {
             5,
@@ -1001,20 +987,20 @@ namespace MapGenerator
             // 
             // fbm1OffsetX
             // 
-            this.fbm1OffsetX.DecimalPlaces = 3;
+            this.fbm1OffsetX.DecimalPlaces = 4;
             this.fbm1OffsetX.Increment = new decimal(new int[] {
             1,
             0,
             0,
             196608});
-            this.fbm1OffsetX.Location = new System.Drawing.Point(121, 415);
+            this.fbm1OffsetX.Location = new System.Drawing.Point(75, 364);
             this.fbm1OffsetX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm1OffsetX.Name = "fbm1OffsetX";
-            this.fbm1OffsetX.Size = new System.Drawing.Size(50, 20);
+            this.fbm1OffsetX.Size = new System.Drawing.Size(66, 20);
             this.fbm1OffsetX.TabIndex = 35;
             this.fbm1OffsetX.Value = new decimal(new int[] {
             2,
@@ -1022,35 +1008,6 @@ namespace MapGenerator
             0,
             65536});
             this.fbm1OffsetX.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
-            // 
-            // fbm1Opacity
-            // 
-            this.fbm1Opacity.DecimalPlaces = 4;
-            this.fbm1Opacity.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.fbm1Opacity.Location = new System.Drawing.Point(121, 368);
-            this.fbm1Opacity.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.fbm1Opacity.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            -2147483648});
-            this.fbm1Opacity.Name = "fbm1Opacity";
-            this.fbm1Opacity.Size = new System.Drawing.Size(100, 20);
-            this.fbm1Opacity.TabIndex = 31;
-            this.fbm1Opacity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.fbm1Opacity.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // positionLabel
             // 
@@ -1066,11 +1023,11 @@ namespace MapGenerator
             this.fbm1Checkbox.AutoSize = true;
             this.fbm1Checkbox.Checked = true;
             this.fbm1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 369);
+            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 335);
             this.fbm1Checkbox.Name = "fbm1Checkbox";
-            this.fbm1Checkbox.Size = new System.Drawing.Size(110, 17);
+            this.fbm1Checkbox.Size = new System.Drawing.Size(61, 17);
             this.fbm1Checkbox.TabIndex = 19;
-            this.fbm1Checkbox.Text = "Fractional Layer 1";
+            this.fbm1Checkbox.Text = "Layer 1";
             this.fbm1Checkbox.UseVisualStyleBackColor = true;
             this.fbm1Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
@@ -2650,6 +2607,9 @@ namespace MapGenerator
             this.mainOptionsControl.ResumeLayout(false);
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3Scale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2Scale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).EndInit();
@@ -2662,21 +2622,12 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.noisePositionX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseScale)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm3OffsetX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbm3Opacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm2OffsetX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbm2Opacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1OffsetX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fbm1Opacity)).EndInit();
             this.waterTab.ResumeLayout(false);
             this.waterTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterDeepColorPicture)).EndInit();
@@ -2754,26 +2705,14 @@ namespace MapGenerator
         private Label fbm1OffsetLabel;
         private NumericUpDown fbm1OffsetY;
         private NumericUpDown fbm1OffsetX;
-        private RadioButton fbm1PositionAndNoise;
-        private RadioButton fbm1NoiseOnly;
-        private NumericUpDown fbm1Opacity;
         private Label fbm2OffsetLabel;
         private NumericUpDown fbm2OffsetY;
         private NumericUpDown fbm2OffsetX;
-        private NumericUpDown fbm2Opacity;
         private CheckBox fbm2Checkbox;
         private Label fbm3OffsetLabel;
         private NumericUpDown fbm3OffsetY;
         private NumericUpDown fbm3OffsetX;
-        private NumericUpDown fbm3Opacity;
         private CheckBox fbm3Checkbox;
-        private Panel panel1;
-        private Panel panel3;
-        private RadioButton fbm3PositionAndNoise;
-        private RadioButton fbm3NoiseOnly;
-        private Panel panel2;
-        private RadioButton fbm2PositionAndNoise;
-        private RadioButton fbm2NoiseOnly;
         private NumericUpDown noiseBrightness;
         private NumericUpDown noiseLacunarity;
         private NumericUpDown noiseGain;
@@ -2859,7 +2798,6 @@ namespace MapGenerator
         private NumericUpDown light1PositionX;
         private Label light1PositionXLabel;
         private Label light1Position;
-        private CheckBox worleyCheckbox;
         private Label light1AmbientColorLabel;
         private PictureBox light1AmbientColorPicture;
         private Label light2AmbientColorLabel;
@@ -2894,5 +2832,14 @@ namespace MapGenerator
         private MenuItem menuItem8;
         private MenuItem menuItem10;
         private MenuItem menuItem11;
+        private ComboBox fbm1Basis;
+        private ComboBox fbm3Basis;
+        private ComboBox fbm2Basis;
+        private Label fbm3ScaleLabel;
+        private NumericUpDown fbm3Scale;
+        private Label fbm2ScaleLabel;
+        private NumericUpDown fbm2Scale;
+        private Label fbm1ScaleLabel;
+        private NumericUpDown fbm1Scale;
     }
 }

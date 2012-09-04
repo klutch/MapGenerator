@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace MapGenerator
 {
+
     public class Main : Game
     {
         public static GraphicsDeviceManager graphics;
@@ -308,18 +309,23 @@ namespace MapGenerator
             baseEffect.Parameters["fbm1"].SetValue(options.fbm1);
             baseEffect.Parameters["fbm2"].SetValue(options.fbm2);
             baseEffect.Parameters["fbm3"].SetValue(options.fbm3);
-            baseEffect.Parameters["fbm1NoiseOnly"].SetValue(options.fbm1NoiseOnly);
-            baseEffect.Parameters["fbm2NoiseOnly"].SetValue(options.fbm2NoiseOnly);
-            baseEffect.Parameters["fbm3NoiseOnly"].SetValue(options.fbm3NoiseOnly);
             baseEffect.Parameters["fbm1Offset"].SetValue(options.fbm1Offset);
             baseEffect.Parameters["fbm2Offset"].SetValue(options.fbm2Offset);
             baseEffect.Parameters["fbm3Offset"].SetValue(options.fbm3Offset);
-            baseEffect.Parameters["fbm1Opacity"].SetValue(options.fbm1Opacity);
-            baseEffect.Parameters["fbm2Opacity"].SetValue(options.fbm2Opacity);
-            baseEffect.Parameters["fbm3Opacity"].SetValue(options.fbm3Opacity);
+            baseEffect.Parameters["fbm1Perlin"].SetValue(options.fbm1Perlin);
+            baseEffect.Parameters["fbm2Perlin"].SetValue(options.fbm2Perlin);
+            baseEffect.Parameters["fbm3Perlin"].SetValue(options.fbm3Perlin);
+            baseEffect.Parameters["fbm1Cell"].SetValue(options.fbm1Cell);
+            baseEffect.Parameters["fbm2Cell"].SetValue(options.fbm2Cell);
+            baseEffect.Parameters["fbm3Cell"].SetValue(options.fbm3Cell);
+            baseEffect.Parameters["fbm1InvCell"].SetValue(options.fbm1InvCell);
+            baseEffect.Parameters["fbm2InvCell"].SetValue(options.fbm2InvCell);
+            baseEffect.Parameters["fbm3InvCell"].SetValue(options.fbm3InvCell);
+            baseEffect.Parameters["fbm1Scale"].SetValue(options.fbm1Scale);
+            baseEffect.Parameters["fbm2Scale"].SetValue(options.fbm2Scale);
+            baseEffect.Parameters["fbm3Scale"].SetValue(options.fbm3Scale);
             baseEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
             baseEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
-            baseEffect.Parameters["useWorley"].SetValue(options.worley);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
             spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
             spriteBatch.End();
