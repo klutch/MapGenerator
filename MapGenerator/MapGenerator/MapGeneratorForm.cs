@@ -675,9 +675,8 @@ namespace MapGenerator
                 {
                     // Adjust scale of effect
                     float scale = (float)noiseScale.Value;
-                    scale += 0.005f * e.Delta;
+                    scale += e.Delta > 0 ? 0.1f : -0.1f;
                     noiseScale.Value = (decimal)scale;
-                    main.generateMap(getOptions());
                 }
             }
         }

@@ -644,7 +644,7 @@ namespace MapGenerator
             // 
             this.noiseScale.DecimalPlaces = 4;
             this.noiseScale.Increment = new decimal(new int[] {
-            6,
+            1,
             0,
             0,
             65536});
@@ -663,10 +663,11 @@ namespace MapGenerator
             this.noiseScale.Size = new System.Drawing.Size(100, 20);
             this.noiseScale.TabIndex = 55;
             this.noiseScale.Value = new decimal(new int[] {
-            32,
+            1,
             0,
             0,
             0});
+            this.noiseScale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // panel3
             // 

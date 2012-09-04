@@ -2,7 +2,6 @@
 // Perlin noise
 ////////////////////////////////////////////////////
 float2 noiseSize;
-float2 noiseOffset;
 float noiseScale;
 float2 renderSize;
 sampler noiseSampler : register(s0) = sampler_state

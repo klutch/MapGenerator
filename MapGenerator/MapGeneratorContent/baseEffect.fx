@@ -1,5 +1,6 @@
 #include <noiseFunction.fx>
 
+float2 offset;
 float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
@@ -33,9 +34,10 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
 	// Set position
+	float smallSide = min(renderSize.x, renderSize.y);
+	float2 aspect = renderSize / smallSide;
 	float2 p = 
-		(noiseOffset / renderSize) - 
-		texCoords * (renderSize / noiseSize) / noiseScale;
+		(offset / renderSize) - (texCoords * aspect) / noiseScale;
 
 	// Calculate noise
 	float n = useWorley ?

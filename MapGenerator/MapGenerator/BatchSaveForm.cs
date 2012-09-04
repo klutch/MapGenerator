@@ -45,8 +45,13 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     MapGeneratorOptions options = mapGeneratorForm.getOptions();
-                    int cellWidth = options.width;
-                    int cellHeight = options.height;
+
+                    // Calculate correct cell dimensions
+                    float smallSide = Math.Min(options.width, options.height);
+                    float aspectX = options.width / smallSide;
+                    float aspectY = options.height / smallSide;
+                    int cellWidth = (int)(((float)options.width * aspectX) / options.scale);
+                    int cellHeight = (int)(((float)options.height * aspectY) / options.scale);
                     int numCells = (int)numSurroundingCells.Value;
                     int originX = (int)options.position.X;
                     int originY = (int)options.position.Y;
@@ -55,8 +60,8 @@ namespace MapGenerator
                     {
                         for (int j = -numCells; j <= numCells; j++)
                         {
-                            int currentX = originX + (i * cellWidth);
-                            int currentY = originY + (j * cellHeight);
+                            int currentX = originX + (-i * cellWidth);
+                            int currentY = originY + (-j * cellHeight);
 
                             options.position.X = (float)currentX;
                             options.position.Y = (float)currentY;
@@ -93,8 +98,13 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     MapGeneratorOptions options = mapGeneratorForm.getOptions();
-                    int cellWidth = options.width;
-                    int cellHeight = options.height;
+
+                    // Calculate correct cell dimensions
+                    float smallSide = Math.Min(options.width, options.height);
+                    float aspectX = options.width / smallSide;
+                    float aspectY = options.height / smallSide;
+                    int cellWidth = (int)(((float)options.width * aspectX) / options.scale);
+                    int cellHeight = (int)(((float)options.height * aspectY) / options.scale);
                     int numCells = (int)numSurroundingCells.Value;
                     int originX = (int)options.position.X;
                     int originY = (int)options.position.Y;
@@ -103,8 +113,8 @@ namespace MapGenerator
                     {
                         for (int j = -numCells; j <= numCells; j++)
                         {
-                            int currentX = originX + (i * cellWidth);
-                            int currentY = originY + (j * cellHeight);
+                            int currentX = originX + (-i * cellWidth);
+                            int currentY = originY + (-j * cellHeight);
 
                             Console.WriteLine("Saving at position: {0}, {1}", currentX, currentY);
 

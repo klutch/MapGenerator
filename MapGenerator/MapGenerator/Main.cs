@@ -297,7 +297,7 @@ namespace MapGenerator
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Textures[1] = worleyTexture;
             GraphicsDevice.Clear(Color.Black);
-            baseEffect.Parameters["noiseOffset"].SetValue(options.position);
+            baseEffect.Parameters["offset"].SetValue(options.position);
             baseEffect.Parameters["noiseScale"].SetValue(options.scale);
             baseEffect.Parameters["renderSize"].SetValue(new Vector2(options.width, options.height));
             baseEffect.Parameters["noiseSize"].SetValue(new Vector2(options.noiseTextureWidth, options.noiseTextureHeight));
