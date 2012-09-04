@@ -116,7 +116,7 @@ namespace MapGenerator
         private bool ctrl;
         private MapGeneratorOptions options;
         private bool blockGenerateMap;
-        private bool ignoreSurfaceClick;
+        public bool ignoreSurfaceClick;
         private bool redrawMap;
         private Color flora1GroundColor = Color.LimeGreen;
         private Color flora1PlantColor = Color.White;
@@ -1010,6 +1010,7 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     saveMapFile(fileDialog.FileName);
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -1032,6 +1033,7 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.saveLayers(fileDialog.FileName);
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -1054,6 +1056,7 @@ namespace MapGenerator
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     main.saveComposite(fileDialog.FileName);
+                    ignoreSurfaceClick = true;
                 }
             }));
         }

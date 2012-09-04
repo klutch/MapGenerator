@@ -69,6 +69,7 @@ namespace MapGenerator
 
                     options.position.X = (float)originX;
                     options.position.Y = (float)originY;
+                    mapGeneratorForm.ignoreSurfaceClick = true;
                     Close();
                 }
             }));
@@ -105,6 +106,8 @@ namespace MapGenerator
                             int currentX = originX + (i * cellWidth);
                             int currentY = originY + (j * cellHeight);
 
+                            Console.WriteLine("Saving at position: {0}, {1}", currentX, currentY);
+
                             options.position.X = (float)currentX;
                             options.position.Y = (float)currentY;
 
@@ -117,6 +120,7 @@ namespace MapGenerator
 
                     options.position.X = (float)originX;
                     options.position.Y = (float)originY;
+                    mapGeneratorForm.ignoreSurfaceClick = true;
                     Close();
                 }
             }));

@@ -44,6 +44,7 @@ namespace MapGenerator
         private RenderTarget2D detailsLayer3;
         private RenderTarget2D detailAlpha;
         private RenderTarget2D normalMap;
+        private RenderTarget2D alphaFix;
         private Texture2D randomTexture;
         private Texture2D worleyTexture;
         private Color[] randomTextureData;
@@ -287,6 +288,7 @@ namespace MapGenerator
                 detailsLayer2 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 detailsLayer3 = new RenderTarget2D(GraphicsDevice, options.width, options.height);
                 normalMap = new RenderTarget2D(GraphicsDevice, options.width, options.height);
+                alphaFix = new RenderTarget2D(GraphicsDevice, options.width, options.height);
             }
 
             //////////////////////////////////////
@@ -698,6 +700,18 @@ namespace MapGenerator
             //spriteBatch.Begin();
             //spriteBatch.Draw(normalMap, normalMap.Bounds, Color.White);
             //spriteBatch.End();
+
+            // Hacky fix for render target transparency problem
+            GraphicsDevice.SetRenderTarget(alphaFix);
+            GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
+            spriteBatch.Draw(alphaFix, alphaFix.Bounds, Color.White);
+            spriteBatch.End();
 
             // Reset render target
             GraphicsDevice.SetRenderTarget(null);
