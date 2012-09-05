@@ -1075,11 +1075,22 @@ namespace MapGenerator
             fileDialog.InitialDirectory = outputDirectory;
             fileDialog.Title = "Save Layers";
 
+            BatchSaveLayerOptions saveLayerOptions = new BatchSaveLayerOptions();
+            saveLayerOptions.baseLayer = true;
+            saveLayerOptions.waterLayer = true;
+            saveLayerOptions.detailsLayer1 = true;
+            saveLayerOptions.detailsLayer2 = true;
+            saveLayerOptions.detailsLayer3 = true;
+            saveLayerOptions.normalsLayer = true;
+            saveLayerOptions.shadowLayer = true;
+            saveLayerOptions.floraLayer1 = true;
+            saveLayerOptions.floraLayer2 = true;
+
             Invoke((Action)(() =>
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.saveLayers(fileDialog.FileName);
+                    main.saveLayers(fileDialog.FileName, saveLayerOptions);
                     ignoreSurfaceClick = true;
                 }
             }));

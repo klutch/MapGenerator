@@ -731,49 +731,74 @@ namespace MapGenerator
         }
 
         // saveLayers
-        public void saveLayers(string fileBase)
+        public void saveLayers(string fileBase, BatchSaveLayerOptions saveLayerOptions)
         {
             string path = fileBase;
+            FileStream fileStream;
 
             // Base noise
-            FileStream fileStream = new FileStream(string.Format("{0}-base.png", path), FileMode.OpenOrCreate);
-            baseNoise.SaveAsPng(fileStream, baseNoise.Width, baseNoise.Height);
-            fileStream.Close();
+            if (saveLayerOptions.baseLayer)
+            {
+                fileStream = new FileStream(string.Format("{0}-base.png", path), FileMode.OpenOrCreate);
+                baseNoise.SaveAsPng(fileStream, baseNoise.Width, baseNoise.Height);
+                fileStream.Close();
+            }
 
             // Flora layer 1
-            fileStream = new FileStream(string.Format("{0}-flora-1.png", path), FileMode.OpenOrCreate);
-            floraLayer1.SaveAsPng(fileStream, floraLayer1.Width, floraLayer1.Height);
-            fileStream.Close();
+            if (saveLayerOptions.floraLayer1)
+            {
+                fileStream = new FileStream(string.Format("{0}-flora-1.png", path), FileMode.OpenOrCreate);
+                floraLayer1.SaveAsPng(fileStream, floraLayer1.Width, floraLayer1.Height);
+                fileStream.Close();
+            }
 
             // Flora layer 2
-            fileStream = new FileStream(string.Format("{0}-flora-2.png", path), FileMode.OpenOrCreate);
-            floraLayer2.SaveAsPng(fileStream, floraLayer2.Width, floraLayer2.Height);
-            fileStream.Close();
+            if (saveLayerOptions.floraLayer2)
+            {
+                fileStream = new FileStream(string.Format("{0}-flora-2.png", path), FileMode.OpenOrCreate);
+                floraLayer2.SaveAsPng(fileStream, floraLayer2.Width, floraLayer2.Height);
+                fileStream.Close();
+            }
 
             // Normal map
-            fileStream = new FileStream(string.Format("{0}-normals.png", path), FileMode.OpenOrCreate);
-            normalMap.SaveAsPng(fileStream, normalMap.Width, normalMap.Height);
-            fileStream.Close();
+            if (saveLayerOptions.normalsLayer)
+            {
+                fileStream = new FileStream(string.Format("{0}-normals.png", path), FileMode.OpenOrCreate);
+                normalMap.SaveAsPng(fileStream, normalMap.Width, normalMap.Height);
+                fileStream.Close();
+            }
 
             // Detail layer 1
-            fileStream = new FileStream(string.Format("{0}-details-1.png", path), FileMode.OpenOrCreate);
-            detailsLayer1.SaveAsPng(fileStream, detailsLayer1.Width, detailsLayer1.Height);
-            fileStream.Close();
+            if (saveLayerOptions.detailsLayer1)
+            {
+                fileStream = new FileStream(string.Format("{0}-details-1.png", path), FileMode.OpenOrCreate);
+                detailsLayer1.SaveAsPng(fileStream, detailsLayer1.Width, detailsLayer1.Height);
+                fileStream.Close();
+            }
 
             // Detail layer 2
-            fileStream = new FileStream(string.Format("{0}-details-2.png", path), FileMode.OpenOrCreate);
-            detailsLayer2.SaveAsPng(fileStream, detailsLayer2.Width, detailsLayer2.Height);
-            fileStream.Close();
+            if (saveLayerOptions.detailsLayer2)
+            {
+                fileStream = new FileStream(string.Format("{0}-details-2.png", path), FileMode.OpenOrCreate);
+                detailsLayer2.SaveAsPng(fileStream, detailsLayer2.Width, detailsLayer2.Height);
+                fileStream.Close();
+            }
 
             // Detail layer 3
-            fileStream = new FileStream(string.Format("{0}-details-3.png", path), FileMode.OpenOrCreate);
-            detailsLayer3.SaveAsPng(fileStream, detailsLayer3.Width, detailsLayer3.Height);
-            fileStream.Close();
+            if (saveLayerOptions.detailsLayer3)
+            {
+                fileStream = new FileStream(string.Format("{0}-details-3.png", path), FileMode.OpenOrCreate);
+                detailsLayer3.SaveAsPng(fileStream, detailsLayer3.Width, detailsLayer3.Height);
+                fileStream.Close();
+            }
 
             // Water
-            fileStream = new FileStream(string.Format("{0}-water.png", path), FileMode.OpenOrCreate);
-            baseWater.SaveAsPng(fileStream, baseWater.Width, baseWater.Height);
-            fileStream.Close();
+            if (saveLayerOptions.waterLayer)
+            {
+                fileStream = new FileStream(string.Format("{0}-water.png", path), FileMode.OpenOrCreate);
+                baseWater.SaveAsPng(fileStream, baseWater.Width, baseWater.Height);
+                fileStream.Close();
+            }
         }
 
         // saveComposite
