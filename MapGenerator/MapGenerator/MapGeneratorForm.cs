@@ -583,6 +583,7 @@ namespace MapGenerator
             fileStream.Close();
             fileStream.Dispose();
             setOptions(loadedOptions);
+            ignoreSurfaceClick = true;
         }
 
         // mapOptionsChanged
@@ -608,6 +609,7 @@ namespace MapGenerator
                     options.flora1TexturePaths = relativePaths;
                     main.setFlora1Textures(relativePaths);
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -628,6 +630,7 @@ namespace MapGenerator
                         options.flora2TexturePaths = relativePaths;
                         main.setFlora2Textures(relativePaths);
                         main.generateMap(getOptions());
+                        ignoreSurfaceClick = true;
                     }
                 }));
         }
@@ -727,6 +730,7 @@ namespace MapGenerator
                     options.detailsLayer1TexturePaths = relativePaths;
                     main.setDetailsLayer1Textures(relativePaths);
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -747,6 +751,7 @@ namespace MapGenerator
                     options.detailsLayer2TexturePaths = relativePaths;
                     main.setDetailsLayer2Textures(relativePaths);
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -767,6 +772,7 @@ namespace MapGenerator
                     options.detailsLayer3TexturePaths = relativePaths;
                     main.setDetailsLayer3Textures(relativePaths);
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -787,6 +793,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -807,6 +814,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -827,6 +835,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -847,6 +856,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -867,6 +877,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -887,6 +898,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -907,6 +919,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -927,6 +940,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -947,6 +961,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -967,6 +982,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -987,6 +1003,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }
@@ -1007,6 +1024,7 @@ namespace MapGenerator
 
                     // Draw map
                     main.generateMap(getOptions());
+                    ignoreSurfaceClick = true;
                 }
             }));
         }

@@ -449,7 +449,7 @@ namespace MapGenerator
                 floraAlpha.GetData<Color>(data);
                 GraphicsDevice.SetRenderTarget(floraLayer1);
                 GraphicsDevice.Clear(Color.Transparent);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
                 if (options.flora1ShowGroundColor)    // only show color if checked
                     spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
                 Color textureColor;
@@ -508,7 +508,7 @@ namespace MapGenerator
                 floraAlpha.GetData<Color>(data);
                 GraphicsDevice.SetRenderTarget(floraLayer2);
                 GraphicsDevice.Clear(Color.Transparent);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
                 if (options.flora2ShowGroundColor)    // only show color if checked
                     spriteBatch.Draw(floraAlpha, renderTarget.Bounds, Color.White);
                 Color textureColor;
