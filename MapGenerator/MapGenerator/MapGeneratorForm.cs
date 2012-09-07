@@ -1075,6 +1075,8 @@ namespace MapGenerator
             fileDialog.InitialDirectory = outputDirectory;
             fileDialog.Title = "Save Layers";
 
+            MapGeneratorOptions options = getOptions();
+
             BatchSaveLayerOptions saveLayerOptions = new BatchSaveLayerOptions();
             saveLayerOptions.baseLayer = true;
             saveLayerOptions.waterLayer = true;
@@ -1090,7 +1092,7 @@ namespace MapGenerator
             {
                 if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    main.saveLayers(fileDialog.FileName, saveLayerOptions);
+                    main.saveLayers(fileDialog.FileName, options, saveLayerOptions);
                     ignoreSurfaceClick = true;
                 }
             }));

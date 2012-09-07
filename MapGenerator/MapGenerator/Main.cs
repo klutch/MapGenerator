@@ -665,6 +665,7 @@ namespace MapGenerator
                 normalMapEffect.Parameters["light2Direction"].SetValue(options.light2Direction);
                 normalMapEffect.Parameters["light2AmbientColor"].SetValue(options.light2AmbientColor);
                 normalMapEffect.Parameters["light2Intensity"].SetValue(options.light2Intensity);
+                normalMapEffect.Parameters["standalone"].SetValue(false);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, normalMapEffect);
                 spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
                 if (options.flora1)
@@ -731,7 +732,7 @@ namespace MapGenerator
         }
 
         // saveLayers
-        public void saveLayers(string fileBase, BatchSaveLayerOptions saveLayerOptions)
+        public void saveLayers(string fileBase, MapGeneratorOptions options, BatchSaveLayerOptions saveLayerOptions)
         {
             string path = fileBase;
             FileStream fileStream;
@@ -739,7 +740,7 @@ namespace MapGenerator
             // Base noise
             if (saveLayerOptions.baseLayer)
             {
-                fileStream = new FileStream(string.Format("{0}-base.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-base.png", path), FileMode.Create);
                 baseNoise.SaveAsPng(fileStream, baseNoise.Width, baseNoise.Height);
                 fileStream.Close();
             }
@@ -747,7 +748,7 @@ namespace MapGenerator
             // Flora layer 1
             if (saveLayerOptions.floraLayer1)
             {
-                fileStream = new FileStream(string.Format("{0}-flora-1.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-flora-1.png", path), FileMode.Create);
                 floraLayer1.SaveAsPng(fileStream, floraLayer1.Width, floraLayer1.Height);
                 fileStream.Close();
             }
@@ -755,7 +756,7 @@ namespace MapGenerator
             // Flora layer 2
             if (saveLayerOptions.floraLayer2)
             {
-                fileStream = new FileStream(string.Format("{0}-flora-2.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-flora-2.png", path), FileMode.Create);
                 floraLayer2.SaveAsPng(fileStream, floraLayer2.Width, floraLayer2.Height);
                 fileStream.Close();
             }
@@ -763,15 +764,47 @@ namespace MapGenerator
             // Normal map
             if (saveLayerOptions.normalsLayer)
             {
-                fileStream = new FileStream(string.Format("{0}-normals.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-normals.png", path), FileMode.Create);
                 normalMap.SaveAsPng(fileStream, normalMap.Width, normalMap.Height);
                 fileStream.Close();
+            }
+
+            // Shadows
+            if (saveLayerOptions.shadowLayer)
+            {
+                // Draw normal map onto disposable canvas
+                RenderTarget2D canvas = new RenderTarget2D(GraphicsDevice, baseNoise.Width, baseNoise.Height);
+                GraphicsDevice.SetRenderTarget(canvas);
+                GraphicsDevice.Textures[1] = normalMap;
+                normalMapEffect.Parameters["light1"].SetValue(options.light1);
+                normalMapEffect.Parameters["light1Color"].SetValue(options.light1Color);
+                normalMapEffect.Parameters["light1Direction"].SetValue(options.light1Direction);
+                normalMapEffect.Parameters["light1AmbientColor"].SetValue(options.light1AmbientColor);
+                normalMapEffect.Parameters["light1Intensity"].SetValue(options.light1Intensity);
+                normalMapEffect.Parameters["light2"].SetValue(options.light2);
+                normalMapEffect.Parameters["light2Color"].SetValue(options.light2Color);
+                normalMapEffect.Parameters["light2Direction"].SetValue(options.light2Direction);
+                normalMapEffect.Parameters["light2AmbientColor"].SetValue(options.light2AmbientColor);
+                normalMapEffect.Parameters["light2Intensity"].SetValue(options.light2Intensity);
+                normalMapEffect.Parameters["standalone"].SetValue(true);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, normalMapEffect);
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+                GraphicsDevice.SetRenderTarget(null);
+
+                // Save
+                fileStream = new FileStream(string.Format("{0}-shadow.png", path), FileMode.Create);
+                canvas.SaveAsPng(fileStream, canvas.Width, canvas.Height);
+                fileStream.Close();
+
+                // Dispose of canvas
+                canvas.Dispose();
             }
 
             // Detail layer 1
             if (saveLayerOptions.detailsLayer1)
             {
-                fileStream = new FileStream(string.Format("{0}-details-1.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-details-1.png", path), FileMode.Create);
                 detailsLayer1.SaveAsPng(fileStream, detailsLayer1.Width, detailsLayer1.Height);
                 fileStream.Close();
             }
@@ -779,7 +812,7 @@ namespace MapGenerator
             // Detail layer 2
             if (saveLayerOptions.detailsLayer2)
             {
-                fileStream = new FileStream(string.Format("{0}-details-2.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-details-2.png", path), FileMode.Create);
                 detailsLayer2.SaveAsPng(fileStream, detailsLayer2.Width, detailsLayer2.Height);
                 fileStream.Close();
             }
@@ -787,7 +820,7 @@ namespace MapGenerator
             // Detail layer 3
             if (saveLayerOptions.detailsLayer3)
             {
-                fileStream = new FileStream(string.Format("{0}-details-3.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-details-3.png", path), FileMode.Create);
                 detailsLayer3.SaveAsPng(fileStream, detailsLayer3.Width, detailsLayer3.Height);
                 fileStream.Close();
             }
@@ -795,7 +828,7 @@ namespace MapGenerator
             // Water
             if (saveLayerOptions.waterLayer)
             {
-                fileStream = new FileStream(string.Format("{0}-water.png", path), FileMode.OpenOrCreate);
+                fileStream = new FileStream(string.Format("{0}-water.png", path), FileMode.Create);
                 baseWater.SaveAsPng(fileStream, baseWater.Width, baseWater.Height);
                 fileStream.Close();
             }
@@ -805,7 +838,7 @@ namespace MapGenerator
         public void saveComposite(string fileBase)
         {
             string path = fileBase;
-            FileStream fileStream = new FileStream(fileBase, FileMode.OpenOrCreate);
+            FileStream fileStream = new FileStream(fileBase, FileMode.Create);
             renderTarget.SaveAsPng(fileStream, renderTarget.Width, renderTarget.Height);
             fileStream.Close();
         }

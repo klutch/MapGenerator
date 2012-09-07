@@ -161,7 +161,7 @@ namespace MapGenerator
 
                                 main.generateMap(options);
                                 string fileBase = string.Format("{0}-batch_{1}_{2}", fileDialog.FileName, i, j);
-                                main.saveLayers(fileBase, saveLayerOptions);
+                                main.saveLayers(fileBase, options, saveLayerOptions);
                             }
                         }
 
