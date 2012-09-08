@@ -35,18 +35,26 @@ namespace MapGenerator
         public Microsoft.Xna.Framework.Vector2 fbm1Offset;
         public Microsoft.Xna.Framework.Vector2 fbm2Offset;
         public Microsoft.Xna.Framework.Vector2 fbm3Offset;
+        public bool fbm0Perlin;
         public bool fbm1Perlin;
         public bool fbm2Perlin;
         public bool fbm3Perlin;
+        public bool fbm0Cell;
         public bool fbm1Cell;
         public bool fbm2Cell;
         public bool fbm3Cell;
+        public bool fbm0InvCell;
         public bool fbm1InvCell;
         public bool fbm2InvCell;
         public bool fbm3InvCell;
+        public float fbm0Scale;
         public float fbm1Scale;
         public float fbm2Scale;
         public float fbm3Scale;
+        public int fbm0Iterations;
+        public int fbm1Iterations;
+        public int fbm2Iterations;
+        public int fbm3Iterations;
 
         public bool flora1;
         public Microsoft.Xna.Framework.Vector2 flora1Range;
@@ -112,6 +120,12 @@ namespace MapGenerator
         [XmlArray("detailsLayer3TexturePaths")]
         [XmlArrayItem("filePath", typeof(string))]
         public List<string> detailsLayer3TexturePaths;
+
+        public Microsoft.Xna.Framework.Vector2 getAspectRatio()
+        {
+            float shortest = Math.Min(width, height);
+            return new Microsoft.Xna.Framework.Vector2(width / shortest, height / shortest);
+        }
     };
 
     public partial class MapGeneratorForm : Form
@@ -160,6 +174,7 @@ namespace MapGenerator
             options.detailsLayer3TexturePaths.Add("textures\\details\\sand_holes.png");
 
             blockGenerateMap = true;
+            fbm0Basis.SelectedIndex = 0;
             fbm1Basis.SelectedIndex = 0;
             fbm2Basis.SelectedIndex = 0;
             fbm3Basis.SelectedIndex = 0;
@@ -259,18 +274,26 @@ namespace MapGenerator
                 (float)fbm2OffsetX.Value, (float)fbm2OffsetY.Value);
             options.fbm3Offset = new Microsoft.Xna.Framework.Vector2(
                 (float)fbm3OffsetX.Value, (float)fbm3OffsetY.Value);
+            options.fbm0Perlin = fbm0Basis.SelectedIndex == 0;
             options.fbm1Perlin = fbm1Basis.SelectedIndex == 0;
             options.fbm2Perlin = fbm2Basis.SelectedIndex == 0;
             options.fbm3Perlin = fbm3Basis.SelectedIndex == 0;
+            options.fbm0Cell = fbm0Basis.SelectedIndex == 1;
             options.fbm1Cell = fbm1Basis.SelectedIndex == 1;
             options.fbm2Cell = fbm2Basis.SelectedIndex == 1;
             options.fbm3Cell = fbm3Basis.SelectedIndex == 1;
+            options.fbm0InvCell = fbm0Basis.SelectedIndex == 2;
             options.fbm1InvCell = fbm1Basis.SelectedIndex == 2;
             options.fbm2InvCell = fbm2Basis.SelectedIndex == 2;
             options.fbm3InvCell = fbm3Basis.SelectedIndex == 2;
-            options.fbm1Scale = (float)fbm1Scale.Value;
-            options.fbm2Scale = (float)fbm2Scale.Value;
-            options.fbm3Scale = (float)fbm3Scale.Value;
+            options.fbm0Scale = Math.Max(0.0001f, (float)fbm0Scale.Value);
+            options.fbm1Scale = Math.Max(0.0001f, (float)fbm1Scale.Value);
+            options.fbm2Scale = Math.Max(0.0001f, (float)fbm2Scale.Value);
+            options.fbm3Scale = Math.Max(0.0001f, (float)fbm3Scale.Value);
+            options.fbm0Iterations = (int)fbm0Iterations.Value;
+            options.fbm1Iterations = (int)fbm1Iterations.Value;
+            options.fbm2Iterations = (int)fbm2Iterations.Value;
+            options.fbm3Iterations = (int)fbm3Iterations.Value;
 
             // Water
             options.water = waterCheckbox.Checked;
@@ -421,27 +444,41 @@ namespace MapGenerator
             fbm2OffsetY.Value = (decimal)options.fbm2Offset.Y;
             fbm3OffsetX.Value = (decimal)options.fbm3Offset.X;
             fbm3OffsetY.Value = (decimal)options.fbm3Offset.Y;
+            if (options.fbm0Perlin)
+                fbm0Basis.SelectedIndex = 0;
+            else if (options.fbm0Cell)
+                fbm0Basis.SelectedIndex = 1;
+            else if (options.fbm0InvCell)
+                fbm0Basis.SelectedIndex = 2;
+            
             if (options.fbm1Perlin)
                 fbm1Basis.SelectedIndex = 0;
             else if (options.fbm1Cell)
                 fbm1Basis.SelectedIndex = 1;
             else if (options.fbm1InvCell)
                 fbm1Basis.SelectedIndex = 2;
+
             if (options.fbm2Perlin)
                 fbm2Basis.SelectedIndex = 0;
             else if (options.fbm2Cell)
                 fbm2Basis.SelectedIndex = 1;
             else if (options.fbm2InvCell)
                 fbm2Basis.SelectedIndex = 2;
+
             if (options.fbm3Perlin)
                 fbm3Basis.SelectedIndex = 0;
             else if (options.fbm3Cell)
                 fbm3Basis.SelectedIndex = 1;
             else if (options.fbm3InvCell)
                 fbm3Basis.SelectedIndex = 2;
+            fbm0Scale.Value = (decimal)options.fbm0Scale;
             fbm1Scale.Value = (decimal)options.fbm1Scale;
             fbm2Scale.Value = (decimal)options.fbm2Scale;
             fbm3Scale.Value = (decimal)options.fbm3Scale;
+            fbm0Iterations.Value = (decimal)options.fbm0Iterations;
+            fbm1Iterations.Value = (decimal)options.fbm1Iterations;
+            fbm2Iterations.Value = (decimal)options.fbm2Iterations;
+            fbm3Iterations.Value = (decimal)options.fbm3Iterations;
 
             // Water
             waterCheckbox.Checked = options.water;

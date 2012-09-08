@@ -4,7 +4,7 @@
 float2 noiseSize;
 float noiseScale;
 float2 renderSize;
-sampler noiseSampler : register(s0) = sampler_state
+sampler noiseSampler : register(s1) = sampler_state
 {
 	AddressU = Wrap;
 	AddressV = Wrap;
@@ -57,7 +57,7 @@ float perlin(float2 p)
 ///////////////////////////////////////////
 // Worley noise
 ///////////////////////////////////////////
-sampler worleySampler : register(s1) = sampler_state
+sampler worleySampler : register(s2) = sampler_state
 {
 	AddressU = Wrap;
 	AddressV = Wrap;
@@ -103,18 +103,18 @@ float2 worley(float2 p, float jitter = 2.0)
 		}
 	}
 
-	return 1 - saturate(float2(sqrt(distance1), sqrt(distance2)));
+	return saturate(float2(sqrt(distance1), sqrt(distance2)));
 }
 
 ///////////////////////////////////////////
 // Fractional Brownian Motion
 ///////////////////////////////////////////
-float fbmPerlin(float2 p, float frequency, float gain, float lacunarity)
+float fbmPerlin(float2 p, int count, float frequency, float gain, float lacunarity)
 {
 	float total = 0;
 	float amplitude = gain;
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < count; i++)
 	{
 		total += perlin(p * frequency) * amplitude;
 		frequency *= lacunarity;
@@ -124,12 +124,12 @@ float fbmPerlin(float2 p, float frequency, float gain, float lacunarity)
 	return total;
 }
 
-float fbmWorley(float2 p, float frequency, float gain, float lacunarity)
+float fbmWorley(float2 p, int count, float frequency, float gain, float lacunarity)
 {
 	float total = 0;
 	float amplitude = gain;
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < count; i++)
 	{
 		total += worley(p * frequency).x * amplitude;
 		frequency *= lacunarity;

@@ -55,6 +55,7 @@ namespace MapGenerator
         private List<Texture2D> detailsLayer1Textures;
         private List<Texture2D> detailsLayer2Textures;
         private List<Texture2D> detailsLayer3Textures;
+        private Texture2D grayTexture;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -123,6 +124,8 @@ namespace MapGenerator
             maskEffect = Content.Load<Effect>("maskEffect");
             createNormalEffect = Content.Load<Effect>("createNormalEffect");
             normalMapEffect = Content.Load<Effect>("normalMapEffect");
+            grayTexture = new Texture2D(GraphicsDevice, 1, 1);
+            grayTexture.SetData<Color>(new Color[] { Color.Gray });
         }
 
         // UnloadContent
@@ -295,9 +298,12 @@ namespace MapGenerator
             //////////////////////////////////////
             // Draw noise effect to render target
             ///////////////////////////////////////
+            // Base layer
             GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Textures[1] = worleyTexture;
+            GraphicsDevice.Textures[1] = randomTexture;
+            GraphicsDevice.Textures[2] = worleyTexture;
             GraphicsDevice.Clear(Color.Black);
+            baseEffect.Parameters["aspectRatio"].SetValue(options.getAspectRatio());
             baseEffect.Parameters["offset"].SetValue(options.position);
             baseEffect.Parameters["noiseScale"].SetValue(options.scale);
             baseEffect.Parameters["renderSize"].SetValue(new Vector2(options.width, options.height));
@@ -306,35 +312,95 @@ namespace MapGenerator
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
             baseEffect.Parameters["brightness"].SetValue(options.noiseBrightness);
-            baseEffect.Parameters["fbm1"].SetValue(options.fbm1);
-            baseEffect.Parameters["fbm2"].SetValue(options.fbm2);
-            baseEffect.Parameters["fbm3"].SetValue(options.fbm3);
-            baseEffect.Parameters["fbm1Offset"].SetValue(options.fbm1Offset);
-            baseEffect.Parameters["fbm2Offset"].SetValue(options.fbm2Offset);
-            baseEffect.Parameters["fbm3Offset"].SetValue(options.fbm3Offset);
-            baseEffect.Parameters["fbm1Perlin"].SetValue(options.fbm1Perlin);
-            baseEffect.Parameters["fbm2Perlin"].SetValue(options.fbm2Perlin);
-            baseEffect.Parameters["fbm3Perlin"].SetValue(options.fbm3Perlin);
-            baseEffect.Parameters["fbm1Cell"].SetValue(options.fbm1Cell);
-            baseEffect.Parameters["fbm2Cell"].SetValue(options.fbm2Cell);
-            baseEffect.Parameters["fbm3Cell"].SetValue(options.fbm3Cell);
-            baseEffect.Parameters["fbm1InvCell"].SetValue(options.fbm1InvCell);
-            baseEffect.Parameters["fbm2InvCell"].SetValue(options.fbm2InvCell);
-            baseEffect.Parameters["fbm3InvCell"].SetValue(options.fbm3InvCell);
-            baseEffect.Parameters["fbm1Scale"].SetValue(options.fbm1Scale);
-            baseEffect.Parameters["fbm2Scale"].SetValue(options.fbm2Scale);
-            baseEffect.Parameters["fbm3Scale"].SetValue(options.fbm3Scale);
+            baseEffect.Parameters["fbmOffset"].SetValue(Vector2.Zero);
+            baseEffect.Parameters["fbmPerlinBasis"].SetValue(options.fbm0Perlin);
+            baseEffect.Parameters["fbmCellBasis"].SetValue(options.fbm0Cell);
+            baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm0InvCell);
+            baseEffect.Parameters["fbmScale"].SetValue(options.fbm0Scale);
             baseEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
             baseEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
+            baseEffect.Parameters["fbmIterations"].SetValue(options.fbm0Iterations);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
-            spriteBatch.Draw(randomTexture, renderTarget.Bounds, randomTexture.Bounds, Color.White);
+            spriteBatch.Draw(grayTexture, renderTarget.Bounds, Color.White);
             spriteBatch.End();
 
-            // Store base noise texture
+            // Store
             GraphicsDevice.SetRenderTarget(baseNoise);
             spriteBatch.Begin();
             spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             spriteBatch.End();
+
+            // First fbm layer
+            if (options.fbm1)
+            {
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Textures[1] = randomTexture;
+                GraphicsDevice.Textures[2] = worleyTexture;
+                GraphicsDevice.Clear(Color.Black);
+                baseEffect.Parameters["fbmOffset"].SetValue(options.fbm1Offset);
+                baseEffect.Parameters["fbmPerlinBasis"].SetValue(options.fbm1Perlin);
+                baseEffect.Parameters["fbmCellBasis"].SetValue(options.fbm1Cell);
+                baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm1InvCell);
+                baseEffect.Parameters["fbmScale"].SetValue(options.fbm1Scale);
+                baseEffect.Parameters["fbmIterations"].SetValue(options.fbm1Iterations);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
+                spriteBatch.Draw(baseNoise, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Store
+                GraphicsDevice.SetRenderTarget(baseNoise);
+                spriteBatch.Begin();
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+            }
+
+            // Second fbm layer
+            if (options.fbm2)
+            {
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Textures[1] = randomTexture;
+                GraphicsDevice.Textures[2] = worleyTexture;
+                GraphicsDevice.Clear(Color.Black);
+                baseEffect.Parameters["fbmOffset"].SetValue(options.fbm2Offset);
+                baseEffect.Parameters["fbmPerlinBasis"].SetValue(options.fbm2Perlin);
+                baseEffect.Parameters["fbmCellBasis"].SetValue(options.fbm2Cell);
+                baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm2InvCell);
+                baseEffect.Parameters["fbmScale"].SetValue(options.fbm2Scale);
+                baseEffect.Parameters["fbmIterations"].SetValue(options.fbm2Iterations);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
+                spriteBatch.Draw(baseNoise, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Store
+                GraphicsDevice.SetRenderTarget(baseNoise);
+                spriteBatch.Begin();
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+            }
+
+            // Third fbm layer
+            if (options.fbm3)
+            {
+                GraphicsDevice.SetRenderTarget(renderTarget);
+                GraphicsDevice.Textures[1] = randomTexture;
+                GraphicsDevice.Textures[2] = worleyTexture;
+                GraphicsDevice.Clear(Color.Black);
+                baseEffect.Parameters["fbmOffset"].SetValue(options.fbm3Offset);
+                baseEffect.Parameters["fbmPerlinBasis"].SetValue(options.fbm3Perlin);
+                baseEffect.Parameters["fbmCellBasis"].SetValue(options.fbm3Cell);
+                baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm3InvCell);
+                baseEffect.Parameters["fbmScale"].SetValue(options.fbm3Scale);
+                baseEffect.Parameters["fbmIterations"].SetValue(options.fbm3Iterations);
+                spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
+                spriteBatch.Draw(baseNoise, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+
+                // Store
+                GraphicsDevice.SetRenderTarget(baseNoise);
+                spriteBatch.Begin();
+                spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+                spriteBatch.End();
+            }
 
             //////////////////////////////////////////
             // Draw detail layer 1 effect

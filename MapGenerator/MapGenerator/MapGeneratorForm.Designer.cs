@@ -44,6 +44,18 @@ namespace MapGenerator
             this.randomTextureDimensionsLabel = new System.Windows.Forms.Label();
             this.mainOptionsControl = new System.Windows.Forms.TabControl();
             this.noiseTab = new System.Windows.Forms.TabPage();
+            this.fbm0BasisScaleLabel = new System.Windows.Forms.Label();
+            this.fbm0Scale = new System.Windows.Forms.NumericUpDown();
+            this.fbm0Iterations = new System.Windows.Forms.NumericUpDown();
+            this.fbm0CountLabel = new System.Windows.Forms.Label();
+            this.fbm0BasisLabel = new System.Windows.Forms.Label();
+            this.fbm0Basis = new System.Windows.Forms.ComboBox();
+            this.fbm3CountLabel = new System.Windows.Forms.Label();
+            this.fbm3Iterations = new System.Windows.Forms.NumericUpDown();
+            this.fbm2CountLabel = new System.Windows.Forms.Label();
+            this.fbm2Iterations = new System.Windows.Forms.NumericUpDown();
+            this.fbm1CountLabel = new System.Windows.Forms.Label();
+            this.fbm1Iterations = new System.Windows.Forms.NumericUpDown();
             this.fbm3ScaleLabel = new System.Windows.Forms.Label();
             this.fbm3Scale = new System.Windows.Forms.NumericUpDown();
             this.fbm2ScaleLabel = new System.Windows.Forms.Label();
@@ -197,6 +209,11 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm0Scale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm0Iterations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3Iterations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2Iterations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1Iterations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm3Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm2Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Scale)).BeginInit();
@@ -339,6 +356,18 @@ namespace MapGenerator
             // noiseTab
             // 
             this.noiseTab.AutoScroll = true;
+            this.noiseTab.Controls.Add(this.fbm0BasisScaleLabel);
+            this.noiseTab.Controls.Add(this.fbm0Scale);
+            this.noiseTab.Controls.Add(this.fbm0Iterations);
+            this.noiseTab.Controls.Add(this.fbm0CountLabel);
+            this.noiseTab.Controls.Add(this.fbm0BasisLabel);
+            this.noiseTab.Controls.Add(this.fbm0Basis);
+            this.noiseTab.Controls.Add(this.fbm3CountLabel);
+            this.noiseTab.Controls.Add(this.fbm3Iterations);
+            this.noiseTab.Controls.Add(this.fbm2CountLabel);
+            this.noiseTab.Controls.Add(this.fbm2Iterations);
+            this.noiseTab.Controls.Add(this.fbm1CountLabel);
+            this.noiseTab.Controls.Add(this.fbm1Iterations);
             this.noiseTab.Controls.Add(this.fbm3ScaleLabel);
             this.noiseTab.Controls.Add(this.fbm3Scale);
             this.noiseTab.Controls.Add(this.fbm2ScaleLabel);
@@ -390,10 +419,200 @@ namespace MapGenerator
             this.noiseTab.Text = "Noise";
             this.noiseTab.UseVisualStyleBackColor = true;
             // 
+            // fbm0BasisScaleLabel
+            // 
+            this.fbm0BasisScaleLabel.AutoSize = true;
+            this.fbm0BasisScaleLabel.Location = new System.Drawing.Point(6, 361);
+            this.fbm0BasisScaleLabel.Name = "fbm0BasisScaleLabel";
+            this.fbm0BasisScaleLabel.Size = new System.Drawing.Size(34, 13);
+            this.fbm0BasisScaleLabel.TabIndex = 90;
+            this.fbm0BasisScaleLabel.Text = "Scale";
+            // 
+            // fbm0Scale
+            // 
+            this.fbm0Scale.DecimalPlaces = 4;
+            this.fbm0Scale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.fbm0Scale.Location = new System.Drawing.Point(8, 377);
+            this.fbm0Scale.Maximum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            0});
+            this.fbm0Scale.Minimum = new decimal(new int[] {
+            2048,
+            0,
+            0,
+            -2147483648});
+            this.fbm0Scale.Name = "fbm0Scale";
+            this.fbm0Scale.Size = new System.Drawing.Size(100, 20);
+            this.fbm0Scale.TabIndex = 89;
+            this.fbm0Scale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm0Scale.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm0Iterations
+            // 
+            this.fbm0Iterations.Location = new System.Drawing.Point(121, 377);
+            this.fbm0Iterations.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.fbm0Iterations.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm0Iterations.Name = "fbm0Iterations";
+            this.fbm0Iterations.Size = new System.Drawing.Size(100, 20);
+            this.fbm0Iterations.TabIndex = 88;
+            this.fbm0Iterations.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm0Iterations.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm0CountLabel
+            // 
+            this.fbm0CountLabel.AutoSize = true;
+            this.fbm0CountLabel.Location = new System.Drawing.Point(118, 361);
+            this.fbm0CountLabel.Name = "fbm0CountLabel";
+            this.fbm0CountLabel.Size = new System.Drawing.Size(50, 13);
+            this.fbm0CountLabel.TabIndex = 87;
+            this.fbm0CountLabel.Text = "Iterations";
+            // 
+            // fbm0BasisLabel
+            // 
+            this.fbm0BasisLabel.AutoSize = true;
+            this.fbm0BasisLabel.Location = new System.Drawing.Point(6, 312);
+            this.fbm0BasisLabel.Name = "fbm0BasisLabel";
+            this.fbm0BasisLabel.Size = new System.Drawing.Size(32, 13);
+            this.fbm0BasisLabel.TabIndex = 86;
+            this.fbm0BasisLabel.Text = "Basis";
+            // 
+            // fbm0Basis
+            // 
+            this.fbm0Basis.DisplayMember = "Perlin";
+            this.fbm0Basis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fbm0Basis.FormattingEnabled = true;
+            this.fbm0Basis.Items.AddRange(new object[] {
+            "Perlin",
+            "Cell",
+            "Inverse Cell"});
+            this.fbm0Basis.Location = new System.Drawing.Point(8, 328);
+            this.fbm0Basis.Name = "fbm0Basis";
+            this.fbm0Basis.Size = new System.Drawing.Size(213, 21);
+            this.fbm0Basis.TabIndex = 85;
+            this.fbm0Basis.SelectedIndexChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm3CountLabel
+            // 
+            this.fbm3CountLabel.AutoSize = true;
+            this.fbm3CountLabel.Location = new System.Drawing.Point(118, 819);
+            this.fbm3CountLabel.Name = "fbm3CountLabel";
+            this.fbm3CountLabel.Size = new System.Drawing.Size(50, 13);
+            this.fbm3CountLabel.TabIndex = 84;
+            this.fbm3CountLabel.Text = "Iterations";
+            // 
+            // fbm3Iterations
+            // 
+            this.fbm3Iterations.Location = new System.Drawing.Point(121, 835);
+            this.fbm3Iterations.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.fbm3Iterations.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm3Iterations.Name = "fbm3Iterations";
+            this.fbm3Iterations.Size = new System.Drawing.Size(100, 20);
+            this.fbm3Iterations.TabIndex = 83;
+            this.fbm3Iterations.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm3Iterations.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm2CountLabel
+            // 
+            this.fbm2CountLabel.AutoSize = true;
+            this.fbm2CountLabel.Location = new System.Drawing.Point(118, 669);
+            this.fbm2CountLabel.Name = "fbm2CountLabel";
+            this.fbm2CountLabel.Size = new System.Drawing.Size(50, 13);
+            this.fbm2CountLabel.TabIndex = 82;
+            this.fbm2CountLabel.Text = "Iterations";
+            // 
+            // fbm2Iterations
+            // 
+            this.fbm2Iterations.Location = new System.Drawing.Point(121, 685);
+            this.fbm2Iterations.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.fbm2Iterations.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm2Iterations.Name = "fbm2Iterations";
+            this.fbm2Iterations.Size = new System.Drawing.Size(100, 20);
+            this.fbm2Iterations.TabIndex = 81;
+            this.fbm2Iterations.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm2Iterations.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
+            // fbm1CountLabel
+            // 
+            this.fbm1CountLabel.AutoSize = true;
+            this.fbm1CountLabel.Location = new System.Drawing.Point(118, 518);
+            this.fbm1CountLabel.Name = "fbm1CountLabel";
+            this.fbm1CountLabel.Size = new System.Drawing.Size(50, 13);
+            this.fbm1CountLabel.TabIndex = 80;
+            this.fbm1CountLabel.Text = "Iterations";
+            // 
+            // fbm1Iterations
+            // 
+            this.fbm1Iterations.Location = new System.Drawing.Point(121, 534);
+            this.fbm1Iterations.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.fbm1Iterations.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm1Iterations.Name = "fbm1Iterations";
+            this.fbm1Iterations.Size = new System.Drawing.Size(100, 20);
+            this.fbm1Iterations.TabIndex = 79;
+            this.fbm1Iterations.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fbm1Iterations.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            // 
             // fbm3ScaleLabel
             // 
             this.fbm3ScaleLabel.AutoSize = true;
-            this.fbm3ScaleLabel.Location = new System.Drawing.Point(34, 633);
+            this.fbm3ScaleLabel.Location = new System.Drawing.Point(5, 819);
             this.fbm3ScaleLabel.Name = "fbm3ScaleLabel";
             this.fbm3ScaleLabel.Size = new System.Drawing.Size(34, 13);
             this.fbm3ScaleLabel.TabIndex = 78;
@@ -407,7 +626,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.fbm3Scale.Location = new System.Drawing.Point(75, 631);
+            this.fbm3Scale.Location = new System.Drawing.Point(9, 835);
             this.fbm3Scale.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -419,7 +638,7 @@ namespace MapGenerator
             0,
             -2147483648});
             this.fbm3Scale.Name = "fbm3Scale";
-            this.fbm3Scale.Size = new System.Drawing.Size(66, 20);
+            this.fbm3Scale.Size = new System.Drawing.Size(100, 20);
             this.fbm3Scale.TabIndex = 77;
             this.fbm3Scale.Value = new decimal(new int[] {
             1,
@@ -431,7 +650,7 @@ namespace MapGenerator
             // fbm2ScaleLabel
             // 
             this.fbm2ScaleLabel.AutoSize = true;
-            this.fbm2ScaleLabel.Location = new System.Drawing.Point(34, 517);
+            this.fbm2ScaleLabel.Location = new System.Drawing.Point(5, 669);
             this.fbm2ScaleLabel.Name = "fbm2ScaleLabel";
             this.fbm2ScaleLabel.Size = new System.Drawing.Size(34, 13);
             this.fbm2ScaleLabel.TabIndex = 76;
@@ -445,7 +664,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.fbm2Scale.Location = new System.Drawing.Point(75, 515);
+            this.fbm2Scale.Location = new System.Drawing.Point(9, 685);
             this.fbm2Scale.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -457,7 +676,7 @@ namespace MapGenerator
             0,
             -2147483648});
             this.fbm2Scale.Name = "fbm2Scale";
-            this.fbm2Scale.Size = new System.Drawing.Size(66, 20);
+            this.fbm2Scale.Size = new System.Drawing.Size(100, 20);
             this.fbm2Scale.TabIndex = 75;
             this.fbm2Scale.Value = new decimal(new int[] {
             1,
@@ -469,7 +688,7 @@ namespace MapGenerator
             // fbm1ScaleLabel
             // 
             this.fbm1ScaleLabel.AutoSize = true;
-            this.fbm1ScaleLabel.Location = new System.Drawing.Point(34, 401);
+            this.fbm1ScaleLabel.Location = new System.Drawing.Point(8, 518);
             this.fbm1ScaleLabel.Name = "fbm1ScaleLabel";
             this.fbm1ScaleLabel.Size = new System.Drawing.Size(34, 13);
             this.fbm1ScaleLabel.TabIndex = 74;
@@ -483,7 +702,7 @@ namespace MapGenerator
             0,
             0,
             131072});
-            this.fbm1Scale.Location = new System.Drawing.Point(75, 399);
+            this.fbm1Scale.Location = new System.Drawing.Point(9, 534);
             this.fbm1Scale.Maximum = new decimal(new int[] {
             2048,
             0,
@@ -495,7 +714,7 @@ namespace MapGenerator
             0,
             -2147483648});
             this.fbm1Scale.Name = "fbm1Scale";
-            this.fbm1Scale.Size = new System.Drawing.Size(66, 20);
+            this.fbm1Scale.Size = new System.Drawing.Size(100, 20);
             this.fbm1Scale.TabIndex = 73;
             this.fbm1Scale.Value = new decimal(new int[] {
             1,
@@ -513,7 +732,7 @@ namespace MapGenerator
             "Perlin",
             "Cell",
             "Inverse Cell"});
-            this.fbm3Basis.Location = new System.Drawing.Point(75, 565);
+            this.fbm3Basis.Location = new System.Drawing.Point(75, 740);
             this.fbm3Basis.Name = "fbm3Basis";
             this.fbm3Basis.Size = new System.Drawing.Size(146, 21);
             this.fbm3Basis.TabIndex = 72;
@@ -528,7 +747,7 @@ namespace MapGenerator
             "Perlin",
             "Cell",
             "Inverse Cell"});
-            this.fbm2Basis.Location = new System.Drawing.Point(75, 449);
+            this.fbm2Basis.Location = new System.Drawing.Point(75, 590);
             this.fbm2Basis.Name = "fbm2Basis";
             this.fbm2Basis.Size = new System.Drawing.Size(146, 21);
             this.fbm2Basis.TabIndex = 71;
@@ -543,7 +762,7 @@ namespace MapGenerator
             "Perlin",
             "Cell",
             "Inverse Cell"});
-            this.fbm1Basis.Location = new System.Drawing.Point(75, 335);
+            this.fbm1Basis.Location = new System.Drawing.Point(75, 441);
             this.fbm1Basis.Name = "fbm1Basis";
             this.fbm1Basis.Size = new System.Drawing.Size(146, 21);
             this.fbm1Basis.TabIndex = 70;
@@ -815,7 +1034,7 @@ namespace MapGenerator
             // fbm3OffsetLabel
             // 
             this.fbm3OffsetLabel.AutoSize = true;
-            this.fbm3OffsetLabel.Location = new System.Drawing.Point(34, 598);
+            this.fbm3OffsetLabel.Location = new System.Drawing.Point(6, 771);
             this.fbm3OffsetLabel.Name = "fbm3OffsetLabel";
             this.fbm3OffsetLabel.Size = new System.Drawing.Size(35, 13);
             this.fbm3OffsetLabel.TabIndex = 51;
@@ -829,14 +1048,14 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm3OffsetY.Location = new System.Drawing.Point(155, 596);
+            this.fbm3OffsetY.Location = new System.Drawing.Point(121, 787);
             this.fbm3OffsetY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm3OffsetY.Name = "fbm3OffsetY";
-            this.fbm3OffsetY.Size = new System.Drawing.Size(66, 20);
+            this.fbm3OffsetY.Size = new System.Drawing.Size(100, 20);
             this.fbm3OffsetY.TabIndex = 50;
             this.fbm3OffsetY.Value = new decimal(new int[] {
             125,
@@ -853,14 +1072,14 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm3OffsetX.Location = new System.Drawing.Point(75, 596);
+            this.fbm3OffsetX.Location = new System.Drawing.Point(9, 787);
             this.fbm3OffsetX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm3OffsetX.Name = "fbm3OffsetX";
-            this.fbm3OffsetX.Size = new System.Drawing.Size(66, 20);
+            this.fbm3OffsetX.Size = new System.Drawing.Size(100, 20);
             this.fbm3OffsetX.TabIndex = 49;
             this.fbm3OffsetX.Value = new decimal(new int[] {
             125,
@@ -872,9 +1091,7 @@ namespace MapGenerator
             // fbm3Checkbox
             // 
             this.fbm3Checkbox.AutoSize = true;
-            this.fbm3Checkbox.Checked = true;
-            this.fbm3Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 567);
+            this.fbm3Checkbox.Location = new System.Drawing.Point(9, 742);
             this.fbm3Checkbox.Name = "fbm3Checkbox";
             this.fbm3Checkbox.Size = new System.Drawing.Size(61, 17);
             this.fbm3Checkbox.TabIndex = 45;
@@ -885,7 +1102,7 @@ namespace MapGenerator
             // fbm2OffsetLabel
             // 
             this.fbm2OffsetLabel.AutoSize = true;
-            this.fbm2OffsetLabel.Location = new System.Drawing.Point(34, 482);
+            this.fbm2OffsetLabel.Location = new System.Drawing.Point(6, 621);
             this.fbm2OffsetLabel.Name = "fbm2OffsetLabel";
             this.fbm2OffsetLabel.Size = new System.Drawing.Size(35, 13);
             this.fbm2OffsetLabel.TabIndex = 44;
@@ -899,14 +1116,14 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm2OffsetY.Location = new System.Drawing.Point(155, 480);
+            this.fbm2OffsetY.Location = new System.Drawing.Point(121, 637);
             this.fbm2OffsetY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm2OffsetY.Name = "fbm2OffsetY";
-            this.fbm2OffsetY.Size = new System.Drawing.Size(66, 20);
+            this.fbm2OffsetY.Size = new System.Drawing.Size(100, 20);
             this.fbm2OffsetY.TabIndex = 43;
             this.fbm2OffsetY.Value = new decimal(new int[] {
             25,
@@ -923,14 +1140,14 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm2OffsetX.Location = new System.Drawing.Point(75, 480);
+            this.fbm2OffsetX.Location = new System.Drawing.Point(9, 637);
             this.fbm2OffsetX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm2OffsetX.Name = "fbm2OffsetX";
-            this.fbm2OffsetX.Size = new System.Drawing.Size(66, 20);
+            this.fbm2OffsetX.Size = new System.Drawing.Size(100, 20);
             this.fbm2OffsetX.TabIndex = 42;
             this.fbm2OffsetX.Value = new decimal(new int[] {
             25,
@@ -942,9 +1159,7 @@ namespace MapGenerator
             // fbm2Checkbox
             // 
             this.fbm2Checkbox.AutoSize = true;
-            this.fbm2Checkbox.Checked = true;
-            this.fbm2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 451);
+            this.fbm2Checkbox.Location = new System.Drawing.Point(9, 592);
             this.fbm2Checkbox.Name = "fbm2Checkbox";
             this.fbm2Checkbox.Size = new System.Drawing.Size(61, 17);
             this.fbm2Checkbox.TabIndex = 38;
@@ -955,7 +1170,7 @@ namespace MapGenerator
             // fbm1OffsetLabel
             // 
             this.fbm1OffsetLabel.AutoSize = true;
-            this.fbm1OffsetLabel.Location = new System.Drawing.Point(34, 366);
+            this.fbm1OffsetLabel.Location = new System.Drawing.Point(6, 470);
             this.fbm1OffsetLabel.Name = "fbm1OffsetLabel";
             this.fbm1OffsetLabel.Size = new System.Drawing.Size(35, 13);
             this.fbm1OffsetLabel.TabIndex = 37;
@@ -969,14 +1184,14 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm1OffsetY.Location = new System.Drawing.Point(155, 364);
+            this.fbm1OffsetY.Location = new System.Drawing.Point(121, 486);
             this.fbm1OffsetY.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm1OffsetY.Name = "fbm1OffsetY";
-            this.fbm1OffsetY.Size = new System.Drawing.Size(66, 20);
+            this.fbm1OffsetY.Size = new System.Drawing.Size(100, 20);
             this.fbm1OffsetY.TabIndex = 36;
             this.fbm1OffsetY.Value = new decimal(new int[] {
             5,
@@ -993,14 +1208,14 @@ namespace MapGenerator
             0,
             0,
             196608});
-            this.fbm1OffsetX.Location = new System.Drawing.Point(75, 364);
+            this.fbm1OffsetX.Location = new System.Drawing.Point(9, 486);
             this.fbm1OffsetX.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.fbm1OffsetX.Name = "fbm1OffsetX";
-            this.fbm1OffsetX.Size = new System.Drawing.Size(66, 20);
+            this.fbm1OffsetX.Size = new System.Drawing.Size(100, 20);
             this.fbm1OffsetX.TabIndex = 35;
             this.fbm1OffsetX.Value = new decimal(new int[] {
             2,
@@ -1021,9 +1236,7 @@ namespace MapGenerator
             // fbm1Checkbox
             // 
             this.fbm1Checkbox.AutoSize = true;
-            this.fbm1Checkbox.Checked = true;
-            this.fbm1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 335);
+            this.fbm1Checkbox.Location = new System.Drawing.Point(9, 441);
             this.fbm1Checkbox.Name = "fbm1Checkbox";
             this.fbm1Checkbox.Size = new System.Drawing.Size(61, 17);
             this.fbm1Checkbox.TabIndex = 19;
@@ -1072,9 +1285,9 @@ namespace MapGenerator
             this.scaleLabel.AutoSize = true;
             this.scaleLabel.Location = new System.Drawing.Point(118, 12);
             this.scaleLabel.Name = "scaleLabel";
-            this.scaleLabel.Size = new System.Drawing.Size(34, 13);
+            this.scaleLabel.Size = new System.Drawing.Size(67, 13);
             this.scaleLabel.TabIndex = 7;
-            this.scaleLabel.Text = "Scale";
+            this.scaleLabel.Text = "Global Scale";
             // 
             // waterTab
             // 
@@ -1131,8 +1344,6 @@ namespace MapGenerator
             // waterCheckbox
             // 
             this.waterCheckbox.AutoSize = true;
-            this.waterCheckbox.Checked = true;
-            this.waterCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.waterCheckbox.Location = new System.Drawing.Point(8, 12);
             this.waterCheckbox.Name = "waterCheckbox";
             this.waterCheckbox.Size = new System.Drawing.Size(91, 17);
@@ -1627,8 +1838,6 @@ namespace MapGenerator
             // flora1Checkbox
             // 
             this.flora1Checkbox.AutoSize = true;
-            this.flora1Checkbox.Checked = true;
-            this.flora1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.flora1Checkbox.Location = new System.Drawing.Point(8, 12);
             this.flora1Checkbox.Name = "flora1Checkbox";
             this.flora1Checkbox.Size = new System.Drawing.Size(97, 17);
@@ -2007,8 +2216,6 @@ namespace MapGenerator
             // detailsLayer1Checkbox
             // 
             this.detailsLayer1Checkbox.AutoSize = true;
-            this.detailsLayer1Checkbox.Checked = true;
-            this.detailsLayer1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.detailsLayer1Checkbox.Location = new System.Drawing.Point(8, 12);
             this.detailsLayer1Checkbox.Name = "detailsLayer1Checkbox";
             this.detailsLayer1Checkbox.Size = new System.Drawing.Size(96, 17);
@@ -2136,8 +2343,6 @@ namespace MapGenerator
             // light2Checkbox
             // 
             this.light2Checkbox.AutoSize = true;
-            this.light2Checkbox.Checked = true;
-            this.light2Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.light2Checkbox.Location = new System.Drawing.Point(8, 278);
             this.light2Checkbox.Name = "light2Checkbox";
             this.light2Checkbox.Size = new System.Drawing.Size(94, 17);
@@ -2437,8 +2642,6 @@ namespace MapGenerator
             // light1Checkbox
             // 
             this.light1Checkbox.AutoSize = true;
-            this.light1Checkbox.Checked = true;
-            this.light1Checkbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.light1Checkbox.Location = new System.Drawing.Point(8, 76);
             this.light1Checkbox.Name = "light1Checkbox";
             this.light1Checkbox.Size = new System.Drawing.Size(94, 17);
@@ -2607,6 +2810,11 @@ namespace MapGenerator
             this.mainOptionsControl.ResumeLayout(false);
             this.noiseTab.ResumeLayout(false);
             this.noiseTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm0Scale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm0Iterations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm3Iterations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm2Iterations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fbm1Iterations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm3Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm2Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Scale)).EndInit();
@@ -2841,5 +3049,17 @@ namespace MapGenerator
         private NumericUpDown fbm2Scale;
         private Label fbm1ScaleLabel;
         private NumericUpDown fbm1Scale;
+        private Label fbm0BasisLabel;
+        private ComboBox fbm0Basis;
+        private Label fbm3CountLabel;
+        private NumericUpDown fbm3Iterations;
+        private Label fbm2CountLabel;
+        private NumericUpDown fbm2Iterations;
+        private Label fbm1CountLabel;
+        private NumericUpDown fbm1Iterations;
+        private NumericUpDown fbm0Iterations;
+        private Label fbm0CountLabel;
+        private Label fbm0BasisScaleLabel;
+        private NumericUpDown fbm0Scale;
     }
 }
