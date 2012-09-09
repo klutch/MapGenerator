@@ -407,23 +407,6 @@ namespace MapGenerator
                 spriteBatch.End();
             }
 
-            ///////////////////////////////////////
-            // Colorize noise
-            ///////////////////////////////////////
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            colorEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
-            colorEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
-            colorEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, colorEffect);
-            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
-            spriteBatch.End();
-
-            // Store as noise
-            GraphicsDevice.SetRenderTarget(baseNoise);
-            spriteBatch.Begin();
-            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
-            spriteBatch.End();
-
             //////////////////////////////////////////
             // Draw detail layer 1 effect
             //////////////////////////////////////////
@@ -481,6 +464,23 @@ namespace MapGenerator
                 spriteBatch.Draw(detailsLayer1, detailsLayer1.Bounds, Color.White);
                 spriteBatch.End();
             }
+
+            ///////////////////////////////////////
+            // Colorize noise
+            ///////////////////////////////////////
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            colorEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+            colorEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
+            colorEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, colorEffect);
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Store as noise
+            GraphicsDevice.SetRenderTarget(baseNoise);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
 
             //////////////////////////////////////////
             // Draw normal map

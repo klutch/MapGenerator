@@ -72,6 +72,9 @@ float4 getWorleyCell(int x, int y, float jitter)
 
 float2 worley(float2 p, bool inverse = false, float jitter = 2.0)
 {
+	// Resize coords
+	p *= 16;
+
 	int xi = int(floor(p.x));
 	int yi = int(floor(p.y));
 
