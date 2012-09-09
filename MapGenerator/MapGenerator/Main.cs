@@ -55,7 +55,7 @@ namespace MapGenerator
         private List<Texture2D> detailsLayer1Textures;
         private List<Texture2D> detailsLayer2Textures;
         private List<Texture2D> detailsLayer3Textures;
-        private Texture2D grayTexture;
+        private Texture2D baseColor;
 
         // Constructor
         public Main(MapGeneratorForm mapGeneratorForm)
@@ -124,8 +124,8 @@ namespace MapGenerator
             maskEffect = Content.Load<Effect>("maskEffect");
             createNormalEffect = Content.Load<Effect>("createNormalEffect");
             normalMapEffect = Content.Load<Effect>("normalMapEffect");
-            grayTexture = new Texture2D(GraphicsDevice, 1, 1);
-            grayTexture.SetData<Color>(new Color[] { Color.Gray });
+            baseColor = new Texture2D(GraphicsDevice, 1, 1);
+            baseColor.SetData<Color>(new Color[] { Color.Gray });
         }
 
         // UnloadContent
@@ -311,7 +311,7 @@ namespace MapGenerator
             baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
-            baseEffect.Parameters["brightness"].SetValue(options.noiseBrightness);
+            baseEffect.Parameters["multiplier"].SetValue(options.noiseMultiplier);
             baseEffect.Parameters["fbmOffset"].SetValue(Vector2.Zero);
             baseEffect.Parameters["fbmPerlinBasis"].SetValue(options.fbm0Perlin);
             baseEffect.Parameters["fbmCellBasis"].SetValue(options.fbm0Cell);
@@ -321,7 +321,7 @@ namespace MapGenerator
             baseEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
             baseEffect.Parameters["fbmIterations"].SetValue(options.fbm0Iterations);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
-            spriteBatch.Draw(grayTexture, renderTarget.Bounds, Color.White);
+            spriteBatch.Draw(baseColor, renderTarget.Bounds, Color.White);
             spriteBatch.End();
 
             // Store

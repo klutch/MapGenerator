@@ -25,7 +25,7 @@ namespace MapGenerator
         public float noiseFrequency;
         public float noiseGain;
         public float noiseLacunarity;
-        public float noiseBrightness;
+        public float noiseMultiplier;
         public Microsoft.Xna.Framework.Vector4 noiseLowColor;
         public Microsoft.Xna.Framework.Vector4 noiseHighColor;
 
@@ -252,7 +252,7 @@ namespace MapGenerator
             options.noiseFrequency = (float)noiseFrequency.Value;
             options.noiseGain = (float)noiseGain.Value;
             options.noiseLacunarity = (float)noiseLacunarity.Value;
-            options.noiseBrightness = (float)noiseBrightness.Value;
+            options.noiseMultiplier = (float)noiseMultiplier.Value;
             options.noiseLowColor = new Microsoft.Xna.Framework.Vector4(
                 (float)noiseLowColor.R / 255f,
                 (float)noiseLowColor.G / 255f,
@@ -422,7 +422,7 @@ namespace MapGenerator
             noiseFrequency.Value = (decimal)options.noiseFrequency;
             noiseGain.Value = (decimal)options.noiseGain;
             noiseLacunarity.Value = (decimal)options.noiseLacunarity;
-            noiseBrightness.Value = (decimal)options.noiseBrightness;
+            noiseMultiplier.Value = (decimal)options.noiseMultiplier;
             noiseLowColor = Color.FromArgb(
                 (int)(options.noiseLowColor.W * 255),
                 (int)(options.noiseLowColor.X * 255),

@@ -7,7 +7,7 @@ float2 offset;
 float noiseFrequency;
 float noiseGain;
 float noiseLacunarity;
-float brightness;
+float multiplier;
 
 float2 fbmOffset;
 bool fbmPerlinBasis;
@@ -29,25 +29,25 @@ void VSBase(inout float4 color:COLOR0, inout float2 texCoord:TEXCOORD0, inout fl
 // Pixel shader
 float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 {
+	// Base values
 	float4 base = tex2D(baseSampler, texCoords);
+	float n = (base.r + base.g + base.b) / 3;
+	n = n * 2 - 1;
 
 	// Set position
 	float2 p = 
 		(offset / renderSize) - (texCoords * aspectRatio) / noiseScale;
 
 	// Calculate noise
-	float n = (base.r + base.g + base.b) / 3;
 	float2 coords = (p + n * fbmOffset) / fbmScale;
 	if (fbmPerlinBasis)
 		n = fbmPerlin(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity);
 	else if (fbmCellBasis)
-		n = 1 - fbmWorley(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity);
+		n = fbmWorley(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity).x;
 	else
-		n = fbmWorley(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity);
+		n = 1 - fbmWorley(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity).x;
 
-	n *= brightness;
-	n = lerp(noiseLowColor, noiseHighColor, n);
-	base.rgb *= n;
+	base.rgb += n * multiplier;
 
 	return base;
 }

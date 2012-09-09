@@ -50,8 +50,8 @@ float perlin(float2 p)
 	float nx1 = n01 * (1 - weight(u)) + n11 * weight(u);
 	float nxy = nx0 * (1 - weight(v)) + nx1 * weight(v);
 
-	return (nxy + 1) / 2;
-	//return nxy;
+	//return (nxy + 1) / 2;
+	return nxy;
 }
 
 ///////////////////////////////////////////
@@ -103,7 +103,7 @@ float2 worley(float2 p, float jitter = 2.0)
 		}
 	}
 
-	return saturate(float2(sqrt(distance1), sqrt(distance2)));
+	return (1 - float2(sqrt(distance1), sqrt(distance2))) * 2 - 1;
 }
 
 ///////////////////////////////////////////

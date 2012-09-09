@@ -69,7 +69,7 @@ namespace MapGenerator
             this.noiseHighColorPicture = new System.Windows.Forms.PictureBox();
             this.noiseLowColorLabel = new System.Windows.Forms.Label();
             this.noiseLowColorPicture = new System.Windows.Forms.PictureBox();
-            this.noiseBrightness = new System.Windows.Forms.NumericUpDown();
+            this.noiseMultiplier = new System.Windows.Forms.NumericUpDown();
             this.noiseLacunarity = new System.Windows.Forms.NumericUpDown();
             this.noiseGain = new System.Windows.Forms.NumericUpDown();
             this.noiseFrequency = new System.Windows.Forms.NumericUpDown();
@@ -92,7 +92,7 @@ namespace MapGenerator
             this.fbm1OffsetX = new System.Windows.Forms.NumericUpDown();
             this.positionLabel = new System.Windows.Forms.Label();
             this.fbm1Checkbox = new System.Windows.Forms.CheckBox();
-            this.brightnessLabel = new System.Windows.Forms.Label();
+            this.multiplierLabel = new System.Windows.Forms.Label();
             this.lacunarityLabel = new System.Windows.Forms.Label();
             this.gainLabel = new System.Windows.Forms.Label();
             this.frequencyLabel = new System.Windows.Forms.Label();
@@ -219,7 +219,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Scale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseMultiplier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseGain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).BeginInit();
@@ -381,7 +381,7 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.noiseHighColorPicture);
             this.noiseTab.Controls.Add(this.noiseLowColorLabel);
             this.noiseTab.Controls.Add(this.noiseLowColorPicture);
-            this.noiseTab.Controls.Add(this.noiseBrightness);
+            this.noiseTab.Controls.Add(this.noiseMultiplier);
             this.noiseTab.Controls.Add(this.noiseLacunarity);
             this.noiseTab.Controls.Add(this.noiseGain);
             this.noiseTab.Controls.Add(this.noiseFrequency);
@@ -404,7 +404,7 @@ namespace MapGenerator
             this.noiseTab.Controls.Add(this.fbm1OffsetX);
             this.noiseTab.Controls.Add(this.positionLabel);
             this.noiseTab.Controls.Add(this.fbm1Checkbox);
-            this.noiseTab.Controls.Add(this.brightnessLabel);
+            this.noiseTab.Controls.Add(this.multiplierLabel);
             this.noiseTab.Controls.Add(this.lacunarityLabel);
             this.noiseTab.Controls.Add(this.gainLabel);
             this.noiseTab.Controls.Add(this.frequencyLabel);
@@ -804,24 +804,24 @@ namespace MapGenerator
             this.noiseLowColorPicture.TabStop = false;
             this.noiseLowColorPicture.Click += new System.EventHandler(this.noiseLowColorPicture_Click);
             // 
-            // noiseBrightness
+            // noiseMultiplier
             // 
-            this.noiseBrightness.DecimalPlaces = 4;
-            this.noiseBrightness.Increment = new decimal(new int[] {
+            this.noiseMultiplier.DecimalPlaces = 4;
+            this.noiseMultiplier.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.noiseBrightness.Location = new System.Drawing.Point(121, 225);
-            this.noiseBrightness.Name = "noiseBrightness";
-            this.noiseBrightness.Size = new System.Drawing.Size(100, 20);
-            this.noiseBrightness.TabIndex = 64;
-            this.noiseBrightness.Value = new decimal(new int[] {
-            13,
+            this.noiseMultiplier.Location = new System.Drawing.Point(121, 225);
+            this.noiseMultiplier.Name = "noiseMultiplier";
+            this.noiseMultiplier.Size = new System.Drawing.Size(100, 20);
+            this.noiseMultiplier.TabIndex = 64;
+            this.noiseMultiplier.Value = new decimal(new int[] {
+            5,
             0,
             0,
             65536});
-            this.noiseBrightness.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
+            this.noiseMultiplier.ValueChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
             // noiseLacunarity
             // 
@@ -1244,14 +1244,14 @@ namespace MapGenerator
             this.fbm1Checkbox.UseVisualStyleBackColor = true;
             this.fbm1Checkbox.CheckedChanged += new System.EventHandler(this.mapOptionsChanged);
             // 
-            // brightnessLabel
+            // multiplierLabel
             // 
-            this.brightnessLabel.AutoSize = true;
-            this.brightnessLabel.Location = new System.Drawing.Point(118, 208);
-            this.brightnessLabel.Name = "brightnessLabel";
-            this.brightnessLabel.Size = new System.Drawing.Size(56, 13);
-            this.brightnessLabel.TabIndex = 17;
-            this.brightnessLabel.Text = "Brightness";
+            this.multiplierLabel.AutoSize = true;
+            this.multiplierLabel.Location = new System.Drawing.Point(118, 208);
+            this.multiplierLabel.Name = "multiplierLabel";
+            this.multiplierLabel.Size = new System.Drawing.Size(48, 13);
+            this.multiplierLabel.TabIndex = 17;
+            this.multiplierLabel.Text = "Multiplier";
             // 
             // lacunarityLabel
             // 
@@ -2820,7 +2820,7 @@ namespace MapGenerator
             ((System.ComponentModel.ISupportInitialize)(this.fbm1Scale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseHighColorPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLowColorPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.noiseBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseMultiplier)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseLacunarity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseGain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).EndInit();
@@ -2906,7 +2906,7 @@ namespace MapGenerator
         private Label lacunarityLabel;
         private Label gainLabel;
         private Label waterLevelLabel;
-        private Label brightnessLabel;
+        private Label multiplierLabel;
         private CheckBox fbm1Checkbox;
         private Label positionLabel;
         private TabPage floraTab;
@@ -2921,7 +2921,7 @@ namespace MapGenerator
         private NumericUpDown fbm3OffsetY;
         private NumericUpDown fbm3OffsetX;
         private CheckBox fbm3Checkbox;
-        private NumericUpDown noiseBrightness;
+        private NumericUpDown noiseMultiplier;
         private NumericUpDown noiseLacunarity;
         private NumericUpDown noiseGain;
         private NumericUpDown noiseFrequency;
