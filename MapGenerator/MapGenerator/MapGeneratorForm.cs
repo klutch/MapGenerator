@@ -25,7 +25,6 @@ namespace MapGenerator
         public float noiseFrequency;
         public float noiseGain;
         public float noiseLacunarity;
-        public float noiseMultiplier;
         public Microsoft.Xna.Framework.Vector4 noiseLowColor;
         public Microsoft.Xna.Framework.Vector4 noiseHighColor;
 
@@ -55,6 +54,7 @@ namespace MapGenerator
         public int fbm1Iterations;
         public int fbm2Iterations;
         public int fbm3Iterations;
+        public float fbm0Multiplier;
         public float fbm1Multiplier;
         public float fbm2Multiplier;
         public float fbm3Multiplier;
@@ -255,7 +255,6 @@ namespace MapGenerator
             options.noiseFrequency = (float)noiseFrequency.Value;
             options.noiseGain = (float)noiseGain.Value;
             options.noiseLacunarity = (float)noiseLacunarity.Value;
-            options.noiseMultiplier = (float)noiseMultiplier.Value;
             options.noiseLowColor = new Microsoft.Xna.Framework.Vector4(
                 (float)noiseLowColor.R / 255f,
                 (float)noiseLowColor.G / 255f,
@@ -297,6 +296,7 @@ namespace MapGenerator
             options.fbm1Iterations = (int)fbm1Iterations.Value;
             options.fbm2Iterations = (int)fbm2Iterations.Value;
             options.fbm3Iterations = (int)fbm3Iterations.Value;
+            options.fbm0Multiplier = (float)fbm0Multiplier.Value;
             options.fbm1Multiplier = (float)fbm1Multiplier.Value;
             options.fbm2Multiplier = (float)fbm2Multiplier.Value;
             options.fbm3Multiplier = (float)fbm3Multiplier.Value;
@@ -421,7 +421,6 @@ namespace MapGenerator
             noiseFrequency.Value = (decimal)options.noiseFrequency;
             noiseGain.Value = (decimal)options.noiseGain;
             noiseLacunarity.Value = (decimal)options.noiseLacunarity;
-            noiseMultiplier.Value = (decimal)options.noiseMultiplier;
             noiseLowColor = Color.FromArgb(
                 (int)(options.noiseLowColor.W * 255),
                 (int)(options.noiseLowColor.X * 255),
@@ -478,6 +477,7 @@ namespace MapGenerator
             fbm1Iterations.Value = (decimal)options.fbm1Iterations;
             fbm2Iterations.Value = (decimal)options.fbm2Iterations;
             fbm3Iterations.Value = (decimal)options.fbm3Iterations;
+            fbm0Multiplier.Value = (decimal)options.fbm0Multiplier;
             fbm1Multiplier.Value = (decimal)options.fbm1Multiplier;
             fbm2Multiplier.Value = (decimal)options.fbm2Multiplier;
             fbm3Multiplier.Value = (decimal)options.fbm3Multiplier;

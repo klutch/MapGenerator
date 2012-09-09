@@ -313,7 +313,7 @@ namespace MapGenerator
             baseEffect.Parameters["noiseFrequency"].SetValue(options.noiseFrequency);
             baseEffect.Parameters["noiseGain"].SetValue(options.noiseGain);
             baseEffect.Parameters["noiseLacunarity"].SetValue(options.noiseLacunarity);
-            baseEffect.Parameters["multiplier"].SetValue(options.noiseMultiplier);
+            baseEffect.Parameters["multiplier"].SetValue(options.fbm0Multiplier);
             baseEffect.Parameters["fbmOffset"].SetValue(Vector2.Zero);
             baseEffect.Parameters["fbmPerlinBasis"].SetValue(options.fbm0Perlin);
             baseEffect.Parameters["fbmCellBasis"].SetValue(options.fbm0Cell);
