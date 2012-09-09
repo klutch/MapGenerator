@@ -104,7 +104,7 @@ float2 worley(float2 p, bool inverse = false, float jitter = 2.0)
 	}
 
 	if (inverse)
-		return float2(sqrt(distance1), sqrt(distance2));
+		return float2(sqrt(distance1), sqrt(distance2)) - 1;
 	else
 		return (1 - float2(sqrt(distance1), sqrt(distance2))) * 2 - 1;
 }

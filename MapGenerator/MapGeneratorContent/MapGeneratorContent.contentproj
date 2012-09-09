@@ -80,6 +80,11 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </Compile>
+    <Compile Include="colorEffect.fx">
+      <Name>colorEffect</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
     <None Include="helper.fx">
       <Name>helper</Name>
       <Importer>EffectImporter</Importer>

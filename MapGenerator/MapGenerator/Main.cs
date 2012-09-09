@@ -35,6 +35,7 @@ namespace MapGenerator
         private Effect maskEffect;
         private Effect createNormalEffect;
         private Effect normalMapEffect;
+        private Effect colorEffect;
         private RenderTarget2D baseNoise;
         private RenderTarget2D baseWater;
         private RenderTarget2D floraLayer1;
@@ -124,6 +125,7 @@ namespace MapGenerator
             maskEffect = Content.Load<Effect>("maskEffect");
             createNormalEffect = Content.Load<Effect>("createNormalEffect");
             normalMapEffect = Content.Load<Effect>("normalMapEffect");
+            colorEffect = Content.Load<Effect>("colorEffect");
             baseColor = new Texture2D(GraphicsDevice, 1, 1);
             baseColor.SetData<Color>(new Color[] { Color.Gray });
         }
@@ -404,6 +406,23 @@ namespace MapGenerator
                 spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
             }
+
+            ///////////////////////////////////////
+            // Colorize noise
+            ///////////////////////////////////////
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            colorEffect.Parameters["matrixTransform"].SetValue(matrixTransform);
+            colorEffect.Parameters["noiseLowColor"].SetValue(options.noiseLowColor);
+            colorEffect.Parameters["noiseHighColor"].SetValue(options.noiseHighColor);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, colorEffect);
+            spriteBatch.Draw(baseNoise, baseNoise.Bounds, Color.White);
+            spriteBatch.End();
+
+            // Store as noise
+            GraphicsDevice.SetRenderTarget(baseNoise);
+            spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
+            spriteBatch.End();
 
             //////////////////////////////////////////
             // Draw detail layer 1 effect
