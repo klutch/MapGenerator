@@ -55,6 +55,9 @@ namespace MapGenerator
         public int fbm1Iterations;
         public int fbm2Iterations;
         public int fbm3Iterations;
+        public float fbm1Multiplier;
+        public float fbm2Multiplier;
+        public float fbm3Multiplier;
 
         public bool flora1;
         public Microsoft.Xna.Framework.Vector2 flora1Range;
@@ -294,6 +297,9 @@ namespace MapGenerator
             options.fbm1Iterations = (int)fbm1Iterations.Value;
             options.fbm2Iterations = (int)fbm2Iterations.Value;
             options.fbm3Iterations = (int)fbm3Iterations.Value;
+            options.fbm1Multiplier = (float)fbm1Multiplier.Value;
+            options.fbm2Multiplier = (float)fbm2Multiplier.Value;
+            options.fbm3Multiplier = (float)fbm3Multiplier.Value;
 
             // Water
             options.water = waterCheckbox.Checked;
@@ -389,13 +395,6 @@ namespace MapGenerator
                 (float)light2PositionY.Value,
                 (float)light2PositionZ.Value);
             options.light2Intensity = (float)light2Intensity.Value;
-            /*
-            Console.WriteLine("flora1TextureFilePaths: {0}", options.flora1TexturePaths);
-            Console.WriteLine("flora2TextureFilePaths: {0}", options.flora2TexturePaths);
-            Console.WriteLine("detailsLayer1TextureFilePaths: {0}", options.detailsLayer1TexturePaths);
-            Console.WriteLine("detailsLayer2TextureFilePaths: {0}", options.detailsLayer2TexturePaths);
-            Console.WriteLine("detailsLayer3TextureFilePaths: {0}", options.detailsLayer3TexturePaths);
-            */
 
             return options;
         }
@@ -479,6 +478,9 @@ namespace MapGenerator
             fbm1Iterations.Value = (decimal)options.fbm1Iterations;
             fbm2Iterations.Value = (decimal)options.fbm2Iterations;
             fbm3Iterations.Value = (decimal)options.fbm3Iterations;
+            fbm1Multiplier.Value = (decimal)options.fbm1Multiplier;
+            fbm2Multiplier.Value = (decimal)options.fbm2Multiplier;
+            fbm3Multiplier.Value = (decimal)options.fbm3Multiplier;
 
             // Water
             waterCheckbox.Checked = options.water;

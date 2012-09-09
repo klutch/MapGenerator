@@ -70,7 +70,7 @@ float4 getWorleyCell(int x, int y, float jitter)
 	return tex2D(worleySampler, float2(u, v)) * jitter;
 }
 
-float2 worley(float2 p, float jitter = 2.0)
+float2 worley(float2 p, bool inverse = false, float jitter = 2.0)
 {
 	int xi = int(floor(p.x));
 	int yi = int(floor(p.y));
@@ -103,7 +103,10 @@ float2 worley(float2 p, float jitter = 2.0)
 		}
 	}
 
-	return (1 - float2(sqrt(distance1), sqrt(distance2))) * 2 - 1;
+	if (inverse)
+		return float2(sqrt(distance1), sqrt(distance2));
+	else
+		return (1 - float2(sqrt(distance1), sqrt(distance2))) * 2 - 1;
 }
 
 ///////////////////////////////////////////
@@ -124,14 +127,14 @@ float fbmPerlin(float2 p, int count, float frequency, float gain, float lacunari
 	return total;
 }
 
-float fbmWorley(float2 p, int count, float frequency, float gain, float lacunarity)
+float fbmWorley(float2 p, bool inverse, int count, float frequency, float gain, float lacunarity)
 {
 	float total = 0;
 	float amplitude = gain;
 
 	for (int i = 0; i < count; i++)
 	{
-		total += worley(p * frequency).x * amplitude;
+		total += worley(p * frequency, inverse).x * amplitude;
 		frequency *= lacunarity;
 		amplitude *= gain;
 	}

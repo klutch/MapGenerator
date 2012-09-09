@@ -43,9 +43,9 @@ float4 PSBaseNoise(float2 texCoords:TEXCOORD0) : COLOR0
 	if (fbmPerlinBasis)
 		n = fbmPerlin(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity);
 	else if (fbmCellBasis)
-		n = fbmWorley(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity).x;
+		n = fbmWorley(coords, false, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity);
 	else
-		n = 1 - fbmWorley(coords, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity).x;
+		n = fbmWorley(coords, true, fbmIterations, noiseFrequency, noiseGain, noiseLacunarity);
 
 	base.rgb += n * multiplier;
 

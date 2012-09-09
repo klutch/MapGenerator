@@ -343,6 +343,7 @@ namespace MapGenerator
                 baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm1InvCell);
                 baseEffect.Parameters["fbmScale"].SetValue(options.fbm1Scale);
                 baseEffect.Parameters["fbmIterations"].SetValue(options.fbm1Iterations);
+                baseEffect.Parameters["multiplier"].SetValue(options.fbm1Multiplier);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
                 spriteBatch.Draw(baseNoise, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
@@ -367,6 +368,7 @@ namespace MapGenerator
                 baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm2InvCell);
                 baseEffect.Parameters["fbmScale"].SetValue(options.fbm2Scale);
                 baseEffect.Parameters["fbmIterations"].SetValue(options.fbm2Iterations);
+                baseEffect.Parameters["multiplier"].SetValue(options.fbm2Multiplier);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
                 spriteBatch.Draw(baseNoise, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
@@ -391,6 +393,7 @@ namespace MapGenerator
                 baseEffect.Parameters["fbmInvCellBasis"].SetValue(options.fbm3InvCell);
                 baseEffect.Parameters["fbmScale"].SetValue(options.fbm3Scale);
                 baseEffect.Parameters["fbmIterations"].SetValue(options.fbm3Iterations);
+                baseEffect.Parameters["multiplier"].SetValue(options.fbm3Multiplier);
                 spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, baseEffect);
                 spriteBatch.Draw(baseNoise, renderTarget.Bounds, Color.White);
                 spriteBatch.End();
