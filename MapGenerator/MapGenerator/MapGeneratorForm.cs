@@ -218,9 +218,12 @@ namespace MapGenerator
             mainOptionsControl.Height = Height - 103;
 
             // Resize graphics device
-            Main.graphics.PreferredBackBufferWidth = surface.Width;
-            Main.graphics.PreferredBackBufferHeight = surface.Height;
-            Main.graphics.ApplyChanges();
+            if (surface.Width > 0 && surface.Height > 0)
+            {
+                Main.graphics.PreferredBackBufferWidth = surface.Width;
+                Main.graphics.PreferredBackBufferHeight = surface.Height;
+                Main.graphics.ApplyChanges();
+            }
 
             // Redraw map
             if (main.renderTarget != null)
