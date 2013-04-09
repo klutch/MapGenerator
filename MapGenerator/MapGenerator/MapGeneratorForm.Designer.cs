@@ -208,9 +208,9 @@ namespace MapGenerator
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
-            this.renderGenerateMap = new System.Windows.Forms.MenuItem();
-            this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem12 = new System.Windows.Forms.MenuItem();
+            this.menuItem14 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.surface)).BeginInit();
             this.mainOptionsControl.SuspendLayout();
             this.noiseTab.SuspendLayout();
@@ -2860,24 +2860,24 @@ namespace MapGenerator
             this.menuItem11.Index = 2;
             this.menuItem11.Text = "-";
             // 
-            // renderGenerateMap
-            // 
-            this.renderGenerateMap.Index = 0;
-            this.renderGenerateMap.Text = "Generate Map";
-            this.renderGenerateMap.Click += new System.EventHandler(this.renderGenerateMap_Click);
-            // 
-            // menuItem6
-            // 
-            this.menuItem6.Index = 1;
-            this.menuItem6.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.renderGenerateMap});
-            this.menuItem6.Text = "Render";
-            // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
-            this.menuItem6});
+            this.menuItem12});
+            // 
+            // menuItem12
+            // 
+            this.menuItem12.Index = 1;
+            this.menuItem12.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem14});
+            this.menuItem12.Text = "Help";
+            // 
+            // menuItem14
+            // 
+            this.menuItem14.Index = 0;
+            this.menuItem14.Text = "About";
+            this.menuItem14.Click += new System.EventHandler(this.menuItem14_Click);
             // 
             // MapGeneratorForm
             // 
@@ -3116,8 +3116,6 @@ namespace MapGenerator
         private Label light1IntensityLabel;
         private MenuItem fileExit;
         private MenuItem menuItem1;
-        private MenuItem renderGenerateMap;
-        private MenuItem menuItem6;
         private MainMenu mainMenu1;
         private NumericUpDown normalStrength;
         private Label normalStrengthLabel;
@@ -3157,5 +3155,7 @@ namespace MapGenerator
         private NumericUpDown fbm2Multiplier;
         private Label fbm1MultiplierLabel;
         private NumericUpDown fbm1Multiplier;
+        private MenuItem menuItem12;
+        private MenuItem menuItem14;
     }
 }

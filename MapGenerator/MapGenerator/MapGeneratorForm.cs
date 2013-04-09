@@ -1193,5 +1193,11 @@ namespace MapGenerator
             BatchSaveForm batchSaveForm = new BatchSaveForm(this);
             batchSaveForm.ShowDialog();
         }
+
+        private void menuItem14_Click(object sender, EventArgs e)
+        {
+            AboutDialog aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog();
+        }
     }
 }
